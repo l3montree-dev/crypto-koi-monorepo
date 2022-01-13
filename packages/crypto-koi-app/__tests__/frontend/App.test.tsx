@@ -1,13 +1,15 @@
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import React from 'react';
+import Enzyme from "enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import React from "react";
 
-import App from '../../frontend/App';
+import App from "../../frontend/App";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-test('renders correctly', () => {
+test("renders correctly", () => {
   const wrapper = Enzyme.shallow(<App />);
 
-  expect(wrapper.find({ testID: 'tid-message'}).contains('Loading...')).toBe(true);
+  expect(wrapper.find({ testID: "tid-message" }).contains("Loading...")).toBe(
+    true
+  );
 });
