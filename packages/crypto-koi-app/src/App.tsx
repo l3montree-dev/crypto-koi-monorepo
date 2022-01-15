@@ -1,12 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { FunctionComponent } from "react";
 import StackNavigator from "./StackNavigator";
+import { TailwindProvider } from "tailwind-rn";
+import utilities from "../tailwind.json";
 
 const App: FunctionComponent = () => {
     return (
-        <NavigationContainer>
-            <StackNavigator />
-        </NavigationContainer>
+        <TailwindProvider utilities={utilities}>
+            <NavigationContainer>
+                <StackNavigator />
+            </NavigationContainer>
+        </TailwindProvider>
     );
 };
 
