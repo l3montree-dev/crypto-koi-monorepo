@@ -4,16 +4,21 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import localhost from "react-native-localhost";
 import Web3 from "web3";
+import { AbiItem } from "web3-eth-abi/node_modules/web3-utils";
 
 import Hello from "../../../artifacts/contracts/Hello.sol/Hello.json";
 
 const styles = StyleSheet.create({
     center: { alignItems: "center", justifyContent: "center" },
-    // eslint-disable-next-line react-native/no-color-literals
     white: { backgroundColor: "white" },
 });
 
-const shouldDeployContract = async (web3, abi, data, from: string) => {
+const shouldDeployContract = async (
+    web3: Web3,
+    abi: AbiItem | AbiItem[],
+    data: string,
+    from: string
+) => {
     const deployment = new web3.eth.Contract(abi).deploy({ data });
     const gas = await deployment.estimateGas();
     const {
@@ -42,7 +47,7 @@ export default function App(): JSX.Element {
                 );
                 const contract = await shouldDeployContract(
                     web3,
-                    Hello.abi,
+                    Hello.abi as AbiItem[],
                     Hello.bytecode,
                     address
                 );

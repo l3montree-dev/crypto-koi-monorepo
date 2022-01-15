@@ -26,7 +26,7 @@
         "plugin:eslint-comments/recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:import/typescript",
-        "plugin:functional/lite",
+        //"plugin:functional/lite",
         "prettier",
         "prettier/@typescript-eslint"
     ],
@@ -35,6 +35,7 @@
         "__DEV__": true
     },
     "rules": {
+        "@typescript-eslint/ban-ts-comment": 0,
         "prettier/prettier": "error",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "eslint-comments/disable-enable-pair": [
@@ -43,27 +44,11 @@
                 "allowWholeFile": true
             }
         ],
+        "functional/immutable-data": 0,
         "eslint-comments/no-unused-disable": "error",
-        "sort-imports": [
-            "error",
-            {
-                "ignoreDeclarationSort": true,
-                "ignoreCase": true
-            }
-        ],
-        "sort-keys": [
-            "error",
-            "asc",
-            {
-                "caseSensitive": true,
-                "natural": false,
-                "minKeys": 2
-            }
-        ],
         "react-native/no-unused-styles": 2,
         "react-native/split-platform-components": 2,
         "react-native/no-inline-styles": 2,
-        "react-native/no-color-literals": 2,
         "react-native/no-raw-text": 2,
         "react-native/no-single-element-style-arrays": 2
     },
