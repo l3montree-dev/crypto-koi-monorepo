@@ -1,8 +1,6 @@
-import {
-    CollidesWithBoundaries,
-    GameEvents,
-    gameSystem,
-} from "../../../../game-system/gameSystem";
+import CollidesWithBoundaries from "../../../../entity-component-system/game-componets/collidesWithBoundaries";
+import { containsComponent } from "../../../../entity-component-system/game-componets/containsComponent";
+import { gameSystem } from "../../../../entity-component-system/game-componets/gameSystem";
 import {
     SnakeGameConfig,
     SnakeGameEvents,
@@ -14,12 +12,9 @@ export const collidesWithBoundariesSystem = gameSystem<
     SnakeGameEvents
 >((entities, { dispatch, time }) => {
     const { head } = entities;
-    if (head.automaticMovement.lastMovement === time.current) {
+    if (head.timeBasedMovement.lastMovement === time.current) {
         Object.values(entities)
-            .filter(
-                (entity): entity is CollidesWithBoundaries =>
-                    "collidesWithBoundaries" in entity
-            )
+            .filter(containsComponent(CollidesWithBoundaries))
             .forEach((entity) => {
                 const { position, collidesWithBoundaries } = entity;
                 const { ownSize } = collidesWithBoundaries;

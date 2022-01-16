@@ -1,6 +1,7 @@
-import { gameSystem } from "../../../../game-system/gameSystem";
-import IdGenerator from "../../../../game-system/IdGenerator";
-import Vec2 from "../../../../game-system/Vec2";
+import { gameSystem } from "../../../../entity-component-system/game-componets/gameSystem";
+import { HasPosition } from "../../../../entity-component-system/game-componets/hasPosition";
+import IdGenerator from "../../../../entity-component-system/IdGenerator";
+import Vec2 from "../../../../entity-component-system/Vec2";
 import {
     SnakeGameConfig,
     SnakeGameEvents,
@@ -8,18 +9,19 @@ import {
 } from "../snakeGameState";
 
 export const consumableSystem = gameSystem<SnakeGameState, SnakeGameEvents>(
-    (entities, { time }) => {
+    (entities, { time, dispatch }) => {
         const { food, head, tail } = entities;
-        if (head.automaticMovement.lastMovement === time.current) {
-            tail.elements.push({
-                position: head.position,
+        if (head.timeBasedMovement.moved(time.current)) {
+            tail.elements.unshift({
+                hasPosition: new HasPosition(head.hasPosition.position),
                 id: IdGenerator.randomId(),
             });
 
-            if (food.position.equals(head.position)) {
+            if (food.hasPosition.position.equals(head.hasPosition.position)) {
+                dispatch({ type: "score", value: 1 });
                 // the head is on the same position as the food
                 // do not pop the last tail element
-                food.position = Vec2.random(
+                food.hasPosition.position = Vec2.random(
                     SnakeGameConfig.GRID_SIZE.getX(),
                     SnakeGameConfig.GRID_SIZE.getY(),
                     SnakeGameConfig.CELL_SIZE

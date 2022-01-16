@@ -2,9 +2,11 @@ import React, { FunctionComponent, useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import { useTailwind } from "tailwind-rn/dist";
-import { Controls } from "../../../game-system/gameSystem";
-import IdGenerator from "../../../game-system/IdGenerator";
-import Vec2 from "../../../game-system/Vec2";
+import { HasPosition } from "../../../entity-component-system/game-componets/hasPosition";
+import { TimeBasedMovement } from "../../../entity-component-system/game-componets/timeBasedMovement";
+import IdGenerator from "../../../entity-component-system/IdGenerator";
+import { Controls } from "../../../entity-component-system/input/controls";
+import Vec2 from "../../../entity-component-system/Vec2";
 import useGameEngine from "../../../hooks/useGameEngine";
 import { Food } from "./components/Food";
 import { Head } from "./components/Head";
@@ -14,7 +16,7 @@ import {
     SnakeGameEvents,
     SnakeGameStateEntities,
 } from "./snakeGameState";
-import { automaticMovementSystem } from "./systems/automaticMovementSystem";
+import { timeBasedMovementSystem } from "./systems/timeBasedMovementSystem";
 import { collidesWithBoundariesSystem } from "./systems/collidesWithBoundariesSystem";
 import { collisionSystem } from "./systems/collisionSystem";
 import { consumableSystem } from "./systems/consumableSystem";
@@ -29,28 +31,32 @@ const styles = StyleSheet.create({
 const entities: SnakeGameStateEntities = {
     food: {
         renderer: <Food />,
-        position: Vec2.random(
-            SnakeGameConfig.GRID_SIZE.getX(),
-            SnakeGameConfig.GRID_SIZE.getY(),
-            SnakeGameConfig.CELL_SIZE
+        hasPosition: new HasPosition(
+            Vec2.random(
+                SnakeGameConfig.GRID_SIZE.getX(),
+                SnakeGameConfig.GRID_SIZE.getY(),
+                SnakeGameConfig.CELL_SIZE
+            )
         ),
     },
     head: {
         renderer: <Head />,
-        position: new Vec2(0, SnakeGameConfig.CELL_SIZE),
-        automaticMovement: {
-            currentDirection: Controls.bottom,
-            speed: 1,
-            lastMovement: 0,
-            stepSize: SnakeGameConfig.CELL_SIZE,
-        },
-        collidesWithBoundaries: {
-            ownSize: [SnakeGameConfig.CELL_SIZE, SnakeGameConfig.CELL_SIZE],
-        },
+        hasPosition: new HasPosition(new Vec2(0, SnakeGameConfig.CELL_SIZE)),
+        timeBasedMovement: new TimeBasedMovement(
+            Controls.bottom,
+            2,
+            SnakeGameConfig.CELL_SIZE,
+            0
+        ),
     },
     tail: {
         renderer: <Tail />,
-        elements: [{ position: new Vec2(0, 0), id: IdGenerator.randomId() }],
+        elements: [
+            {
+                hasPosition: new HasPosition(new Vec2(0, 0)),
+                id: IdGenerator.randomId(),
+            },
+        ],
     },
 };
 
@@ -90,7 +96,7 @@ const SnakeGameScreen: FunctionComponent = () => {
                 }}
                 systems={[
                     // provide the boundaries of the snake game
-                    automaticMovementSystem,
+                    timeBasedMovementSystem,
                     collidesWithBoundariesSystem,
                     collisionSystem,
                     consumableSystem,

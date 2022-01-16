@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { gameComponent } from "../../../../game-system/gameComponent";
-import { HasPosition } from "../../../../game-system/gameSystem";
+import { AttachComponent } from "../../../../entity-component-system/game-componets/containsComponent";
+import { HasPosition } from "../../../../entity-component-system/game-componets/hasPosition";
+import { gameDrawable } from "../../../../entity-component-system/game-drawable/gameDrawable";
+
 import { SnakeGameConfig } from "../snakeGameState";
 
 const style = StyleSheet.create({
@@ -14,13 +16,15 @@ const style = StyleSheet.create({
 });
 
 export type TailEntity = {
-    elements: Array<HasPosition & { id: string }>;
+    elements: Array<
+        { id: string } & AttachComponent<HasPosition, "hasPosition">
+    >;
 };
-export const Tail = gameComponent((props: TailEntity) => {
+export const Tail = gameDrawable((props: TailEntity) => {
     return (
         <>
             {props.elements.map((el) => {
-                const [x, y] = el.position.getVec2();
+                const [x, y] = el.hasPosition.position.getVec2();
                 return (
                     <View
                         key={el.id}

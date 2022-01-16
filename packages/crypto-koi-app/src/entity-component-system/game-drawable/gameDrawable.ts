@@ -1,7 +1,7 @@
 import { FunctionComponent, memo } from "react";
-import GameState from "./gameState";
+import GameState from "../game-state/gameState";
 
-export const gameComponent = <
+export const gameDrawable = <
     T extends GameState<any>,
     EntityId extends keyof T["entities"],
     Props
