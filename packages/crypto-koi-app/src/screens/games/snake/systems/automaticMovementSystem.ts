@@ -1,14 +1,9 @@
 import {
     AutomaticMovement,
     Controls,
-    GameEvents,
     gameSystem,
 } from "../../../../game-system/gameSystem";
-import {
-    SnakeGameConfig,
-    SnakeGameEvents,
-    SnakeGameState,
-} from "../snakeGameState";
+import { SnakeGameEvents, SnakeGameState } from "../snakeGameState";
 
 export const automaticMovementSystem = gameSystem<
     SnakeGameState,
@@ -23,11 +18,11 @@ export const automaticMovementSystem = gameSystem<
         .forEach((entity) => {
             // check if an event needs to be processed.
             events.forEach((event) => {
-                if (Object.values(Controls).includes(event as Controls)) {
+                if (event.type === "controls") {
                     // check if the event is valid.
                     switch (entity.automaticMovement.currentDirection) {
                         case Controls.left:
-                            if (event === Controls.right) {
+                            if (event.value === Controls.right) {
                                 entity.automaticMovement.currentDirection =
                                     Controls.top;
                             } else {
@@ -37,7 +32,7 @@ export const automaticMovementSystem = gameSystem<
                             }
                             break;
                         case Controls.right:
-                            if (event === Controls.left) {
+                            if (event.value === Controls.left) {
                                 entity.automaticMovement.currentDirection =
                                     Controls.top;
                             } else {
@@ -47,7 +42,7 @@ export const automaticMovementSystem = gameSystem<
                             }
                             break;
                         case Controls.bottom:
-                            if (event === Controls.left) {
+                            if (event.value === Controls.left) {
                                 entity.automaticMovement.currentDirection =
                                     Controls.right;
                             } else {
@@ -58,7 +53,8 @@ export const automaticMovementSystem = gameSystem<
                             break;
                         default:
                             // can only be top or bottom
-                            entity.automaticMovement.currentDirection = event as Controls;
+                            entity.automaticMovement.currentDirection =
+                                event.value;
                             break;
                     }
                 }

@@ -51,6 +51,11 @@ export enum Controls {
     bottom,
 }
 
-export enum GameEvents {
-    gameOver = "gameOver",
-}
+export type GameEvents =
+    | {
+          type: "gameOver";
+      }
+    | {
+          type: "controls";
+          value: Controls;
+      };

@@ -1,12 +1,13 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { Button, StyleSheet, View, Text } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import { useTailwind } from "tailwind-rn/dist";
 import { Controls, GameEvents } from "../../../game-system/gameSystem";
+import { randomPosition } from "../../../game-system/utils";
 import useGameEngine from "../../../hooks/useGameEngine";
 import { Food } from "./components/Food";
 import { Head } from "./components/Head";
-import { Tail } from "./components/Tails";
+import { Tail } from "./components/Tail";
 import {
     SnakeGameConfig,
     SnakeGameEvents,
@@ -14,6 +15,8 @@ import {
 } from "./snakeGameState";
 import { automaticMovementSystem } from "./systems/automaticMovementSystem";
 import { collidesWithBoundariesSystem } from "./systems/collidesWithBoundariesSystem";
+import { collisionSystem } from "./systems/collisionSystem";
+import { consumableSystem } from "./systems/consumableSystem";
 
 const styles = StyleSheet.create({
     container: {
@@ -25,7 +28,11 @@ const styles = StyleSheet.create({
 const entities: SnakeGameStateEntities = {
     food: {
         renderer: <Food />,
-        position: [0, 0],
+        position: randomPosition(
+            SnakeGameConfig.GRID_SIZE[0],
+            SnakeGameConfig.GRID_SIZE[1],
+            SnakeGameConfig.CELL_SIZE
+        ),
     },
     head: {
         renderer: <Head />,
@@ -53,13 +60,13 @@ const SnakeGameScreen: FunctionComponent = () => {
         setIsRunning,
     } = useGameEngine<SnakeGameEvents>();
     const tailwind = useTailwind();
+    const [score, setScore] = useState(0);
     const handleLeft = () => {
-        console.log("LEFT");
-        engine.current?.dispatch(Controls.left);
+        engine.current?.dispatch({ type: "controls", value: Controls.left });
     };
 
     const handleRight = () => {
-        engine.current?.dispatch(Controls.right);
+        engine.current?.dispatch({ type: "controls", value: Controls.right });
     };
 
     const handleReset = () => {
@@ -74,22 +81,28 @@ const SnakeGameScreen: FunctionComponent = () => {
                 style={styles.container}
                 running={isRunning}
                 onEvent={(event: SnakeGameEvents) => {
-                    if (event === GameEvents.gameOver) {
+                    if (event.type === "gameOver") {
                         setIsRunning(false);
+                    } else if (event.type === "score") {
+                        setScore((prev) => prev + event.value);
                     }
                 }}
                 systems={[
                     // provide the boundaries of the snake game
                     automaticMovementSystem,
                     collidesWithBoundariesSystem,
+                    collisionSystem,
+                    consumableSystem,
                 ]}
                 entities={entities}
             />
+
             <View style={tailwind("flex-1 flex-row")}>
-                <Button title="Links" onPress={handleLeft} />
-                <Button title="Rechts" onPress={handleRight} />
+                <Button title="Left" onPress={handleLeft} />
+                <Button title="Right" onPress={handleRight} />
                 <Button title="Reset" onPress={handleReset} />
-                <Text>TEEEST: {isRunning.toString()}</Text>
+                <Text>IsRunning: {isRunning.toString()}</Text>
+                <Text>Score: {score.toString()}</Text>
             </View>
         </View>
     );

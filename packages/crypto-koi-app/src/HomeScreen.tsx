@@ -12,7 +12,7 @@ const HomeScreen = () => {
     return (
         <View style={style.container}>
             <Button
-                title="Test"
+                title="SnakeGame"
                 onPress={() => navigate("SnakeGameScreen")}
             ></Button>
         </View>
