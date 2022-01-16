@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState } from "react";
-import { Button, StyleSheet, View, Text } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import { useTailwind } from "tailwind-rn/dist";
-import { Controls, GameEvents } from "../../../game-system/gameSystem";
-import { randomPosition } from "../../../game-system/utils";
+import { Controls } from "../../../game-system/gameSystem";
+import IdGenerator from "../../../game-system/IdGenerator";
+import Vec2 from "../../../game-system/Vec2";
 import useGameEngine from "../../../hooks/useGameEngine";
 import { Food } from "./components/Food";
 import { Head } from "./components/Head";
@@ -28,15 +29,15 @@ const styles = StyleSheet.create({
 const entities: SnakeGameStateEntities = {
     food: {
         renderer: <Food />,
-        position: randomPosition(
-            SnakeGameConfig.GRID_SIZE[0],
-            SnakeGameConfig.GRID_SIZE[1],
+        position: Vec2.random(
+            SnakeGameConfig.GRID_SIZE.getX(),
+            SnakeGameConfig.GRID_SIZE.getY(),
             SnakeGameConfig.CELL_SIZE
         ),
     },
     head: {
         renderer: <Head />,
-        position: [0, 0],
+        position: new Vec2(0, SnakeGameConfig.CELL_SIZE),
         automaticMovement: {
             currentDirection: Controls.bottom,
             speed: 1,
@@ -49,7 +50,7 @@ const entities: SnakeGameStateEntities = {
     },
     tail: {
         renderer: <Tail />,
-        positions: [],
+        elements: [{ position: new Vec2(0, 0), id: IdGenerator.randomId() }],
     },
 };
 

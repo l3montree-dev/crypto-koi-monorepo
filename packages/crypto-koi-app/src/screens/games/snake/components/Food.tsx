@@ -17,7 +17,7 @@ export type FoodEntity = HasPosition;
 
 export const Food = gameComponent<SnakeGameState, "food", FoodEntity>(
     (props) => {
-        const [x, y] = props.position;
+        const [x, y] = props.position.getVec2();
         return <View style={[style.food, { left: x, top: y }]} />;
     }
 );

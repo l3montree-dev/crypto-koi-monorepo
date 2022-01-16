@@ -8,7 +8,7 @@ import { SnakeGameEvents, SnakeGameState } from "../snakeGameState";
 export const automaticMovementSystem = gameSystem<
     SnakeGameState,
     SnakeGameEvents
->((entities, { time, events, dispatch }) => {
+>((entities, { time, events }) => {
     // check if a step needs to be made.
     Object.values(entities)
         .filter(
@@ -72,16 +72,24 @@ export const automaticMovementSystem = gameSystem<
                 // calculate the new position
                 switch (currentDirection) {
                     case Controls.left:
-                        entity.position[0] -= entity.automaticMovement.stepSize;
+                        entity.position = entity.position.moveX(
+                            -entity.automaticMovement.stepSize
+                        );
                         break;
                     case Controls.right:
-                        entity.position[0] += entity.automaticMovement.stepSize;
+                        entity.position = entity.position.moveX(
+                            entity.automaticMovement.stepSize
+                        );
                         break;
                     case Controls.top:
-                        entity.position[1] -= entity.automaticMovement.stepSize;
+                        entity.position = entity.position.moveY(
+                            -entity.automaticMovement.stepSize
+                        );
                         break;
                     case Controls.bottom:
-                        entity.position[1] += entity.automaticMovement.stepSize;
+                        entity.position = entity.position.moveY(
+                            entity.automaticMovement.stepSize
+                        );
                         break;
                 }
             }

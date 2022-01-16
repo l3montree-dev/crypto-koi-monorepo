@@ -6,15 +6,8 @@ export const collisionSystem = gameSystem<SnakeGameState, SnakeGameEvents>(
         const { head, tail } = entities;
         if (head.automaticMovement.lastMovement === time.current) {
             const { position: headPosition } = head;
-            const { positions: tailPositions } = tail;
-            const headX = headPosition[0];
-            const headY = headPosition[1];
-            const tailPositionsX = tailPositions.map((position) => position[0]);
-            const tailPositionsY = tailPositions.map((position) => position[1]);
-            if (
-                tailPositionsX.includes(headX) &&
-                tailPositionsY.includes(headY)
-            ) {
+            const { elements: tailElements } = tail;
+            if (tailElements.some((el) => el.position.equals(headPosition))) {
                 dispatch({ type: "gameOver" });
             }
         }

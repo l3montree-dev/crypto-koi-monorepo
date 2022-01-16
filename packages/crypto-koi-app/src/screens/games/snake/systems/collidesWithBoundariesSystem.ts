@@ -24,8 +24,11 @@ export const collidesWithBoundariesSystem = gameSystem<
                 const { position, collidesWithBoundaries } = entity;
                 const { ownSize } = collidesWithBoundaries;
                 const [ownWidth, ownHeight] = ownSize;
-                const [x, y] = position;
-                const [gridWidth, gridHeight] = SnakeGameConfig.GRID_SIZE;
+                const [x, y] = position.getVec2();
+                const [
+                    gridWidth,
+                    gridHeight,
+                ] = SnakeGameConfig.GRID_SIZE.getVec2();
                 if (
                     y + ownHeight > gridHeight ||
                     x + ownWidth > gridWidth ||

@@ -2,6 +2,7 @@ import produce from "immer";
 import { ReactNode } from "react";
 import { GameEngineUpdateEventOptionType } from "react-native-game-engine";
 import GameState from "./gameState";
+import Vec2 from "./Vec2";
 
 /**
  * Wrapper function to wrap a game system fn.
@@ -25,7 +26,7 @@ export type Drawable<T> = T & {
     renderer: ReactNode;
 };
 export interface HasPosition {
-    position: [number, number];
+    position: Vec2;
 }
 
 export interface AutomaticMovement extends HasPosition {

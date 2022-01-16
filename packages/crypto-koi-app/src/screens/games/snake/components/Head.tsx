@@ -18,6 +18,6 @@ const style = StyleSheet.create({
 
 export type HeadEntity = AutomaticMovement & CollidesWithBoundaries;
 export const Head = gameComponent((props: HeadEntity) => {
-    const [x, y] = props.position;
+    const [x, y] = props.position.getVec2();
     return <View style={[style.head, { left: x, top: y }]} />;
 });
