@@ -5,13 +5,16 @@ export const collisionSystem = gameSystem<SnakeGameState, SnakeGameEvents>(
     (entities, { dispatch, time }) => {
         const { head, tail } = entities;
         if (head.timeBasedMovement.moved(time.current)) {
-            const { position: headPosition } = head.hasPosition;
+            const { position: headPosition } = head;
             const { elements: tailElements } = tail;
             if (
                 tailElements.some((el) =>
-                    el.hasPosition.position.equals(headPosition)
+                    el.position.p
+                        .getRectangle()
+                        .overlaps(headPosition.p.getRectangle())
                 )
             ) {
+                console.log("GAME OVER");
                 dispatch({ type: "gameOver" });
             }
         }

@@ -4,8 +4,8 @@ import {
     AttachComponent,
     Ctor,
 } from "../../../../entity-component-system/game-componets/containsComponent";
-import { HasPosition } from "../../../../entity-component-system/game-componets/hasPosition";
-import { TimeBasedMovement } from "../../../../entity-component-system/game-componets/timeBasedMovement";
+import { HasPosition } from "../../../../entity-component-system/game-componets/HasPosition";
+import { TimeBasedMovement } from "../../../../entity-component-system/game-componets/TimeBasedMovement";
 import { gameDrawable } from "../../../../entity-component-system/game-drawable/gameDrawable";
 import { SnakeGameConfig } from "../snakeGameState";
 
@@ -18,10 +18,10 @@ const style = StyleSheet.create({
     },
 });
 
-export type HeadEntity = AttachComponent<HasPosition, "hasPosition"> &
-    AttachComponent<TimeBasedMovement, "timeBasedMovement">;
+export type HeadEntity = AttachComponent<HasPosition> &
+    AttachComponent<TimeBasedMovement>;
 
 export const Head = gameDrawable((props: HeadEntity) => {
-    const [x, y] = props.hasPosition.position.getVec2();
+    const [x, y] = props.position.getCoords();
     return <View style={[style.head, { left: x, top: y }]} />;
 });

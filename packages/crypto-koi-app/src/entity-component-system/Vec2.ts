@@ -1,6 +1,10 @@
 import produce, { immerable } from "immer";
-import Normalizer from "./Normalizer";
+import { normalizeAll, normalizeFloat } from "./normalizer";
 
+/**
+ * Is used to represent a position.
+ * (x,y) coordinates
+ */
 export default class Vec2 {
     static random(maxX: number, maxY: number, stepSize: number): Vec2 {
         const x = Math.floor((Math.random() * maxX) / stepSize) * stepSize;
@@ -34,8 +38,7 @@ export default class Vec2 {
     _y: number;
 
     constructor(x: number, y: number) {
-        this._x = Normalizer.normalizeFloat(x);
-        this._y = Normalizer.normalizeFloat(y);
+        [this._x, this._y] = normalizeAll()(x, y);
     }
 
     getX(): number {
@@ -58,12 +61,16 @@ export default class Vec2 {
         });
     }
 
+    move(vec2: Vec2) {
+        return new Vec2(this._x + vec2.getX(), this._y + vec2.getY());
+    }
+
     moveX(deltaX: number): Vec2 {
-        return this.setX(Normalizer.normalizeFloat(this._x + deltaX));
+        return this.setX(normalizeFloat(this._x + deltaX));
     }
 
     moveY(deltaY: number): Vec2 {
-        return this.setY(Normalizer.normalizeFloat(this._y + deltaY));
+        return this.setY(normalizeFloat(this._y + deltaY));
     }
 
     setVec2(x: number, y: number): Vec2 {

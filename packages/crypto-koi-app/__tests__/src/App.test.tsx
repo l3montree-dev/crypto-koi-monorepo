@@ -7,9 +7,9 @@ import App from "../../src/App";
 Enzyme.configure({ adapter: new Adapter() });
 
 test("renders correctly", () => {
-  const wrapper = Enzyme.shallow(<App />);
+    const wrapper = Enzyme.shallow(<App />);
 
-  expect(wrapper.find({ testID: "tid-message" }).contains("Loading...")).toBe(
-    true
-  );
+    expect(wrapper.find({ testID: "tid-message" }).contains("Loading...")).toBe(
+        true
+    );
 });

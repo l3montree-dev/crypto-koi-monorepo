@@ -1,23 +1,13 @@
 import { immerable } from "immer";
 import { Controls } from "../input/controls";
+import GameComponent from "./GameComponent";
 
-export class TimeBasedMovement {
-    static getComponentName() {
-        return "timeBasedMovement" as const;
-    }
-
-    attach<T>(
-        entity: T
-    ): T &
-        {
-            [key in ReturnType<
-                typeof TimeBasedMovement["getComponentName"]
-            >]: TimeBasedMovement;
-        } {
-        return { ...entity, [TimeBasedMovement.getComponentName()]: this };
-    }
-
+export class TimeBasedMovement extends GameComponent<"timeBasedMovement"> {
     [immerable] = true;
+
+    static getKey(): string {
+        return "timeBasedMovement";
+    }
 
     constructor(
         public currentDirection: Controls,
@@ -26,7 +16,9 @@ export class TimeBasedMovement {
         public stepSize: number,
         // timestamp when the last movement did occur
         public lastMovement: number = 0
-    ) {}
+    ) {
+        super("timeBasedMovement");
+    }
 
     moved(currentTime: number): boolean {
         return this.lastMovement === currentTime;

@@ -2,8 +2,6 @@ import produce from "immer";
 import { ReactNode } from "react";
 import { GameEngineUpdateEventOptionType } from "react-native-game-engine";
 import GameState from "../game-state/gameState";
-import Vec2 from "../Vec2";
-import { HasPosition } from "./hasPosition";
 
 /**
  * Wrapper function to wrap a game system fn.

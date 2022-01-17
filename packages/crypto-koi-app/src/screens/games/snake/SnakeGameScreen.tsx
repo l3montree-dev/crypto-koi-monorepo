@@ -2,11 +2,15 @@ import React, { FunctionComponent, useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import { useTailwind } from "tailwind-rn/dist";
-import { HasPosition } from "../../../entity-component-system/game-componets/hasPosition";
-import { TimeBasedMovement } from "../../../entity-component-system/game-componets/timeBasedMovement";
+import CollidesWithBoundaries from "../../../entity-component-system/game-componets/CollidesWithBoundaries";
+import { GameEntityBuilder } from "../../../entity-component-system/game-componets/GameEntityBuilder";
+import { HasPosition } from "../../../entity-component-system/game-componets/HasPosition";
+import { TimeBasedMovement } from "../../../entity-component-system/game-componets/TimeBasedMovement";
 import IdGenerator from "../../../entity-component-system/IdGenerator";
 import { Controls } from "../../../entity-component-system/input/controls";
+import Position from "../../../entity-component-system/Position";
 import Vec2 from "../../../entity-component-system/Vec2";
+import Rectangle from "../../../entity-component-system/Rectangle";
 import useGameEngine from "../../../hooks/useGameEngine";
 import { Food } from "./components/Food";
 import { Head } from "./components/Head";
@@ -16,10 +20,10 @@ import {
     SnakeGameEvents,
     SnakeGameStateEntities,
 } from "./snakeGameState";
-import { timeBasedMovementSystem } from "./systems/timeBasedMovementSystem";
 import { collidesWithBoundariesSystem } from "./systems/collidesWithBoundariesSystem";
 import { collisionSystem } from "./systems/collisionSystem";
 import { consumableSystem } from "./systems/consumableSystem";
+import { timeBasedMovementSystem } from "./systems/timeBasedMovementSystem";
 
 const styles = StyleSheet.create({
     container: {
@@ -28,34 +32,66 @@ const styles = StyleSheet.create({
     },
 });
 
+const cellWidthAndHeight = new Vec2(
+    SnakeGameConfig.CELL_SIZE,
+    SnakeGameConfig.CELL_SIZE
+);
 const entities: SnakeGameStateEntities = {
-    food: {
+    food: new GameEntityBuilder({
         renderer: <Food />,
-        hasPosition: new HasPosition(
-            Vec2.random(
-                SnakeGameConfig.GRID_SIZE.getX(),
-                SnakeGameConfig.GRID_SIZE.getY(),
-                SnakeGameConfig.CELL_SIZE
+        id: IdGenerator.randomId(),
+    })
+        .attach(
+            new HasPosition(
+                new Position(
+                    Vec2.random(
+                        SnakeGameConfig.GRID_SIZE.getX(),
+                        SnakeGameConfig.GRID_SIZE.getY(),
+                        SnakeGameConfig.CELL_SIZE
+                    ),
+                    cellWidthAndHeight
+                )
             )
-        ),
-    },
-    head: {
+        )
+        .eject(),
+    head: new GameEntityBuilder({
         renderer: <Head />,
-        hasPosition: new HasPosition(new Vec2(0, SnakeGameConfig.CELL_SIZE)),
-        timeBasedMovement: new TimeBasedMovement(
-            Controls.bottom,
-            2,
-            SnakeGameConfig.CELL_SIZE,
-            0
-        ),
-    },
+        id: IdGenerator.randomId(),
+    })
+        .attach(
+            new CollidesWithBoundaries(
+                new Rectangle(new Vec2(0, 0), SnakeGameConfig.GRID_SIZE)
+            )
+        )
+        .attach(
+            new HasPosition(
+                new Position(
+                    new Vec2(0, SnakeGameConfig.CELL_SIZE),
+                    cellWidthAndHeight
+                )
+            )
+        )
+        .attach(
+            new TimeBasedMovement(
+                Controls.bottom,
+                2,
+                SnakeGameConfig.CELL_SIZE,
+                0
+            )
+        )
+        .eject(),
     tail: {
         renderer: <Tail />,
         elements: [
-            {
-                hasPosition: new HasPosition(new Vec2(0, 0)),
+            new GameEntityBuilder({
                 id: IdGenerator.randomId(),
-            },
+            })
+                .attach(
+                    new HasPosition(
+                        new Position(new Vec2(0, 0), cellWidthAndHeight)
+                    )
+                )
+                .eject(),
         ],
     },
 };

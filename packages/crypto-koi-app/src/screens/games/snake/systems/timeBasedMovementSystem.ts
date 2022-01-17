@@ -1,7 +1,8 @@
 import { containsComponent } from "../../../../entity-component-system/game-componets/containsComponent";
 import { gameSystem } from "../../../../entity-component-system/game-componets/gameSystem";
-import { HasPosition } from "../../../../entity-component-system/game-componets/hasPosition";
-import { TimeBasedMovement } from "../../../../entity-component-system/game-componets/timeBasedMovement";
+import { HasPosition } from "../../../../entity-component-system/game-componets/HasPosition";
+import { TimeBasedMovement } from "../../../../entity-component-system/game-componets/TimeBasedMovement";
+
 import { Controls } from "../../../../entity-component-system/input/controls";
 import { SnakeGameEvents, SnakeGameState } from "../snakeGameState";
 
@@ -70,22 +71,22 @@ export const timeBasedMovementSystem = gameSystem<
                 // calculate the new position
                 switch (currentDirection) {
                     case Controls.left:
-                        entity.hasPosition.position = entity.hasPosition.position.moveX(
+                        entity.position.p = entity.position.p.moveX(
                             -entity.timeBasedMovement.stepSize
                         );
                         break;
                     case Controls.right:
-                        entity.hasPosition.position = entity.hasPosition.position.moveX(
+                        entity.position.p = entity.position.p.moveX(
                             entity.timeBasedMovement.stepSize
                         );
                         break;
                     case Controls.top:
-                        entity.hasPosition.position = entity.hasPosition.position.moveY(
+                        entity.position.p = entity.position.p.moveY(
                             -entity.timeBasedMovement.stepSize
                         );
                         break;
                     case Controls.bottom:
-                        entity.hasPosition.position = entity.hasPosition.position.moveY(
+                        entity.position.p = entity.position.p.moveY(
                             entity.timeBasedMovement.stepSize
                         );
                         break;

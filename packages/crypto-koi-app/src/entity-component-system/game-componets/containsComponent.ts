@@ -1,22 +1,23 @@
-export interface Ctor<T, Key> {
+import GameComponent from "./GameComponent";
+
+export interface Ctor<T> {
     new (...args: any[]): T;
-    getComponentName(): Key;
-    [key: string]: any;
 }
 
-export const containsComponent = <T, Key extends string>(
-    component: Ctor<T, Key>
-) => <A>(
-    entity: A
-): entity is A &
-    {
-        [k in Key]: T;
-    } => {
-    const componentName = component.getComponentName();
-    // @ts-ignore
-    return entity[componentName] !== undefined;
+export type AttachComponent<T extends GameComponent<any>> = {
+    [k in ReturnType<T["getKey"]>]: T;
 };
 
-export type AttachComponent<T, Key extends string> = {
-    [k in ReturnType<Ctor<T, Key>["getComponentName"]>]: T;
+type InstanceType<S> = S extends { new (...args: any[]): infer T } ? T : never;
+
+export const containsComponent = <T extends Ctor<GameComponent<string>>>(
+    component: T
+) => <A>(entity: A): entity is A & AttachComponent<InstanceType<T>> => {
+    if (typeof entity !== "object" || entity === null) {
+        return false;
+    }
+
+    // @ts-ignore
+    const c = entity[component.getKey()];
+    return c instanceof component;
 };
