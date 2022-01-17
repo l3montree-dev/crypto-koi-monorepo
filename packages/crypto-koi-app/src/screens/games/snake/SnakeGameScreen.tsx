@@ -26,9 +26,11 @@ import { consumableSystem } from "./systems/consumableSystem";
 import { timeBasedMovementSystem } from "./systems/timeBasedMovementSystem";
 
 const styles = StyleSheet.create({
-    container: {
+    canvas: {
         backgroundColor: "red",
-        flex: 1,
+        width: SnakeGameConfig.GRID_SIZE._x,
+        height: SnakeGameConfig.GRID_SIZE._y,
+        position: "relative",
     },
 });
 
@@ -121,7 +123,7 @@ const SnakeGameScreen: FunctionComponent = () => {
         <View style={tailwind("flex-1")}>
             <GameEngine
                 ref={engine}
-                style={styles.container}
+                style={styles.canvas}
                 running={isRunning}
                 onEvent={(event: SnakeGameEvents) => {
                     if (event.type === "gameOver") {
@@ -131,7 +133,6 @@ const SnakeGameScreen: FunctionComponent = () => {
                     }
                 }}
                 systems={[
-                    // provide the boundaries of the snake game
                     timeBasedMovementSystem,
                     collidesWithBoundariesSystem,
                     collisionSystem,

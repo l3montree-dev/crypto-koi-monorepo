@@ -21,6 +21,9 @@ export const consumableSystem = gameSystem<SnakeGameState, SnakeGameEvents>(
             if (
                 food.position.p
                     .getRectangle()
+                    .equals(head.position.p.getRectangle()) ||
+                food.position.p
+                    .getRectangle()
                     .overlaps(head.position.p.getRectangle())
             ) {
                 dispatch({ type: "score", value: 1 });

@@ -14,7 +14,6 @@ export const collisionSystem = gameSystem<SnakeGameState, SnakeGameEvents>(
                         .overlaps(headPosition.p.getRectangle())
                 )
             ) {
-                console.log("GAME OVER");
                 dispatch({ type: "gameOver" });
             }
         }

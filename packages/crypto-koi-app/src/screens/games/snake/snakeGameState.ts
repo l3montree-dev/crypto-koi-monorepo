@@ -20,7 +20,7 @@ export type SnakeGameState = GameState<SnakeGameStateEntities>;
 export type SnakeGameEvents = GameEvents | { type: "score"; value: number };
 
 export const SnakeGameConfig = {
-    CELL_SIZE: Dimensions.get("window").width / 20,
+    CELL_SIZE: Dimensions.get("window").width / 15,
     GRID_SIZE: new Vec2(
         Dimensions.get("window").width,
         Dimensions.get("window").width
