@@ -11,7 +11,7 @@ import {
 export const consumableSystem = gameSystem<SnakeGameState, SnakeGameEvents>(
     (entities, { time, dispatch }) => {
         const { food, head, tail } = entities;
-        if (head.timeBasedMovement.moved(time.current)) {
+        if (head.timeBasedMovement.movedInThisFrame(time.current)) {
             // build a new tail element
             tail.elements.unshift({
                 position: new HasPosition(head.position.p),

@@ -1,7 +1,7 @@
 import produce from "immer";
 import { ReactNode } from "react";
 import { GameEngineUpdateEventOptionType } from "react-native-game-engine";
-import GameState from "../game-state/gameState";
+import GameState from "../types";
 
 /**
  * Wrapper function to wrap a game system fn.

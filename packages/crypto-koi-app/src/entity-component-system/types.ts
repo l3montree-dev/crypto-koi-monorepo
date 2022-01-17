@@ -16,3 +16,19 @@ export default interface GameState<Entities extends { [key: string]: any }>
     extends GameEngineProperties {
     entities: Entities;
 }
+
+export enum Controls {
+    left,
+    right,
+    top,
+    bottom,
+}
+
+export type GameEvents =
+    | {
+          type: "gameOver";
+      }
+    | {
+          type: "controls";
+          value: Controls;
+      };

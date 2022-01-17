@@ -1,4 +1,4 @@
-import GameComponent from "./GameComponent";
+import GameComponent from "./game-componets/GameComponent";
 
 export interface Ctor<T> {
     new (...args: any[]): T;

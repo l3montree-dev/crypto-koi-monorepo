@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { AttachComponent } from "../../../../entity-component-system/game-componets/containsComponent";
+import { AttachComponent } from "../../../../entity-component-system/containsComponent";
 import { HasPosition } from "../../../../entity-component-system/game-componets/HasPosition";
-import { gameDrawable } from "../../../../entity-component-system/game-drawable/gameDrawable";
+import { gameDrawable } from "../../../../entity-component-system/gameDrawable";
 
 import { SnakeGameConfig, SnakeGameState } from "../snakeGameState";
 

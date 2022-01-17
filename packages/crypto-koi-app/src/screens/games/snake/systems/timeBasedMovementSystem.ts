@@ -1,9 +1,9 @@
-import { containsComponent } from "../../../../entity-component-system/game-componets/containsComponent";
+import { containsComponent } from "../../../../entity-component-system/containsComponent";
 import { gameSystem } from "../../../../entity-component-system/game-componets/gameSystem";
 import { HasPosition } from "../../../../entity-component-system/game-componets/HasPosition";
 import { TimeBasedMovement } from "../../../../entity-component-system/game-componets/TimeBasedMovement";
+import { Controls } from "../../../../entity-component-system/types";
 
-import { Controls } from "../../../../entity-component-system/input/controls";
 import { SnakeGameEvents, SnakeGameState } from "../snakeGameState";
 
 export const timeBasedMovementSystem = gameSystem<

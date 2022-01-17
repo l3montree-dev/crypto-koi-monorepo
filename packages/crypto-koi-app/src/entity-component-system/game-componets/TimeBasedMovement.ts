@@ -1,5 +1,5 @@
 import { immerable } from "immer";
-import { Controls } from "../input/controls";
+import { Controls } from "../types";
 import GameComponent from "./GameComponent";
 
 export class TimeBasedMovement extends GameComponent<"timeBasedMovement"> {
@@ -20,7 +20,14 @@ export class TimeBasedMovement extends GameComponent<"timeBasedMovement"> {
         super("timeBasedMovement");
     }
 
-    moved(currentTime: number): boolean {
+    /**
+     * Returns true, if a movement did happen in this frame
+     * This can be used to check if the movement is valid or to calculate collisions
+     * or similar.
+     * @param currentTime
+     * @returns
+     */
+    movedInThisFrame(currentTime: number): boolean {
         return this.lastMovement === currentTime;
     }
 }

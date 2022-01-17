@@ -1,4 +1,4 @@
-import { Entity } from "../game-state/gameState";
+import { Entity } from "../types";
 import GameComponent from "./GameComponent";
 
 export class GameEntityBuilder<T extends Entity> {

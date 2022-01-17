@@ -1,8 +1,7 @@
 import { Dimensions } from "react-native";
 import { Drawable } from "../../../entity-component-system/game-componets/gameSystem";
-import GameState from "../../../entity-component-system/game-state/gameState";
+import GameState, { GameEvents } from "../../../entity-component-system/types";
 
-import { GameEvents } from "../../../entity-component-system/input/gameEvents";
 import Vec2 from "../../../entity-component-system/Vec2";
 import { FoodEntity } from "./components/Food";
 import { HeadEntity } from "./components/Head";

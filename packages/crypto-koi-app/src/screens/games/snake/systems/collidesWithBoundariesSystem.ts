@@ -1,5 +1,5 @@
 import CollidesWithBoundaries from "../../../../entity-component-system/game-componets/CollidesWithBoundaries";
-import { containsComponent } from "../../../../entity-component-system/game-componets/containsComponent";
+import { containsComponent } from "../../../../entity-component-system/containsComponent";
 import { gameSystem } from "../../../../entity-component-system/game-componets/gameSystem";
 import { HasPosition } from "../../../../entity-component-system/game-componets/HasPosition";
 import { SnakeGameEvents, SnakeGameState } from "../snakeGameState";

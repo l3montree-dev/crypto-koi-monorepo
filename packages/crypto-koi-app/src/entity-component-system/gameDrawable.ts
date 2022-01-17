@@ -1,5 +1,5 @@
 import { FunctionComponent, memo } from "react";
-import GameState from "../game-state/gameState";
+import GameState from "./types";
 
 export const gameDrawable = <
     T extends GameState<any>,

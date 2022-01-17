@@ -7,7 +7,6 @@ import { GameEntityBuilder } from "../../../entity-component-system/game-compone
 import { HasPosition } from "../../../entity-component-system/game-componets/HasPosition";
 import { TimeBasedMovement } from "../../../entity-component-system/game-componets/TimeBasedMovement";
 import IdGenerator from "../../../entity-component-system/IdGenerator";
-import { Controls } from "../../../entity-component-system/input/controls";
 import Position from "../../../entity-component-system/Position";
 import Vec2 from "../../../entity-component-system/Vec2";
 import Rectangle from "../../../entity-component-system/Rectangle";
@@ -24,6 +23,7 @@ import { collidesWithBoundariesSystem } from "./systems/collidesWithBoundariesSy
 import { collisionSystem } from "./systems/collisionSystem";
 import { consumableSystem } from "./systems/consumableSystem";
 import { timeBasedMovementSystem } from "./systems/timeBasedMovementSystem";
+import { Controls } from "../../../entity-component-system/types";
 
 const styles = StyleSheet.create({
     canvas: {

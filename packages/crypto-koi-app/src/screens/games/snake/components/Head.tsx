@@ -1,12 +1,9 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import {
-    AttachComponent,
-    Ctor,
-} from "../../../../entity-component-system/game-componets/containsComponent";
+import { StyleSheet, View } from "react-native";
+import { AttachComponent } from "../../../../entity-component-system/containsComponent";
 import { HasPosition } from "../../../../entity-component-system/game-componets/HasPosition";
 import { TimeBasedMovement } from "../../../../entity-component-system/game-componets/TimeBasedMovement";
-import { gameDrawable } from "../../../../entity-component-system/game-drawable/gameDrawable";
+import { gameDrawable } from "../../../../entity-component-system/gameDrawable";
 import { SnakeGameConfig } from "../snakeGameState";
 
 const style = StyleSheet.create({
