@@ -1,16 +1,17 @@
 {
-  "expo": {
-    "name": "cattleshow-app",
-    "slug": "cattleshow-app",
-    "version": "1.0.0",
-    "sdkVersion": "44.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "android": {
-      "package": "io.cattleshowapp"
+    "expo": {
+        "name": "cattleshow-app",
+        "slug": "cattleshow-app",
+        "version": "1.0.0",
+        "sdkVersion": "44.0.0",
+        "jsEngine": "hermes",
+        "platforms": [
+            "ios",
+            "android",
+            "web"
+        ],
+        "android": {
+            "package": "io.cattleshowapp"
+        }
     }
-  }
 }
