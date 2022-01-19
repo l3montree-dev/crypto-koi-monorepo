@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
+    Button,
     Image,
     NativeScrollEvent,
     NativeSyntheticEvent,
@@ -11,16 +12,16 @@ import {
     View,
 } from "react-native";
 import Animated, {
-    useAnimatedProps,
+    FadeIn,
     useAnimatedStyle,
     useSharedValue,
     withSpring,
 } from "react-native-reanimated";
-import { mixPath, parse } from "react-native-redash";
-import { Path } from "react-native-svg";
 import { useTailwind } from "tailwind-rn";
+import { AppButton } from "../../components/AppButton";
 import Wave from "../../components/Wave";
 import { useFloating } from "../../hooks/useFloating";
+import { useNavigation } from "../../hooks/useNavigation";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -54,23 +55,12 @@ const style = StyleSheet.create({
     },
 });
 
-const blob1 = parse(
-    "M42.6,24C31.2,44.5,-18.8,42.1,-32.4,20.5C-45.9,-1.2,-23,-42.2,2.1,-41C27.1,-39.8,54.1,3.5,42.6,24Z"
-);
-
-const blob2 = parse(
-    "M44.4,29.3C32.4,46.4,-19.7,43.9,-33.8,25.6C-47.9,7.4,-23.9,-26.7,2.1,-25.5C28.2,-24.2,56.3,12.3,44.4,29.3Z"
-);
-
-const blob3 = parse(
-    "M13.9,10.4C2.4,27.9,-33.3,33.9,-39.6,19.3C-46,4.6,-23,-30.5,-5.1,-33.5C12.7,-36.5,25.4,-7.2,13.9,10.4Z"
-);
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
 function OnboardingScreen() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const scrollPosition = useSharedValue(0);
+
+    const { navigate } = useNavigation();
 
     const animatedActiveDotStyle = useAnimatedStyle(() => {
         "worklet";
@@ -84,21 +74,6 @@ function OnboardingScreen() {
                     ),
                 },
             ],
-        };
-    });
-
-    const animatedProps = useAnimatedProps(() => {
-        "worklet";
-        // check which is the active screen.
-        const v = scrollPosition.value / DimensionUtils.deviceWidth;
-        let d: string;
-        if (v < 1) {
-            d = mixPath(v, blob1, blob2);
-        } else {
-            d = mixPath(v - 1, blob2, blob3);
-        }
-        return {
-            d,
         };
     });
 
@@ -143,6 +118,7 @@ function OnboardingScreen() {
     const opacity = useMemo(() => ({ opacity: activeSlide > 0 ? 1 : 0.5 }), [
         activeSlide,
     ]);
+
     return (
         <View style={tailwind("flex flex-1 bg-purple-700")}>
             <View style={tailwind("absolute top-0")}>
@@ -189,15 +165,129 @@ function OnboardingScreen() {
                         Travel and have fun with your best friends
                     </Text>
                 </View>
-                <View style={style.slide}>
-                    <Text>Hi</Text>
+                <View
+                    style={[
+                        style.slide,
+                        tailwind("flex-1 px-4 justify-center"),
+                    ]}
+                >
+                    {activeSlide === 1 && (
+                        <>
+                            <Animated.Text
+                                entering={FadeIn}
+                                style={tailwind(
+                                    "text-white text-4xl font-bold text-center mb-5"
+                                )}
+                            >
+                                Try to Keep your friend alive
+                            </Animated.Text>
+                            <Animated.View
+                                style={tailwind(
+                                    "flex-row mx-0 my-4 rounded-lg items-center"
+                                )}
+                                entering={FadeIn.delay(500)}
+                            >
+                                <Text style={tailwind("text-3xl")}>🥪</Text>
+                                <View style={tailwind("ml-5")}>
+                                    <Text
+                                        style={tailwind("text-white text-lg")}
+                                    >
+                                        Feed your friend
+                                    </Text>
+                                    <Text
+                                        style={tailwind(
+                                            "text-white opacity-75"
+                                        )}
+                                    >
+                                        Every few hours
+                                    </Text>
+                                </View>
+                            </Animated.View>
+                            <Animated.View
+                                style={tailwind(
+                                    "flex-row mx-0 my-4 rounded-lg items-center"
+                                )}
+                                entering={FadeIn.delay(1000)}
+                            >
+                                <Text style={tailwind("text-3xl")}>⚾</Text>
+                                <View style={tailwind("ml-5")}>
+                                    <Text
+                                        style={tailwind("text-white text-lg")}
+                                    >
+                                        Play with him
+                                    </Text>
+                                    <Text
+                                        style={tailwind(
+                                            "text-white opacity-75"
+                                        )}
+                                    >
+                                        Every few hours
+                                    </Text>
+                                </View>
+                            </Animated.View>
+                            <Animated.View
+                                style={tailwind(
+                                    "flex-row mx-0 my-4 rounded-lg items-center"
+                                )}
+                                entering={FadeIn.delay(1500)}
+                            >
+                                <Text style={tailwind("text-3xl")}>❤️</Text>
+                                <View style={tailwind("ml-5")}>
+                                    <Text
+                                        style={tailwind("text-white text-lg")}
+                                    >
+                                        Cuddle with him
+                                    </Text>
+                                    <Text
+                                        style={tailwind(
+                                            "text-white opacity-75"
+                                        )}
+                                    >
+                                        Every few hours
+                                    </Text>
+                                </View>
+                            </Animated.View>
+                        </>
+                    )}
                 </View>
-                <View style={style.slide}>
-                    <Text>Test</Text>
+                <View
+                    style={[
+                        style.slide,
+                        tailwind(
+                            "flex-col flex-1 justify-center px-4 items-center"
+                        ),
+                    ]}
+                >
+                    {activeSlide === 2 && (
+                        <Animated.View entering={FadeIn}>
+                            <Text
+                                style={tailwind(
+                                    "text-white text-4xl font-bold text-center mb-5"
+                                )}
+                            >
+                                Make it an NFT
+                            </Text>
+                            <Text
+                                style={tailwind(
+                                    "text-white text-lg text-center"
+                                )}
+                            >
+                                To never loose your friend again you can make
+                                him unique by putting him in an NFT
+                            </Text>
+                            <View style={tailwind("mt-5")}>
+                                <AppButton
+                                    variant="primary"
+                                    onPress={() => navigate("HomeScreen")}
+                                    title="Play"
+                                />
+                            </View>
+                        </Animated.View>
+                    )}
                 </View>
             </ScrollView>
 
-            <View style={tailwind("absolute bottom-0")}>
+            <View style={tailwind("absolute -bottom-20")}>
                 <Wave svgStyle={[style.svg, tailwind("text-violet-900")]} />
             </View>
 
@@ -230,7 +320,9 @@ function OnboardingScreen() {
                 </View>
                 <TouchableNativeFeedback onPress={handleNext}>
                     <View style={tailwind("py-4 m-2 px-10 rounded-lg")}>
-                        <Text style={tailwind("text-white")}>Next</Text>
+                        <Text style={tailwind("text-white")}>
+                            {activeSlide === 2 ? "Play" : "Next"}
+                        </Text>
                     </View>
                 </TouchableNativeFeedback>
             </View>
