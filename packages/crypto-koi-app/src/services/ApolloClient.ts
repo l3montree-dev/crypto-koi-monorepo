@@ -1,8 +1,7 @@
-// import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { Config } from "../config";
 import { authService } from "./AuthService";
 
-// @ts-ignore
 const httpLink = createHttpLink({
     uri: Config.graphqlBaseUrl,
     fetch: (uri: RequestInfo) => {
@@ -16,9 +15,7 @@ const httpLink = createHttpLink({
     },
 });
 
-// @ts-ignore
 export const apolloClient = new ApolloClient({
     link: httpLink,
-    // @ts-ignore
     cache: new InMemoryCache(),
 });

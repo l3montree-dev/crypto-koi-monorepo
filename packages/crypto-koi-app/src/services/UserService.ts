@@ -1,6 +1,6 @@
-import { GET_USER } from "../graphql/queries/userQueries";
+// import { GET_USER } from "../graphql/queries/userQueries";
 import log from "../utils/logger";
-import { apolloClient } from "./ApolloClient";
+// import { apolloClient } from "./ApolloClient";
 import { authService } from "./AuthService";
 
 class UserService {
@@ -13,7 +13,7 @@ class UserService {
         if (!success) {
             return;
         }
-        console.log(await apolloClient.query({ query: GET_USER }));
+        // console.log(await apolloClient.query({ query: GET_USER }));
     }
     /**
      * Executes side-effects. If the login is successful, it does update the authorization store.
@@ -26,7 +26,7 @@ class UserService {
             return;
         }
 
-        console.log(await apolloClient.query({ query: GET_USER }));
+        // console.log(await apolloClient.query({ query: GET_USER }));
     }
 }
 

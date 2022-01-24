@@ -1,17 +1,20 @@
 const extraNodeModules = require('node-libs-browser');
-const { getDefaultConfig } = require("metro-config");
-const { resolver: defaultResolver } = getDefaultConfig.getDefaultValues();
-const config = {
+
+const { getDefaultConfig } = require('@expo/metro-config');
+
+const defaultConfig = getDefaultConfig(__dirname)
+defaultConfig.resolver.sourceExts.push("cjs")
+
+
+module.exports = {
+    ...defaultConfig,
     resolver: {
-        ...defaultResolver,
+        ...defaultConfig.resolver,
         extraNodeModules,
-        sourceExts: [...defaultResolver.sourceExts, "cjs"]
     },
     transformer: {
+        ...defaultConfig.transformer,
         assetPlugins: ['expo-asset/tools/hashAssetFiles'],
     },
 };
 
-
-
-module.exports = config;
