@@ -1,19 +1,19 @@
 import moment, { Moment } from "moment";
 import React, { useEffect, useState } from "react";
 import { Text, TextStyle } from "react-native";
+import { ticker } from "../services/Ticker";
 
 interface Props {
     style?: TextStyle;
     date: Moment;
+    id: string;
 }
 
 function SimpleClock(props: Props) {
     const [value, setValue] = useState(moment());
     useEffect(() => {
-        const interval = setInterval(() => {
-            setValue(moment());
-        }, 1 * 1000);
-        return () => clearInterval(interval);
+        ticker.addTickHandler(props.id, () => setValue(moment()));
+        return () => ticker.removeTickHandler(props.id);
     }, [props.date]);
 
     return (

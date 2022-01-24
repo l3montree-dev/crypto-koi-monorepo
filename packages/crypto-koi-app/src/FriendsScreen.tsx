@@ -125,6 +125,7 @@ const HomeScreen = () => {
                                 style={tailwind(
                                     "text-white text-xs text-center mt-1"
                                 )}
+                                id="food-clock"
                             />
                         </View>
                         <View style={tailwind("mx-4")}>
@@ -155,6 +156,7 @@ const HomeScreen = () => {
                                 style={tailwind(
                                     "text-white text-xs text-center mt-1"
                                 )}
+                                id="fun-clock"
                             />
                         </View>
                         <View>
@@ -181,6 +183,7 @@ const HomeScreen = () => {
                                 </View>
                             </CircularProgress>
                             <SimpleClock
+                                id="affection-clock"
                                 date={moment().add(0.8, "hour")}
                                 style={tailwind(
                                     "text-white text-xs text-center mt-1"
@@ -230,6 +233,7 @@ const HomeScreen = () => {
                     />
                     <Text style={tailwind("text-white ml-2")}>Age:</Text>
                     <Clock
+                        id="age-clock"
                         style={tailwind("text-white ml-2")}
                         date={moment().subtract(5, "d")}
                     />
