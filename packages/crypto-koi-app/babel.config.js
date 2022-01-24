@@ -7,9 +7,13 @@ module.exports = function (api) {
             '@babel/preset-typescript',
         ],
         plugins: [
-            ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+            ['@babel/plugin-proposal-private-property-in-object', { loose: false }],
             ['module:react-native-dotenv'],
-            'react-native-reanimated/plugin'
+            'react-native-reanimated/plugin',
+            ["@babel/plugin-proposal-class-properties", { "loose": false }]
         ],
+        "assumptions": {
+            "setPublicClassFields": false
+        }
     };
 };

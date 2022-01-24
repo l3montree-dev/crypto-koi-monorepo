@@ -2,7 +2,7 @@ import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
 import React, { FunctionComponent } from "react";
-import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
 import RootStackNavigator from "./RootStackNavigator";
@@ -25,14 +25,14 @@ const style = {
 };
 const App: FunctionComponent = () => {
     return (
-        <View style={style}>
-            <StatusBar translucent />
+        <SafeAreaProvider>
             <TailwindProvider utilities={utilities}>
+                <StatusBar translucent />
                 <NavigationContainer theme={Theme}>
                     <RootStackNavigator />
                 </NavigationContainer>
             </TailwindProvider>
-        </View>
+        </SafeAreaProvider>
     );
 };
 

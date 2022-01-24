@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import localhost from "react-native-localhost";
 import Web3 from "web3";
-import { AbiItem } from "web3-eth-abi/node_modules/web3-utils";
 
 import Hello from "../../../artifacts/contracts/Hello.sol/Hello.json";
 
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
 
 const shouldDeployContract = async (
     web3: Web3,
-    abi: AbiItem | AbiItem[],
+    abi: any | any[],
     data: string,
     from: string
 ) => {
@@ -47,7 +46,7 @@ export default function App(): JSX.Element {
                 );
                 const contract = await shouldDeployContract(
                     web3,
-                    Hello.abi as AbiItem[],
+                    Hello.abi as any[],
                     Hello.bytecode,
                     address
                 );

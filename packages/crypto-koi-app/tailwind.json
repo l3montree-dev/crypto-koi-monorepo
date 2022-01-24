@@ -212,6 +212,12 @@
 			"borderBottomLeftRadius": 4
 		}
 	},
+	"bg-purple-600": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(147 51 234 / var(--tw-bg-opacity))"
+		}
+	},
 	"bg-amber-500": {
 		"style": {
 			"--tw-bg-opacity": 1,
