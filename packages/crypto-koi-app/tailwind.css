@@ -163,9 +163,9 @@
   background-color: rgb(245 158 11 / var(--tw-bg-opacity))
 }
 
-.bg-red-700 {
+.bg-purple-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity))
+  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
 .bg-violet-400 {
@@ -176,11 +176,6 @@
 .bg-violet-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(221 214 254 / var(--tw-bg-opacity))
-}
-
-.bg-purple-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
 .p-1 {
