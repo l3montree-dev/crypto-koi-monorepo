@@ -45,11 +45,12 @@
             }
         ],
         "functional/immutable-data": 0,
-        "eslint-comments/no-unused-disable": "error",
+        "eslint-comments/no-unused-disable": "off",
         "react-native/no-unused-styles": 2,
         "react-native/split-platform-components": 2,
         "react-native/no-inline-styles": 2,
         "react-native/no-raw-text": 2,
+        "eslint-comments/no-unlimited-disable": "off",
         "react-native/no-single-element-style-arrays": 2
     },
     "parserOptions": {

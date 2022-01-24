@@ -1,4 +1,9 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, {
+    AxiosError,
+    AxiosRequestConfig,
+    AxiosResponse,
+    AxiosInstance,
+} from "axios";
 import { Config } from "../config";
 import { StorageService } from "./StorageService";
 
@@ -8,27 +13,42 @@ interface TokenResponse {
 }
 
 class AuthService {
+    publicClient: AxiosInstance;
+    protectedClient: AxiosInstance;
+
+    constructor() {
+        this.protectedClient = axios.create({
+            baseURL: Config.restApiBaseUrl,
+        });
+
+        this.publicClient = axios.create({
+            baseURL: Config.restApiBaseUrl,
+        });
+
+        // add the interceptor.
+        this.protectedClient.interceptors.response.use(
+            (response) => response,
+            this.rejectedInterceptor.bind(this)
+        );
+
+        // adds the authorization header to each request.
+        // like a middleware.
+        this.protectedClient.interceptors.request.use(
+            this.requestInterceptor.bind(this)
+        );
+    }
     // the public client does not contain any request or response interceptors.
     // it can be used to login.
-    static PublicClient = axios.create({
-        baseURL: Config.restApiBaseUrl,
-    });
 
-    static ProtectedClient = axios.create({
-        baseURL: Config.restApiBaseUrl,
-    });
-
-    private static accessToken: string | null = null;
+    private accessToken: string | null = null;
 
     private static refreshTokenStorageKey = "@auth/refreshToken";
     private static accessTokenStorageKey = "@auth/accessToken";
 
-    static refreshTokenRequest: Promise<
-        AxiosResponse<TokenResponse>
-    > | null = null;
+    refreshTokenRequest: Promise<AxiosResponse<TokenResponse>> | null = null;
 
-    static async loginUsingDeviceId(deviceId: string): Promise<void> {
-        const token = await this.PublicClient.post<TokenResponse>(
+    async loginUsingDeviceId(deviceId: string): Promise<void> {
+        const token = await this.publicClient.post<TokenResponse>(
             "/auth/login",
             {
                 type: "deviceId",
@@ -39,31 +59,34 @@ class AuthService {
         await this.handleSuccessfulToken(token.data);
     }
 
-    static async logout() {
+    async logout() {
         // destroy the tokens from the storage
         await Promise.all([
-            StorageService.delete(this.refreshTokenStorageKey),
-            StorageService.delete(this.accessTokenStorageKey),
+            StorageService.delete(AuthService.refreshTokenStorageKey),
+            StorageService.delete(AuthService.accessTokenStorageKey),
         ]);
     }
 
-    private static async handleSuccessfulToken(token: TokenResponse) {
+    private async handleSuccessfulToken(token: TokenResponse) {
         await Promise.all([
-            StorageService.save(this.accessTokenStorageKey, token.accessToken),
             StorageService.save(
-                this.refreshTokenStorageKey,
+                AuthService.accessTokenStorageKey,
+                token.accessToken
+            ),
+            StorageService.save(
+                AuthService.refreshTokenStorageKey,
                 token.refreshToken
             ),
         ]);
         this.accessToken = token.accessToken;
     }
 
-    static async refreshToken() {
-        const token = await this.ProtectedClient.post<TokenResponse>(
+    async refreshToken() {
+        const token = await this.protectedClient.post<TokenResponse>(
             "/auth/refresh",
             {
                 refreshToken: await StorageService.getValueFor(
-                    this.refreshTokenStorageKey
+                    AuthService.refreshTokenStorageKey
                 ),
             }
         );
@@ -71,13 +94,13 @@ class AuthService {
         return token;
     }
 
-    private static maybeRefreshToken() {
+    private maybeRefreshToken() {
         if (this.refreshTokenRequest === null) {
             this.refreshTokenRequest = this.refreshToken();
         }
     }
 
-    static rejectedInterceptor(error: AxiosError) {
+    rejectedInterceptor(error: AxiosError) {
         if (error.response?.status === 401) {
             // if the requests was rejected with a 401 response, this means,
             // that the user is not authenticated or the token is expired.
@@ -86,12 +109,12 @@ class AuthService {
             // just retry the request.
             // the execution will be blocked by the request interceptor which awaits
             // any ongoing refresh requests.
-            return this.ProtectedClient.request(error.config);
+            return this.protectedClient.request(error.config);
         }
         return Promise.reject(error);
     }
 
-    static async requestInterceptor(config: AxiosRequestConfig) {
+    async requestInterceptor(config: AxiosRequestConfig) {
         if (this.refreshTokenRequest !== null) {
             try {
                 await this.refreshTokenRequest;
@@ -109,14 +132,4 @@ class AuthService {
     }
 }
 
-// add the interceptor.
-AuthService.ProtectedClient.interceptors.response.use(
-    (response) => response,
-    AuthService.rejectedInterceptor
-);
-
-// adds the authorization header to each request.
-// like a middleware.
-AuthService.ProtectedClient.interceptors.request.use(
-    AuthService.requestInterceptor
-);
+export const authService = new AuthService();
