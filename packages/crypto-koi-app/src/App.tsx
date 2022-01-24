@@ -1,23 +1,38 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { FunctionComponent } from "react";
-import StackNavigator from "./StackNavigator";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import * as NavigationBar from "expo-navigation-bar";
+import { StatusBar } from "expo-status-bar";
+import React, { FunctionComponent } from "react";
+import { View } from "react-native";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
-import { StatusBar } from "expo-status-bar";
-import * as NavigationBar from "expo-navigation-bar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import RootStackNavigator from "./RootStackNavigator";
+import { Colors } from "./styles/colors";
 
-NavigationBar.setBackgroundColorAsync("#4c1d95");
+NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
+
+const Theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: "rgb(255, 45, 85)",
+        background: Colors.bgColor,
+    },
+};
+
+const style = {
+    backgroundColor: Colors.bgColor,
+    flex: 1,
+};
 const App: FunctionComponent = () => {
     return (
-        <SafeAreaProvider>
+        <View style={style}>
+            <StatusBar translucent />
             <TailwindProvider utilities={utilities}>
-                <StatusBar translucent />
-                <NavigationContainer>
-                    <StackNavigator />
+                <NavigationContainer theme={Theme}>
+                    <RootStackNavigator />
                 </NavigationContainer>
             </TailwindProvider>
-        </SafeAreaProvider>
+        </View>
     );
 };
 

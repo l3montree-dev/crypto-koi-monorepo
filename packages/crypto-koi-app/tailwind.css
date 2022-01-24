@@ -6,6 +6,22 @@
   position: relative
 }
 
+.bottom-0 {
+  bottom: 0px
+}
+
+.left-0 {
+  left: 0px
+}
+
+.right-0 {
+  right: 0px
+}
+
+.top-16 {
+  top: 4rem
+}
+
 .top-0 {
   top: 0px
 }
@@ -16,6 +32,11 @@
 
 .m-2 {
   margin: 0.5rem
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem
 }
 
 .mx-0 {
@@ -31,6 +52,26 @@
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem
+}
+
+.mt-40 {
+  margin-top: 10rem
+}
+
+.mt-1 {
+  margin-top: 0.25rem
+}
+
+.ml-2 {
+  margin-left: 0.5rem
+}
+
+.mt-4 {
+  margin-top: 1rem
+}
+
+.mb-4 {
+  margin-bottom: 1rem
 }
 
 .mt-20 {
@@ -57,6 +98,22 @@
   display: flex
 }
 
+.h-56 {
+  height: 14rem
+}
+
+.h-10 {
+  height: 2.5rem
+}
+
+.w-full {
+  width: 100%
+}
+
+.w-10 {
+  width: 2.5rem
+}
+
 .flex-1 {
   flex: 1 1 0%
 }
@@ -71,6 +128,10 @@
 
 .items-center {
   align-items: center
+}
+
+.justify-end {
+  justify-content: flex-end
 }
 
 .justify-center {
@@ -89,18 +150,12 @@
   border-radius: 0.5rem
 }
 
+.rounded-full {
+  border-radius: 9999px
+}
+
 .rounded {
   border-radius: 0.25rem
-}
-
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity))
-}
-
-.bg-gray-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(75 85 99 / var(--tw-bg-opacity))
 }
 
 .bg-amber-500 {
@@ -123,6 +178,20 @@
   background-color: rgb(221 214 254 / var(--tw-bg-opacity))
 }
 
+.p-1 {
+  padding: 0.25rem
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -138,13 +207,23 @@
   padding-right: 2.5rem
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem
-}
-
 .text-center {
   text-align: center
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .text-4xl {
@@ -157,23 +236,28 @@
   line-height: 1.75rem
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem
-}
-
 .font-bold {
   font-weight: 700
 }
 
-.text-white {
+.text-amber-500 {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
+  color: rgb(245 158 11 / var(--tw-text-opacity))
 }
 
 .text-violet-900 {
   --tw-text-opacity: 1;
   color: rgb(76 29 149 / var(--tw-text-opacity))
+}
+
+.text-amber-100 {
+  --tw-text-opacity: 1;
+  color: rgb(254 243 199 / var(--tw-text-opacity))
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .opacity-75 {

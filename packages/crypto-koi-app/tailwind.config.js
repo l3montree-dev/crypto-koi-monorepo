@@ -1,17 +1,10 @@
 module.exports = {
-    content: ["./src/**/*.{tsx,jsx}"],
-    theme: {
-        extend: {
-            colors: {
-                vio: "#572D92"
-            }
-        },
-    },
+    content: ["./src/**/*.tsx"],
     corePlugins: {
-        // boxShadow: false,
-        // translate: false,
+        boxShadow: false,
+        translate: false,
         transform: false,
-        // ringWidth: false
+        ringWidth: false
     },
     plugins: [],
 };

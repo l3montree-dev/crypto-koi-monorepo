@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
     Button,
@@ -23,6 +23,8 @@ import Wave from "../../components/Wave";
 import { useFloating } from "../../hooks/useFloating";
 import { useNavigation } from "../../hooks/useNavigation";
 import { DimensionUtils } from "../../utils/DimensionUtils";
+import * as NavigationBar from "expo-navigation-bar";
+import { Colors } from "../../styles/colors";
 
 const style = StyleSheet.create({
     slide: {
@@ -113,14 +115,18 @@ function OnboardingScreen() {
         }
     };
 
-    const floatingStyle = useFloating();
+    const { translateX, translateY } = useFloating();
 
     const opacity = useMemo(() => ({ opacity: activeSlide > 0 ? 1 : 0.5 }), [
         activeSlide,
     ]);
 
+    useEffect(() => {
+        NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
+    }, []);
+
     return (
-        <View style={tailwind("flex flex-1 bg-purple-700")}>
+        <View style={tailwind("flex-1 bg-purple-700")}>
             <View style={tailwind("absolute top-0")}>
                 <Wave
                     svgStyle={[
@@ -142,7 +148,7 @@ function OnboardingScreen() {
             >
                 <View style={[style.slide, tailwind("mt-20 flex-1")]}>
                     <View>
-                        <RNAnimated.View style={floatingStyle}>
+                        <RNAnimated.View style={{ translateX, translateY }}>
                             <Image
                                 style={style.img}
                                 resizeMode="contain"
@@ -277,7 +283,6 @@ function OnboardingScreen() {
                             </Text>
                             <View style={tailwind("mt-5")}>
                                 <AppButton
-                                    variant="primary"
                                     onPress={() => navigate("HomeScreen")}
                                     title="Play"
                                 />

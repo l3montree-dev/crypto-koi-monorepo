@@ -10,9 +10,6 @@ import Animated, {
     Easing,
 } from "react-native-reanimated";
 import { mix } from "react-native-redash";
-import { useTailwind } from "tailwind-rn/dist";
-
-const SIZE = Dimensions.get("window").width;
 
 const style = StyleSheet.create({
     container: {
@@ -26,19 +23,21 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 interface Props {
     svgStyle?: ViewStyle | ViewStyle[];
+    disableAnimation?: boolean;
 }
 
 const Wave: FunctionComponent<Props> = (props) => {
-    const progress = useSharedValue(0);
+    const progress = useSharedValue(props.disableAnimation ? 0.35 : 0);
     useEffect(() => {
-        progress.value = withRepeat(
-            withTiming(1, {
-                duration: 3000,
-                easing: Easing.inOut(Easing.ease),
-            }),
-            -1,
-            true
-        );
+        if (!props.disableAnimation)
+            progress.value = withRepeat(
+                withTiming(1, {
+                    duration: 3000,
+                    easing: Easing.inOut(Easing.ease),
+                }),
+                -1,
+                true
+            );
     }, [progress]);
 
     const data1 = useDerivedValue(() => {
