@@ -2,12 +2,13 @@ import { ApolloProvider } from "@apollo/client";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
 import RootStackNavigator from "./RootStackNavigator";
 import { apolloClient } from "./services/ApolloClient";
+import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
 
 NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
@@ -22,6 +23,10 @@ const Theme = {
 };
 
 const App: FunctionComponent = () => {
+    useEffect(() => {
+        // start the login routine.
+        userService.tryToLogin();
+    }, []);
     return (
         <ApolloProvider client={apolloClient}>
             <SafeAreaProvider>

@@ -2,9 +2,9 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
+import { observer } from "mobx-react-lite";
 import React, { FunctionComponent } from "react";
-
-import HomeScreen from "./FriendsScreen";
+import { authStore } from "./mobx/RootStore";
 import SnakeGameScreen from "./screens/games/snake/SnakeGameScreen";
 import OnboardingScreen from "./screens/onboarding/OnboardingScreen";
 import { Colors } from "./styles/colors";
@@ -21,33 +21,38 @@ const commonNavigationOptions: NativeStackNavigationOptions = {
     headerTitleAlign: "center",
 };
 
-const RootStackNavigator: FunctionComponent = () => {
+const RootStackNavigator: FunctionComponent = observer(() => {
     return (
         <Stack.Navigator>
-            <Stack.Screen
-                name="TabNavigator"
-                component={TabNavigator}
-                options={{
-                    ...commonNavigationOptions,
-                    // there is no way to redirect back
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="OnboardingScreen"
-                component={OnboardingScreen}
-                options={{
-                    ...commonNavigationOptions,
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name="SnakeGameScreen"
-                component={SnakeGameScreen}
-                options={commonNavigationOptions}
-            />
+            {authStore.currentUser !== null ? (
+                <>
+                    <Stack.Screen
+                        name="TabNavigator"
+                        component={TabNavigator}
+                        options={{
+                            ...commonNavigationOptions,
+                            // there is no way to redirect back
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="SnakeGameScreen"
+                        component={SnakeGameScreen}
+                        options={commonNavigationOptions}
+                    />
+                </>
+            ) : (
+                <Stack.Screen
+                    name="OnboardingScreen"
+                    component={OnboardingScreen}
+                    options={{
+                        ...commonNavigationOptions,
+                        headerShown: false,
+                    }}
+                />
+            )}
         </Stack.Navigator>
     );
-};
+});
 
 export default RootStackNavigator;

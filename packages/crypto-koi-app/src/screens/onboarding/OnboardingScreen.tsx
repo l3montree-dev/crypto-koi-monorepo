@@ -1,7 +1,7 @@
+import * as NavigationBar from "expo-navigation-bar";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
-    Button,
     Image,
     NativeScrollEvent,
     NativeSyntheticEvent,
@@ -17,14 +17,16 @@ import Animated, {
     useSharedValue,
     withSpring,
 } from "react-native-reanimated";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../../components/AppButton";
 import Wave from "../../components/Wave";
 import { useFloating } from "../../hooks/useFloating";
-import { useNavigation } from "../../hooks/useNavigation";
-import { DimensionUtils } from "../../utils/DimensionUtils";
-import * as NavigationBar from "expo-navigation-bar";
+import { authService } from "../../services/AuthService";
+import { userService } from "../../services/UserService";
 import { Colors } from "../../styles/colors";
+import { DimensionUtils } from "../../utils/DimensionUtils";
+import Constants from "expo-constants";
 
 const style = StyleSheet.create({
     slide: {
@@ -55,14 +57,15 @@ const style = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "flex-start",
     },
+    listItem: {
+        backgroundColor: "rgba(255,255,255,0.2)",
+    },
 });
 
 function OnboardingScreen() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const scrollPosition = useSharedValue(0);
-
-    const { navigate } = useNavigation();
 
     const animatedActiveDotStyle = useAnimatedStyle(() => {
         "worklet";
@@ -78,6 +81,10 @@ function OnboardingScreen() {
             ],
         };
     });
+
+    const onPlayPress = () => {
+        userService.loginUsingDeviceId(Constants.installationId);
+    };
 
     const setActive = (next: number, x: number) => {
         setActiveSlide(next);
@@ -106,6 +113,9 @@ function OnboardingScreen() {
     };
 
     const handleNext = () => {
+        if (activeSlide === 2) {
+            return onPlayPress();
+        }
         if (scrollViewRef.current) {
             scrollViewRef.current.scrollTo({
                 x: (activeSlide + 1) * DimensionUtils.deviceWidth,
@@ -140,6 +150,7 @@ function OnboardingScreen() {
                 decelerationRate={"fast"}
                 pagingEnabled={true}
                 ref={scrollViewRef}
+                scrollEnabled={false}
                 style={tailwind("flex-1")}
                 scrollEventThrottle={16}
                 onScroll={scrollHandler}
@@ -185,15 +196,22 @@ function OnboardingScreen() {
                                     "text-white text-4xl font-bold text-center mb-5"
                                 )}
                             >
-                                Try to Keep your friend alive
+                                Keep your friend alive
                             </Animated.Text>
                             <Animated.View
-                                style={tailwind(
-                                    "flex-row mx-0 my-4 rounded-lg items-center"
-                                )}
+                                style={[
+                                    style.listItem,
+                                    tailwind(
+                                        "flex-row mx-0 my-2 py-3 px-4 rounded-lg items-center"
+                                    ),
+                                ]}
                                 entering={FadeIn.delay(500)}
                             >
-                                <Text style={tailwind("text-3xl")}>🥪</Text>
+                                <Icon
+                                    style={tailwind("text-4xl text-amber-500")}
+                                    name="food-apple"
+                                />
+
                                 <View style={tailwind("ml-5")}>
                                     <Text
                                         style={tailwind("text-white text-lg")}
@@ -210,12 +228,18 @@ function OnboardingScreen() {
                                 </View>
                             </Animated.View>
                             <Animated.View
-                                style={tailwind(
-                                    "flex-row mx-0 my-4 rounded-lg items-center"
-                                )}
+                                style={[
+                                    style.listItem,
+                                    tailwind(
+                                        "flex-row mx-0 px-4 py-3 my-2 rounded-lg items-center"
+                                    ),
+                                ]}
                                 entering={FadeIn.delay(1000)}
                             >
-                                <Text style={tailwind("text-3xl")}>⚾</Text>
+                                <Icon
+                                    style={tailwind("text-4xl text-amber-500")}
+                                    name="gamepad-variant-outline"
+                                />
                                 <View style={tailwind("ml-5")}>
                                     <Text
                                         style={tailwind("text-white text-lg")}
@@ -232,12 +256,18 @@ function OnboardingScreen() {
                                 </View>
                             </Animated.View>
                             <Animated.View
-                                style={tailwind(
-                                    "flex-row mx-0 my-4 rounded-lg items-center"
-                                )}
+                                style={[
+                                    style.listItem,
+                                    tailwind(
+                                        "flex-row mx-0 my-2 px-4 py-3 rounded-lg items-center"
+                                    ),
+                                ]}
                                 entering={FadeIn.delay(1500)}
                             >
-                                <Text style={tailwind("text-3xl")}>❤️</Text>
+                                <Icon
+                                    style={tailwind("text-4xl text-amber-500")}
+                                    name="heart"
+                                />
                                 <View style={tailwind("ml-5")}>
                                     <Text
                                         style={tailwind("text-white text-lg")}
@@ -282,10 +312,7 @@ function OnboardingScreen() {
                                 him unique by putting him in an NFT
                             </Text>
                             <View style={tailwind("mt-5")}>
-                                <AppButton
-                                    onPress={() => navigate("HomeScreen")}
-                                    title="Play"
-                                />
+                                <AppButton onPress={onPlayPress} title="Play" />
                             </View>
                         </Animated.View>
                     )}
@@ -306,7 +333,7 @@ function OnboardingScreen() {
                 </TouchableNativeFeedback>
 
                 <View style={tailwind("flex-row")}>
-                    {[0, 1, 2].map((slide, index) => (
+                    {[0, 1, 2].map((_, index) => (
                         <View
                             key={index}
                             style={[

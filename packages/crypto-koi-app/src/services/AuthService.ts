@@ -1,10 +1,11 @@
 import axios, {
     AxiosError,
+    AxiosInstance,
     AxiosRequestConfig,
     AxiosResponse,
-    AxiosInstance,
 } from "axios";
 import { Config } from "../config";
+import log from "../utils/logger";
 import { StorageService } from "./StorageService";
 
 interface TokenResponse {
@@ -15,7 +16,7 @@ interface TokenResponse {
 class AuthService {
     publicClient: AxiosInstance;
     protectedClient: AxiosInstance;
-
+    loadTokenPromise: Promise<unknown>;
     constructor() {
         this.protectedClient = axios.create({
             baseURL: Config.restApiBaseUrl,
@@ -36,27 +37,68 @@ class AuthService {
         this.protectedClient.interceptors.request.use(
             this.requestInterceptor.bind(this)
         );
+        // load the tokens.
+        this.loadTokenPromise = Promise.all([
+            StorageService.getValueFor(AuthService.refreshTokenStorageKey),
+            StorageService.getValueFor(AuthService.accessTokenStorageKey),
+        ]).then(([refreshToken, accessToken]) => {
+            this.accessToken = accessToken;
+            this.refreshToken = refreshToken;
+        });
     }
     // the public client does not contain any request or response interceptors.
     // it can be used to login.
 
     private accessToken: string | null = null;
+    private refreshToken: string | null = null;
 
-    private static refreshTokenStorageKey = "@auth/refreshToken";
-    private static accessTokenStorageKey = "@auth/accessToken";
+    private static refreshTokenStorageKey = "_auth_refreshToken";
+    private static accessTokenStorageKey = "_auth_accessToken";
 
     refreshTokenRequest: Promise<AxiosResponse<TokenResponse>> | null = null;
 
-    async loginUsingDeviceId(deviceId: string): Promise<void> {
-        const token = await this.publicClient.post<TokenResponse>(
-            "/auth/login",
-            {
-                type: "deviceId",
-                deviceId,
-            }
-        );
+    async exchangeDeviceIdForToken(deviceId: string): Promise<boolean> {
+        try {
+            const token = await this.publicClient.post<TokenResponse>(
+                "/auth/login",
+                {
+                    type: "deviceId",
+                    deviceId,
+                }
+            );
+            await this.handleSuccessfulToken(token.data);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
 
-        await this.handleSuccessfulToken(token.data);
+    /**
+     *
+     * @returns A promise that resolves to the success state.
+     */
+    async tryToLoginUsingStoredCredentials(): Promise<boolean> {
+        log.info("trying to login using stored credentials");
+        // check if the tokens do exist.
+        await this.loadTokenPromise;
+        if (this.accessToken === null) {
+            log.warn("no access token found");
+            return false;
+        }
+        // they do exist.
+        // check if they are still valid.
+        // we can do this by just refreshing the access token.
+        try {
+            const token = await this.refreshAccessToken();
+            await this.handleSuccessfulToken(token.data);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    getAccessToken() {
+        return this.accessToken;
     }
 
     async logout() {
@@ -79,15 +121,14 @@ class AuthService {
             ),
         ]);
         this.accessToken = token.accessToken;
+        this.refreshToken = token.refreshToken;
     }
 
-    async refreshToken() {
+    private async refreshAccessToken() {
         const token = await this.protectedClient.post<TokenResponse>(
             "/auth/refresh",
             {
-                refreshToken: await StorageService.getValueFor(
-                    AuthService.refreshTokenStorageKey
-                ),
+                refreshToken: this.refreshToken,
             }
         );
 
@@ -96,11 +137,11 @@ class AuthService {
 
     private maybeRefreshToken() {
         if (this.refreshTokenRequest === null) {
-            this.refreshTokenRequest = this.refreshToken();
+            this.refreshTokenRequest = this.refreshAccessToken();
         }
     }
 
-    rejectedInterceptor(error: AxiosError) {
+    private rejectedInterceptor(error: AxiosError) {
         if (error.response?.status === 401) {
             // if the requests was rejected with a 401 response, this means,
             // that the user is not authenticated or the token is expired.
@@ -114,7 +155,7 @@ class AuthService {
         return Promise.reject(error);
     }
 
-    async requestInterceptor(config: AxiosRequestConfig) {
+    private async requestInterceptor(config: AxiosRequestConfig) {
         if (this.refreshTokenRequest !== null) {
             try {
                 await this.refreshTokenRequest;
