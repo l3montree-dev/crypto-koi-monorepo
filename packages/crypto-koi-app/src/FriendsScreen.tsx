@@ -7,8 +7,6 @@ import {
     Image,
     SafeAreaView,
     StyleSheet,
-    Text,
-    TouchableNativeFeedback,
     View,
 } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
@@ -16,11 +14,15 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "./components/AppButton";
 import CircularProgress from "./components/CircularProgress";
-import Clock from "./components/Clock";
+import FriendInfo from "./components/FriendInfo";
+import FriendTitle from "./components/FriendTitle";
+import IconButton from "./components/IconButton";
 import SimpleClock from "./components/SimpleClock";
 import useAppState from "./hooks/useAppState";
 import { useFloating } from "./hooks/useFloating";
+import useOpen from "./hooks/useOpen";
 import { selectFirstCryptogotchi } from "./mobx/selectors";
+import FriendEditModal from "./modals/FriendEditModal";
 import { DimensionUtils } from "./utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -42,7 +44,7 @@ const FriendsScreen = observer(() => {
     const tailwind = useTailwind();
     const { translateX, translateY } = useFloating();
     const cryptogotchi = useAppState(selectFirstCryptogotchi);
-
+    const { isOpen, open, close } = useOpen();
     return (
         <SafeAreaView style={tailwind("flex-1 flex-col")}>
             <View
@@ -218,87 +220,17 @@ const FriendsScreen = observer(() => {
             </View>
             <View style={tailwind("flex-col mx-4 justify-end")}>
                 <View style={tailwind("flex-row justify-between")}>
-                    <View style={tailwind("flex-row")}>
-                        <Text style={tailwind("text-white text-3xl font-bold")}>
-                            {cryptogotchi?.name}
-                        </Text>
-                        {!cryptogotchi?.isAlive && (
-                            <Icon
-                                name="grave-stone"
-                                style={tailwind(
-                                    "text-3xl text-white opacity-50 ml-2"
-                                )}
-                            />
-                        )}
-                    </View>
-
+                    {cryptogotchi && (
+                        <FriendTitle cryptogotchi={cryptogotchi} />
+                    )}
                     <View style={tailwind("rounded-lg overflow-hidden")}>
-                        <TouchableNativeFeedback
-                            style={tailwind("rounded-full")}
-                            onPress={() => console.log("Hello")}
-                        >
-                            <View
-                                style={tailwind(
-                                    "p-1 w-10 flex-row items-center justify-center h-10 flex-row"
-                                )}
-                            >
-                                <Icon
-                                    style={tailwind("text-white text-2xl ")}
-                                    name="dots-horizontal"
-                                />
-                            </View>
-                        </TouchableNativeFeedback>
+                        <IconButton onPress={open} name="dots-horizontal" />
                     </View>
                 </View>
 
                 {cryptogotchi && (
                     <>
-                        <View style={tailwind("flex-row items-center")}>
-                            <Icon
-                                style={
-                                    cryptogotchi.tokenId
-                                        ? tailwind("text-2xl text-amber-500")
-                                        : tailwind(
-                                              "text-2xl text-white opacity-50"
-                                          )
-                                }
-                                name={
-                                    cryptogotchi.tokenId
-                                        ? "shield-check"
-                                        : "shield-off"
-                                }
-                            />
-                            <Text style={tailwind("text-white ml-2")}>
-                                #
-                                {cryptogotchi.tokenId !== null
-                                    ? cryptogotchi.tokenId + " (is valid NFT)"
-                                    : cryptogotchi.getBase64Uuid + " (No NFT)"}
-                            </Text>
-                        </View>
-                        <View style={tailwind("flex-row items-center")}>
-                            <Icon
-                                style={tailwind("text-2xl text-amber-500")}
-                                name="information-outline"
-                            />
-                            <Text style={tailwind("text-white ml-2")}>
-                                Age:
-                            </Text>
-                            {cryptogotchi.deathDate === null ? (
-                                <Clock
-                                    id="age-clock"
-                                    style={tailwind("text-white ml-2")}
-                                    date={cryptogotchi.createdAt}
-                                />
-                            ) : (
-                                <Text style={tailwind("text-white ml-2")}>
-                                    {cryptogotchi.deathDateString} (died:{" "}
-                                    {cryptogotchi.deathDate.format(
-                                        "DD.MM.YYYY HH:mm"
-                                    )}
-                                    )
-                                </Text>
-                            )}
-                        </View>
+                        <FriendInfo cryptogotchi={cryptogotchi} />
                         <View style={tailwind(" mt-4 mb-4")}>
                             <AppButton
                                 disabled={!cryptogotchi.isAlive}
@@ -309,6 +241,13 @@ const FriendsScreen = observer(() => {
                     </>
                 )}
             </View>
+            {cryptogotchi && (
+                <FriendEditModal
+                    cryptogotchi={cryptogotchi}
+                    onClose={close}
+                    isOpen={isOpen}
+                />
+            )}
         </SafeAreaView>
     );
 });

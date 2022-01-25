@@ -25,6 +25,13 @@ export default class Cryptogotchi {
         makeAutoObservable(this);
     }
 
+    setName(name: string | undefined | null) {
+        if (!name) {
+            return;
+        }
+        this.name = name;
+    }
+
     get foodEmptyDate(): Moment {
         // the drain variables indicates the loss per minute.
         // this way we can just calculate the time till the variable will equal null

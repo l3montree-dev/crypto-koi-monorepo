@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { ActivityIndicator } from "react-native";
 import {
     Pressable,
     PressableProps,
@@ -12,6 +13,7 @@ import { useTailwind } from "tailwind-rn/dist";
 interface Props extends PressableProps {
     style?: StyleProp<ViewStyle>;
     title: string;
+    loading?: boolean;
 }
 
 const android_ripple = {
@@ -29,13 +31,19 @@ export const AppButton: FunctionComponent<Props> = (props) => {
                 props.style,
             ]}
         >
-            <Pressable android_ripple={android_ripple} {...rest}>
-                <View style={tailwind("px-5 py-4")}>
-                    <Text style={tailwind("text-white text-center")}>
-                        {title}
-                    </Text>
+            {props.loading ? (
+                <View style={tailwind("px-5 py-2")}>
+                    <ActivityIndicator color={"white"} size="large" />
                 </View>
-            </Pressable>
+            ) : (
+                <Pressable android_ripple={android_ripple} {...rest}>
+                    <View style={tailwind("px-5 py-4")}>
+                        <Text style={tailwind("text-white text-center")}>
+                            {title}
+                        </Text>
+                    </View>
+                </Pressable>
+            )}
         </View>
     );
 };
