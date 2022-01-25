@@ -9,14 +9,22 @@
 
 export interface GetUser_user_cryptogotchies {
   __typename: "Cryptogotchi";
-  name: string;
+  id: string;
+  isAlive: boolean;
+  name: string | null;
+  affection: number;
+  fun: number;
+  food: number;
+  tokenId: string | null;
+  createdAt: any;
 }
 
 export interface GetUser_user {
   __typename: "User";
   id: string;
-  name: string;
-  cryptogotchies: (GetUser_user_cryptogotchies | null)[] | null;
+  createdAt: any;
+  name: string | null;
+  cryptogotchies: GetUser_user_cryptogotchies[];
 }
 
 export interface GetUser {

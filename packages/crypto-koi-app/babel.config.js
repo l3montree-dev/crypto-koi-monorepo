@@ -10,10 +10,10 @@ module.exports = function (api) {
             ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
             ['module:react-native-dotenv'],
             'react-native-reanimated/plugin',
-            // ["@babel/plugin-proposal-class-properties", { "loose": false }]
+            ["@babel/plugin-proposal-class-properties", { "loose": true }]
         ],
         /*"assumptions": {
-            "setPublicClassFields": false
+    "setPublicClassFields": false
         }*/
     };
 };

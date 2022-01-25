@@ -9,7 +9,8 @@
 /* dapp-begin */
 const { Platform, LogBox } = require('react-native');
 
-console.log("CALLED")
+if (!new class { x }().hasOwnProperty('x')) throw new Error('Transpiler is not configured correctly');
+
 if (Platform.OS !== 'web') {
     require('react-native-get-random-values');
     LogBox.ignoreLogs(

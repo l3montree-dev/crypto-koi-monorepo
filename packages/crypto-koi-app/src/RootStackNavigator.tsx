@@ -3,8 +3,9 @@ import {
     NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import React, { FunctionComponent } from "react";
-import { authStore } from "./mobx/RootStore";
+import React, { FunctionComponent, useContext } from "react";
+import useAppState from "./hooks/useAppState";
+import { AppStateContext } from "./mobx/AppStateContext";
 import SnakeGameScreen from "./screens/games/snake/SnakeGameScreen";
 import OnboardingScreen from "./screens/onboarding/OnboardingScreen";
 import { Colors } from "./styles/colors";
@@ -22,9 +23,11 @@ const commonNavigationOptions: NativeStackNavigationOptions = {
 };
 
 const RootStackNavigator: FunctionComponent = observer(() => {
+    const currentUser = useAppState((r) => r.authStore.currentUser);
+
     return (
         <Stack.Navigator>
-            {authStore.currentUser !== null ? (
+            {currentUser ? (
                 <>
                     <Stack.Screen
                         name="TabNavigator"

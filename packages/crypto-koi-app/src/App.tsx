@@ -6,6 +6,8 @@ import React, { FunctionComponent, useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
+import { AppStateContext } from "./mobx/AppStateContext";
+import { rootStore } from "./mobx/RootStore";
 import RootStackNavigator from "./RootStackNavigator";
 import { apolloClient } from "./services/ApolloClient";
 import { userService } from "./services/UserService";
@@ -27,16 +29,19 @@ const App: FunctionComponent = () => {
         // start the login routine.
         userService.tryToLogin();
     }, []);
+
     return (
         <ApolloProvider client={apolloClient}>
-            <SafeAreaProvider>
-                <TailwindProvider utilities={utilities}>
-                    <StatusBar translucent />
-                    <NavigationContainer theme={Theme}>
-                        <RootStackNavigator />
-                    </NavigationContainer>
-                </TailwindProvider>
-            </SafeAreaProvider>
+            <AppStateContext.Provider value={rootStore}>
+                <SafeAreaProvider>
+                    <TailwindProvider utilities={utilities}>
+                        <StatusBar translucent />
+                        <NavigationContainer theme={Theme}>
+                            <RootStackNavigator />
+                        </NavigationContainer>
+                    </TailwindProvider>
+                </SafeAreaProvider>
+            </AppStateContext.Provider>
         </ApolloProvider>
     );
 };
