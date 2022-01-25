@@ -35,6 +35,7 @@ const App: FunctionComponent = () => {
         // start the login routine.
         (async function () {
             try {
+                log.info("Boot");
                 await userService.tryToLogin();
             } catch (e) {
                 log.warn("login failed with:", e);

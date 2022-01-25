@@ -3,17 +3,24 @@ module.exports = function (api) {
     return {
         presets: [
             'babel-preset-expo',
-            ['@babel/preset-env', { targets: { node: 'current' } }],
+            // ['@babel/preset-env', { targets: { node: 'current' } }],
             '@babel/preset-typescript',
         ],
         plugins: [
-            ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+            // ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
             ['module:react-native-dotenv'],
             'react-native-reanimated/plugin',
-            ["@babel/plugin-proposal-class-properties", { "loose": true }]
+            //["@babel/plugin-proposal-class-properties", { "loose": true }]
         ],
-        /*"assumptions": {
-    "setPublicClassFields": false
-        }*/
+
+        overrides: [
+            {
+                test: fileName => !fileName.includes('node_modules'),
+                plugins: [
+                    ['@babel/plugin-proposal-decorators', { legacy: true }],
+                    ['@babel/plugin-proposal-class-properties', { loose: false }],
+                ],
+            },
+        ],
     };
 };

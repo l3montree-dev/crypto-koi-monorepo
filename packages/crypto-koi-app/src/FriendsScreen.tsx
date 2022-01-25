@@ -105,7 +105,7 @@ const FriendsScreen = observer(() => {
                 ]}
             >
                 {cryptogotchi && (
-                    <BlurView intensity={75} style={tailwind("rounded-lg")}>
+                    <BlurView intensity={0} style={tailwind("rounded-lg")}>
                         <View style={tailwind("flex-row py-2 px-4")}>
                             <View>
                                 <CircularProgress
@@ -130,7 +130,7 @@ const FriendsScreen = observer(() => {
                                             style={tailwind(
                                                 "text-amber-100 text-2xl"
                                             )}
-                                            name="food-apple"
+                                            name="heart"
                                         />
                                     </View>
                                 </CircularProgress>
@@ -142,7 +142,7 @@ const FriendsScreen = observer(() => {
                                     id="food-clock"
                                 />
                             </View>
-                            <View style={tailwind("mx-4")}>
+                            {/*<View style={tailwind("mx-4")}>
                                 <CircularProgress
                                     progress={Math.max(
                                         cryptogotchi.fun / 100,
@@ -211,7 +211,7 @@ const FriendsScreen = observer(() => {
                                         "text-white text-xs text-center mt-1"
                                     )}
                                 />
-                            </View>
+                                    </View>*/}
                         </View>
                     </BlurView>
                 )}

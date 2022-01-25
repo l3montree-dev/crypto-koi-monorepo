@@ -17,6 +17,7 @@ class UserService {
         }
 
         const user = await apolloClient.query<GetUser>({ query: GET_USER });
+
         rootStore.authStore.setCurrentUser(user.data.user);
     }
     /**
