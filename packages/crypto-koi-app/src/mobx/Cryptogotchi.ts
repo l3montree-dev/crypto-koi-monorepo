@@ -3,26 +3,49 @@ import GameStat from "./GameStat";
 import Event from "./Event";
 import moment, { Moment } from "moment";
 import TimeUtils from "../utils/TimeUtils";
+import { ClientCryptogotchi } from "../graphql/queries/__generated__/ClientCryptogotchi";
 
 export default class Cryptogotchi {
-    constructor(
-        public id: string,
-        public isAlive: boolean,
-        public name: string | null,
-        public food: number,
-        public fun: number,
-        public affection: number,
-        public tokenId: string | null,
-        public createdAt: Moment,
-        public gameStats: GameStat[],
-        public events: Event[],
-        public ownerId: string,
-        public foodDrain: number,
-        public funDrain: number,
-        public affectionDrain: number,
-        public deathDate: Moment | null
-    ) {
+    public id: string;
+    public isAlive: boolean;
+    public name: string | null;
+    public food: number;
+    public tokenId: string | null;
+    public createdAt: Moment;
+    public gameStats: GameStat[] = [];
+    public events: Event[] = [];
+    public minutesTillDeath: number;
+    public deathDate: Moment | null;
+    public nextFeeding: Moment;
+    constructor(fragment: ClientCryptogotchi) {
         makeAutoObservable(this);
+
+        // duplicate...
+        this.id = fragment.id;
+        this.isAlive = fragment.isAlive;
+        this.name = fragment.name;
+        this.food = fragment.food;
+        this.tokenId = fragment.tokenId;
+        this.createdAt = moment(fragment.createdAt);
+        // this.gameStats = fragment.gameStats.map(gs => new GameStat(gs))
+        // this.events = fragment.events.map(e => new Event(e))
+        this.minutesTillDeath = fragment.minutesTillDeath;
+        this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
+        this.nextFeeding = moment(fragment.nextFeeding);
+    }
+
+    setFromFragment(fragment: ClientCryptogotchi) {
+        this.id = fragment.id;
+        this.isAlive = fragment.isAlive;
+        this.name = fragment.name;
+        this.food = fragment.food;
+        this.tokenId = fragment.tokenId;
+        this.createdAt = moment(fragment.createdAt);
+        // this.gameStats = fragment.gameStats.map(gs => new GameStat(gs))
+        // this.events = fragment.events.map(e => new Event(e))
+        this.minutesTillDeath = fragment.minutesTillDeath;
+        this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
+        this.nextFeeding = moment(fragment.nextFeeding);
     }
 
     setName(name: string | undefined | null) {
@@ -33,25 +56,7 @@ export default class Cryptogotchi {
     }
 
     get foodEmptyDate(): Moment {
-        // the drain variables indicates the loss per minute.
-        // this way we can just calculate the time till the variable will equal null
-        const minutesLeft = Math.max(0, this.food / this.foodDrain);
-
-        return moment().add(minutesLeft, "minutes");
-    }
-
-    get funEmptyDate(): Moment {
-        // the drain variables indicates the loss per minute.
-        // this way we can just calculate the time till the variable will equal null
-        const minutesLeft = Math.max(this.fun / this.funDrain, 0);
-        return moment().add(minutesLeft, "minutes");
-    }
-
-    get affectionEmptyDate(): Moment {
-        // the drain variables indicates the loss per minute.
-        // this way we can just calculate the time till the variable will equal null
-        const minutesLeft = Math.max(this.affection / this.affectionDrain, 0);
-        return moment().add(minutesLeft, "minutes");
+        return moment().add(this.minutesTillDeath, "minutes");
     }
 
     get getBase64Uuid(): string {

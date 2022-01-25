@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: ChangeCryptogotchiName
+// GraphQL mutation operation: Feed
 // ====================================================
 
-export interface ChangeCryptogotchiName_changeCryptogotchiName {
+export interface Feed_feed {
   __typename: "Cryptogotchi";
   id: string;
   isAlive: boolean;
@@ -20,11 +20,10 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   nextFeeding: any;
 }
 
-export interface ChangeCryptogotchiName {
-  changeCryptogotchiName: ChangeCryptogotchiName_changeCryptogotchiName;
+export interface Feed {
+  feed: Feed_feed;
 }
 
-export interface ChangeCryptogotchiNameVariables {
+export interface FeedVariables {
   id: string;
-  name: string;
 }

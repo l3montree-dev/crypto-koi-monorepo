@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import { BlurView } from "expo-blur";
 import { observer } from "mobx-react-lite";
 import React from "react";
@@ -18,6 +19,8 @@ import FriendInfo from "./components/FriendInfo";
 import FriendTitle from "./components/FriendTitle";
 import IconButton from "./components/IconButton";
 import SimpleClock from "./components/SimpleClock";
+import { FEED_CRYPTOGOTCHI_MUTATION } from "./graphql/queries/cryptogotchiMutations";
+import { FeedVariables, Feed } from "./graphql/queries/__generated__/Feed";
 import useAppState from "./hooks/useAppState";
 import { useFloating } from "./hooks/useFloating";
 import useOpen from "./hooks/useOpen";
@@ -45,6 +48,20 @@ const FriendsScreen = observer(() => {
     const { translateX, translateY } = useFloating();
     const cryptogotchi = useAppState(selectFirstCryptogotchi);
     const { isOpen, open, close } = useOpen();
+    const [feed, { loading }] = useMutation<Feed, FeedVariables>(
+        FEED_CRYPTOGOTCHI_MUTATION
+    );
+    const handleFeed = async () => {
+        if (!cryptogotchi) {
+            return;
+        }
+        const res = await feed({ variables: { id: cryptogotchi.id } });
+        if (!res.data) {
+            return;
+        }
+        cryptogotchi.setFromFragment(res.data.feed);
+    };
+
     return (
         <SafeAreaView style={tailwind("flex-1 flex-col")}>
             <View
@@ -130,7 +147,7 @@ const FriendsScreen = observer(() => {
                                     >
                                         <Icon
                                             style={tailwind(
-                                                "text-amber-100 text-2xl"
+                                                "text-amber-500 text-2xl"
                                             )}
                                             name="heart"
                                         />
@@ -233,6 +250,8 @@ const FriendsScreen = observer(() => {
                         <FriendInfo cryptogotchi={cryptogotchi} />
                         <View style={tailwind(" mt-4 mb-4")}>
                             <AppButton
+                                loading={loading}
+                                onPress={handleFeed}
                                 disabled={!cryptogotchi.isAlive}
                                 style={tailwind("w-full")}
                                 title="Feed"

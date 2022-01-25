@@ -5,14 +5,11 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         id
         isAlive
         name
-        affection
-        fun
         food
         tokenId
         createdAt
-        foodDrain
-        funDrain
-        affectionDrain
+        minutesTillDeath
         deathDate
+        nextFeeding
     }
 `;

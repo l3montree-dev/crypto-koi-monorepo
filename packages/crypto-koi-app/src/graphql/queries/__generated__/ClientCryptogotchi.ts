@@ -12,13 +12,10 @@ export interface ClientCryptogotchi {
   id: string;
   isAlive: boolean;
   name: string | null;
-  affection: number;
-  fun: number;
   food: number;
   tokenId: string | null;
   createdAt: any;
-  foodDrain: number;
-  funDrain: number;
-  affectionDrain: number;
+  minutesTillDeath: number;
   deathDate: any | null;
+  nextFeeding: any;
 }

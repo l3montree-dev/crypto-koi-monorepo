@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
+import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Modal, ScrollView, View } from "react-native";
-
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "../components/AppButton";
 import FriendInfo from "../components/FriendInfo";
@@ -13,10 +13,10 @@ import { CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptog
 import {
     ChangeCryptogotchiName,
     ChangeCryptogotchiNameVariables,
-    ChangeCryptogotchiName_changeCryptogotchiName,
 } from "../graphql/queries/__generated__/ChangeCryptogotchiName";
 import useInput from "../hooks/useInput";
 import Cryptogotchi from "../mobx/Cryptogotchi";
+import { Colors } from "../styles/colors";
 
 interface Props {
     isOpen: boolean;
@@ -36,13 +36,16 @@ const FriendEditModal = observer((props: Props) => {
         const result = await changeName({
             variables: { id: cryptogotchi.id, name: name.value },
         });
-
         cryptogotchi.setName(result.data?.changeCryptogotchiName.name);
     };
 
     return (
         <Modal animationType="slide" visible={isOpen} onRequestClose={onClose}>
-            <View style={tailwind("flex-1 bg-purple-700")}>
+            <StatusBar
+                animated={true}
+                backgroundColor={Colors.bgColorVariant}
+            />
+            <View style={tailwind("flex-1 bg-violet-900")}>
                 <ScrollView
                     contentContainerStyle={tailwind("px-4")}
                     style={tailwind("flex-1")}
@@ -55,12 +58,12 @@ const FriendEditModal = observer((props: Props) => {
                             <FriendTitle cryptogotchi={cryptogotchi} />
                         </View>
                     </View>
-                    <View style={tailwind("bg-violet-900 rounded-lg p-4 mb-6")}>
+                    <View style={tailwind("rounded-lg mt-4 mb-6")}>
                         <FriendInfo cryptogotchi={cryptogotchi} />
                     </View>
                     <Input
                         label="Change Name"
-                        style={tailwind("bg-purple-500")}
+                        style={tailwind("bg-violet-500")}
                         {...name}
                         selectTextOnFocus
                     />
