@@ -16,12 +16,16 @@ function SimpleClock(props: Props) {
         return () => ticker.removeTickHandler(props.id);
     }, [props.date]);
 
+    const diffSeconds = props.date.diff(value, "second");
+    if (diffSeconds < 0) {
+        // remove the ticker
+        ticker.removeTickHandler(props.id);
+    }
     return (
         <Text style={props.style}>
-            {props.date
-                .clone()
-                .subtract(value.unix(), "second")
-                .format("HH:mm:ss")}
+            {diffSeconds < 0
+                ? "00:00:00"
+                : moment.utc(diffSeconds * 1000).format("HH:mm:ss")}
         </Text>
     );
 }

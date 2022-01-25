@@ -1,6 +1,6 @@
-import { action, makeAutoObservable, makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
+import moment from "moment";
 import { GetUser } from "../graphql/queries/__generated__/GetUser";
-import log from "../utils/logger";
 import Cryptogotchi from "./Cryptogotchi";
 import User from "./User";
 
@@ -11,16 +11,13 @@ export default class AuthStore {
     currentUser: User | null;
     test = "";
     constructor() {
-        makeObservable(this, {
-            currentUser: observable,
-            setCurrentUser: action,
-        });
+        makeAutoObservable(this);
         this.currentUser = null;
     }
 
     setCurrentUser(user: GetUser["user"] | null) {
         this.test = Math.random().toString();
-        log.info("setting current user", user);
+
         if (user) {
             this.currentUser = new User(
                 user.id,
@@ -31,13 +28,20 @@ export default class AuthStore {
                         cryptogotchi.id,
                         cryptogotchi.isAlive,
                         cryptogotchi.name,
-                        cryptogotchi.affection,
                         cryptogotchi.food,
+                        cryptogotchi.fun,
+                        cryptogotchi.affection,
                         cryptogotchi.tokenId,
-                        cryptogotchi.createdAt,
+                        moment(cryptogotchi.createdAt),
                         [],
                         [],
-                        user.id
+                        user.id,
+                        cryptogotchi.foodDrain,
+                        cryptogotchi.funDrain,
+                        cryptogotchi.affectionDrain,
+                        cryptogotchi.deathDate !== null
+                            ? moment(cryptogotchi.deathDate)
+                            : null
                     );
                 })
             );

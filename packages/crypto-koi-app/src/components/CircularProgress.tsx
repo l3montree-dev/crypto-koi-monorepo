@@ -32,7 +32,9 @@ function CircularProgress(props: Props) {
     });
 
     useEffect(() => {
-        sharedProgress.value = withSpring(props.progress);
+        setTimeout(() => {
+            sharedProgress.value = withSpring(props.progress);
+        }, 1000);
     }, [props.progress]);
 
     const tailwind = useTailwind();

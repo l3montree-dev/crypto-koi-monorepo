@@ -17,6 +17,10 @@ export interface GetUser_user_cryptogotchies {
   food: number;
   tokenId: string | null;
   createdAt: any;
+  foodDrain: number;
+  funDrain: number;
+  affectionDrain: number;
+  deathDate: any | null;
 }
 
 export interface GetUser_user {

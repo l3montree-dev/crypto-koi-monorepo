@@ -158,14 +158,14 @@
   border-radius: 0.25rem
 }
 
-.bg-amber-500 {
+.bg-amber-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 158 11 / var(--tw-bg-opacity))
+  background-color: rgb(251 191 36 / var(--tw-bg-opacity))
 }
 
-.bg-violet-700 {
+.bg-purple-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(109 40 217 / var(--tw-bg-opacity))
+  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
 .bg-violet-400 {
@@ -178,29 +178,9 @@
   background-color: rgb(221 214 254 / var(--tw-bg-opacity))
 }
 
-.bg-violet-600 {
+.bg-amber-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
-}
-
-.bg-violet-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(139 92 246 / var(--tw-bg-opacity))
-}
-
-.bg-violet-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(237 233 254 / var(--tw-bg-opacity))
-}
-
-.bg-purple-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 85 247 / var(--tw-bg-opacity))
-}
-
-.bg-purple-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
+  background-color: rgb(245 158 11 / var(--tw-bg-opacity))
 }
 
 .p-1 {
@@ -288,6 +268,10 @@
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.opacity-50 {
+  opacity: 0.5
 }
 
 .opacity-75 {

@@ -1,5 +1,5 @@
 import { BlurView } from "expo-blur";
-import moment from "moment";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import {
     Animated,
@@ -11,14 +11,16 @@ import {
     TouchableNativeFeedback,
     View,
 } from "react-native";
-import Svg, { Circle, Ellipse } from "react-native-svg";
+import Svg, { Ellipse } from "react-native-svg";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "./components/AppButton";
 import CircularProgress from "./components/CircularProgress";
 import Clock from "./components/Clock";
 import SimpleClock from "./components/SimpleClock";
+import useAppState from "./hooks/useAppState";
 import { useFloating } from "./hooks/useFloating";
+import { selectFirstCryptogotchi } from "./mobx/selectors";
 import { DimensionUtils } from "./utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -29,12 +31,17 @@ const style = StyleSheet.create({
     z1: {
         zIndex: 1,
     },
+    dead: {
+        tintColor: "black",
+        opacity: 0.6,
+    },
 });
 
 const AnimatedEllipse = Animated.createAnimatedComponent(Ellipse);
-const HomeScreen = () => {
+const FriendsScreen = observer(() => {
     const tailwind = useTailwind();
     const { translateX, translateY } = useFloating();
+    const cryptogotchi = useAppState(selectFirstCryptogotchi);
 
     return (
         <SafeAreaView style={tailwind("flex-1 flex-col")}>
@@ -65,7 +72,10 @@ const HomeScreen = () => {
             <View style={tailwind("flex-1 mt-40")}>
                 <RNAnimated.View style={[{ translateX, translateY }, style.z1]}>
                     <Image
-                        style={style.img}
+                        style={[
+                            style.img,
+                            !cryptogotchi?.isAlive && style.dead,
+                        ]}
                         resizeMode="contain"
                         source={require("../assets/image/cg-3.png")}
                     />
@@ -94,110 +104,134 @@ const HomeScreen = () => {
                     style.z1,
                 ]}
             >
-                <BlurView intensity={75} style={tailwind("rounded-lg")}>
-                    <View style={tailwind("flex-row py-2 px-4")}>
-                        <View>
-                            <CircularProgress
-                                progress={0.6}
-                                backgroundStrokeColor={
-                                    tailwind("text-amber-100").color as string
-                                }
-                                radius={25}
-                                svgStyle={tailwind("text-amber-500")}
-                                strokeWidth={6}
-                            >
-                                <View
-                                    style={tailwind(
-                                        "flex-row flex-1 justify-center items-center"
+                {cryptogotchi && (
+                    <BlurView intensity={75} style={tailwind("rounded-lg")}>
+                        <View style={tailwind("flex-row py-2 px-4")}>
+                            <View>
+                                <CircularProgress
+                                    progress={Math.max(
+                                        cryptogotchi.food / 100,
+                                        0
                                     )}
+                                    backgroundStrokeColor={
+                                        tailwind("text-amber-100")
+                                            .color as string
+                                    }
+                                    radius={25}
+                                    svgStyle={tailwind("text-amber-500")}
+                                    strokeWidth={6}
                                 >
-                                    <Icon
+                                    <View
                                         style={tailwind(
-                                            "text-amber-100 text-2xl"
+                                            "flex-row flex-1 justify-center items-center"
                                         )}
-                                        name="food-apple"
-                                    />
-                                </View>
-                            </CircularProgress>
-
-                            <SimpleClock
-                                date={moment().add(1, "hour")}
-                                style={tailwind(
-                                    "text-white text-xs text-center mt-1"
-                                )}
-                                id="food-clock"
-                            />
-                        </View>
-                        <View style={tailwind("mx-4")}>
-                            <CircularProgress
-                                progress={0.6}
-                                backgroundStrokeColor={
-                                    tailwind("text-amber-100").color as string
-                                }
-                                radius={25}
-                                svgStyle={tailwind("text-amber-500")}
-                                strokeWidth={6}
-                            >
-                                <View
+                                    >
+                                        <Icon
+                                            style={tailwind(
+                                                "text-amber-100 text-2xl"
+                                            )}
+                                            name="food-apple"
+                                        />
+                                    </View>
+                                </CircularProgress>
+                                <SimpleClock
+                                    date={cryptogotchi.foodEmptyDate}
                                     style={tailwind(
-                                        "flex-row flex-1 justify-center items-center"
+                                        "text-white text-xs text-center mt-1"
                                     )}
+                                    id="food-clock"
+                                />
+                            </View>
+                            <View style={tailwind("mx-4")}>
+                                <CircularProgress
+                                    progress={Math.max(
+                                        cryptogotchi.fun / 100,
+                                        0
+                                    )}
+                                    backgroundStrokeColor={
+                                        tailwind("text-amber-100")
+                                            .color as string
+                                    }
+                                    radius={25}
+                                    svgStyle={tailwind("text-amber-500")}
+                                    strokeWidth={6}
                                 >
-                                    <Icon
+                                    <View
                                         style={tailwind(
-                                            "text-amber-100 text-2xl"
+                                            "flex-row flex-1 justify-center items-center"
                                         )}
-                                        name="gamepad-variant-outline"
-                                    />
-                                </View>
-                            </CircularProgress>
-                            <SimpleClock
-                                date={moment().add(0.6, "hour")}
-                                style={tailwind(
-                                    "text-white text-xs text-center mt-1"
-                                )}
-                                id="fun-clock"
-                            />
-                        </View>
-                        <View>
-                            <CircularProgress
-                                progress={0.6}
-                                backgroundStrokeColor={
-                                    tailwind("text-amber-100").color as string
-                                }
-                                radius={25}
-                                svgStyle={tailwind("text-amber-500")}
-                                strokeWidth={6}
-                            >
-                                <View
+                                    >
+                                        <Icon
+                                            style={tailwind(
+                                                "text-amber-100 text-2xl"
+                                            )}
+                                            name="gamepad-variant-outline"
+                                        />
+                                    </View>
+                                </CircularProgress>
+                                <SimpleClock
+                                    date={cryptogotchi.funEmptyDate}
                                     style={tailwind(
-                                        "flex-row flex-1 justify-center items-center"
+                                        "text-white text-xs text-center mt-1"
                                     )}
+                                    id="fun-clock"
+                                />
+                            </View>
+                            <View>
+                                <CircularProgress
+                                    progress={Math.max(
+                                        0,
+                                        cryptogotchi.affection / 100
+                                    )}
+                                    backgroundStrokeColor={
+                                        tailwind("text-amber-100")
+                                            .color as string
+                                    }
+                                    radius={25}
+                                    svgStyle={tailwind("text-amber-500")}
+                                    strokeWidth={6}
                                 >
-                                    <Icon
+                                    <View
                                         style={tailwind(
-                                            "text-amber-100 text-2xl"
+                                            "flex-row flex-1 justify-center items-center"
                                         )}
-                                        name="heart"
-                                    />
-                                </View>
-                            </CircularProgress>
-                            <SimpleClock
-                                id="affection-clock"
-                                date={moment().add(0.8, "hour")}
-                                style={tailwind(
-                                    "text-white text-xs text-center mt-1"
-                                )}
-                            />
+                                    >
+                                        <Icon
+                                            style={tailwind(
+                                                "text-amber-100 text-2xl"
+                                            )}
+                                            name="heart"
+                                        />
+                                    </View>
+                                </CircularProgress>
+                                <SimpleClock
+                                    id="affection-clock"
+                                    date={cryptogotchi.affectionEmptyDate}
+                                    style={tailwind(
+                                        "text-white text-xs text-center mt-1"
+                                    )}
+                                />
+                            </View>
                         </View>
-                    </View>
-                </BlurView>
+                    </BlurView>
+                )}
             </View>
             <View style={tailwind("flex-col mx-4 justify-end")}>
                 <View style={tailwind("flex-row justify-between")}>
-                    <Text style={tailwind("text-white text-3xl font-bold")}>
-                        Tabito
-                    </Text>
+                    <View style={tailwind("flex-row")}>
+                        <Text style={tailwind("text-white text-3xl font-bold")}>
+                            {cryptogotchi?.name}
+                        </Text>
+                        {!cryptogotchi?.isAlive && (
+                            <Icon
+                                name="grave-stone"
+                                style={tailwind(
+                                    "text-3xl text-white opacity-50 ml-2"
+                                )}
+                            />
+                        )}
+                    </View>
+
                     <View style={tailwind("rounded-lg overflow-hidden")}>
                         <TouchableNativeFeedback
                             style={tailwind("rounded-full")}
@@ -217,33 +251,66 @@ const HomeScreen = () => {
                     </View>
                 </View>
 
-                <View style={tailwind("flex-row items-center")}>
-                    <Icon
-                        style={tailwind("text-2xl text-amber-500")}
-                        name="shield-check"
-                    />
-                    <Text style={tailwind("text-white ml-2")}>
-                        #3m83kuf4 (is valid NFT)
-                    </Text>
-                </View>
-                <View style={tailwind("flex-row items-center")}>
-                    <Icon
-                        style={tailwind("text-2xl text-amber-500")}
-                        name="information-outline"
-                    />
-                    <Text style={tailwind("text-white ml-2")}>Age:</Text>
-                    <Clock
-                        id="age-clock"
-                        style={tailwind("text-white ml-2")}
-                        date={moment().subtract(5, "d")}
-                    />
-                </View>
-                <View style={tailwind(" mt-4 mb-4")}>
-                    <AppButton style={tailwind("w-full")} title="Feed" />
-                </View>
+                {cryptogotchi && (
+                    <>
+                        <View style={tailwind("flex-row items-center")}>
+                            <Icon
+                                style={
+                                    cryptogotchi.tokenId
+                                        ? tailwind("text-2xl text-amber-500")
+                                        : tailwind(
+                                              "text-2xl text-white opacity-50"
+                                          )
+                                }
+                                name={
+                                    cryptogotchi.tokenId
+                                        ? "shield-check"
+                                        : "shield-off"
+                                }
+                            />
+                            <Text style={tailwind("text-white ml-2")}>
+                                #
+                                {cryptogotchi.tokenId !== null
+                                    ? cryptogotchi.tokenId + " (is valid NFT)"
+                                    : cryptogotchi.getBase64Uuid + " (No NFT)"}
+                            </Text>
+                        </View>
+                        <View style={tailwind("flex-row items-center")}>
+                            <Icon
+                                style={tailwind("text-2xl text-amber-500")}
+                                name="information-outline"
+                            />
+                            <Text style={tailwind("text-white ml-2")}>
+                                Age:
+                            </Text>
+                            {cryptogotchi.deathDate === null ? (
+                                <Clock
+                                    id="age-clock"
+                                    style={tailwind("text-white ml-2")}
+                                    date={cryptogotchi.createdAt}
+                                />
+                            ) : (
+                                <Text style={tailwind("text-white ml-2")}>
+                                    {cryptogotchi.deathDateString} (died:{" "}
+                                    {cryptogotchi.deathDate.format(
+                                        "DD.MM.YYYY HH:mm"
+                                    )}
+                                    )
+                                </Text>
+                            )}
+                        </View>
+                        <View style={tailwind(" mt-4 mb-4")}>
+                            <AppButton
+                                disabled={!cryptogotchi.isAlive}
+                                style={tailwind("w-full")}
+                                title="Feed"
+                            />
+                        </View>
+                    </>
+                )}
             </View>
         </SafeAreaView>
     );
-};
+});
 
-export default HomeScreen;
+export default FriendsScreen;

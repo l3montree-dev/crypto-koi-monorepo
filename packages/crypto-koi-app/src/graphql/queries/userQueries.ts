@@ -16,6 +16,10 @@ export const GET_USER = gql`
                 food
                 tokenId
                 createdAt
+                foodDrain
+                funDrain
+                affectionDrain
+                deathDate
             }
         }
     }

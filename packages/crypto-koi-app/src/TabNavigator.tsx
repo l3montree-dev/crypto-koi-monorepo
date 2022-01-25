@@ -1,6 +1,6 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import HomeScreen from "./FriendsScreen";
+import FriendsScreen from "./FriendsScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -22,7 +22,7 @@ export function TabNavigator() {
         >
             <Tab.Screen
                 name="Friends"
-                component={HomeScreen}
+                component={FriendsScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons

@@ -24,6 +24,7 @@ export const AppButton: FunctionComponent<Props> = (props) => {
     return (
         <View
             style={[
+                props.disabled && tailwind("opacity-50"),
                 tailwind("rounded-lg bg-amber-500 overflow-hidden"),
                 props.style,
             ]}

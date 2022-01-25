@@ -7,7 +7,7 @@ export default class User {
     constructor(
         public id: string,
         public name: string | null,
-        createdAt: any,
+        createdAt: string,
         public cryptogotchies: Cryptogotchi[]
     ) {
         makeAutoObservable(this);

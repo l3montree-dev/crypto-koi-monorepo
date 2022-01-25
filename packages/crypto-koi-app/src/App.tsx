@@ -12,9 +12,15 @@ import RootStackNavigator from "./RootStackNavigator";
 import { apolloClient } from "./services/ApolloClient";
 import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
+import * as SplashScreen from "expo-splash-screen";
+import log from "./utils/logger";
 
 NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
 
+// Instruct SplashScreen not to hide yet, we want to do this manually
+SplashScreen.preventAutoHideAsync().catch(() => {
+    /* reloading the app might trigger some race conditions, ignore them */
+});
 const Theme = {
     ...DefaultTheme,
     colors: {
@@ -27,7 +33,17 @@ const Theme = {
 const App: FunctionComponent = () => {
     useEffect(() => {
         // start the login routine.
-        userService.tryToLogin();
+        (async function () {
+            try {
+                await userService.tryToLogin();
+            } catch (e) {
+                log.warn("login failed with:", e);
+            } finally {
+                setTimeout(() => {
+                    return SplashScreen.hideAsync();
+                }, 1000);
+            }
+        })();
     }, []);
 
     return (
