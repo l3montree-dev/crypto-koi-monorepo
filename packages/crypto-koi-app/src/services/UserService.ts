@@ -1,6 +1,6 @@
-// import { GET_USER } from "../graphql/queries/userQueries";
+import { GET_USER } from "../graphql/queries/userQueries";
 import log from "../utils/logger";
-// import { apolloClient } from "./ApolloClient";
+import { apolloClient } from "./ApolloClient";
 import { authService } from "./AuthService";
 
 class UserService {
@@ -20,13 +20,11 @@ class UserService {
      * @returns
      */
     async tryToLogin(): Promise<void> {
-        log.info("trying to login in called");
         const success = await authService.tryToLoginUsingStoredCredentials();
         if (!success) {
             return;
         }
-
-        // console.log(await apolloClient.query({ query: GET_USER }));
+        console.log(await apolloClient.query({ query: GET_USER }));
     }
 }
 

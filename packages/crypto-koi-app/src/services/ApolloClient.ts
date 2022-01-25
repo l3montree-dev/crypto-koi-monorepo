@@ -1,17 +1,46 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { AxiosResponse } from "axios";
 import { Config } from "../config";
-import { authService } from "./AuthService";
+import log from "../utils/logger";
+import { authService, TokenResponse } from "./AuthService";
 
 const httpLink = createHttpLink({
     uri: Config.graphqlBaseUrl,
-    fetch: (uri: RequestInfo) => {
-        if (typeof uri === "string") {
-            return authService.protectedClient.request({
-                url: uri,
+    fetch: async (uri: RequestInfo, options) => {
+        const token = authService.getAccessToken();
+        const request = fetch(uri, {
+            ...options,
+            headers: { ...options?.headers, Authorization: `Bearer ${token}` },
+        });
+        const response = await request;
+
+        if (response.status === 401) {
+            // the request failed because the token is expired
+            if (!authService.refreshTokenRequest) {
+                log.info("started fetch api refresh routine");
+                authService.refreshTokenRequest = authService.refreshAccessToken();
+            }
+            authService.refreshTokenRequest.then((r) => {
+                log.info("refreshing api token");
+                const tokenResponse = (r as AxiosResponse<TokenResponse>).data;
+                authService.handleSuccessfulToken(tokenResponse);
+                // reset the promise
+                authService.refreshTokenRequest = null;
+                return fetch(uri, {
+                    ...options,
+                    headers: {
+                        ...options?.headers,
+                        Authorization: `Bearer ${tokenResponse.accessToken}`,
+                    },
+                });
             });
-        } else {
-            return authService.protectedClient.request({ url: uri.url });
         }
+        if (!response.ok) {
+            log.error("GraphQL request failed with: " + response.status);
+            return response;
+        }
+        // just return the response.
+        return response;
     },
 });
 

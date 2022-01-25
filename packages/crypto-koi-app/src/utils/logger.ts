@@ -23,6 +23,10 @@ const defaultConfig = {
     enabled: true,
 };
 
-const log = logger.createLogger(defaultConfig);
+const log: ReturnType<typeof logger.createLogger> &
+    typeof console = logger.createLogger(defaultConfig) as ReturnType<
+    typeof logger.createLogger
+> &
+    typeof console;
 
 export default log;
