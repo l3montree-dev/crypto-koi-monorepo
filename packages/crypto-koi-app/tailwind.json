@@ -418,6 +418,16 @@
 			"paddingBottom": 16
 		}
 	},
+	"pt-4": {
+		"style": {
+			"paddingTop": 16
+		}
+	},
+	"pb-2": {
+		"style": {
+			"paddingBottom": 8
+		}
+	},
 	"text-center": {
 		"style": {
 			"textAlign": "center"

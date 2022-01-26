@@ -283,7 +283,7 @@ const FriendsScreen = observer(() => {
                 </View>
             </ScrollView>
             {cryptogotchi && (
-                <View style={tailwind("bg-violet-900 p-4")}>
+                <View style={tailwind("bg-violet-900 pt-4 px-4 pb-2")}>
                     <NextFeedButton
                         loading={loading}
                         onPress={handleFeed}
