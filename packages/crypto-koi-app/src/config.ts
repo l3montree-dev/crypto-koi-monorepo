@@ -1,6 +1,6 @@
 export const Config = {
-    restApiBaseUrl: "http://localhost:8080/",
-    graphqlBaseUrl: "http://localhost:8080/query",
+    restApiBaseUrl: "http://192.168.2.87:8080/",
+    graphqlBaseUrl: "http://192.168.2.87:8080/query",
 
     secondsBetweenFeeding: 10 * 60,
 };

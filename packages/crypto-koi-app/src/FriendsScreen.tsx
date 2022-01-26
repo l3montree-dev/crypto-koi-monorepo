@@ -6,9 +6,11 @@ import {
     Animated,
     Animated as RNAnimated,
     Image,
+    Platform,
     Pressable,
     SafeAreaView,
     ScrollView,
+    StatusBar,
     StyleSheet,
     View,
 } from "react-native";
@@ -44,6 +46,13 @@ const style = StyleSheet.create({
         tintColor: "black",
         opacity: 0.6,
     },
+    ticker: {
+        ...Platform.select({
+            android: {
+                marginTop: StatusBar.currentHeight,
+            },
+        }),
+    },
 });
 
 const AnimatedEllipse = Animated.createAnimatedComponent(Ellipse);
@@ -76,9 +85,10 @@ const FriendsScreen = observer(() => {
                 {cryptogotchi && (
                     <BlurView intensity={0} style={tailwind("rounded-lg")}>
                         <View
-                            style={tailwind(
-                                "flex-row justify-center py-2 px-4"
-                            )}
+                            style={[
+                                style.ticker,
+                                tailwind("flex-row justify-center py-2 px-4"),
+                            ]}
                         >
                             <View>
                                 <Pressable onPress={handleFeed}>
