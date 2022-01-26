@@ -5,6 +5,7 @@
         "version": "1.0.0",
         "sdkVersion": "44.0.0",
         "jsEngine": "hermes",
+        "icon": "./assets/image/app-icon.png",
         "platforms": [
             "ios",
             "android",
@@ -14,7 +15,9 @@
             "package": "io.cattleshowapp"
         },
         "splash": {
-            "backgroundColor": "#FEF9B0"
+            "image": "./assets/image/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
         }
     }
 }
