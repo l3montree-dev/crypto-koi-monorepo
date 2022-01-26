@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Modal, ScrollView, View } from "react-native";
+import { Modal, ScrollView, View, SafeAreaView } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "../components/AppButton";
 import FriendInfo from "../components/FriendInfo";
@@ -45,7 +45,7 @@ const FriendEditModal = observer((props: Props) => {
                 animated={true}
                 backgroundColor={Colors.bgColorVariant}
             />
-            <View style={tailwind("flex-1 bg-violet-900")}>
+            <SafeAreaView style={tailwind("flex-1 bg-violet-900")}>
                 <ScrollView
                     contentContainerStyle={tailwind("px-4")}
                     style={tailwind("flex-1")}
@@ -87,7 +87,7 @@ const FriendEditModal = observer((props: Props) => {
                         />
                     </View>
                 </View>
-            </View>
+            </SafeAreaView>
         </Modal>
     );
 });

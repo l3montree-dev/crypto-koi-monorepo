@@ -7,6 +7,7 @@ import {
     Animated as RNAnimated,
     Image,
     SafeAreaView,
+    ScrollView,
     StyleSheet,
     View,
 } from "react-native";
@@ -64,104 +65,107 @@ const FriendsScreen = observer(() => {
 
     return (
         <SafeAreaView style={tailwind("flex-1 flex-col")}>
-            <View
-                style={tailwind(
-                    "flex-row text-amber-500 absolute bottom-0 w-full h-56 justify-center"
-                )}
-            ></View>
-            <View
-                style={tailwind(
-                    "flex-row text-amber-500 absolute bottom-0 w-full h-56 justify-center"
-                )}
-            >
-                <Svg
-                    style={tailwind("text-violet-900")}
-                    width={DimensionUtils.deviceWidth}
-                    height={500}
+            <ScrollView>
+                <View
+                    style={tailwind(
+                        "flex-row text-amber-500 absolute bottom-0 w-full h-56 justify-center"
+                    )}
+                ></View>
+                <View
+                    style={tailwind(
+                        "flex-row text-amber-500 absolute bottom-0 w-full h-56 justify-center"
+                    )}
                 >
-                    <AnimatedEllipse
-                        rx={500}
-                        ry={200}
-                        cx="200"
-                        cy="200"
-                        fill={"currentColor"}
-                    />
-                </Svg>
-            </View>
-            <View style={tailwind("flex-1 mt-40")}>
-                <RNAnimated.View style={[{ translateX, translateY }, style.z1]}>
-                    <Image
-                        style={[
-                            style.img,
-                            !cryptogotchi?.isAlive && style.dead,
-                        ]}
-                        resizeMode="contain"
-                        source={require("../assets/image/cg-3.png")}
-                    />
-                </RNAnimated.View>
-                <View style={tailwind("flex-row relative justify-center")}>
-                    <Svg width={150} height={75}>
+                    <Svg
+                        style={tailwind("text-violet-900")}
+                        width={DimensionUtils.deviceWidth}
+                        height={500}
+                    >
                         <AnimatedEllipse
-                            rx={Animated.diffClamp(
-                                Animated.multiply(translateY, -1),
-                                50,
-                                75
-                            )}
-                            ry={10}
-                            cx="75"
-                            cy="25"
-                            fill="rgba(0,0,0,0.2)"
+                            rx={500}
+                            ry={200}
+                            cx="200"
+                            cy="200"
+                            fill={"currentColor"}
                         />
                     </Svg>
                 </View>
-            </View>
-            <View
-                style={[
-                    tailwind(
-                        "flex-row absolute left-0 right-0 justify-center top-16"
-                    ),
-                    style.z1,
-                ]}
-            >
-                {cryptogotchi && (
-                    <BlurView intensity={0} style={tailwind("rounded-lg")}>
-                        <View style={tailwind("flex-row py-2 px-4")}>
-                            <View>
-                                <CircularProgress
-                                    progress={Math.max(
-                                        cryptogotchi.food / 100,
-                                        0
-                                    )}
-                                    backgroundStrokeColor={
-                                        tailwind("text-amber-100")
-                                            .color as string
-                                    }
-                                    radius={25}
-                                    svgStyle={tailwind("text-amber-500")}
-                                    strokeWidth={6}
-                                >
-                                    <View
-                                        style={tailwind(
-                                            "flex-row flex-1 justify-center items-center"
+                <View style={tailwind("flex-1 mt-32")}>
+                    <RNAnimated.View
+                        style={[{ translateX, translateY }, style.z1]}
+                    >
+                        <Image
+                            style={[
+                                style.img,
+                                !cryptogotchi?.isAlive && style.dead,
+                            ]}
+                            resizeMode="contain"
+                            source={require("../assets/image/cg-3.png")}
+                        />
+                    </RNAnimated.View>
+                    <View style={tailwind("flex-row relative justify-center")}>
+                        <Svg width={150} height={75}>
+                            <AnimatedEllipse
+                                rx={Animated.diffClamp(
+                                    Animated.multiply(translateY, -1),
+                                    50,
+                                    75
+                                )}
+                                ry={10}
+                                cx="75"
+                                cy="25"
+                                fill="rgba(0,0,0,0.2)"
+                            />
+                        </Svg>
+                    </View>
+                </View>
+                <View
+                    style={[
+                        tailwind(
+                            "flex-row absolute left-0 right-0 justify-center top-0"
+                        ),
+                        style.z1,
+                    ]}
+                >
+                    {cryptogotchi && (
+                        <BlurView intensity={0} style={tailwind("rounded-lg")}>
+                            <View style={tailwind("flex-row py-2 px-4")}>
+                                <View>
+                                    <CircularProgress
+                                        progress={Math.max(
+                                            cryptogotchi.food / 100,
+                                            0
                                         )}
+                                        backgroundStrokeColor={
+                                            tailwind("text-amber-100")
+                                                .color as string
+                                        }
+                                        radius={25}
+                                        svgStyle={tailwind("text-amber-500")}
+                                        strokeWidth={6}
                                     >
-                                        <Icon
+                                        <View
                                             style={tailwind(
-                                                "text-amber-500 text-2xl"
+                                                "flex-row flex-1 justify-center items-center"
                                             )}
-                                            name="heart"
-                                        />
-                                    </View>
-                                </CircularProgress>
-                                <SimpleClock
-                                    date={cryptogotchi.foodEmptyDate}
-                                    style={tailwind(
-                                        "text-white text-xs text-center mt-1"
-                                    )}
-                                    id="food-clock"
-                                />
-                            </View>
-                            {/*<View style={tailwind("mx-4")}>
+                                        >
+                                            <Icon
+                                                style={tailwind(
+                                                    "text-amber-500 text-2xl"
+                                                )}
+                                                name="heart"
+                                            />
+                                        </View>
+                                    </CircularProgress>
+                                    <SimpleClock
+                                        date={cryptogotchi.foodEmptyDate}
+                                        style={tailwind(
+                                            "text-white text-xs text-center mt-1"
+                                        )}
+                                        id="food-clock"
+                                    />
+                                </View>
+                                {/*<View style={tailwind("mx-4")}>
                                 <CircularProgress
                                     progress={Math.max(
                                         cryptogotchi.fun / 100,
@@ -231,35 +235,34 @@ const FriendsScreen = observer(() => {
                                     )}
                                 />
                                     </View>*/}
-                        </View>
-                    </BlurView>
-                )}
-            </View>
-            <View style={tailwind("flex-col mx-4 justify-end")}>
-                <View style={tailwind("flex-row justify-between")}>
-                    {cryptogotchi && (
-                        <FriendTitle cryptogotchi={cryptogotchi} />
+                            </View>
+                        </BlurView>
                     )}
-                    <View style={tailwind("rounded-lg overflow-hidden")}>
-                        <IconButton onPress={open} name="dots-horizontal" />
-                    </View>
                 </View>
-
-                {cryptogotchi && (
-                    <>
-                        <FriendInfo cryptogotchi={cryptogotchi} />
-                        <View style={tailwind(" mt-4 mb-4")}>
-                            <AppButton
-                                loading={loading}
-                                onPress={handleFeed}
-                                disabled={!cryptogotchi.isAlive}
-                                style={tailwind("w-full")}
-                                title="Feed"
-                            />
+                <View style={tailwind("flex-col mx-4 justify-end")}>
+                    <View style={tailwind("flex-row justify-between")}>
+                        {cryptogotchi && (
+                            <FriendTitle cryptogotchi={cryptogotchi} />
+                        )}
+                        <View style={tailwind("rounded-lg overflow-hidden")}>
+                            <IconButton onPress={open} name="dots-horizontal" />
                         </View>
-                    </>
-                )}
-            </View>
+                    </View>
+
+                    {cryptogotchi && <FriendInfo cryptogotchi={cryptogotchi} />}
+                </View>
+            </ScrollView>
+            {cryptogotchi && (
+                <View style={tailwind("bg-violet-900 p-4")}>
+                    <AppButton
+                        loading={loading}
+                        onPress={handleFeed}
+                        disabled={!cryptogotchi.isAlive}
+                        style={tailwind("w-full")}
+                        title="Feed"
+                    />
+                </View>
+            )}
             {cryptogotchi && (
                 <FriendEditModal
                     cryptogotchi={cryptogotchi}
