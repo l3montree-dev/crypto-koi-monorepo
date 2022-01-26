@@ -2,17 +2,19 @@
     "expo": {
         "name": "Tabito",
         "slug": "Tabito",
+        "displayName": "Tabito",
         "version": "1.0.0",
         "sdkVersion": "44.0.0",
         "jsEngine": "hermes",
         "icon": "./assets/image/app-icon.png",
+        "scheme": "tabito",
         "platforms": [
             "ios",
             "android",
             "web"
         ],
         "android": {
-            "package": "io.cattleshowapp"
+            "package": "io.tabito"
         },
         "splash": {
             "image": "./assets/image/splash.png",

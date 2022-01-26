@@ -9,10 +9,11 @@ interface Props {
     cryptogotchi: Cryptogotchi;
     onPress: () => void;
     loading: boolean;
+    disabled: boolean;
 }
 
 function NextFeedButton(props: Props) {
-    const { cryptogotchi, onPress, loading } = props;
+    const { cryptogotchi, onPress, loading, disabled } = props;
     const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
@@ -41,6 +42,7 @@ function NextFeedButton(props: Props) {
             progress={
                 seconds === 0 ? 1 : seconds / Config.secondsBetweenFeeding
             }
+            disabled={disabled}
             loading={loading}
             onPress={onPress}
         />

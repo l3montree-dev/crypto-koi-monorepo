@@ -1,9 +1,16 @@
 import { useNavigation as useNavigationBase } from "@react-navigation/core";
 import { NavigationProp } from "@react-navigation/native";
 
-type RootStackParamList = {
-    readonly HomeScreen: undefined;
+export type RootStackParamList = {
+    readonly OnboardingScreen: undefined;
+    readonly FriendScreen: undefined;
     readonly SnakeGameScreen: undefined;
+    readonly TabNavigator: undefined;
+    readonly FriendEditScreen: {
+        cryptogotchiId: string;
+        name: string;
+        isAlive: boolean;
+    };
 };
 
 export function useNavigation() {

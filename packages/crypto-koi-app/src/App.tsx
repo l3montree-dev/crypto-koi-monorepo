@@ -14,7 +14,7 @@ import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
 import * as SplashScreen from "expo-splash-screen";
 import log from "./utils/logger";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 
 if (Platform.OS === "android") {
     NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
@@ -31,6 +31,8 @@ const Theme = {
         background: Colors.bgColor,
     },
 };
+
+const containerStyle = { flex: 1, backgroundColor: Colors.bgColor };
 
 const App: FunctionComponent = () => {
     useEffect(() => {
@@ -55,9 +57,11 @@ const App: FunctionComponent = () => {
                 <SafeAreaProvider>
                     <TailwindProvider utilities={utilities}>
                         <StatusBar translucent />
-                        <NavigationContainer theme={Theme}>
-                            <RootStackNavigator />
-                        </NavigationContainer>
+                        <View style={containerStyle}>
+                            <NavigationContainer theme={Theme}>
+                                <RootStackNavigator />
+                            </NavigationContainer>
+                        </View>
                     </TailwindProvider>
                 </SafeAreaProvider>
             </AppStateContext.Provider>

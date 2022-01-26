@@ -17,21 +17,18 @@ import {
 import Svg, { Ellipse } from "react-native-svg";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
-import { AppButton } from "./components/AppButton";
 import CircularProgress from "./components/CircularProgress";
 import FriendInfo from "./components/FriendInfo";
 import FriendTitle from "./components/FriendTitle";
 import IconButton from "./components/IconButton";
 import NextFeedButton from "./components/NextFeedButton";
-import { ProgressButton } from "./components/ProgressButton";
 import SimpleClock from "./components/SimpleClock";
 import { FEED_CRYPTOGOTCHI_MUTATION } from "./graphql/queries/cryptogotchiMutations";
-import { FeedVariables, Feed } from "./graphql/queries/__generated__/Feed";
+import { Feed, FeedVariables } from "./graphql/queries/__generated__/Feed";
 import useAppState from "./hooks/useAppState";
 import { useFloating } from "./hooks/useFloating";
-import useOpen from "./hooks/useOpen";
+import { useNavigation } from "./hooks/useNavigation";
 import { selectFirstCryptogotchi } from "./mobx/selectors";
-import FriendEditModal from "./modals/FriendEditModal";
 import { DimensionUtils } from "./utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -60,7 +57,7 @@ const FriendsScreen = observer(() => {
     const tailwind = useTailwind();
     const { translateX, translateY } = useFloating();
     const cryptogotchi = useAppState(selectFirstCryptogotchi);
-    const { isOpen, open, close } = useOpen();
+    const { navigate } = useNavigation();
     const [feed, { loading }] = useMutation<Feed, FeedVariables>(
         FEED_CRYPTOGOTCHI_MUTATION
     );
@@ -208,14 +205,10 @@ const FriendsScreen = observer(() => {
                         </View>
                     </BlurView>
                 )}
+
                 <View
                     style={tailwind(
-                        "flex-row text-amber-500 absolute bottom-0 w-full h-56 justify-center"
-                    )}
-                ></View>
-                <View
-                    style={tailwind(
-                        "flex-row text-amber-500 absolute bottom-0 w-full h-56 justify-center"
+                        "flex-row text-amber-500 absolute bottom-0 w-full h-44 justify-center"
                     )}
                 >
                     <Svg
@@ -275,7 +268,20 @@ const FriendsScreen = observer(() => {
                             <FriendTitle cryptogotchi={cryptogotchi} />
                         )}
                         <View style={tailwind("rounded-lg overflow-hidden")}>
-                            <IconButton onPress={open} name="dots-horizontal" />
+                            <IconButton
+                                disabled={!cryptogotchi}
+                                onPress={() => {
+                                    if (!cryptogotchi) {
+                                        return;
+                                    }
+                                    navigate("FriendEditScreen", {
+                                        cryptogotchiId: cryptogotchi.id,
+                                        name: cryptogotchi.name || "",
+                                        isAlive: cryptogotchi.isAlive,
+                                    });
+                                }}
+                                name="dots-horizontal"
+                            />
                         </View>
                     </View>
 
@@ -285,18 +291,12 @@ const FriendsScreen = observer(() => {
             {cryptogotchi && (
                 <View style={tailwind("bg-violet-900 pt-4 px-4 pb-2")}>
                     <NextFeedButton
+                        disabled={!cryptogotchi.isAlive}
                         loading={loading}
                         onPress={handleFeed}
                         cryptogotchi={cryptogotchi}
                     />
                 </View>
-            )}
-            {cryptogotchi && (
-                <FriendEditModal
-                    cryptogotchi={cryptogotchi}
-                    onClose={close}
-                    isOpen={isOpen}
-                />
             )}
         </SafeAreaView>
     );

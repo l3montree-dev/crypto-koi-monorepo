@@ -83,14 +83,14 @@
 			"marginRight": 8
 		}
 	},
-	"mt-32": {
-		"style": {
-			"marginTop": 128
-		}
-	},
 	"mt-1": {
 		"style": {
 			"marginTop": 4
+		}
+	},
+	"mt-10": {
+		"style": {
+			"marginTop": 40
 		}
 	},
 	"ml-2": {
@@ -118,11 +118,6 @@
 			"marginTop": 80
 		}
 	},
-	"mt-10": {
-		"style": {
-			"marginTop": 40
-		}
-	},
 	"mt-5": {
 		"style": {
 			"marginTop": 20
@@ -138,29 +133,19 @@
 			"marginLeft": 20
 		}
 	},
-	"mt-2": {
-		"style": {
-			"marginTop": 8
-		}
-	},
 	"flex": {
 		"style": {
 			"display": "flex"
 		}
 	},
-	"h-56": {
+	"h-44": {
 		"style": {
-			"height": 224
+			"height": 176
 		}
 	},
 	"h-full": {
 		"style": {
 			"height": "100%"
-		}
-	},
-	"h-1": {
-		"style": {
-			"height": 4
 		}
 	},
 	"w-full": {
@@ -238,6 +223,12 @@
 			"backgroundColor": "rgb(245 158 11 / var(--tw-bg-opacity))"
 		}
 	},
+	"bg-violet-700": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(109 40 217 / var(--tw-bg-opacity))"
+		}
+	},
 	"bg-violet-500": {
 		"style": {
 			"--tw-bg-opacity": 1,
@@ -260,84 +251,6 @@
 		"style": {
 			"--tw-bg-opacity": 1,
 			"backgroundColor": "rgb(221 214 254 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-red-100": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(254 226 226 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-amber-400": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(251 191 36 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-amber-600": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(217 119 6 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-violet-600": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(124 58 237 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-slate-500": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(100 116 139 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-gray-500": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(107 114 128 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-gray-400": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(156 163 175 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-amber-100": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(254 243 199 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-amber-200": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(253 230 138 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-purple-200": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(233 213 255 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-purple-900": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(88 28 135 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-violet-800": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(91 33 182 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-violet-700": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(109 40 217 / var(--tw-bg-opacity))"
 		}
 	},
 	"p-4": {
@@ -384,38 +297,16 @@
 			"paddingRight": 12
 		}
 	},
-	"px-10": {
-		"style": {
-			"paddingLeft": 40,
-			"paddingRight": 40
-		}
-	},
-	"px-2": {
-		"style": {
-			"paddingLeft": 8,
-			"paddingRight": 8
-		}
-	},
-	"px-0": {
-		"style": {
-			"paddingLeft": 0,
-			"paddingRight": 0
-		}
-	},
 	"py-1": {
 		"style": {
 			"paddingTop": 4,
 			"paddingBottom": 4
 		}
 	},
-	"pb-5": {
+	"px-10": {
 		"style": {
-			"paddingBottom": 20
-		}
-	},
-	"pb-4": {
-		"style": {
-			"paddingBottom": 16
+			"paddingLeft": 40,
+			"paddingRight": 40
 		}
 	},
 	"pt-4": {
@@ -468,28 +359,28 @@
 			"fontWeight": "700"
 		}
 	},
-	"text-amber-500": {
-		"style": {
-			"--tw-text-opacity": 1,
-			"color": "rgb(245 158 11 / var(--tw-text-opacity))"
-		}
-	},
-	"text-violet-900": {
-		"style": {
-			"--tw-text-opacity": 1,
-			"color": "rgb(76 29 149 / var(--tw-text-opacity))"
-		}
-	},
 	"text-amber-100": {
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(254 243 199 / var(--tw-text-opacity))"
 		}
 	},
+	"text-amber-500": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(245 158 11 / var(--tw-text-opacity))"
+		}
+	},
 	"text-white": {
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(255 255 255 / var(--tw-text-opacity))"
+		}
+	},
+	"text-violet-900": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(76 29 149 / var(--tw-text-opacity))"
 		}
 	},
 	"opacity-50": {
