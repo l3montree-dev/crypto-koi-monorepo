@@ -1,7 +1,6 @@
 import { GET_USER } from "../graphql/queries/userQueries";
 import { GetUser } from "../graphql/queries/__generated__/GetUser";
 import { rootStore } from "../mobx/RootStore";
-import log from "../utils/logger";
 import { apolloClient } from "./ApolloClient";
 import { authService } from "./AuthService";
 
@@ -11,7 +10,7 @@ class UserService {
      * @returns
      */
     async loginUsingDeviceId(deviceId: string): Promise<void> {
-        const success = authService.exchangeDeviceIdForToken(deviceId);
+        const success = await authService.exchangeDeviceIdForToken(deviceId);
         if (!success) {
             return;
         }

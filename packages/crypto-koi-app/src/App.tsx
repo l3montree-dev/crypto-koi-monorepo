@@ -14,9 +14,11 @@ import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
 import * as SplashScreen from "expo-splash-screen";
 import log from "./utils/logger";
+import { Platform } from "react-native";
 
-NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
-
+if (Platform.OS === "android") {
+    NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
+}
 // Instruct SplashScreen not to hide yet, we want to do this manually
 SplashScreen.preventAutoHideAsync().catch(() => {
     /* reloading the app might trigger some race conditions, ignore them */

@@ -82,8 +82,8 @@ function OnboardingScreen() {
         };
     });
 
-    const onPlayPress = () => {
-        userService.loginUsingDeviceId(Constants.installationId);
+    const onPlayPress = async () => {
+        await userService.loginUsingDeviceId(Constants.installationId);
     };
 
     const setActive = (next: number, x: number) => {
@@ -130,10 +130,6 @@ function OnboardingScreen() {
     const opacity = useMemo(() => ({ opacity: activeSlide > 0 ? 1 : 0.5 }), [
         activeSlide,
     ]);
-
-    useEffect(() => {
-        NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
-    }, []);
 
     return (
         <View style={tailwind("flex-1 bg-purple-700")}>
@@ -251,7 +247,7 @@ function OnboardingScreen() {
                                             "text-white opacity-75"
                                         )}
                                     >
-                                        Every few hours
+                                        And rank against your friends
                                     </Text>
                                 </View>
                             </Animated.View>
@@ -272,14 +268,14 @@ function OnboardingScreen() {
                                     <Text
                                         style={tailwind("text-white text-lg")}
                                     >
-                                        Cuddle with him
+                                        Build a relationship
                                     </Text>
                                     <Text
                                         style={tailwind(
                                             "text-white opacity-75"
                                         )}
                                     >
-                                        Every few hours
+                                        And show your friends your Tabito
                                     </Text>
                                 </View>
                             </Animated.View>

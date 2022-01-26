@@ -20,10 +20,12 @@ class AuthService {
     constructor() {
         this.protectedClient = axios.create({
             baseURL: Config.restApiBaseUrl,
+            timeout: 10 * 1000,
         });
 
         this.publicClient = axios.create({
             baseURL: Config.restApiBaseUrl,
+            timeout: 10 * 1000,
         });
 
         // add the interceptor.
