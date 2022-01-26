@@ -9,6 +9,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         tokenId
         createdAt
         minutesTillDeath
+        maxLifetimeMinutes
         deathDate
         nextFeeding
     }

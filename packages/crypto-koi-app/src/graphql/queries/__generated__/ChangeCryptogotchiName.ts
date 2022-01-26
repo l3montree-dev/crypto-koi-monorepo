@@ -16,6 +16,7 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   tokenId: string | null;
   createdAt: any;
   minutesTillDeath: number;
+  maxLifetimeMinutes: number;
   deathDate: any | null;
   nextFeeding: any;
 }

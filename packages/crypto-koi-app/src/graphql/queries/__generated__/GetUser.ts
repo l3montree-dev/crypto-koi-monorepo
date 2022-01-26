@@ -16,6 +16,7 @@ export interface GetUser_user_cryptogotchies {
   tokenId: string | null;
   createdAt: any;
   minutesTillDeath: number;
+  maxLifetimeMinutes: number;
   deathDate: any | null;
   nextFeeding: any;
 }

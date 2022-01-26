@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const style = StyleSheet.create({
     container: {
-        marginTop: Platform.select({ android: 96 }),
+        // marginTop: Platform.select({ android: 0 }),
     },
 });
 const Screen: FunctionComponent<{ style: ViewStyle }> = (props) => {

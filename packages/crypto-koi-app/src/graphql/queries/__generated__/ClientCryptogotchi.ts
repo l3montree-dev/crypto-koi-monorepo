@@ -16,6 +16,7 @@ export interface ClientCryptogotchi {
   tokenId: string | null;
   createdAt: any;
   minutesTillDeath: number;
+  maxLifetimeMinutes: number;
   deathDate: any | null;
   nextFeeding: any;
 }

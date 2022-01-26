@@ -17,6 +17,7 @@ export default class Cryptogotchi {
     public minutesTillDeath: number;
     public deathDate: Moment | null;
     public nextFeeding: Moment;
+    public maxLifetimeMinutes: number;
     constructor(fragment: ClientCryptogotchi) {
         makeAutoObservable(this);
 
@@ -32,6 +33,7 @@ export default class Cryptogotchi {
         this.minutesTillDeath = fragment.minutesTillDeath;
         this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
         this.nextFeeding = moment(fragment.nextFeeding);
+        this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
     }
 
     setFromFragment(fragment: ClientCryptogotchi) {
@@ -46,7 +48,7 @@ export default class Cryptogotchi {
         this.minutesTillDeath = fragment.minutesTillDeath;
         this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
         this.nextFeeding = moment(fragment.nextFeeding);
-
+        this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
         console.log(fragment);
     }
 
