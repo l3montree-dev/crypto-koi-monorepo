@@ -19,7 +19,6 @@ function Clock(props: Props) {
 
     return (
         <Text style={props.style}>
-            {value.diff(props.date, "day")}d{" "}
             {TimeUtils.getTimeString(value, props.date)}
         </Text>
     );

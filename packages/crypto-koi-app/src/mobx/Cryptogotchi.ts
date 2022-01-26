@@ -46,6 +46,8 @@ export default class Cryptogotchi {
         this.minutesTillDeath = fragment.minutesTillDeath;
         this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
         this.nextFeeding = moment(fragment.nextFeeding);
+
+        console.log(fragment);
     }
 
     setName(name: string | undefined | null) {

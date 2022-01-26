@@ -2,6 +2,7 @@ import moment, { Moment } from "moment";
 import React, { useEffect, useState } from "react";
 import { Text, TextStyle } from "react-native";
 import { ticker } from "../services/Ticker";
+import TimeUtils from "../utils/TimeUtils";
 
 interface Props {
     style?: TextStyle;
@@ -21,11 +22,15 @@ function SimpleClock(props: Props) {
         // remove the ticker
         ticker.removeTickHandler(props.id);
     }
+
     return (
         <Text style={props.style}>
             {diffSeconds < 0
-                ? "00:00:00"
-                : moment.utc(diffSeconds * 1000).format("HH:mm:ss")}
+                ? "0h 0m 0s"
+                : TimeUtils.getTimeString(
+                      moment().add(diffSeconds, "second"),
+                      value
+                  )}
         </Text>
     );
 }
