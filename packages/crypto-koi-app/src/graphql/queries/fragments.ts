@@ -14,3 +14,12 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         nextFeeding
     }
 `;
+
+export const CLIENT_EVENT_FRAGMENT = gql`
+    fragment ClientEvent on Event {
+        id
+        type
+        payload
+        createdAt
+    }
+`;

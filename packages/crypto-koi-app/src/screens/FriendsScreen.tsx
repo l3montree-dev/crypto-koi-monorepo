@@ -16,18 +16,18 @@ import {
 } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
 import { useTailwind } from "tailwind-rn/dist";
-import FriendInfo from "./components/FriendInfo";
-import FriendTitle from "./components/FriendTitle";
-import IconButton from "./components/IconButton";
-import Lifetime from "./components/Lifetime";
-import NextFeedButton from "./components/NextFeedButton";
-import { FEED_CRYPTOGOTCHI_MUTATION } from "./graphql/queries/cryptogotchiMutations";
-import { Feed, FeedVariables } from "./graphql/queries/__generated__/Feed";
-import useAppState from "./hooks/useAppState";
-import { useFloating } from "./hooks/useFloating";
-import { useNavigation } from "./hooks/useNavigation";
-import { selectFirstCryptogotchi } from "./mobx/selectors";
-import { DimensionUtils } from "./utils/DimensionUtils";
+import FriendInfo from "../components/FriendInfo";
+import FriendTitle from "../components/FriendTitle";
+import IconButton from "../components/IconButton";
+import Lifetime from "../components/Lifetime";
+import NextFeedButton from "../components/NextFeedButton";
+import { FEED_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
+import { Feed, FeedVariables } from "../graphql/queries/__generated__/Feed";
+import useAppState from "../hooks/useAppState";
+import { useFloating } from "../hooks/useFloating";
+import { useNavigation } from "../hooks/useNavigation";
+import { selectFirstCryptogotchi } from "../mobx/selectors";
+import { DimensionUtils } from "../utils/DimensionUtils";
 
 const style = StyleSheet.create({
     img: {
@@ -123,7 +123,7 @@ const FriendsScreen = observer(() => {
                                 !cryptogotchi?.isAlive && style.dead,
                             ]}
                             resizeMode="contain"
-                            source={require("../assets/image/cg-3.png")}
+                            source={require("../../assets/image/cg-3.png")}
                         />
                     </RNAnimated.View>
                     <View style={tailwind("flex-row relative justify-center")}>

@@ -1,4 +1,4 @@
-import { GET_USER } from "../graphql/queries/userQueries";
+import { GET_USER } from "../graphql/queries/user";
 import { GetUser } from "../graphql/queries/__generated__/GetUser";
 import { rootStore } from "../mobx/RootStore";
 import { apolloClient } from "./ApolloClient";

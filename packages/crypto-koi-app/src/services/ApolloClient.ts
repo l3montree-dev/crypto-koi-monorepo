@@ -1,4 +1,5 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 import { AxiosResponse } from "axios";
 import { Config } from "../config";
 import log from "../utils/logger";
@@ -46,5 +47,13 @@ const httpLink = createHttpLink({
 
 export const apolloClient = new ApolloClient({
     link: httpLink,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        typePolicies: {
+            Query: {
+                fields: {
+                    events: offsetLimitPagination(["cryptogotchiId"]),
+                },
+            },
+        },
+    }),
 });

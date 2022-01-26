@@ -1,6 +1,6 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import FriendsScreen from "./FriendsScreen";
+import FriendsScreen from "./screens/FriendsScreen";
 import { Colors } from "./styles/colors";
 
 const Tab = createMaterialBottomTabNavigator();

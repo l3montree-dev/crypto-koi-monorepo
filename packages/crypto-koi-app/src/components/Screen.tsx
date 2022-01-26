@@ -1,18 +1,13 @@
 import React, { FunctionComponent } from "react";
-import { Platform, StyleSheet, ViewStyle } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, View, ViewStyle } from "react-native";
 
 const style = StyleSheet.create({
     container: {
-        // marginTop: Platform.select({ android: 0 }),
+        paddingTop: 10,
     },
 });
 const Screen: FunctionComponent<{ style: ViewStyle }> = (props) => {
-    return (
-        <SafeAreaView style={[style.container, props.style]}>
-            {props.children}
-        </SafeAreaView>
-    );
+    return <View style={[style.container, props.style]}>{props.children}</View>;
 };
 
 export default Screen;
