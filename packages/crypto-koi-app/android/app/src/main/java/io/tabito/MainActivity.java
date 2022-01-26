@@ -1,4 +1,4 @@
-package io.cattleshowapp;
+package io.tabito;
 
 import android.os.Build;
 import android.os.Bundle;

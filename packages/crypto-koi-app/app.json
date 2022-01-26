@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "cattleshow-app",
-        "slug": "cattleshow-app",
+        "name": "Tabito",
+        "slug": "Tabito",
         "version": "1.0.0",
         "sdkVersion": "44.0.0",
         "jsEngine": "hermes",
