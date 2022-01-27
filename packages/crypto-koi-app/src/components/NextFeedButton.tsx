@@ -22,7 +22,7 @@ function NextFeedButton(props: Props) {
 
             // if seconds is negative - the date is in the past.
             if (seconds < 0) {
-                setSeconds(0);
+                setSeconds(-1);
                 return;
             }
             setSeconds(Config.secondsBetweenFeeding - seconds);
@@ -31,7 +31,7 @@ function NextFeedButton(props: Props) {
     return (
         <ProgressButton
             title={
-                seconds === 0
+                seconds === -1
                     ? "Feed"
                     : "Feed (" +
                       moment
@@ -40,7 +40,7 @@ function NextFeedButton(props: Props) {
                       ")"
             }
             progress={
-                seconds === 0 ? 1 : seconds / Config.secondsBetweenFeeding
+                seconds === -1 ? 1 : seconds / Config.secondsBetweenFeeding
             }
             disabled={disabled}
             loading={loading}
