@@ -9,6 +9,7 @@ import Clock from "./Clock";
 
 interface Props {
     cryptogotchi: Cryptogotchi;
+    clockId: string;
 }
 
 const FriendInfo = observer((props: Props) => {
@@ -40,7 +41,7 @@ const FriendInfo = observer((props: Props) => {
                 <Text style={tailwind("text-white ml-2")}>Age:</Text>
                 {cryptogotchi.deathDate === null ? (
                     <Clock
-                        id="age-clock"
+                        id={props.clockId}
                         style={tailwind("text-white ml-2")}
                         date={cryptogotchi.createdAt}
                     />

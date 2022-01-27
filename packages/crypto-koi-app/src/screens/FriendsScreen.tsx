@@ -173,7 +173,12 @@ const FriendsScreen = observer(() => {
                         </View>
                     </View>
 
-                    {cryptogotchi && <FriendInfo cryptogotchi={cryptogotchi} />}
+                    {cryptogotchi && (
+                        <FriendInfo
+                            clockId="friend"
+                            cryptogotchi={cryptogotchi}
+                        />
+                    )}
                 </View>
             </ScrollView>
             {cryptogotchi && (

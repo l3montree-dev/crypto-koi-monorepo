@@ -1,5 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import {
+    ActivityIndicator,
+    GestureResponderEvent,
+    StyleSheet,
+} from "react-native";
 import {
     Pressable,
     PressableProps,
@@ -31,6 +35,12 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
     const tailwind = useTailwind();
 
     const { title, progress, ...rest } = props;
+    const handlePress = (ev: GestureResponderEvent) => {
+        if (props.loading) {
+            return;
+        }
+        props.onPress && props.onPress(ev);
+    };
     return (
         <View
             style={[
@@ -59,6 +69,7 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
                     style={tailwind("w-full")}
                     android_ripple={android_ripple}
                     {...rest}
+                    onPress={handlePress}
                 >
                     <View style={tailwind("px-5 w-full py-4")}>
                         <Text style={tailwind("text-white text-center")}>

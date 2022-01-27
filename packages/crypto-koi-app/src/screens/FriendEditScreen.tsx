@@ -219,7 +219,10 @@ const FriendEditModal = observer(() => {
                     ListHeaderComponent={
                         <View style={tailwind("px-4")}>
                             <View style={tailwind("rounded-lg mb-6")}>
-                                <FriendInfo cryptogotchi={cryptogotchi} />
+                                <FriendInfo
+                                    clockId={"friend-edit"}
+                                    cryptogotchi={cryptogotchi}
+                                />
                             </View>
                             <Input
                                 label="Change Name"
