@@ -129,12 +129,10 @@ const FriendEditModal = observer(() => {
         ChangeCryptogotchiNameVariables
     >(CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION);
 
-    const {
-        fetchMore,
-        data: events,
-        loading: eventsLoading,
-        error: eventsError,
-    } = useQuery<FetchEvents, FetchEventsVariables>(FETCH_EVENTS, {
+    const { fetchMore, data: events } = useQuery<
+        FetchEvents,
+        FetchEventsVariables
+    >(FETCH_EVENTS, {
         variables: { id: cryptogotchi?.id ?? "", offset: 0, limit: 20 },
     });
 

@@ -4,6 +4,7 @@ import Event from "./Event";
 import moment, { Moment } from "moment";
 import TimeUtils from "../utils/TimeUtils";
 import { ClientCryptogotchi } from "../graphql/queries/__generated__/ClientCryptogotchi";
+import Transformer from "../utils/Transformer";
 
 export default class Cryptogotchi {
     public id: string;
@@ -69,8 +70,7 @@ export default class Cryptogotchi {
     }
 
     get getBase64Uuid(): string {
-        const hex = this.id.replace(/-/g, "");
-        return Buffer.from(hex, "hex").toString("base64");
+        return Transformer.uuidToBase64(this.id);
     }
 
     get deathDateString(): string | undefined {

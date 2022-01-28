@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const commonStyles = StyleSheet.create({
     screenTitle: {
         color: "white",
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: "bold",
         textAlign: "center",
     },

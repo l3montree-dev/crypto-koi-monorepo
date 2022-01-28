@@ -32,7 +32,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
     const currentUser = useAppState(selectCurrentUser);
     return (
         <Stack.Navigator>
-            {!currentUser ? (
+            {currentUser ? (
                 <>
                     <Stack.Screen
                         name="TabNavigator"

@@ -60,7 +60,9 @@ function LeaderboardNavigator() {
     return (
         <>
             <View style={[tailwind("px-4 pb-3 bg-slate-900"), style.header]}>
-                <Text style={commonStyles.screenTitle}>Leaderboard</Text>
+                <Text style={[commonStyles.screenTitle, tailwind("pt-1")]}>
+                    Leaderboard
+                </Text>
                 <View style={[tailwind("absolute right-0"), style.absolutePos]}>
                     <Icon
                         onPress={() => (width.value = withTiming(0))}

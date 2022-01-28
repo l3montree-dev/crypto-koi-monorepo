@@ -5,6 +5,7 @@ import React from "react";
 import {
     Animated as RNAnimated,
     Image,
+    ImageBackground,
     Platform,
     Pressable,
     SafeAreaView,
@@ -38,8 +39,8 @@ const style = StyleSheet.create({
         zIndex: 1,
     },
     dead: {
-        tintColor: "white",
-        opacity: 0.4,
+        tintColor: "gray",
+        opacity: 0.8,
     },
     ticker: {
         ...Platform.select({
@@ -47,6 +48,14 @@ const style = StyleSheet.create({
                 marginTop: StatusBar.currentHeight,
             },
         }),
+    },
+    bgImg: {
+        top: 0,
+        left: 0,
+        // backgroundColor: "red",
+        width: DimensionUtils.deviceWidth,
+        height: DimensionUtils.deviceHeight,
+        position: "absolute",
     },
 });
 
@@ -67,7 +76,7 @@ const CryptogotchiView = observer((props: Props) => {
     const [feed, { loading }] = useMutation<Feed, FeedVariables>(
         FEED_CRYPTOGOTCHI_MUTATION
     );
-    console.log(cryptogotchi);
+
     const { navigate } = useNavigation();
     const handleFeed = async () => {
         if (!currentUserIsOwner) {
@@ -84,10 +93,18 @@ const CryptogotchiView = observer((props: Props) => {
         }
     };
     return (
-        <SafeAreaView style={tailwind("flex-1 flex-col")}>
+        <SafeAreaView style={tailwind("flex-1 bg-black flex-col")}>
+            <Image
+                // style={tailwind("flex-1")}
+                resizeMode="cover"
+                style={style.bgImg}
+                source={require("../../assets/image/stars_back.png")}
+            />
             <ScrollView
-                style={tailwind("bg-slate-900")}
-                contentContainerStyle={tailwind("bg-black")}
+                //style={tailwind("bg-slate-900")}
+                contentContainerStyle={{
+                    minHeight: DimensionUtils.deviceHeight - 36,
+                }}
                 stickyHeaderIndices={[0]}
             >
                 {cryptogotchi && (
@@ -126,6 +143,7 @@ const CryptogotchiView = observer((props: Props) => {
                         />
                     </Svg>
                 </View>
+
                 <View style={tailwind("flex-1 mt-10")}>
                     <RNAnimated.View
                         style={[{ translateX, translateY }, style.z1]}
@@ -155,14 +173,7 @@ const CryptogotchiView = observer((props: Props) => {
                         </Svg>
                     </View>
                 </View>
-                <View
-                    style={[
-                        tailwind(
-                            "flex-row absolute left-0 right-0 justify-center top-0"
-                        ),
-                        style.z1,
-                    ]}
-                ></View>
+
                 <View style={tailwind("flex-col mx-4 justify-end")}>
                     <View style={tailwind("flex-row justify-between")}>
                         {cryptogotchi && (
@@ -194,6 +205,7 @@ const CryptogotchiView = observer((props: Props) => {
                     )}
                 </View>
             </ScrollView>
+
             {cryptogotchi && (
                 <View style={tailwind("bg-slate-900 pt-4 px-4 pb-2")}>
                     <NextFeedButton
