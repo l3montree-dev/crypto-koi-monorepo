@@ -1,7 +1,6 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native";
-import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import Leaderboard from "./screens/Leaderboard";
@@ -44,14 +43,14 @@ const Tab = createMaterialTopTabNavigator();
 
 function LeaderboardNavigator() {
     const tailwind = useTailwind();
-    const width = useSharedValue(100);
+    /*const width = useSharedValue(100);
     const animatedProps = useAnimatedStyle(() => {
         return {
             left: width.value + "%",
             opacity: 1 - width.value / 100,
             zIndex: width.value < 100 ? 1 : -1,
         };
-    });
+    });*/
     return (
         <>
             <View style={[tailwind("px-4 pb-3 bg-slate-900"), style.header]}>

@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import moment from "moment";
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
     FlatList,
     Image,
@@ -15,11 +15,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import CircularProgress from "../components/CircularProgress";
 import Clock from "../components/Clock";
-import FriendInfo from "../components/FriendInfo";
 import { FETCH_LEADERBOARD } from "../graphql/queries/cryptogotchi";
 import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
 import { useNavigation } from "../hooks/useNavigation";
-import Cryptogotchi from "../mobx/Cryptogotchi";
 import { ticker } from "../services/Ticker";
 import { android_ripple } from "../styles/commonStyles";
 import Transformer from "../utils/Transformer";

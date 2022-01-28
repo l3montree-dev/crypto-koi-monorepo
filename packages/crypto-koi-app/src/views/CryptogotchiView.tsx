@@ -1,12 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { BlurView } from "expo-blur";
 import { observer } from "mobx-react-lite";
-import React from "react";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import {
     Animated as RNAnimated,
     Image,
-    ImageBackground,
     Platform,
     Pressable,
     SafeAreaView,

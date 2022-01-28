@@ -1,18 +1,15 @@
 /* eslint-disable react-native/no-raw-text */
-import { ApolloError, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
 import React, { FunctionComponent } from "react";
-import { StyleSheet } from "react-native";
-import { FlatList, Text, View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "../components/AppButton";
 import FriendInfo from "../components/FriendInfo";
 import Input from "../components/Input";
-import Loading from "../components/Loading";
 import Screen from "../components/Screen";
 import {
     CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,

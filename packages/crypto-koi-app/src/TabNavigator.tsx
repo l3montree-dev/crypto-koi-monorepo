@@ -6,10 +6,6 @@ import { Colors } from "./styles/colors";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const SettingsScreen = () => {
-    return null;
-};
-
 const style = {
     backgroundColor: Colors.bgColorVariant,
     //borderTopWidth: 1,

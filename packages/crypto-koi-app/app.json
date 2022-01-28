@@ -2,7 +2,6 @@
     "expo": {
         "name": "Tabito",
         "slug": "Tabito",
-        "displayName": "Tabito",
         "version": "1.0.0",
         "sdkVersion": "44.0.0",
         "jsEngine": "hermes",
@@ -17,9 +16,9 @@
             "package": "io.tabito"
         },
         "splash": {
-            "image": "./assets/image/splash.png",
+            "image": "./assets/splash.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#0f172a"
         }
     }
 }
