@@ -4,11 +4,12 @@ import {
 } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
 import React, { FunctionComponent } from "react";
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useAppState from "./hooks/useAppState";
 import { RootStackParamList } from "./hooks/useNavigation";
 import { selectCurrentUser } from "./mobx/selectors";
+import CryptogotchiScreen from "./screens/CryptogotchiScreen";
 import FriendEditScreen from "./screens/FriendEditScreen";
 import SnakeGameScreen from "./screens/games/snake/SnakeGameScreen";
 import OnboardingScreen from "./screens/onboarding/OnboardingScreen";
@@ -31,7 +32,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
     const currentUser = useAppState(selectCurrentUser);
     return (
         <Stack.Navigator>
-            {currentUser ? (
+            {!currentUser ? (
                 <>
                     <Stack.Screen
                         name="TabNavigator"
@@ -61,6 +62,18 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                                 ),
                             };
                         }}
+                    />
+                    <Stack.Screen
+                        name="CryptogotchiScreen"
+                        options={{
+                            ...commonNavigationOptions,
+                            headerTitle: "",
+                            title: "",
+                            headerStyle: {
+                                backgroundColor: "transparent",
+                            },
+                        }}
+                        component={CryptogotchiScreen}
                     />
                     <Stack.Screen
                         name="SnakeGameScreen"

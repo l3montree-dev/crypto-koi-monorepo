@@ -4,6 +4,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import {
     FlatList,
     Image,
+    Pressable,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -14,10 +15,11 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import CircularProgress from "../components/CircularProgress";
 import Clock from "../components/Clock";
-import Loading from "../components/Loading";
 import { FETCH_LEADERBOARD } from "../graphql/queries/cryptogotchi";
 import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
+import { useNavigation } from "../hooks/useNavigation";
 import { ticker } from "../services/Ticker";
+import { android_ripple } from "../styles/commonStyles";
 
 const style = StyleSheet.create({
     img: {
@@ -41,6 +43,7 @@ type Props = FetchLeaderBoard["leaderboard"][0] & {
 const LeaderboardItem: FunctionComponent<Props> = (props) => {
     const tailwind = useTailwind();
 
+    const { navigate } = useNavigation();
     const [value, setValue] = useState(moment());
 
     useEffect(() => {
@@ -57,79 +60,90 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
     }
 
     return (
-        <Animated.View
-            entering={FadeIn.delay(props.index * 100)}
-            style={[tailwind("px-4 flex-row py-2 items-center"), style.wrapper]}
+        <Pressable
+            onPress={() =>
+                navigate("CryptogotchiScreen", { cryptogotchiId: props.id })
+            }
+            android_ripple={android_ripple}
         >
-            <View
-                style={tailwind(
-                    "flex-row justify-between flex-1  p-1 items-center"
-                )}
+            <Animated.View
+                entering={FadeIn.delay(props.index * 100)}
+                style={[
+                    tailwind("px-4 flex-row py-2 items-center"),
+                    style.wrapper,
+                ]}
             >
-                <View style={tailwind("flex-row items-center")}>
-                    <Text style={tailwind("text-white mr-3")}>
-                        {props.index + 1}.
-                    </Text>
-                    <View
-                        style={[
-                            tailwind(
-                                "rounded-lg bg-violet-400 overflow-hidden"
-                            ),
-                            style.imgContainer,
-                        ]}
-                    >
-                        <Image
-                            style={style.img}
-                            resizeMode="cover"
-                            source={require("../../assets/image/cg-3.png")}
-                        />
-                    </View>
-                    <View style={tailwind("ml-2")}>
-                        <Text style={tailwind("text-white")}>{props.name}</Text>
-                        <Clock
-                            style={tailwind("text-white opacity-75")}
-                            id={props.id}
-                            date={props.createdAt}
-                        />
-                    </View>
-                </View>
-                <View style={tailwind("pr-1")}>
-                    <CircularProgress
-                        progress={Math.max(
-                            0,
-                            diffSeconds / (props.maxLifetimeMinutes * 60)
-                        )}
-                        backgroundStrokeColor={"rgba(255,255,255,0.2)"}
-                        radius={20}
-                        svgStyle={tailwind("text-amber-500")}
-                        strokeWidth={3}
-                    >
+                <View
+                    style={tailwind(
+                        "flex-row justify-between flex-1  p-1 items-center"
+                    )}
+                >
+                    <View style={tailwind("flex-row items-center")}>
+                        <Text style={tailwind("text-white mr-3")}>
+                            {props.index + 1}.
+                        </Text>
                         <View
-                            style={tailwind(
-                                "flex-row flex-1 justify-center items-center"
-                            )}
+                            style={[
+                                tailwind(
+                                    "rounded-lg bg-slate-400 overflow-hidden"
+                                ),
+                                style.imgContainer,
+                            ]}
                         >
-                            <Icon
-                                style={tailwind("text-amber-500 text-2xl")}
-                                name="heart"
+                            <Image
+                                style={style.img}
+                                resizeMode="cover"
+                                source={require("../../assets/image/cg-3.png")}
                             />
                         </View>
-                    </CircularProgress>
+                        <View style={tailwind("ml-2")}>
+                            <Text style={tailwind("text-white")}>
+                                {props.name}
+                            </Text>
+                            <Clock
+                                style={tailwind("text-white opacity-75")}
+                                id={props.id}
+                                date={props.createdAt}
+                            />
+                        </View>
+                    </View>
+                    <View style={tailwind("pr-1")}>
+                        <CircularProgress
+                            progress={Math.max(
+                                0,
+                                diffSeconds / (props.maxLifetimeMinutes * 60)
+                            )}
+                            backgroundStrokeColor={"rgba(255,255,255,0.2)"}
+                            radius={20}
+                            svgStyle={tailwind("text-amber-500")}
+                            strokeWidth={3}
+                        >
+                            <View
+                                style={tailwind(
+                                    "flex-row flex-1 justify-center items-center"
+                                )}
+                            >
+                                <Icon
+                                    style={tailwind("text-amber-500 text-2xl")}
+                                    name="heart"
+                                />
+                            </View>
+                        </CircularProgress>
+                    </View>
                 </View>
-            </View>
-        </Animated.View>
+            </Animated.View>
+        </Pressable>
     );
 };
 
 function Leaderboard() {
     const tailwind = useTailwind();
-    const { fetchMore, data, loading, error } = useQuery<FetchLeaderBoard>(
-        FETCH_LEADERBOARD,
-        { variables: { offset: 0, limit: 20 } }
-    );
+    const { fetchMore, data } = useQuery<FetchLeaderBoard>(FETCH_LEADERBOARD, {
+        variables: { offset: 0, limit: 20 },
+    });
 
     return (
-        <SafeAreaView style={tailwind("flex-1 bg-violet-900 flex-col")}>
+        <SafeAreaView style={tailwind("flex-1 bg-slate-900 flex-col")}>
             <FlatList
                 contentContainerStyle={tailwind("pt-0")}
                 renderItem={({ item, index }) => (

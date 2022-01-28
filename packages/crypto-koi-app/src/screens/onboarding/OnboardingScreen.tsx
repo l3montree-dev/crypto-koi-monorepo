@@ -129,12 +129,12 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={tailwind("flex-1 bg-purple-700")}>
+        <View style={tailwind("flex-1 bg-slate-700")}>
             <View style={tailwind("absolute top-0")}>
                 <Wave
                     svgStyle={[
                         style.svg,
-                        tailwind("text-violet-900"),
+                        tailwind("text-slate-900"),
                         style.rotatedSvg,
                     ]}
                 />
@@ -313,7 +313,7 @@ function OnboardingScreen() {
             </ScrollView>
 
             <View style={tailwind("absolute -bottom-20")}>
-                <Wave svgStyle={[style.svg, tailwind("text-violet-900")]} />
+                <Wave svgStyle={[style.svg, tailwind("text-slate-900")]} />
             </View>
 
             <View style={tailwind("flex-row items-center justify-between")}>
@@ -330,7 +330,7 @@ function OnboardingScreen() {
                         <View
                             key={index}
                             style={[
-                                tailwind("bg-violet-400 mx-2 rounded"),
+                                tailwind("bg-slate-400 mx-2 rounded"),
                                 style.dot,
                             ]}
                         />
@@ -338,7 +338,7 @@ function OnboardingScreen() {
                     <Animated.View
                         style={[
                             style.dot,
-                            tailwind("bg-violet-200 rounded absolute mx-2"),
+                            tailwind("bg-slate-200 rounded absolute mx-2"),
                             animatedActiveDotStyle,
                         ]}
                     />

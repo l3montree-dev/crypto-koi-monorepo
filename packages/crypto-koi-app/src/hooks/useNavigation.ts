@@ -4,6 +4,9 @@ import { NavigationProp } from "@react-navigation/native";
 export type RootStackParamList = {
     readonly OnboardingScreen: undefined;
     readonly FriendScreen: undefined;
+    readonly CryptogotchiScreen: {
+        cryptogotchiId: string;
+    };
     readonly SnakeGameScreen: undefined;
     readonly TabNavigator: undefined;
     readonly FriendEditScreen: {

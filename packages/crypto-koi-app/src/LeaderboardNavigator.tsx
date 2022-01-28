@@ -14,14 +14,14 @@ import { commonStyles } from "./styles/commonStyles";
 
 const style = StyleSheet.create({
     header: {
-        paddingTop: StatusBar.currentHeight,
+        paddingTop: StatusBar.currentHeight ?? 0 + 5,
     },
     icon: {
         fontSize: 60,
         lineHeight: 60,
     },
     absolutePos: {
-        marginTop: StatusBar.currentHeight,
+        marginTop: StatusBar.currentHeight ?? 0 + 5,
         marginRight: 20,
         marginLeft: 20,
     },
@@ -59,9 +59,7 @@ function LeaderboardNavigator() {
     });
     return (
         <>
-            <View
-                style={[tailwind("px-4 pt-1 pb-3 bg-violet-900"), style.header]}
-            >
+            <View style={[tailwind("px-4 pb-3 bg-slate-900"), style.header]}>
                 <Text style={commonStyles.screenTitle}>Leaderboard</Text>
                 <View style={[tailwind("absolute right-0"), style.absolutePos]}>
                     <Icon
@@ -81,23 +79,23 @@ function LeaderboardNavigator() {
                     <View style={tailwind("flex-1")}>
                         <SearchInput
                             onClose={() => (width.value = withTiming(100))}
-                            style={tailwind("bg-violet-400")}
+                            style={tailwind("bg-slate-600")}
                         />
                     </View>
                 </Animated.View>
             </View>
-            <View style={tailwind("bg-violet-900 flex-1")}>
+            <View style={tailwind("bg-slate-900 flex-1")}>
                 <Tab.Navigator
                     screenOptions={{
                         tabBarStyle: [
-                            tailwind("bg-violet-800"),
+                            tailwind("bg-slate-900"),
                             { elevation: 0 },
                         ],
                         tabBarActiveTintColor: tailwind("text-white")
                             .color as string,
                         tabBarIndicatorStyle: tailwind("bg-amber-500"),
                     }}
-                    sceneContainerStyle={tailwind("bg-violet-900")}
+                    sceneContainerStyle={tailwind("bg-slate-900")}
                 >
                     <Tab.Screen name="User" component={Leaderboard} />
                     <Tab.Screen name="Games" component={ComingSoon} />

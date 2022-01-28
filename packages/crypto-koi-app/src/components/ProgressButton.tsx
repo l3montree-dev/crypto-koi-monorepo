@@ -43,7 +43,7 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
         <View
             style={[
                 props.disabled && tailwind("opacity-50"),
-                tailwind("rounded-lg flex-row bg-violet-700 overflow-hidden"),
+                tailwind("rounded-lg flex-row bg-slate-700 overflow-hidden"),
                 props.style,
             ]}
         >

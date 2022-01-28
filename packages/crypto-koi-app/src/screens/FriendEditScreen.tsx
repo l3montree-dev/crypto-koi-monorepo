@@ -67,7 +67,7 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = (
             <View style={[style.border, props.isFirst && style.firstItem]} />
             <View style={tailwind("mb-4")}>
                 <View style={tailwind("flex-row items-center")}>
-                    <View style={tailwind("bg-violet-900 rounded-full p-1")}>
+                    <View style={tailwind("bg-slate-900 rounded-full p-1")}>
                         <View
                             style={[
                                 style.circle,
@@ -85,7 +85,7 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = (
                         </View>
                     </View>
                     <View
-                        style={tailwind("bg-violet-800 flex-1 p-3 rounded-lg")}
+                        style={tailwind("bg-slate-800 flex-1 p-3 rounded-lg")}
                     >
                         <View style={tailwind("mb-3")}>
                             <Text style={tailwind("text-white")}>
@@ -154,7 +154,7 @@ const FriendEditModal = observer(() => {
     }
 
     return (
-        <Screen style={tailwind("flex-1 bg-violet-900")}>
+        <Screen style={tailwind("flex-1 bg-slate-900")}>
             <View style={tailwind("flex-1")}>
                 <FlatList
                     onEndReachedThreshold={0.5}
@@ -183,7 +183,7 @@ const FriendEditModal = observer(() => {
                             </View>
                             <Input
                                 label="Change Name"
-                                style={tailwind("bg-violet-500 mb-10")}
+                                style={tailwind("bg-slate-600 mb-10")}
                                 {...name}
                                 selectTextOnFocus
                             />
@@ -205,7 +205,7 @@ const FriendEditModal = observer(() => {
                     )}
                 />
             </View>
-            <View style={tailwind("p-4 flex-row bg-violet-900")}>
+            <View style={tailwind("p-4 flex-row bg-slate-900")}>
                 <View style={tailwind("flex-1 mr-2")}>
                     <AppButton
                         disabled={!cryptogotchi.isAlive}

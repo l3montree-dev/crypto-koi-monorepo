@@ -12,6 +12,7 @@ export default class Cryptogotchi {
     public food: number;
     public tokenId: string | null;
     public createdAt: Moment;
+    public ownerId: string;
     public gameStats: GameStat[] = [];
     public events: Event[] = [];
     public minutesTillDeath: number;
@@ -36,6 +37,7 @@ export default class Cryptogotchi {
         this.nextFeeding = moment(fragment.nextFeeding);
         this.snapshotValid = moment(fragment.snapshotValid);
         this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
+        this.ownerId = fragment.ownerId;
     }
 
     setFromFragment(fragment: ClientCryptogotchi) {
@@ -52,6 +54,7 @@ export default class Cryptogotchi {
         this.nextFeeding = moment(fragment.nextFeeding);
         this.snapshotValid = moment(fragment.snapshotValid);
         this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
+        this.ownerId = fragment.ownerId;
     }
 
     setName(name: string | undefined | null) {

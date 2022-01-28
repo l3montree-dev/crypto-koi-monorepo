@@ -10,6 +10,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         createdAt
         minutesTillDeath
         maxLifetimeMinutes
+        ownerId
         deathDate
         nextFeeding
         snapshotValid
