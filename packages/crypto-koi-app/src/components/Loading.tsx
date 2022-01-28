@@ -18,7 +18,7 @@ const Loading: FunctionComponent<{
 }> = (props) => {
     const { loading, error, errorMsg, emptyMsg } = props;
     const tailwind = useTailwind();
-    console.log("Loading", loading, error);
+
     if (!loading && !error) {
         return null;
     }

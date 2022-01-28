@@ -3,7 +3,7 @@ import React from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
-import Leaderboard from "./screens/Leaderboard";
+import Leaderboard from "./screens/LeaderboardScreen";
 import { commonStyles } from "./styles/commonStyles";
 
 const style = StyleSheet.create({

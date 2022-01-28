@@ -48,16 +48,18 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
     const [value, setValue] = useState(moment());
 
     useEffect(() => {
-        ticker.addTickHandler("lifetime-" + props.id, () => setValue(moment()));
-        return () => ticker.removeTickHandler("lifetime");
+        ticker.addTickHandler("item-lifetime-" + props.id, () =>
+            setValue(moment())
+        );
+        return () => ticker.removeTickHandler("item-lifetime-" + props.id);
     }, []);
 
-    const diffSeconds = moment(props.snapshotValid)
+    const diffSeconds = moment()
         .add(props.minutesTillDeath, "minutes")
         .diff(value, "second");
     if (diffSeconds < 0) {
         // remove the ticker
-        ticker.removeTickHandler("lifetime-" + props.id);
+        ticker.removeTickHandler("item-lifetime-" + props.id);
     }
 
     return (
