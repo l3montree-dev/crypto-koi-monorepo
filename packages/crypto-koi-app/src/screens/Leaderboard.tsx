@@ -70,7 +70,7 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
             android_ripple={android_ripple}
         >
             <Animated.View
-                entering={FadeIn.delay(props.index * 100)}
+                entering={FadeIn.delay((props.index % 20) * 100)}
                 style={[
                     tailwind("px-4 flex-row py-2 items-center"),
                     style.wrapper,
@@ -216,7 +216,6 @@ function Leaderboard() {
         <SafeAreaView style={tailwind("flex-1 bg-slate-900 flex-col")}>
             <FlatList
                 onEndReached={() => {
-                    console.log("test");
                     if (data) {
                         fetchMore({
                             variables: { offset: data.leaderboard.length },

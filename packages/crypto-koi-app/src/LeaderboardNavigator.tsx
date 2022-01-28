@@ -1,14 +1,9 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React from "react";
-import { StyleSheet, View, Text, StatusBar } from "react-native";
-import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withTiming,
-} from "react-native-reanimated";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
-import SearchInput from "./components/SearchInput";
 import Leaderboard from "./screens/Leaderboard";
 import { commonStyles } from "./styles/commonStyles";
 
@@ -20,14 +15,14 @@ const style = StyleSheet.create({
         fontSize: 60,
         lineHeight: 60,
     },
-    absolutePos: {
+    /*absolutePos: {
         marginTop: StatusBar.currentHeight ?? 0 + 5,
         marginRight: 20,
         marginLeft: 20,
     },
     searchContainer: {
         // height: 40,
-    },
+    },*/
 });
 
 const ComingSoon = () => {
@@ -63,7 +58,7 @@ function LeaderboardNavigator() {
                 <Text style={[commonStyles.screenTitle, tailwind("pt-1")]}>
                     Leaderboard
                 </Text>
-                <View style={[tailwind("absolute right-0"), style.absolutePos]}>
+                {/* <View style={[tailwind("absolute right-0"), style.absolutePos]}>
                     <Icon
                         onPress={() => (width.value = withTiming(0))}
                         style={tailwind("text-white text-2xl p-2")}
@@ -84,7 +79,7 @@ function LeaderboardNavigator() {
                             style={tailwind("bg-slate-600")}
                         />
                     </View>
-                </Animated.View>
+                </Animated.View> */}
             </View>
             <View style={tailwind("bg-slate-900 flex-1")}>
                 <Tab.Navigator

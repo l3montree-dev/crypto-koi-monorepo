@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
-import { offsetLimitPagination } from "@apollo/client/utilities";
 import { AxiosResponse } from "axios";
+import { uniqBy } from "lodash";
 import { Config } from "../config";
 import log from "../utils/logger";
 import { authService, TokenResponse } from "./AuthService";
@@ -46,13 +46,27 @@ const httpLink = createHttpLink({
     },
 });
 
+const uniqueByIdOffsetLimitPagination = <T>(keyArgs?: string[]) => {
+    return {
+        keyArgs: keyArgs,
+        merge: (existing: T[], incoming: T[]) => {
+            return uniqBy(
+                [...(existing || []), ...(incoming || [])],
+                // @ts-ignore
+                (item) => item.__ref
+            );
+        },
+    };
+};
+
 export const apolloClient = new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
                 fields: {
-                    events: offsetLimitPagination(["cryptogotchiId"]),
+                    events: uniqueByIdOffsetLimitPagination(["cryptogotchiId"]),
+                    leaderboard: uniqueByIdOffsetLimitPagination(),
                 },
             },
         },

@@ -108,7 +108,7 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = (
 };
 const EventItem: FunctionComponent<Props> = (props) => {
     return (
-        <Animated.View entering={FadeIn.delay(props.index * 100)}>
+        <Animated.View entering={FadeIn.delay((props.index % 20) * 100)}>
             <EventItemContainer
                 date={props.createdAt}
                 iconName="heart"
@@ -156,11 +156,15 @@ const FriendEditModal = observer(() => {
             <View style={tailwind("flex-1")}>
                 <FlatList
                     onEndReachedThreshold={0.5}
-                    onEndReached={() =>
-                        fetchMore({
-                            variables: { offset: events?.events.length ?? 0 },
-                        })
-                    }
+                    onEndReached={() => {
+                        if (events) {
+                            fetchMore({
+                                variables: {
+                                    offset: events?.events.length ?? 0,
+                                },
+                            });
+                        }
+                    }}
                     ListFooterComponent={
                         loading ? null : (
                             <EventItemContainer
