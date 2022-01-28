@@ -13,6 +13,7 @@ import {
     ViewStyle,
 } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
+import { android_ripple } from "../styles/commonStyles";
 
 interface Props extends PressableProps {
     style?: StyleProp<ViewStyle>;
@@ -28,9 +29,6 @@ const style = StyleSheet.create({
     },
 });
 
-const android_ripple = {
-    color: "rgba(0,0,0,0.2)",
-};
 export const ProgressButton: FunctionComponent<Props> = (props) => {
     const tailwind = useTailwind();
 

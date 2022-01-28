@@ -14,7 +14,7 @@
         "description": "",
         "fields": [
           {
-            "name": "leaderBoard",
+            "name": "leaderboard",
             "description": "",
             "args": [
               {
@@ -363,6 +363,22 @@
           },
           {
             "name": "nextFeeding",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Time",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "snapshotValid",
             "description": "",
             "args": [],
             "type": {

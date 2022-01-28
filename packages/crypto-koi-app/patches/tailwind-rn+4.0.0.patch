@@ -1,0 +1,13 @@
+diff --git a/node_modules/tailwind-rn/dist/cli.js b/node_modules/tailwind-rn/dist/cli.js
+index 8925030..3491d0f 100755
+--- a/node_modules/tailwind-rn/dist/cli.js
++++ b/node_modules/tailwind-rn/dist/cli.js
+@@ -50,7 +50,7 @@ const build = () => {
+     fs.writeFileSync(output, JSON.stringify(utilities, null, '\t'));
+ };
+ if (watch) {
+-    chokidar.watch(input).on('all', build);
++    chokidar.watch(input, { awaitWriteFinish: true }).on('all', build);
+ }
+ else {
+     build();

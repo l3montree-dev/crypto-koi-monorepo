@@ -12,18 +12,20 @@ function Input(props: Props) {
     const { label, style, ...rest } = props;
     return (
         <Pressable onPress={() => textInputRef.current?.focus()}>
-            <View style={[tailwind("text-white rounded-lg py-3 "), style]}>
-                <Text style={tailwind("text-white opacity-75 px-3")}>
+            <View style={tailwind("text-white rounded-lg py-3")}>
+                <Text style={tailwind("text-white opacity-75 mb-2")}>
                     {label}
                 </Text>
 
-                <TextInput
-                    ref={textInputRef}
-                    style={tailwind(
-                        "text-lg text-white py-1 px-3 w-full text-white rounded-lg"
-                    )}
-                    {...rest}
-                />
+                <View style={[tailwind("rounded-lg"), style]}>
+                    <TextInput
+                        ref={textInputRef}
+                        style={tailwind(
+                            "text-lg text-white py-2 px-3 w-full text-white"
+                        )}
+                        {...rest}
+                    />
+                </View>
             </View>
         </Pressable>
     );

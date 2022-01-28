@@ -12,6 +12,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         maxLifetimeMinutes
         deathDate
         nextFeeding
+        snapshotValid
     }
 `;
 

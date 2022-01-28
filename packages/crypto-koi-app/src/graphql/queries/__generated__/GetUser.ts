@@ -19,6 +19,7 @@ export interface GetUser_user_cryptogotchies {
   maxLifetimeMinutes: number;
   deathDate: any | null;
   nextFeeding: any;
+  snapshotValid: any;
 }
 
 export interface GetUser_user {

@@ -31,7 +31,10 @@ const Lifetime = observer((props: Props) => {
     return (
         <View style={tailwind("flex-col items-center justify-center")}>
             <CircularProgress
-                progress={diffSeconds / (cryptogotchi.maxLifetimeMinutes * 60)}
+                progress={Math.max(
+                    0,
+                    diffSeconds / (cryptogotchi.maxLifetimeMinutes * 60)
+                )}
                 backgroundStrokeColor={
                     tailwind("text-amber-100").color as string
                 }

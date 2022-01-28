@@ -9,6 +9,7 @@ const httpLink = createHttpLink({
     uri: Config.graphqlBaseUrl,
     fetch: async (uri: RequestInfo, options) => {
         const token = authService.getAccessToken();
+
         const request = fetch(uri, {
             ...options,
             headers: { ...options?.headers, Authorization: `Bearer ${token}` },

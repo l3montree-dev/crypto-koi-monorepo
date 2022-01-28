@@ -2,14 +2,11 @@ import React from "react";
 import { Pressable, PressableProps, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
+import { android_ripple } from "../styles/commonStyles";
 
 interface Props extends PressableProps {
     name: string;
 }
-
-const android_ripple = {
-    color: "rgba(0,0,0,0.2)",
-};
 
 const style = StyleSheet.create({
     view: {

@@ -6,11 +6,13 @@ import React, { FunctionComponent } from "react";
 import { StyleSheet } from "react-native";
 import { FlatList, Text, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
+import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "../components/AppButton";
 import FriendInfo from "../components/FriendInfo";
 import Input from "../components/Input";
+import Loading from "../components/Loading";
 import Screen from "../components/Screen";
 import {
     CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
@@ -30,13 +32,9 @@ import useInput from "../hooks/useInput";
 import { selectFirstCryptogotchi } from "../mobx/selectors";
 import log from "../utils/logger";
 
-type Props = ClientEvent & { name: string };
+type Props = ClientEvent & { name: string; index: number };
 
 const style = StyleSheet.create({
-    error: {
-        fontSize: 60,
-        lineHeight: 100,
-    },
     circle: {
         borderColor: "rgba(255,255,255,0.3)",
     },
@@ -110,50 +108,15 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = (
 };
 const EventItem: FunctionComponent<Props> = (props) => {
     return (
-        <EventItemContainer
-            date={props.createdAt}
-            iconName="heart"
-            text={"You fed " + props.name + " with " + props.payload + " food"}
-        />
-    );
-};
-
-const EventEmpty: FunctionComponent<{
-    loading: boolean;
-    error: ApolloError | undefined;
-}> = (props) => {
-    const { loading } = props;
-    const tailwind = useTailwind();
-    return (
-        <View style={tailwind("px-4")}>
-            {loading ? (
-                <View style={tailwind("p-10")}>
-                    <ActivityIndicator
-                        color="rgba(255,255,255,0.5)"
-                        size="large"
-                    />
-                </View>
-            ) : (
-                <View>
-                    <Icon
-                        style={[
-                            tailwind(
-                                "text-white text-center opacity-50 text-4xl"
-                            ),
-                            style.error,
-                        ]}
-                        name="alert-circle-outline"
-                    />
-                    <Text
-                        style={tailwind(
-                            "text-white opacity-50 px-10 text-center"
-                        )}
-                    >
-                        Could not load events. Please try again later.
-                    </Text>
-                </View>
-            )}
-        </View>
+        <Animated.View entering={FadeIn.delay(props.index * 100)}>
+            <EventItemContainer
+                date={props.createdAt}
+                iconName="heart"
+                text={
+                    "You fed " + props.name + " with " + props.payload + " food"
+                }
+            />
+        </Animated.View>
     );
 };
 
@@ -200,12 +163,6 @@ const FriendEditModal = observer(() => {
                             variables: { offset: events?.events.length ?? 0 },
                         })
                     }
-                    ListEmptyComponent={
-                        <EventEmpty
-                            loading={eventsLoading}
-                            error={eventsError}
-                        />
-                    }
                     ListFooterComponent={
                         loading ? null : (
                             <EventItemContainer
@@ -238,8 +195,9 @@ const FriendEditModal = observer(() => {
                         </View>
                     }
                     data={events?.events || []}
-                    renderItem={({ item }) => (
+                    renderItem={({ item, index }) => (
                         <EventItem
+                            index={index}
                             name={cryptogotchi.name ?? ""}
                             key={item.id}
                             {...item}

@@ -1,6 +1,7 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import FriendsScreen from "./screens/FriendsScreen";
+import LeaderboardNavigator from "./LeaderboardNavigator";
+import FriendsScreen from "./screens/FriendScreen";
 import { Colors } from "./styles/colors";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -11,6 +12,8 @@ const SettingsScreen = () => {
 
 const style = {
     backgroundColor: Colors.bgColorVariant,
+    //borderTopWidth: 1,
+    //borderTopColor: "rgba(255,255,255,0.2)",
     elevation: 0,
 };
 export function TabNavigator() {
@@ -36,7 +39,7 @@ export function TabNavigator() {
             />
             <Tab.Screen
                 name="Leaderboard"
-                component={SettingsScreen}
+                component={LeaderboardNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons

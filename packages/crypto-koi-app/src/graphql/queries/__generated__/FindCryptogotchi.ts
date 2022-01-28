@@ -19,6 +19,7 @@ export interface FindCryptogotchi_cryptogotchi {
   maxLifetimeMinutes: number;
   deathDate: any | null;
   nextFeeding: any;
+  snapshotValid: any;
 }
 
 export interface FindCryptogotchi {

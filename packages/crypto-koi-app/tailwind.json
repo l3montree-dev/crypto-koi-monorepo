@@ -9,6 +9,11 @@
 			"position": "relative"
 		}
 	},
+	"right-0": {
+		"style": {
+			"right": 0
+		}
+	},
 	"bottom-0": {
 		"style": {
 			"bottom": 0
@@ -17,11 +22,6 @@
 	"left-0": {
 		"style": {
 			"left": 0
-		}
-	},
-	"right-0": {
-		"style": {
-			"right": 0
 		}
 	},
 	"top-0": {
@@ -71,9 +71,19 @@
 			"marginLeft": 8
 		}
 	},
+	"mb-2": {
+		"style": {
+			"marginBottom": 8
+		}
+	},
 	"mt-1": {
 		"style": {
 			"marginTop": 4
+		}
+	},
+	"mr-2": {
+		"style": {
+			"marginRight": 8
 		}
 	},
 	"mb-4": {
@@ -81,9 +91,9 @@
 			"marginBottom": 16
 		}
 	},
-	"mr-2": {
+	"mb-3": {
 		"style": {
-			"marginRight": 8
+			"marginBottom": 12
 		}
 	},
 	"mb-6": {
@@ -99,6 +109,11 @@
 	"mt-10": {
 		"style": {
 			"marginTop": 40
+		}
+	},
+	"mr-3": {
+		"style": {
+			"marginRight": 12
 		}
 	},
 	"mt-20": {
@@ -119,16 +134,6 @@
 	"ml-5": {
 		"style": {
 			"marginLeft": 20
-		}
-	},
-	"mb-2": {
-		"style": {
-			"marginBottom": 8
-		}
-	},
-	"mb-3": {
-		"style": {
-			"marginBottom": 12
 		}
 	},
 	"flex": {
@@ -243,6 +248,24 @@
 			"borderLeftWidth": 2
 		}
 	},
+	"bg-violet-900": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(76 29 149 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-violet-400": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(167 139 250 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-violet-800": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(91 33 182 / var(--tw-bg-opacity))"
+		}
+	},
 	"bg-amber-500": {
 		"style": {
 			"--tw-bg-opacity": 1,
@@ -253,18 +276,6 @@
 		"style": {
 			"--tw-bg-opacity": 1,
 			"backgroundColor": "rgb(109 40 217 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-violet-900": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(76 29 149 / var(--tw-bg-opacity))"
-		}
-	},
-	"bg-violet-800": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(91 33 182 / var(--tw-bg-opacity))"
 		}
 	},
 	"bg-violet-500": {
@@ -279,16 +290,26 @@
 			"backgroundColor": "rgb(126 34 206 / var(--tw-bg-opacity))"
 		}
 	},
-	"bg-violet-400": {
-		"style": {
-			"--tw-bg-opacity": 1,
-			"backgroundColor": "rgb(167 139 250 / var(--tw-bg-opacity))"
-		}
-	},
 	"bg-violet-200": {
 		"style": {
 			"--tw-bg-opacity": 1,
 			"backgroundColor": "rgb(221 214 254 / var(--tw-bg-opacity))"
+		}
+	},
+	"p-2": {
+		"style": {
+			"paddingTop": 8,
+			"paddingRight": 8,
+			"paddingBottom": 8,
+			"paddingLeft": 8
+		}
+	},
+	"p-10": {
+		"style": {
+			"paddingTop": 40,
+			"paddingRight": 40,
+			"paddingBottom": 40,
+			"paddingLeft": 40
 		}
 	},
 	"p-1": {
@@ -307,20 +328,18 @@
 			"paddingLeft": 12
 		}
 	},
-	"p-10": {
-		"style": {
-			"paddingTop": 40,
-			"paddingRight": 40,
-			"paddingBottom": 40,
-			"paddingLeft": 40
-		}
-	},
 	"p-4": {
 		"style": {
 			"paddingTop": 16,
 			"paddingRight": 16,
 			"paddingBottom": 16,
 			"paddingLeft": 16
+		}
+	},
+	"px-4": {
+		"style": {
+			"paddingLeft": 16,
+			"paddingRight": 16
 		}
 	},
 	"px-5": {
@@ -353,22 +372,26 @@
 			"paddingRight": 12
 		}
 	},
-	"py-1": {
-		"style": {
-			"paddingTop": 4,
-			"paddingBottom": 4
-		}
-	},
-	"px-4": {
-		"style": {
-			"paddingLeft": 16,
-			"paddingRight": 16
-		}
-	},
 	"px-10": {
 		"style": {
 			"paddingLeft": 40,
 			"paddingRight": 40
+		}
+	},
+	"px-2": {
+		"style": {
+			"paddingLeft": 8,
+			"paddingRight": 8
+		}
+	},
+	"pt-1": {
+		"style": {
+			"paddingTop": 4
+		}
+	},
+	"pb-3": {
+		"style": {
+			"paddingBottom": 12
 		}
 	},
 	"pr-4": {
@@ -389,6 +412,16 @@
 	"pb-2": {
 		"style": {
 			"paddingBottom": 8
+		}
+	},
+	"pr-1": {
+		"style": {
+			"paddingRight": 4
+		}
+	},
+	"pt-0": {
+		"style": {
+			"paddingTop": 0
 		}
 	},
 	"text-center": {
@@ -452,6 +485,18 @@
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(254 243 199 / var(--tw-text-opacity))"
+		}
+	},
+	"text-indigo-50": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(238 242 255 / var(--tw-text-opacity))"
+		}
+	},
+	"text-black": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(0 0 0 / var(--tw-text-opacity))"
 		}
 	},
 	"text-violet-900": {

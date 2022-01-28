@@ -39,3 +39,12 @@ export const FETCH_EVENTS = gql`
         }
     }
 `;
+
+export const FETCH_LEADERBOARD = gql`
+    ${CLIENT_CRYPTOGOTCHI_FRAGMENT}
+    query FetchLeaderBoard($offset: Int!, $limit: Int!) {
+        leaderboard(offset: $offset, limit: $limit) {
+            ...ClientCryptogotchi
+        }
+    }
+`;

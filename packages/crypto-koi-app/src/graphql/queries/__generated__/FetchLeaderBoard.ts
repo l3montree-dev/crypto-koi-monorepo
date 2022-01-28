@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: ChangeCryptogotchiName
+// GraphQL query operation: FetchLeaderBoard
 // ====================================================
 
-export interface ChangeCryptogotchiName_changeCryptogotchiName {
+export interface FetchLeaderBoard_leaderboard {
   __typename: "Cryptogotchi";
   id: string;
   isAlive: boolean;
@@ -22,11 +22,11 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   snapshotValid: any;
 }
 
-export interface ChangeCryptogotchiName {
-  changeCryptogotchiName: ChangeCryptogotchiName_changeCryptogotchiName;
+export interface FetchLeaderBoard {
+  leaderboard: FetchLeaderBoard_leaderboard[];
 }
 
-export interface ChangeCryptogotchiNameVariables {
-  id: string;
-  name: string;
+export interface FetchLeaderBoardVariables {
+  offset: number;
+  limit: number;
 }

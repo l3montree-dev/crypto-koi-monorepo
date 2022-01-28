@@ -19,6 +19,7 @@ export interface Feed_feed {
   maxLifetimeMinutes: number;
   deathDate: any | null;
   nextFeeding: any;
+  snapshotValid: any;
 }
 
 export interface Feed {

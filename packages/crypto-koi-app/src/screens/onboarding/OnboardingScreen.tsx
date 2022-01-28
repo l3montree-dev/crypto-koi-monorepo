@@ -1,5 +1,5 @@
-import * as NavigationBar from "expo-navigation-bar";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import Constants from "expo-constants";
+import React, { useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
     Image,
@@ -22,11 +22,8 @@ import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../../components/AppButton";
 import Wave from "../../components/Wave";
 import { useFloating } from "../../hooks/useFloating";
-import { authService } from "../../services/AuthService";
 import { userService } from "../../services/UserService";
-import { Colors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
-import Constants from "expo-constants";
 
 const style = StyleSheet.create({
     slide: {
