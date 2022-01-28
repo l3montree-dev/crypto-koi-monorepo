@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { BlurView } from "expo-blur";
 import { observer } from "mobx-react-lite";
 import React from "react";
+import { useMemo } from "react";
 import {
     Animated as RNAnimated,
     Image,
@@ -92,6 +93,22 @@ const CryptogotchiView = observer((props: Props) => {
             //
         }
     };
+
+    const memoStyle = useMemo(
+        () => ({
+            contentContainerStyle: {
+                minHeight:
+                    DimensionUtils.deviceHeight -
+                    (currentUserIsOwner ? 36 : -39),
+                paddingBottom: 20,
+            },
+            wave: {
+                bottom: currentUserIsOwner ? 25 : 82,
+            },
+        }),
+        [currentUserIsOwner]
+    );
+
     return (
         <SafeAreaView style={tailwind("flex-1 bg-black flex-col")}>
             <Image
@@ -102,9 +119,7 @@ const CryptogotchiView = observer((props: Props) => {
             />
             <ScrollView
                 //style={tailwind("bg-slate-900")}
-                contentContainerStyle={{
-                    minHeight: DimensionUtils.deviceHeight - 36,
-                }}
+                contentContainerStyle={memoStyle.contentContainerStyle}
                 stickyHeaderIndices={[0]}
             >
                 {cryptogotchi && (
@@ -125,9 +140,12 @@ const CryptogotchiView = observer((props: Props) => {
                 )}
 
                 <View
-                    style={tailwind(
-                        "flex-row text-amber-500 absolute bottom-0 w-full h-44 justify-center"
-                    )}
+                    style={[
+                        tailwind(
+                            "flex-row text-amber-500 absolute w-full h-44 justify-center"
+                        ),
+                        memoStyle.wave,
+                    ]}
                 >
                     <Svg
                         style={tailwind("text-slate-900")}
@@ -179,22 +197,26 @@ const CryptogotchiView = observer((props: Props) => {
                         {cryptogotchi && (
                             <FriendTitle cryptogotchi={cryptogotchi} />
                         )}
-                        <View style={tailwind("rounded-lg overflow-hidden")}>
-                            <IconButton
-                                disabled={!cryptogotchi}
-                                onPress={() => {
-                                    if (!cryptogotchi) {
-                                        return;
-                                    }
-                                    navigate("FriendEditScreen", {
-                                        cryptogotchiId: cryptogotchi.id,
-                                        name: cryptogotchi.name || "",
-                                        isAlive: cryptogotchi.isAlive,
-                                    });
-                                }}
-                                name="dots-horizontal"
-                            />
-                        </View>
+                        {currentUserIsOwner && (
+                            <View
+                                style={tailwind("rounded-lg overflow-hidden")}
+                            >
+                                <IconButton
+                                    disabled={!cryptogotchi}
+                                    onPress={() => {
+                                        if (!cryptogotchi) {
+                                            return;
+                                        }
+                                        navigate("FriendEditScreen", {
+                                            cryptogotchiId: cryptogotchi.id,
+                                            name: cryptogotchi.name || "",
+                                            isAlive: cryptogotchi.isAlive,
+                                        });
+                                    }}
+                                    name="dots-horizontal"
+                                />
+                            </View>
+                        )}
                     </View>
 
                     {cryptogotchi && (
@@ -206,7 +228,7 @@ const CryptogotchiView = observer((props: Props) => {
                 </View>
             </ScrollView>
 
-            {cryptogotchi && (
+            {currentUserIsOwner && (
                 <View style={tailwind("bg-slate-900 pt-4 px-4 pb-2")}>
                     <NextFeedButton
                         disabled={!cryptogotchi.isAlive}

@@ -39,6 +39,21 @@
 			"left": -8
 		}
 	},
+	"bottom-10": {
+		"style": {
+			"bottom": 40
+		}
+	},
+	"bottom-16": {
+		"style": {
+			"bottom": 64
+		}
+	},
+	"bottom-24": {
+		"style": {
+			"bottom": 96
+		}
+	},
 	"z-10": {
 		"style": {
 			"zIndex": 10

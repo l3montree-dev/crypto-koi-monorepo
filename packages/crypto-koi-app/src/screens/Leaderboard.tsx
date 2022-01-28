@@ -215,6 +215,14 @@ function Leaderboard() {
     return (
         <SafeAreaView style={tailwind("flex-1 bg-slate-900 flex-col")}>
             <FlatList
+                onEndReached={() => {
+                    console.log("test");
+                    if (data) {
+                        fetchMore({
+                            variables: { offset: data.leaderboard.length },
+                        });
+                    }
+                }}
                 contentContainerStyle={tailwind("pt-0")}
                 renderItem={({ item, index }) => (
                     <LeaderboardItem index={index} key={item.id} {...item} />
