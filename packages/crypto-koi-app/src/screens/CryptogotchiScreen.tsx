@@ -27,7 +27,12 @@ const CryptogotchiScreen = observer(() => {
         return null;
     }
 
-    return <CryptogotchiView cryptogotchi={cryptogotchi} />;
+    return (
+        <CryptogotchiView
+            clockIdPrefix="cryptogotchi-screen"
+            cryptogotchi={cryptogotchi}
+        />
+    );
 });
 
 export default CryptogotchiScreen;

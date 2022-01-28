@@ -11,7 +11,12 @@ const FriendsScreen = observer(() => {
         return null;
     }
 
-    return <CryptogotchiView cryptogotchi={cryptogotchi} />;
+    return (
+        <CryptogotchiView
+            clockIdPrefix="friend-screen"
+            cryptogotchi={cryptogotchi}
+        />
+    );
 });
 
 export default FriendsScreen;

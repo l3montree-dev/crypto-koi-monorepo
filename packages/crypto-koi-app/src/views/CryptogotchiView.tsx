@@ -26,7 +26,7 @@ import useAppState from "../hooks/useAppState";
 import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
 import Cryptogotchi from "../mobx/Cryptogotchi";
-import { selectCurrentUser } from "../mobx/selectors";
+import { selectCurrentUser, selectFirstCryptogotchi } from "../mobx/selectors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -60,17 +60,23 @@ const style = StyleSheet.create({
 
 type Props = {
     cryptogotchi: Cryptogotchi;
+    clockIdPrefix: string;
 };
 
 const AnimatedEllipse = RNAnimated.createAnimatedComponent(Ellipse);
 
 const CryptogotchiView = observer((props: Props) => {
-    const { cryptogotchi } = props;
+    let { cryptogotchi } = props;
     const tailwind = useTailwind();
     const { translateX, translateY } = useFloating();
     const currentUser = useAppState(selectCurrentUser);
-
+    const cryptogotchiOfUser = useAppState(selectFirstCryptogotchi);
     const currentUserIsOwner = currentUser?.id === cryptogotchi.ownerId;
+    if (currentUserIsOwner && cryptogotchiOfUser) {
+        // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
+        // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
+        cryptogotchi = cryptogotchiOfUser;
+    }
 
     const [feed, { loading }] = useMutation<Feed, FeedVariables>(
         FEED_CRYPTOGOTCHI_MUTATION
@@ -86,6 +92,7 @@ const CryptogotchiView = observer((props: Props) => {
             if (!res.data) {
                 return;
             }
+
             cryptogotchi.setFromFragment(res.data.feed);
         } catch (e) {
             //
@@ -130,7 +137,12 @@ const CryptogotchiView = observer((props: Props) => {
                         >
                             <View>
                                 <Pressable onPress={handleFeed}>
-                                    <Lifetime cryptogotchi={cryptogotchi} />
+                                    <Lifetime
+                                        clockId={
+                                            props.clockIdPrefix + "-lifetime"
+                                        }
+                                        cryptogotchi={cryptogotchi}
+                                    />
                                 </Pressable>
                             </View>
                         </View>
@@ -219,7 +231,7 @@ const CryptogotchiView = observer((props: Props) => {
 
                     {cryptogotchi && (
                         <FriendInfo
-                            clockId="friend"
+                            clockId={props.clockIdPrefix + "-friend-info"}
                             cryptogotchi={cryptogotchi}
                         />
                     )}
@@ -231,6 +243,7 @@ const CryptogotchiView = observer((props: Props) => {
                     <NextFeedButton
                         disabled={!cryptogotchi.isAlive}
                         loading={loading}
+                        clockId={props.clockIdPrefix + "-next-feed-button"}
                         onPress={handleFeed}
                         cryptogotchi={cryptogotchi}
                     />

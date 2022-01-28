@@ -10,6 +10,7 @@ interface Props {
     onPress: () => void;
     loading: boolean;
     disabled: boolean;
+    clockId: string;
 }
 
 function NextFeedButton(props: Props) {
@@ -17,7 +18,7 @@ function NextFeedButton(props: Props) {
     const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
-        ticker.addTickHandler("feeding-button", () => {
+        ticker.addTickHandler(props.clockId, () => {
             const seconds = cryptogotchi.nextFeeding.diff(moment(), "seconds");
 
             // if seconds is negative - the date is in the past.
@@ -27,6 +28,9 @@ function NextFeedButton(props: Props) {
             }
             setSeconds(Config.secondsBetweenFeeding - seconds);
         });
+        return () => {
+            ticker.removeTickHandler(props.clockId);
+        };
     }, []);
     return (
         <ProgressButton

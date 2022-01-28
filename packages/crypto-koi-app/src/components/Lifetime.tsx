@@ -11,6 +11,7 @@ import TimeUtils from "../utils/TimeUtils";
 
 interface Props {
     cryptogotchi: Cryptogotchi;
+    clockId: string;
 }
 const Lifetime = observer((props: Props) => {
     const { cryptogotchi } = props;
@@ -18,14 +19,14 @@ const Lifetime = observer((props: Props) => {
     const [value, setValue] = useState(moment());
 
     useEffect(() => {
-        ticker.addTickHandler("lifetime", () => setValue(moment()));
-        return () => ticker.removeTickHandler("lifetime");
+        ticker.addTickHandler(props.clockId, () => setValue(moment()));
+        return () => ticker.removeTickHandler(props.clockId);
     }, []);
 
     const diffSeconds = cryptogotchi.foodEmptyDate.diff(value, "second");
     if (diffSeconds < 0) {
         // remove the ticker
-        ticker.removeTickHandler("lifetime");
+        ticker.removeTickHandler(props.clockId);
     }
 
     return (

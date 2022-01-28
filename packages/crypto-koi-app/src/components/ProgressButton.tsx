@@ -50,7 +50,9 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
             <View
                 style={[
                     { width: progress * 100 + "%" },
-                    tailwind("bg-amber-500 h-full absolute"),
+                    progress === 1
+                        ? tailwind("bg-amber-500 h-full absolute")
+                        : tailwind("bg-slate-800 h-full absolute"),
                 ]}
             />
             {props.loading ? (
