@@ -12,13 +12,14 @@
                 "buildConfiguration": "Debug"
             }
         },
-        "apk": {
+        "preview": {
+            "distribution": "internal",
             "android": {
                 "buildType": "apk"
+            },
+            "env": {
+                "API_URL": "https://api.tabito.io"
             }
-        },
-        "preview": {
-            "distribution": "internal"
         },
         "production": {}
     },
