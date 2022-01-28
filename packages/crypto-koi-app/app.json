@@ -1,12 +1,13 @@
 {
     "expo": {
         "name": "Tabito",
-        "slug": "Tabito",
+        "slug": "tabito",
         "version": "1.0.0",
         "sdkVersion": "44.0.0",
         "jsEngine": "hermes",
         "icon": "./assets/image/app-icon.png",
         "scheme": "tabito",
+        "owner": "l3montree",
         "platforms": [
             "ios",
             "android",
