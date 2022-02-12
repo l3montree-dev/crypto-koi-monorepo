@@ -13,7 +13,6 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   isAlive: boolean;
   name: string | null;
   food: number;
-  tokenId: string | null;
   createdAt: any;
   minutesTillDeath: number;
   maxLifetimeMinutes: number;

@@ -15,6 +15,7 @@ import { Colors } from "./styles/colors";
 import * as SplashScreen from "expo-splash-screen";
 import log from "./utils/logger";
 import { Platform, View } from "react-native";
+import { web3 } from "./web3/Web3";
 
 if (Platform.OS === "android") {
     NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
@@ -49,6 +50,7 @@ const App: FunctionComponent = () => {
                 }, 1000);
             }
         })();
+        console.log(web3.checkIfValidNFT("123"));
     }, []);
 
     return (

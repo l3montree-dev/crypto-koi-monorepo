@@ -11,7 +11,6 @@ export default class Cryptogotchi {
     public isAlive: boolean;
     public name: string | null;
     public food: number;
-    public tokenId: string | null;
     public createdAt: Moment;
     public ownerId: string;
     public gameStats: GameStat[] = [];
@@ -29,7 +28,6 @@ export default class Cryptogotchi {
         this.isAlive = fragment.isAlive;
         this.name = fragment.name;
         this.food = fragment.food;
-        this.tokenId = fragment.tokenId;
         this.createdAt = moment(fragment.createdAt);
         // this.gameStats = fragment.gameStats.map(gs => new GameStat(gs))
         // this.events = fragment.events.map(e => new Event(e))
@@ -46,7 +44,6 @@ export default class Cryptogotchi {
         this.isAlive = fragment.isAlive;
         this.name = fragment.name;
         this.food = fragment.food;
-        this.tokenId = fragment.tokenId;
         this.createdAt = moment(fragment.createdAt);
         // this.gameStats = fragment.gameStats.map(gs => new GameStat(gs))
         // this.events = fragment.events.map(e => new Event(e))

@@ -13,6 +13,7 @@ if (!new class { x }().hasOwnProperty('x')) console.error('Transpiler is not con
 
 if (Platform.OS !== 'web') {
     require('react-native-get-random-values');
+    require("@ethersproject/shims");
     LogBox.ignoreLogs(
         [
             "The provided value 'ms-stream' is not a valid 'responseType'.",

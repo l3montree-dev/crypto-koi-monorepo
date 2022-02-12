@@ -20,16 +20,16 @@ const FriendInfo = observer((props: Props) => {
             <View style={tailwind("flex-row items-center")}>
                 <Icon
                     style={
-                        cryptogotchi.tokenId
+                        cryptogotchi.id
                             ? tailwind("text-2xl text-amber-500")
                             : tailwind("text-2xl text-white opacity-50")
                     }
-                    name={cryptogotchi.tokenId ? "shield-check" : "shield-off"}
+                    name={cryptogotchi.id ? "shield-check" : "shield-off"}
                 />
                 <Text style={tailwind("text-white ml-2")}>
                     #
-                    {cryptogotchi.tokenId !== null
-                        ? cryptogotchi.tokenId + " (is valid NFT)"
+                    {cryptogotchi.id !== null
+                        ? cryptogotchi.id + " (is valid NFT)"
                         : cryptogotchi.getBase64Uuid + " (No NFT)"}
                 </Text>
             </View>

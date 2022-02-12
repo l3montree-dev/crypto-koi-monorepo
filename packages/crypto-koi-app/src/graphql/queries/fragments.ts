@@ -6,7 +6,6 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         isAlive
         name
         food
-        tokenId
         createdAt
         minutesTillDeath
         maxLifetimeMinutes

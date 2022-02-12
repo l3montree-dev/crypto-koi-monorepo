@@ -114,8 +114,7 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
                                 )}
                             >
                                 #
-                                {props.tokenId ??
-                                    Transformer.uuidToBase64(props.id)}
+                                {props.id ?? Transformer.uuidToBase64(props.id)}
                             </Text>
                             <View style={tailwind("flex-row flex-wrap")}>
                                 <View
@@ -131,14 +130,14 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
                                         <Icon
                                             style={[
                                                 tailwind("text-lg mr-1"),
-                                                props.tokenId
+                                                props.id
                                                     ? tailwind("text-amber-500")
                                                     : tailwind(
                                                           "text-white opacity-75"
                                                       ),
                                             ]}
                                             name={
-                                                props.tokenId
+                                                props.id
                                                     ? "shield"
                                                     : "shield-off"
                                             }
@@ -148,9 +147,7 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
                                                 "text-xs text-white opacity-75"
                                             )}
                                         >
-                                            {props.tokenId
-                                                ? "Valid NFT"
-                                                : "No NFT"}
+                                            {props.id ? "Valid NFT" : "No NFT"}
                                         </Text>
                                     </View>
                                 </View>

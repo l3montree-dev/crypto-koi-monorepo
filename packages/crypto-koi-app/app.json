@@ -1,12 +1,12 @@
 {
     "expo": {
-        "name": "Tabito",
-        "slug": "tabito",
+        "name": "CryptoKoi",
+        "slug": "cryptokoi",
         "version": "1.0.0",
         "sdkVersion": "44.0.0",
         "jsEngine": "hermes",
         "icon": "./assets/image/app-icon.png",
-        "scheme": "tabito",
+        "scheme": "cryptokoi",
         "owner": "l3montree",
         "platforms": [
             "ios",
@@ -14,7 +14,7 @@
             "web"
         ],
         "android": {
-            "package": "io.tabito"
+            "package": "io.cryptokoi"
         },
         "splash": {
             "image": "./assets/splash.png",
