@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { observer } from "mobx-react-lite";
 import moment from "moment";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import {
@@ -18,6 +19,7 @@ import Clock from "../components/Clock";
 import { FETCH_LEADERBOARD } from "../graphql/queries/cryptogotchi";
 import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
 import { useNavigation } from "../hooks/useNavigation";
+import { rootStore } from "../mobx/RootStore";
 import { ticker } from "../services/Ticker";
 import { android_ripple } from "../styles/commonStyles";
 import Transformer from "../utils/Transformer";
@@ -41,7 +43,7 @@ type Props = FetchLeaderBoard["leaderboard"][0] & {
     index: number;
 };
 
-const LeaderboardItem: FunctionComponent<Props> = (props) => {
+const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
     const tailwind = useTailwind();
 
     const { navigate } = useNavigation();
@@ -201,16 +203,21 @@ const LeaderboardItem: FunctionComponent<Props> = (props) => {
             </Animated.View>
         </Pressable>
     );
-};
+});
 
-function Leaderboard() {
+const Leaderboard = observer(() => {
     const tailwind = useTailwind();
     const { fetchMore, data } = useQuery<FetchLeaderBoard>(FETCH_LEADERBOARD, {
         variables: { offset: 0, limit: 20 },
     });
 
     return (
-        <SafeAreaView style={tailwind("flex-1 bg-slate-900 flex-col")}>
+        <SafeAreaView
+            style={[
+                tailwind("flex-1 flex-col"),
+                { backgroundColor: rootStore.backgroundColor },
+            ]}
+        >
             <FlatList
                 onEndReached={() => {
                     if (data) {
@@ -227,6 +234,6 @@ function Leaderboard() {
             />
         </SafeAreaView>
     );
-}
+});
 
 export default Leaderboard;

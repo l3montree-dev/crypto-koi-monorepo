@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -10,23 +10,21 @@ import Clock from "./Clock";
 interface Props {
     cryptogotchi: Cryptogotchi;
     clockId: string;
+    textColor: string;
 }
 
 const FriendInfo = observer((props: Props) => {
     const { cryptogotchi } = props;
     const tailwind = useTailwind();
+    const s = useMemo(() => ({ color: props.textColor }), [props.textColor]);
     return (
         <View>
             <View style={tailwind("flex-row items-center")}>
                 <Icon
-                    style={
-                        cryptogotchi.id
-                            ? tailwind("text-2xl text-amber-500")
-                            : tailwind("text-2xl text-white opacity-50")
-                    }
+                    style={[tailwind("text-2xl opacity-50"), s]}
                     name={cryptogotchi.id ? "shield-check" : "shield-off"}
                 />
-                <Text style={tailwind("text-white ml-2")}>
+                <Text style={[tailwind("ml-2"), s]}>
                     #
                     {cryptogotchi.id !== null
                         ? cryptogotchi.id + " (is valid NFT)"
@@ -35,18 +33,18 @@ const FriendInfo = observer((props: Props) => {
             </View>
             <View style={tailwind("flex-row items-center")}>
                 <Icon
-                    style={tailwind("text-2xl text-amber-500")}
+                    style={[tailwind("text-2xl opacity-50"), s]}
                     name="information-outline"
                 />
-                <Text style={tailwind("text-white ml-2")}>Age:</Text>
+                <Text style={[tailwind("ml-2"), s]}>Age:</Text>
                 {cryptogotchi.deathDate === null ? (
                     <Clock
                         id={props.clockId}
-                        style={tailwind("text-white ml-2")}
+                        style={tailwind("ml-2")}
                         date={cryptogotchi.createdAt}
                     />
                 ) : (
-                    <Text style={tailwind("text-white ml-2")}>
+                    <Text style={[tailwind("ml-2"), s]}>
                         {cryptogotchi.deathDateString} (died:{" "}
                         {cryptogotchi.deathDate.format("DD.MM.YYYY HH:mm")})
                     </Text>

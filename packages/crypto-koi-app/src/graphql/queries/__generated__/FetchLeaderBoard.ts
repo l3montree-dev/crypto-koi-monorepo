@@ -20,6 +20,7 @@ export interface FetchLeaderBoard_leaderboard {
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
+  color: string;
 }
 
 export interface FetchLeaderBoard {

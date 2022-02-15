@@ -4,31 +4,34 @@ import { useTailwind } from "tailwind-rn/dist";
 
 type Props = TextInputProps & {
     label: string;
+    textColor: string;
+    labelColor: string;
 };
-function Input(props: Props) {
+const Input = (props: Props) => {
     const tailwind = useTailwind();
     const textInputRef = useRef<TextInput>(null);
 
     const { label, style, ...rest } = props;
     return (
         <Pressable onPress={() => textInputRef.current?.focus()}>
-            <View style={tailwind("text-white rounded-lg py-3")}>
-                <Text style={tailwind("text-white opacity-75 mb-2")}>
+            <View style={tailwind("rounded-lg py-3")}>
+                <Text style={[tailwind("mb-2"), { color: props.labelColor }]}>
                     {label}
                 </Text>
 
                 <View style={[tailwind("rounded-lg"), style]}>
                     <TextInput
                         ref={textInputRef}
-                        style={tailwind(
-                            "text-lg text-white py-2 px-3 w-full text-white"
-                        )}
+                        style={[
+                            tailwind("text-lg py-2 px-3 w-full"),
+                            { color: props.textColor },
+                        ]}
                         {...rest}
                     />
                 </View>
             </View>
         </Pressable>
     );
-}
+};
 
 export default Input;

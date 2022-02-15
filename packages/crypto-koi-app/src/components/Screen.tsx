@@ -6,7 +6,9 @@ const style = StyleSheet.create({
         paddingTop: 10,
     },
 });
-const Screen: FunctionComponent<{ style: ViewStyle }> = (props) => {
+const Screen: FunctionComponent<{ style: ViewStyle | ViewStyle[] }> = (
+    props
+) => {
     return <View style={[style.container, props.style]}>{props.children}</View>;
 };
 

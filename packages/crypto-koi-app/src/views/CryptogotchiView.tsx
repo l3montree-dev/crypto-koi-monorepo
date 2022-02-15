@@ -20,12 +20,14 @@ import FriendTitle from "../components/FriendTitle";
 import IconButton from "../components/IconButton";
 import Lifetime from "../components/Lifetime";
 import NextFeedButton from "../components/NextFeedButton";
+import { Config } from "../config";
 import { FEED_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
 import { Feed, FeedVariables } from "../graphql/queries/__generated__/Feed";
 import useAppState from "../hooks/useAppState";
 import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
 import Cryptogotchi from "../mobx/Cryptogotchi";
+import RootStore from "../mobx/RootStore";
 import { selectCurrentUser, selectFirstCryptogotchi } from "../mobx/selectors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 
@@ -38,8 +40,8 @@ const style = StyleSheet.create({
         zIndex: 1,
     },
     dead: {
-        tintColor: "gray",
-        opacity: 0.8,
+        tintColor: "black",
+        opacity: 0.6,
     },
     ticker: {
         ...Platform.select({
@@ -114,14 +116,34 @@ const CryptogotchiView = observer((props: Props) => {
         [currentUserIsOwner]
     );
 
+    const {
+        primaryColor,
+        backgroundColor,
+        secondaryColor,
+        onBackground,
+        onSecondary,
+        buttonBackgroundColor,
+        buttonTextColor,
+        buttonProgressUnfilled,
+        buttonProgressFilled,
+        backgroundIsDark,
+    } = useMemo(() => {
+        return RootStore.calculateColorVariants(cryptogotchi.color);
+    }, [cryptogotchi.color]);
+
     return (
-        <SafeAreaView style={tailwind("flex-1 bg-black flex-col")}>
-            <Image
+        <SafeAreaView
+            style={[tailwind("flex-1 flex-col"), { backgroundColor }]}
+        >
+            <StatusBar
+                barStyle={backgroundIsDark ? "light-content" : "dark-content"}
+            />
+            {/*<Image
                 // style={tailwind("flex-1")}
                 resizeMode="cover"
                 style={style.bgImg}
                 source={require("../../assets/image/stars_back.png")}
-            />
+            />*/}
             <ScrollView
                 //style={tailwind("bg-slate-900")}
                 contentContainerStyle={memoStyle.contentContainerStyle}
@@ -138,6 +160,8 @@ const CryptogotchiView = observer((props: Props) => {
                             <View>
                                 <Pressable onPress={handleFeed}>
                                     <Lifetime
+                                        heartColor={primaryColor}
+                                        onBackgroundColor={onBackground}
                                         clockId={
                                             props.clockIdPrefix + "-lifetime"
                                         }
@@ -152,13 +176,13 @@ const CryptogotchiView = observer((props: Props) => {
                 <View
                     style={[
                         tailwind(
-                            "flex-row text-amber-500 absolute w-full h-44 justify-center"
+                            "flex-row absolute w-full h-44 justify-center"
                         ),
                         memoStyle.wave,
                     ]}
                 >
                     <Svg
-                        style={tailwind("text-slate-900")}
+                        style={{ color: secondaryColor } as any}
                         width={DimensionUtils.deviceWidth}
                         height={500}
                     >
@@ -179,10 +203,17 @@ const CryptogotchiView = observer((props: Props) => {
                         <Image
                             style={[
                                 style.img,
-                                !cryptogotchi?.isAlive && style.dead,
+                                !cryptogotchi.isAlive && style.dead,
                             ]}
                             resizeMode="contain"
-                            source={require("../../assets/image/cg-3.png")}
+                            source={{
+                                uri:
+                                    Config.imageUrl +
+                                    "/" +
+                                    cryptogotchi.id +
+                                    "?" +
+                                    Date.now(),
+                            }}
                         />
                     </RNAnimated.View>
                     <View style={tailwind("flex-row relative justify-center")}>
@@ -231,6 +262,7 @@ const CryptogotchiView = observer((props: Props) => {
 
                     {cryptogotchi && (
                         <FriendInfo
+                            textColor={onSecondary}
                             clockId={props.clockIdPrefix + "-friend-info"}
                             cryptogotchi={cryptogotchi}
                         />
@@ -239,8 +271,17 @@ const CryptogotchiView = observer((props: Props) => {
             </ScrollView>
 
             {currentUserIsOwner && (
-                <View style={tailwind("bg-slate-900 pt-4 px-4 pb-2")}>
+                <View
+                    style={[
+                        tailwind("pt-4 px-4 pb-2"),
+                        { backgroundColor: secondaryColor },
+                    ]}
+                >
                     <NextFeedButton
+                        buttonBackgroundColor={buttonBackgroundColor}
+                        buttonTextColor={buttonTextColor}
+                        buttonProgressUnfilled={buttonProgressUnfilled}
+                        buttonProgressFilled={buttonProgressFilled}
                         disabled={!cryptogotchi.isAlive}
                         loading={loading}
                         clockId={props.clockIdPrefix + "-next-feed-button"}

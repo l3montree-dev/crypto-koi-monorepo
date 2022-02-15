@@ -20,6 +20,7 @@ export default class Cryptogotchi {
     public nextFeeding: Moment;
     public snapshotValid: Moment;
     public maxLifetimeMinutes: number;
+    public color: string;
     constructor(fragment: ClientCryptogotchi) {
         makeAutoObservable(this);
 
@@ -37,6 +38,7 @@ export default class Cryptogotchi {
         this.snapshotValid = moment(fragment.snapshotValid);
         this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
         this.ownerId = fragment.ownerId;
+        this.color = fragment.color;
     }
 
     setFromFragment(fragment: ClientCryptogotchi) {
@@ -53,6 +55,7 @@ export default class Cryptogotchi {
         this.snapshotValid = moment(fragment.snapshotValid);
         this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
         this.ownerId = fragment.ownerId;
+        this.color = fragment.color;
     }
 
     setName(name: string | undefined | null) {

@@ -2,13 +2,11 @@ import { StyleSheet } from "react-native";
 
 export const commonStyles = StyleSheet.create({
     screenTitle: {
-        color: "white",
         fontSize: 25,
         fontWeight: "bold",
         textAlign: "center",
     },
     screenIcon: {
-        color: "rgba(255,255,255,0.5)",
         fontSize: 30,
     },
 });

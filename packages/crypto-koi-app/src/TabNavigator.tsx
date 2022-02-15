@@ -1,24 +1,26 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { observer } from "mobx-react-lite";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import LeaderboardNavigator from "./LeaderboardNavigator";
+import { rootStore } from "./mobx/RootStore";
 import FriendScreen from "./screens/FriendScreen";
-import { Colors } from "./styles/colors";
+import Leaderboard from "./screens/LeaderboardScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const style = {
-    backgroundColor: Colors.bgColorVariant,
     //borderTopWidth: 1,
     //borderTopColor: "rgba(255,255,255,0.2)",
     elevation: 0,
 };
-export function TabNavigator() {
+export const TabNavigator = observer(() => {
+    const backgroundColor = rootStore.tabBarColor;
     return (
         <Tab.Navigator
             shifting
             activeColor="white"
             inactiveColor={"rgba(255,255,255,0.5)"}
-            barStyle={style}
+            barStyle={[style, { backgroundColor }]}
         >
             <Tab.Screen
                 name="Friend"
@@ -35,7 +37,7 @@ export function TabNavigator() {
             />
             <Tab.Screen
                 name="Leaderboard"
-                component={LeaderboardNavigator}
+                component={Leaderboard}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
@@ -61,4 +63,4 @@ export function TabNavigator() {
             /> */}
         </Tab.Navigator>
     );
-}
+});

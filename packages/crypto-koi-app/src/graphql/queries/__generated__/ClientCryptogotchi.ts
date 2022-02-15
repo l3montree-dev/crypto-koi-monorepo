@@ -20,4 +20,5 @@ export interface ClientCryptogotchi {
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
+  color: string;
 }

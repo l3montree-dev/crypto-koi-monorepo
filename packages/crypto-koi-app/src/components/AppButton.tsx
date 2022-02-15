@@ -15,17 +15,21 @@ interface Props extends PressableProps {
     style?: StyleProp<ViewStyle>;
     title: string;
     loading?: boolean;
+    textColor: string;
+    backgroundColor: string;
 }
 
 export const AppButton: FunctionComponent<Props> = (props) => {
     const tailwind = useTailwind();
 
     const { title, ...rest } = props;
+
     return (
         <View
             style={[
                 props.disabled && tailwind("opacity-50"),
-                tailwind("rounded-lg bg-amber-500 overflow-hidden"),
+                tailwind("rounded-lg overflow-hidden"),
+                { backgroundColor: props.backgroundColor },
                 props.style,
             ]}
         >
@@ -36,7 +40,12 @@ export const AppButton: FunctionComponent<Props> = (props) => {
             ) : (
                 <Pressable android_ripple={android_ripple} {...rest}>
                     <View style={tailwind("px-5 py-4")}>
-                        <Text style={tailwind("text-white text-center")}>
+                        <Text
+                            style={[
+                                tailwind("text-center"),
+                                { color: props.textColor },
+                            ]}
+                        >
                             {title}
                         </Text>
                     </View>

@@ -41,7 +41,7 @@ const ComingSoon = () => {
 
 const Tab = createMaterialTopTabNavigator();
 
-function LeaderboardNavigator() {
+const LeaderboardNavigator = () => {
     const tailwind = useTailwind();
     /*const width = useSharedValue(100);
     const animatedProps = useAnimatedStyle(() => {
@@ -99,6 +99,6 @@ function LeaderboardNavigator() {
             </View>
         </>
     );
-}
+};
 
 export default LeaderboardNavigator;

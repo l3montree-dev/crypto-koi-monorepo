@@ -20,6 +20,7 @@ export interface Feed_feed {
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
+  color: string;
 }
 
 export interface Feed {

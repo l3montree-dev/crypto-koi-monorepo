@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 import { GetUser } from "../graphql/queries/__generated__/GetUser";
 import Cryptogotchi from "./Cryptogotchi";
 import User from "./User";

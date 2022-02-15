@@ -22,24 +22,12 @@
   top: 0px
 }
 
-.-bottom-20 {
-  bottom: -5rem
-}
-
 .-left-2 {
   left: -0.5rem
 }
 
-.bottom-10 {
-  bottom: 2.5rem
-}
-
-.bottom-16 {
-  bottom: 4rem
-}
-
-.bottom-24 {
-  bottom: 6rem
+.-bottom-20 {
+  bottom: -5rem
 }
 
 .z-10 {
@@ -102,8 +90,12 @@
   margin-bottom: 2.5rem
 }
 
-.mr-3 {
-  margin-right: 0.75rem
+.mb-0 {
+  margin-bottom: 0px
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem
 }
 
 .mr-1 {
@@ -128,14 +120,6 @@
 
 .ml-5 {
   margin-left: 1.25rem
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem
-}
-
-.mb-0 {
-  margin-bottom: 0px
 }
 
 .flex {
@@ -248,6 +232,16 @@
   background-color: rgb(0 0 0 / var(--tw-bg-opacity))
 }
 
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity))
+}
+
+.bg-red-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(127 29 29 / var(--tw-bg-opacity))
+}
+
 .bg-slate-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(148 163 184 / var(--tw-bg-opacity))
@@ -258,9 +252,9 @@
   background-color: rgb(226 232 240 / var(--tw-bg-opacity))
 }
 
-.bg-amber-400 {
+.bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(251 191 36 / var(--tw-bg-opacity))
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
 .p-2 {
@@ -360,10 +354,6 @@
   padding-bottom: 0.5rem
 }
 
-.pl-2 {
-  padding-left: 0.5rem
-}
-
 .text-center {
   text-align: center
 }
@@ -431,34 +421,19 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.text-slate-900 {
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity))
-}
-
-.text-slate-800 {
-  --tw-text-opacity: 1;
-  color: rgb(30 41 59 / var(--tw-text-opacity))
-}
-
-.text-slate-100 {
-  --tw-text-opacity: 1;
-  color: rgb(241 245 249 / var(--tw-text-opacity))
-}
-
-.text-slate-200 {
-  --tw-text-opacity: 1;
-  color: rgb(226 232 240 / var(--tw-text-opacity))
-}
-
-.text-slate-300 {
-  --tw-text-opacity: 1;
-  color: rgb(203 213 225 / var(--tw-text-opacity))
-}
-
 .text-slate-500 {
   --tw-text-opacity: 1;
   color: rgb(100 116 139 / var(--tw-text-opacity))
+}
+
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity))
+}
+
+.text-slate-900 {
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity))
 }
 
 .opacity-50 {

@@ -20,6 +20,7 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
+  color: string;
 }
 
 export interface ChangeCryptogotchiName {

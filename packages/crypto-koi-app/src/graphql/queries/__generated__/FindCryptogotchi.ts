@@ -20,6 +20,7 @@ export interface FindCryptogotchi_cryptogotchi {
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
+  color: string;
 }
 
 export interface FindCryptogotchi {

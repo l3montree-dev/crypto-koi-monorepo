@@ -1,8 +1,10 @@
 import { ApolloProvider } from "@apollo/client";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { FunctionComponent, useEffect } from "react";
+import { Platform, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
@@ -12,10 +14,7 @@ import RootStackNavigator from "./RootStackNavigator";
 import { apolloClient } from "./services/ApolloClient";
 import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
-import * as SplashScreen from "expo-splash-screen";
 import log from "./utils/logger";
-import { Platform, View } from "react-native";
-import { web3 } from "./web3/Web3";
 
 if (Platform.OS === "android") {
     NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
@@ -33,7 +32,7 @@ const Theme = {
     },
 };
 
-const containerStyle = { flex: 1, backgroundColor: Colors.bgColor };
+const containerStyle = { flex: 1, backgroundColor: "red" };
 
 const App: FunctionComponent = () => {
     useEffect(() => {
@@ -50,7 +49,6 @@ const App: FunctionComponent = () => {
                 }, 1000);
             }
         })();
-        console.log(web3.checkIfValidNFT("123"));
     }, []);
 
     return (

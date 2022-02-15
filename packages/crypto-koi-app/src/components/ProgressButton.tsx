@@ -2,12 +2,10 @@ import React, { FunctionComponent } from "react";
 import {
     ActivityIndicator,
     GestureResponderEvent,
-    StyleSheet,
-} from "react-native";
-import {
     Pressable,
     PressableProps,
     StyleProp,
+    StyleSheet,
     Text,
     View,
     ViewStyle,
@@ -21,6 +19,10 @@ interface Props extends PressableProps {
     // value between 0 and 1
     progress: number;
     loading?: boolean;
+    buttonProgressUnfilled: string;
+    buttonProgressFilled: string;
+    buttonBackgroundColor: string;
+    buttonTextColor: string;
 }
 
 const style = StyleSheet.create({
@@ -39,20 +41,26 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
         }
         props.onPress && props.onPress(ev);
     };
+
     return (
         <View
             style={[
                 props.disabled && tailwind("opacity-50"),
-                tailwind("rounded-lg flex-row bg-slate-700 overflow-hidden"),
+                tailwind("rounded-lg flex-row overflow-hidden"),
+                { backgroundColor: props.buttonProgressUnfilled },
                 props.style,
             ]}
         >
             <View
                 style={[
                     { width: progress * 100 + "%" },
-                    progress === 1
-                        ? tailwind("bg-amber-500 h-full absolute")
-                        : tailwind("bg-slate-800 h-full absolute"),
+                    tailwind("h-full absolute"),
+                    {
+                        backgroundColor:
+                            progress === 1
+                                ? props.buttonBackgroundColor
+                                : props.buttonProgressFilled,
+                    },
                 ]}
             />
             {props.loading ? (
@@ -72,7 +80,12 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
                     onPress={handlePress}
                 >
                     <View style={tailwind("px-5 w-full py-4")}>
-                        <Text style={tailwind("text-white text-center")}>
+                        <Text
+                            style={[
+                                tailwind("text-center"),
+                                { color: props.buttonTextColor },
+                            ]}
+                        >
                             {title}
                         </Text>
                     </View>

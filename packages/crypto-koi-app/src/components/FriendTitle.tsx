@@ -14,7 +14,7 @@ const FriendTitle = observer((props: Props) => {
     return (
         <View style={tailwind("flex-row")}>
             <Text style={tailwind("text-3xl font-bold text-white")}>
-                {cryptogotchi.name}
+                Kohaku
             </Text>
             {!cryptogotchi?.isAlive && (
                 <Icon

@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
-import { useTailwind } from "tailwind-rn/dist";
 import { observer } from "mobx-react-lite";
-import Cryptogotchi from "../mobx/Cryptogotchi";
-import CircularProgress from "./CircularProgress";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTailwind } from "tailwind-rn/dist";
+import Cryptogotchi from "../mobx/Cryptogotchi";
 import { ticker } from "../services/Ticker";
 import TimeUtils from "../utils/TimeUtils";
+import CircularProgress from "./CircularProgress";
 
 interface Props {
     cryptogotchi: Cryptogotchi;
     clockId: string;
+    heartColor: string;
+    onBackgroundColor: string;
 }
 const Lifetime = observer((props: Props) => {
     const { cryptogotchi } = props;
@@ -36,11 +38,9 @@ const Lifetime = observer((props: Props) => {
                     0,
                     diffSeconds / (cryptogotchi.maxLifetimeMinutes * 60)
                 )}
-                backgroundStrokeColor={
-                    tailwind("text-amber-100").color as string
-                }
+                backgroundStrokeColor={props.onBackgroundColor}
                 radius={25}
-                svgStyle={tailwind("text-amber-500")}
+                svgStyle={{ color: props.heartColor } as any}
                 strokeWidth={6}
             >
                 <View
@@ -49,12 +49,20 @@ const Lifetime = observer((props: Props) => {
                     )}
                 >
                     <Icon
-                        style={tailwind("text-amber-500 text-2xl")}
+                        style={[
+                            tailwind("text-2xl"),
+                            { color: props.heartColor },
+                        ]}
                         name="heart"
                     />
                 </View>
             </CircularProgress>
-            <Text style={tailwind("text-white text-xs mt-1")}>
+            <Text
+                style={[
+                    tailwind("text-xs mt-1"),
+                    { color: props.onBackgroundColor },
+                ]}
+            >
                 {diffSeconds < 0
                     ? "0h 0m 0s"
                     : TimeUtils.getTimeString(

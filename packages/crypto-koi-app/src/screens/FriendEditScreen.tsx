@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-raw-text */
 import { useMutation, useQuery } from "@apollo/client";
+import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
 import React, { FunctionComponent } from "react";
@@ -26,6 +27,7 @@ import {
 } from "../graphql/queries/__generated__/FetchEvents";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
+import { rootStore } from "../mobx/RootStore";
 import { selectFirstCryptogotchi } from "../mobx/selectors";
 import log from "../utils/logger";
 
@@ -55,54 +57,68 @@ interface EventItemContainerProps {
     isFirst?: boolean;
 }
 
-const EventItemContainer: FunctionComponent<EventItemContainerProps> = (
-    props
-) => {
-    const tailwind = useTailwind();
-    return (
-        <View style={tailwind("pr-4 pl-3")}>
-            <View style={[style.border, props.isFirst && style.firstItem]} />
-            <View style={tailwind("mb-4")}>
-                <View style={tailwind("flex-row items-center")}>
-                    <View style={tailwind("bg-slate-900 rounded-full p-1")}>
+const EventItemContainer: FunctionComponent<EventItemContainerProps> = observer(
+    (props) => {
+        const tailwind = useTailwind();
+        return (
+            <View style={tailwind("pr-4 pl-3")}>
+                <View
+                    style={[style.border, props.isFirst && style.firstItem]}
+                />
+                <View style={tailwind("mb-4")}>
+                    <View style={tailwind("flex-row items-center")}>
                         <View
                             style={[
-                                style.circle,
-                                tailwind(
-                                    "border-2 mr-2 w-10 h-10 flex-row justify-center items-center rounded-full"
-                                ),
+                                tailwind("rounded-full p-1"),
+                                { backgroundColor: rootStore.secondaryColor },
                             ]}
                         >
-                            <Icon
-                                style={tailwind(
-                                    "text-white opacity-50 text-lg"
-                                )}
-                                name={props.iconName}
-                            />
+                            <View
+                                style={[
+                                    style.circle,
+                                    tailwind(
+                                        "border-2 mr-2 w-10 h-10 flex-row justify-center items-center rounded-full"
+                                    ),
+                                ]}
+                            >
+                                <Icon
+                                    style={[
+                                        { color: rootStore.onSecondary },
+                                        tailwind("opacity-75 text-lg"),
+                                    ]}
+                                    name={props.iconName}
+                                />
+                            </View>
                         </View>
-                    </View>
-                    <View
-                        style={tailwind("bg-slate-800 flex-1 p-3 rounded-lg")}
-                    >
-                        <View style={tailwind("mb-3")}>
-                            <Text style={tailwind("text-white")}>
-                                {props.text}
+                        <View
+                            style={[
+                                { backgroundColor: rootStore.backgroundColor },
+                                tailwind("flex-1 p-3 rounded-lg"),
+                            ]}
+                        >
+                            <View style={tailwind("mb-3")}>
+                                <Text style={{ color: rootStore.onBackground }}>
+                                    {props.text}
+                                </Text>
+                            </View>
+
+                            <Text
+                                style={[
+                                    { color: rootStore.onBackground },
+                                    tailwind("text-right text-xs opacity-50"),
+                                ]}
+                            >
+                                {moment(props.date).format(
+                                    "DD.MM.YYYY HH:mm:ss"
+                                )}
                             </Text>
                         </View>
-
-                        <Text
-                            style={tailwind(
-                                "text-white text-right text-xs opacity-50"
-                            )}
-                        >
-                            {moment(props.date).format("DD.MM.YYYY HH:mm:ss")}
-                        </Text>
                     </View>
                 </View>
             </View>
-        </View>
-    );
-};
+        );
+    }
+);
 const EventItem: FunctionComponent<Props> = (props) => {
     return (
         <Animated.View entering={FadeIn.delay((props.index % 20) * 100)}>
@@ -149,7 +165,13 @@ const FriendEditModal = observer(() => {
     }
 
     return (
-        <Screen style={tailwind("flex-1 bg-slate-900")}>
+        <Screen
+            style={[
+                tailwind("flex-1"),
+                { backgroundColor: rootStore.secondaryColor },
+            ]}
+        >
+            <StatusBar style={rootStore.secondaryIsDark ? "light" : "dark"} />
             <View style={tailwind("flex-1")}>
                 <FlatList
                     onEndReachedThreshold={0.5}
@@ -176,18 +198,27 @@ const FriendEditModal = observer(() => {
                         <View style={tailwind("px-4")}>
                             <View style={tailwind("rounded-lg mb-6")}>
                                 <FriendInfo
+                                    textColor={rootStore.onBackground}
                                     clockId={"friend-edit"}
                                     cryptogotchi={cryptogotchi}
                                 />
                             </View>
                             <Input
                                 label="Change Name"
-                                style={tailwind("bg-slate-600 mb-10")}
+                                textColor={rootStore.buttonTextColor}
+                                labelColor={rootStore.onSecondary}
+                                style={[
+                                    tailwind("mb-10"),
+                                    {
+                                        backgroundColor:
+                                            rootStore.buttonBackgroundColor,
+                                    },
+                                ]}
                                 {...name}
                                 selectTextOnFocus
                             />
                             <View style={tailwind("mb-4")}>
-                                <Text style={tailwind("text-white")}>
+                                <Text style={{ color: rootStore.onSecondary }}>
                                     Events
                                 </Text>
                             </View>
@@ -204,9 +235,16 @@ const FriendEditModal = observer(() => {
                     )}
                 />
             </View>
-            <View style={tailwind("p-4 flex-row bg-slate-900")}>
+            <View
+                style={[
+                    tailwind("p-4 flex-row"),
+                    { backgroundColor: rootStore.secondaryColor },
+                ]}
+            >
                 <View style={tailwind("flex-1 mr-2")}>
                     <AppButton
+                        backgroundColor={rootStore.buttonBackgroundColor}
+                        textColor={rootStore.buttonTextColor}
                         disabled={!cryptogotchi.isAlive}
                         style={tailwind("w-full")}
                         title="Make NFT"
@@ -215,6 +253,8 @@ const FriendEditModal = observer(() => {
 
                 <View style={tailwind("flex-1 ml-2")}>
                     <AppButton
+                        backgroundColor={rootStore.buttonBackgroundColor}
+                        textColor={rootStore.buttonTextColor}
                         loading={loading && !error}
                         onPress={onNameSave}
                         disabled={!cryptogotchi.isAlive}

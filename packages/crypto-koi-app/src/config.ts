@@ -1,6 +1,7 @@
 import Constants from "expo-constants";
 
 export const Config = {
+    imageUrl: "http://192.168.2.133:8080/images",
     restApiBaseUrl:
         // Constants?.manifest?.extra?.API_URL ??
         "http://192.168.2.133:8080/",

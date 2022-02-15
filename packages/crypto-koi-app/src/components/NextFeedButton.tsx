@@ -11,6 +11,10 @@ interface Props {
     loading: boolean;
     disabled: boolean;
     clockId: string;
+    buttonProgressUnfilled: string;
+    buttonProgressFilled: string;
+    buttonBackgroundColor: string;
+    buttonTextColor: string;
 }
 
 function NextFeedButton(props: Props) {
@@ -46,6 +50,7 @@ function NextFeedButton(props: Props) {
             progress={
                 seconds === -1 ? 1 : seconds / Config.secondsBetweenFeeding
             }
+            {...props}
             disabled={disabled}
             loading={loading}
             onPress={onPress}
