@@ -305,7 +305,12 @@ function OnboardingScreen() {
                                 him unique by putting him in an NFT
                             </Text>
                             <View style={tailwind("mt-5")}>
-                                <AppButton onPress={onPlayPress} title="Play" />
+                                <AppButton
+                                    backgroundColor="red"
+                                    textColor="white"
+                                    onPress={onPlayPress}
+                                    title="Play"
+                                />
                             </View>
                         </Animated.View>
                     )}
