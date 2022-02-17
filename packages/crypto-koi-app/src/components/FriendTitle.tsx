@@ -7,14 +7,20 @@ import Cryptogotchi from "../mobx/Cryptogotchi";
 
 interface Props {
     cryptogotchi: Cryptogotchi;
+    textColor: string;
 }
 const FriendTitle = observer((props: Props) => {
     const { cryptogotchi } = props;
     const tailwind = useTailwind();
     return (
         <View style={tailwind("flex-row")}>
-            <Text style={tailwind("text-3xl font-bold text-white")}>
-                Kohaku
+            <Text
+                style={[
+                    tailwind("text-3xl font-bold text-white"),
+                    { color: props.textColor },
+                ]}
+            >
+                {cryptogotchi.name}
             </Text>
             {!cryptogotchi?.isAlive && (
                 <Icon

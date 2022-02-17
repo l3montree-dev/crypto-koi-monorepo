@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { useTailwind } from "tailwind-rn/dist";
 import Cryptogotchi from "../mobx/Cryptogotchi";
+import Transformer from "../utils/Transformer";
 import Clock from "./Clock";
 
 interface Props {
@@ -27,7 +28,8 @@ const FriendInfo = observer((props: Props) => {
                 <Text style={[tailwind("ml-2"), s]}>
                     #
                     {cryptogotchi.id !== null
-                        ? cryptogotchi.id + " (is valid NFT)"
+                        ? Transformer.uuidToBase64(cryptogotchi.id) +
+                          " (is valid NFT)"
                         : cryptogotchi.getBase64Uuid + " (No NFT)"}
                 </Text>
             </View>
@@ -40,7 +42,7 @@ const FriendInfo = observer((props: Props) => {
                 {cryptogotchi.deathDate === null ? (
                     <Clock
                         id={props.clockId}
-                        style={tailwind("ml-2")}
+                        style={[tailwind("ml-2"), { color: props.textColor }]}
                         date={cryptogotchi.createdAt}
                     />
                 ) : (

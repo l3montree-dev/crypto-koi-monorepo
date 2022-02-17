@@ -7,6 +7,7 @@ import {
     Image,
     Pressable,
     SafeAreaView,
+    StatusBar,
     StyleSheet,
     Text,
     View,
@@ -16,12 +17,13 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import CircularProgress from "../components/CircularProgress";
 import Clock from "../components/Clock";
+import { Config } from "../config";
 import { FETCH_LEADERBOARD } from "../graphql/queries/cryptogotchi";
 import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
 import { useNavigation } from "../hooks/useNavigation";
 import { rootStore } from "../mobx/RootStore";
 import { ticker } from "../services/Ticker";
-import { android_ripple } from "../styles/commonStyles";
+import { android_ripple, commonStyles } from "../styles/commonStyles";
 import Transformer from "../utils/Transformer";
 
 const style = StyleSheet.create({
@@ -35,7 +37,10 @@ const style = StyleSheet.create({
     },
     wrapper: {
         borderBottomWidth: 1,
-        borderBottomColor: "rgba(255,255,255,0.2)",
+        borderBottomColor: "rgba(0,0,0,0.2)",
+    },
+    header: {
+        paddingTop: StatusBar.currentHeight ?? 0 + 5,
     },
 });
 
@@ -85,11 +90,16 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                 >
                     <View style={tailwind("flex-row items-center")}>
                         <View
-                            style={tailwind(
-                                "absolute -left-2 bg-slate-800 bottom-0 z-10 px-1 rounded-full"
-                            )}
+                            style={[
+                                {
+                                    backgroundColor: rootStore.secondaryColor,
+                                },
+                                tailwind(
+                                    "absolute -left-2 bottom-0 z-10 px-1 rounded-full"
+                                ),
+                            ]}
                         >
-                            <Text style={tailwind("text-white opacity-75")}>
+                            <Text style={{ color: rootStore.onSecondary }}>
                                 {props.index + 1}.
                             </Text>
                         </View>
@@ -103,20 +113,27 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                             <Image
                                 style={style.img}
                                 resizeMode="cover"
-                                source={require("../../assets/image/cg-3.png")}
+                                source={{
+                                    uri: Config.thumbnailUrl + "/" + props.id,
+                                }}
                             />
                         </View>
                         <View style={tailwind("ml-2")}>
-                            <Text style={tailwind("text-white mb-0")}>
+                            <Text
+                                style={[
+                                    tailwind("mb-0"),
+                                    { color: rootStore.onBackground },
+                                ]}
+                            >
                                 {props.name}
                             </Text>
                             <Text
-                                style={tailwind(
-                                    "opacity-75 text-slate-500 mb-1"
-                                )}
+                                style={[
+                                    { color: rootStore.onBackground },
+                                    tailwind("opacity-75 text-xs mb-1"),
+                                ]}
                             >
-                                #
-                                {props.id ?? Transformer.uuidToBase64(props.id)}
+                                #{Transformer.uuidToBase64(props.id)}
                             </Text>
                             <View style={tailwind("flex-row flex-wrap")}>
                                 <View
@@ -125,18 +142,23 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                     )}
                                 >
                                     <View
-                                        style={tailwind(
-                                            "bg-slate-800 flex-row items-center px-2 rounded-full"
-                                        )}
+                                        style={[
+                                            {
+                                                backgroundColor:
+                                                    rootStore.secondaryColor,
+                                            },
+                                            tailwind(
+                                                "flex-row items-center px-2 rounded-full"
+                                            ),
+                                        ]}
                                     >
                                         <Icon
                                             style={[
                                                 tailwind("text-lg mr-1"),
-                                                props.id
-                                                    ? tailwind("text-amber-500")
-                                                    : tailwind(
-                                                          "text-white opacity-75"
-                                                      ),
+                                                {
+                                                    color:
+                                                        rootStore.onSecondary,
+                                                },
                                             ]}
                                             name={
                                                 props.id
@@ -145,30 +167,43 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                             }
                                         />
                                         <Text
-                                            style={tailwind(
-                                                "text-xs text-white opacity-75"
-                                            )}
+                                            style={[
+                                                {
+                                                    color:
+                                                        rootStore.onSecondary,
+                                                },
+                                                tailwind("text-xs"),
+                                            ]}
                                         >
                                             {props.id ? "Valid NFT" : "No NFT"}
                                         </Text>
                                     </View>
                                 </View>
                                 <View
-                                    style={tailwind(
-                                        "flex-row bg-slate-800 rounded-full px-2 items-center"
-                                    )}
+                                    style={[
+                                        {
+                                            backgroundColor:
+                                                rootStore.secondaryColor,
+                                        },
+                                        tailwind(
+                                            "flex-row rounded-full px-2 items-center"
+                                        ),
+                                    ]}
                                 >
                                     <Icon
-                                        style={tailwind(
-                                            "text-xl mr-2 text-amber-500"
-                                        )}
+                                        style={[
+                                            tailwind("text-xl mr-2"),
+                                            {
+                                                color: rootStore.onSecondary,
+                                            },
+                                        ]}
                                         name="information-outline"
                                     />
 
                                     <Clock
-                                        style={tailwind(
-                                            "text-white opacity-75"
-                                        )}
+                                        style={{
+                                            color: rootStore.onSecondary,
+                                        }}
                                         id={props.id}
                                         date={props.createdAt}
                                     />
@@ -182,10 +217,12 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                 0,
                                 diffSeconds / (props.maxLifetimeMinutes * 60)
                             )}
-                            backgroundStrokeColor={"rgba(255,255,255,0.2)"}
+                            backgroundStrokeColor={rootStore.onBackground}
                             radius={15}
-                            svgStyle={tailwind("text-amber-500")}
-                            strokeWidth={2}
+                            svgStyle={
+                                { color: rootStore.secondaryColor } as any
+                            }
+                            strokeWidth={3}
                         >
                             <View
                                 style={tailwind(
@@ -193,7 +230,12 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                 )}
                             >
                                 <Icon
-                                    style={tailwind("text-amber-500 text-lg")}
+                                    style={[
+                                        tailwind("text-lg"),
+                                        {
+                                            color: rootStore.secondaryColor,
+                                        },
+                                    ]}
                                     name="heart"
                                 />
                             </View>
@@ -218,6 +260,28 @@ const Leaderboard = observer(() => {
                 { backgroundColor: rootStore.backgroundColor },
             ]}
         >
+            <StatusBar
+                barStyle={
+                    rootStore.secondaryIsDark ? "light-content" : "dark-content"
+                }
+            />
+            <View
+                style={[
+                    tailwind("px-4 pb-3"),
+                    style.header,
+                    { backgroundColor: rootStore.secondaryColor },
+                ]}
+            >
+                <Text
+                    style={[
+                        commonStyles.screenTitle,
+                        tailwind("pt-1"),
+                        { color: rootStore.onSecondary },
+                    ]}
+                >
+                    Leaderboard
+                </Text>
+            </View>
             <FlatList
                 onEndReached={() => {
                     if (data) {

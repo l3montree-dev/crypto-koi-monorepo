@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { BlurView } from "expo-blur";
 import { observer } from "mobx-react-lite";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
     Animated as RNAnimated,
     Image,
@@ -13,6 +13,7 @@ import {
     StyleSheet,
     View,
 } from "react-native";
+import * as NavigationBar from "expo-navigation-bar";
 import Svg, { Ellipse } from "react-native-svg";
 import { useTailwind } from "tailwind-rn/dist";
 import FriendInfo from "../components/FriendInfo";
@@ -27,7 +28,7 @@ import useAppState from "../hooks/useAppState";
 import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
 import Cryptogotchi from "../mobx/Cryptogotchi";
-import RootStore from "../mobx/RootStore";
+import RootStore, { rootStore } from "../mobx/RootStore";
 import { selectCurrentUser, selectFirstCryptogotchi } from "../mobx/selectors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 
@@ -40,8 +41,8 @@ const style = StyleSheet.create({
         zIndex: 1,
     },
     dead: {
-        tintColor: "black",
-        opacity: 0.6,
+        // tintColor: "black",
+        // opacity: 0.6,
     },
     ticker: {
         ...Platform.select({
@@ -130,6 +131,14 @@ const CryptogotchiView = observer((props: Props) => {
     } = useMemo(() => {
         return RootStore.calculateColorVariants(cryptogotchi.color);
     }, [cryptogotchi.color]);
+
+    useEffect(() => {
+        NavigationBar.setBackgroundColorAsync(secondaryColor);
+        return () => {
+            // reset to the users secondary color
+            NavigationBar.setBackgroundColorAsync(rootStore.secondaryColor);
+        };
+    }, [secondaryColor]);
 
     return (
         <SafeAreaView
@@ -236,7 +245,10 @@ const CryptogotchiView = observer((props: Props) => {
                 <View style={tailwind("flex-col mx-4 justify-end")}>
                     <View style={tailwind("flex-row justify-between")}>
                         {cryptogotchi && (
-                            <FriendTitle cryptogotchi={cryptogotchi} />
+                            <FriendTitle
+                                textColor={onSecondary}
+                                cryptogotchi={cryptogotchi}
+                            />
                         )}
                         {currentUserIsOwner && (
                             <View

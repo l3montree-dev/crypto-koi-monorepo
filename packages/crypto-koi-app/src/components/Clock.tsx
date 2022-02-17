@@ -5,7 +5,7 @@ import { ticker } from "../services/Ticker";
 import TimeUtils from "../utils/TimeUtils";
 
 interface Props {
-    style?: TextStyle;
+    style?: TextStyle | TextStyle[];
     date: Moment;
     id: string;
 }

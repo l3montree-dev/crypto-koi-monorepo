@@ -25,7 +25,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
     const commonNavigationOptions: NativeStackNavigationOptions = useMemo(
         () => ({
             headerShadowVisible: false,
-            headerTintColor: rootStore.onSecondary,
+            headerTintColor: rootStore.onBackground,
             headerStyle: {
                 backgroundColor: rootStore.secondaryColor,
             },

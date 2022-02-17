@@ -198,7 +198,7 @@ const FriendEditModal = observer(() => {
                         <View style={tailwind("px-4")}>
                             <View style={tailwind("rounded-lg mb-6")}>
                                 <FriendInfo
-                                    textColor={rootStore.onBackground}
+                                    textColor={rootStore.onSecondary}
                                     clockId={"friend-edit"}
                                     cryptogotchi={cryptogotchi}
                                 />

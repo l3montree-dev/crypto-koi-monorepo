@@ -4,15 +4,18 @@ import tinycolor from "tinycolor2";
 import { Colors } from "../styles/colors";
 import AuthStore from "./AuthStore";
 
+const getBestTextColor = (c: string): string => {
+    return tinycolor(c).isDark() ? "#ffffff" : "#000000";
+};
 /**
  * The mobx root store of the application
  */
 export default class RootStore {
     authStore: AuthStore;
 
-    primaryColor = "#fffff";
-    secondaryColor = "#fffff";
-    backgroundColor = "#fffff";
+    primaryColor = "#ffffff";
+    secondaryColor = "#ffffff";
+    backgroundColor = "#ffffff";
     onSecondary = "#000000";
     onBackground = "#000000";
     buttonTextColor = "#000000";
@@ -29,12 +32,14 @@ export default class RootStore {
     static calculateColorVariants(base: string) {
         const obj = tinycolor(base);
         if (obj.isDark()) {
+            const secondaryColor = obj.clone().darken(10).toString();
+            const backgroundColor = obj.clone().brighten(50).toString();
             return {
                 primaryColor: base,
-                secondaryColor: obj.clone().darken(10).toString(),
-                backgroundColor: obj.clone().brighten(50).toString(),
-                onSecondary: "#ffffff",
-                onBackground: "#000000",
+                secondaryColor,
+                backgroundColor,
+                onSecondary: getBestTextColor(secondaryColor),
+                onBackground: getBestTextColor(backgroundColor),
                 buttonTextColor: "#000000",
                 buttonBackgroundColor: "#ffffff",
                 buttonProgressFilled: "rgba(255,255,255,0.6)",
@@ -43,12 +48,14 @@ export default class RootStore {
                 backgroundIsDark: obj.clone().lighten(50).isDark(),
             };
         }
+        const secondaryColor = obj.clone().darken(10).toString();
+        const backgroundColor = obj.clone().brighten(50).toString();
         return {
             primaryColor: base,
-            secondaryColor: obj.clone().darken(20).toString(),
-            backgroundColor: obj.clone().lighten(30).toString(),
-            onBackground: "#ffffff",
-            onSecondary: "#000000",
+            secondaryColor,
+            backgroundColor,
+            onBackground: getBestTextColor(backgroundColor),
+            onSecondary: getBestTextColor(secondaryColor),
             buttonTextColor: "#ffffff",
             buttonBackgroundColor: "#000000",
             buttonProgressFilled: "rgba(0,0,0,0.5)",
