@@ -45,7 +45,7 @@ const style = StyleSheet.create({
         zIndex: 1,
     },
     dead: {
-        tintColor: "black",
+        // tintColor: "black",
         opacity: 0.6,
     },
     ticker: {

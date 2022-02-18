@@ -273,7 +273,7 @@ const Leaderboard = observer(() => {
                 style={[
                     tailwind("px-4 pb-3"),
                     style.header,
-                    { backgroundColor: themeStore.secondaryColor },
+                    { backgroundColor: themeStore.backgroundColor },
                 ]}
             >
                 <Text

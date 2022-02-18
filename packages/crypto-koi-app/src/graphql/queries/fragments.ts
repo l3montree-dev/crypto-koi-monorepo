@@ -25,3 +25,11 @@ export const CLIENT_EVENT_FRAGMENT = gql`
         createdAt
     }
 `;
+
+export const CLIENT_NFT_DATA = gql`
+    fragment ClientNftData on NftData {
+        signature
+        address
+        tokenId
+    }
+`;

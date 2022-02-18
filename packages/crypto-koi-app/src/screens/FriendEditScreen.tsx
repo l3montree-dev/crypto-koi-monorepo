@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -15,6 +15,7 @@ import Screen from "../components/Screen";
 import {
     CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
     FETCH_EVENTS,
+    GET_NFT_SIGNATURE,
 } from "../graphql/queries/cryptogotchi";
 import {
     ChangeCryptogotchiName,
@@ -25,6 +26,10 @@ import {
     FetchEvents,
     FetchEventsVariables,
 } from "../graphql/queries/__generated__/FetchEvents";
+import {
+    GetNftSignature,
+    GetNftSignatureVariables,
+} from "../graphql/queries/__generated__/GetNftSignature";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
 import { selectFirstCryptogotchi, selectThemeStore } from "../mobx/selectors";
@@ -156,9 +161,23 @@ const FriendEditModal = observer(() => {
         variables: { id: cryptogotchi?.id ?? "", offset: 0, limit: 20 },
     });
 
+    const [getNftSignature] = useMutation<
+        GetNftSignature,
+        GetNftSignatureVariables
+    >(GET_NFT_SIGNATURE);
+
     const themeStore = useAppState(selectThemeStore);
 
-    const onNameSave = async () => {
+    const handleMakeNft = async () => {
+        if (!cryptogotchi) {
+            return;
+        }
+        const result = await getNftSignature({
+            variables: { id: cryptogotchi.id, address: "0x0" },
+        });
+        console.log(result);
+    };
+    const handleNameSave = async () => {
         if (!cryptogotchi) {
             log.error("No cryptogotchi to save");
             return;
@@ -252,6 +271,7 @@ const FriendEditModal = observer(() => {
             >
                 <View style={tailwind("flex-1 mr-2")}>
                     <AppButton
+                        onPress={handleMakeNft}
                         backgroundColor={themeStore.buttonBackgroundColor}
                         textColor={themeStore.buttonTextColor}
                         disabled={!cryptogotchi.isAlive}
@@ -265,7 +285,7 @@ const FriendEditModal = observer(() => {
                         backgroundColor={themeStore.buttonBackgroundColor}
                         textColor={themeStore.buttonTextColor}
                         loading={loading && !error}
-                        onPress={onNameSave}
+                        onPress={handleNameSave}
                         disabled={!cryptogotchi.isAlive}
                         style={tailwind("w-full")}
                         title="Save"

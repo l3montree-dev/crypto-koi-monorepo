@@ -1,4 +1,4 @@
 export const Colors = {
-    bgColor: "#0f172a",
+    bgColor: "#000000",
     bgColorVariant: "#dc2626",
 };
