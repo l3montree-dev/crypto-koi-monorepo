@@ -1,9 +1,8 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { observer } from "mobx-react-lite";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import tinycolor from "tinycolor2";
 import useAppState from "./hooks/useAppState";
-import LeaderboardNavigator from "./LeaderboardNavigator";
-import { rootStore } from "./mobx/RootStore";
 import { selectThemeStore } from "./mobx/selectors";
 import FriendScreen from "./screens/FriendScreen";
 import Leaderboard from "./screens/LeaderboardScreen";
@@ -18,11 +17,14 @@ const style = {
 export const TabNavigator = observer(() => {
     const themeStore = useAppState(selectThemeStore);
     const backgroundColor = themeStore.tabBarColor;
+
     return (
         <Tab.Navigator
             shifting
-            activeColor="white"
-            inactiveColor={"rgba(255,255,255,0.5)"}
+            activeColor={themeStore.onSecondary}
+            inactiveColor={tinycolor(themeStore.onSecondary)
+                .setAlpha(0.5)
+                .toRgbString()}
             barStyle={[style, { backgroundColor }]}
         >
             <Tab.Screen
@@ -51,6 +53,7 @@ export const TabNavigator = observer(() => {
                     ),
                 }}
             />
+
             {/*  <Tab.Screen
                 name="Profile"
                 component={SettingsScreen}
