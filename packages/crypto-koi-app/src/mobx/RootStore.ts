@@ -28,6 +28,7 @@ export default class RootStore {
     backgroundIsDark = true;
 
     tabBarColor: string = Colors.bgColorVariant;
+    currentHeaderTintColor = "#ffffff";
 
     static calculateColorVariants(base: string) {
         const obj = tinycolor(base);
@@ -74,6 +75,10 @@ export default class RootStore {
         this.tabBarColor = color;
     }
 
+    setCurrentHeaderTintColor(color: string) {
+        this.currentHeaderTintColor = color;
+    }
+
     setColor(color: string) {
         const colorVariants = RootStore.calculateColorVariants(color);
         this.primaryColor = colorVariants.primaryColor;
@@ -87,6 +92,8 @@ export default class RootStore {
         this.buttonTextColor = colorVariants.buttonTextColor;
         this.secondaryIsDark = colorVariants.secondaryIsDark;
         this.backgroundIsDark = colorVariants.backgroundIsDark;
+
+        this.setCurrentHeaderTintColor(colorVariants.onSecondary);
 
         NavigationBar.setBackgroundColorAsync(colorVariants.secondaryColor);
         this.setTabBarColor(colorVariants.secondaryColor);

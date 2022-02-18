@@ -134,11 +134,12 @@ const CryptogotchiView = observer((props: Props) => {
 
     useEffect(() => {
         NavigationBar.setBackgroundColorAsync(secondaryColor);
+        rootStore.setCurrentHeaderTintColor(onSecondary);
         return () => {
             // reset to the users secondary color
             NavigationBar.setBackgroundColorAsync(rootStore.secondaryColor);
         };
-    }, [secondaryColor]);
+    }, [secondaryColor, onSecondary]);
 
     return (
         <SafeAreaView
