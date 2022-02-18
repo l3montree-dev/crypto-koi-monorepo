@@ -45,8 +45,8 @@ const style = StyleSheet.create({
         zIndex: 1,
     },
     dead: {
-        // tintColor: "black",
-        // opacity: 0.6,
+        tintColor: "black",
+        opacity: 0.6,
     },
     ticker: {
         ...Platform.select({
@@ -140,7 +140,7 @@ const CryptogotchiView = observer((props: Props) => {
 
     useEffect(() => {
         NavigationBar.setBackgroundColorAsync(secondaryColor);
-        themeStore.setCurrentHeaderTintColor(onSecondary);
+        themeStore.setCurrentHeaderTintColor(onBackground);
         return () => {
             // reset to the users secondary color
             NavigationBar.setBackgroundColorAsync(themeStore.secondaryColor);

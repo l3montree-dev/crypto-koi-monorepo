@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -60,6 +60,10 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = observer(
     (props) => {
         const tailwind = useTailwind();
         const themeStore = useAppState(selectThemeStore);
+
+        useEffect(() => {
+            themeStore.setCurrentHeaderTintColor(themeStore.onSecondary);
+        }, []);
 
         return (
             <View style={tailwind("pr-4 pl-3")}>

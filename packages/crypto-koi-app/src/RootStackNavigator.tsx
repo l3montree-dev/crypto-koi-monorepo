@@ -24,6 +24,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
 
     const commonNavigationOptions: NativeStackNavigationOptions = useMemo(
         () => ({
+            animation: "slide_from_right",
             headerShadowVisible: false,
             headerTintColor: themeStore.currentHeaderTintColor,
             headerStyle: {
@@ -85,6 +86,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                             ...commonNavigationOptions,
                             headerTitle: "",
                             title: "",
+                            headerTransparent: true,
                             headerStyle: {
                                 backgroundColor: "transparent",
                             },
