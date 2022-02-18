@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { BlurView } from "expo-blur";
+import * as NavigationBar from "expo-navigation-bar";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useMemo } from "react";
 import {
@@ -13,7 +14,6 @@ import {
     StyleSheet,
     View,
 } from "react-native";
-import * as NavigationBar from "expo-navigation-bar";
 import Svg, { Ellipse } from "react-native-svg";
 import { useTailwind } from "tailwind-rn/dist";
 import FriendInfo from "../components/FriendInfo";
@@ -28,8 +28,12 @@ import useAppState from "../hooks/useAppState";
 import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
 import Cryptogotchi from "../mobx/Cryptogotchi";
-import RootStore, { rootStore } from "../mobx/RootStore";
-import { selectCurrentUser, selectFirstCryptogotchi } from "../mobx/selectors";
+import {
+    selectCurrentUser,
+    selectFirstCryptogotchi,
+    selectThemeStore,
+} from "../mobx/selectors";
+import ThemeStore from "../mobx/ThemeStore";
 import { DimensionUtils } from "../utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -85,6 +89,8 @@ const CryptogotchiView = observer((props: Props) => {
         FEED_CRYPTOGOTCHI_MUTATION
     );
 
+    const themeStore = useAppState(selectThemeStore);
+
     const { navigate } = useNavigation();
     const handleFeed = async () => {
         if (!currentUserIsOwner) {
@@ -129,15 +135,15 @@ const CryptogotchiView = observer((props: Props) => {
         buttonProgressFilled,
         backgroundIsDark,
     } = useMemo(() => {
-        return RootStore.calculateColorVariants(cryptogotchi.color);
+        return ThemeStore.calculateColorVariants(cryptogotchi.color);
     }, [cryptogotchi.color]);
 
     useEffect(() => {
         NavigationBar.setBackgroundColorAsync(secondaryColor);
-        rootStore.setCurrentHeaderTintColor(onSecondary);
+        themeStore.setCurrentHeaderTintColor(onSecondary);
         return () => {
             // reset to the users secondary color
-            NavigationBar.setBackgroundColorAsync(rootStore.secondaryColor);
+            NavigationBar.setBackgroundColorAsync(themeStore.secondaryColor);
         };
     }, [secondaryColor, onSecondary]);
 
@@ -148,12 +154,7 @@ const CryptogotchiView = observer((props: Props) => {
             <StatusBar
                 barStyle={backgroundIsDark ? "light-content" : "dark-content"}
             />
-            {/*<Image
-                // style={tailwind("flex-1")}
-                resizeMode="cover"
-                style={style.bgImg}
-                source={require("../../assets/image/stars_back.png")}
-            />*/}
+
             <ScrollView
                 //style={tailwind("bg-slate-900")}
                 contentContainerStyle={memoStyle.contentContainerStyle}

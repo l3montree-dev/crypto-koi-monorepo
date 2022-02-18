@@ -8,8 +8,7 @@ import { Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useAppState from "./hooks/useAppState";
 import { RootStackParamList } from "./hooks/useNavigation";
-import { rootStore } from "./mobx/RootStore";
-import { selectCurrentUser } from "./mobx/selectors";
+import { selectCurrentUser, selectThemeStore } from "./mobx/selectors";
 import CryptogotchiScreen from "./screens/CryptogotchiScreen";
 import FriendEditScreen from "./screens/FriendEditScreen";
 import SnakeGameScreen from "./screens/games/snake/SnakeGameScreen";
@@ -21,17 +20,18 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStackNavigator: FunctionComponent = observer(() => {
     const currentUser = useAppState(selectCurrentUser);
+    const themeStore = useAppState(selectThemeStore);
 
     const commonNavigationOptions: NativeStackNavigationOptions = useMemo(
         () => ({
             headerShadowVisible: false,
-            headerTintColor: rootStore.currentHeaderTintColor,
+            headerTintColor: themeStore.currentHeaderTintColor,
             headerStyle: {
-                backgroundColor: rootStore.secondaryColor,
+                backgroundColor: themeStore.secondaryColor,
             },
             headerTitleAlign: "center",
         }),
-        [rootStore.secondaryColor, rootStore.currentHeaderTintColor]
+        [themeStore.secondaryColor, themeStore.currentHeaderTintColor]
     );
     return (
         <Stack.Navigator>
@@ -57,7 +57,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                                         style={[
                                             commonStyles.screenTitle,
                                             {
-                                                color: rootStore.onSecondary,
+                                                color: themeStore.onSecondary,
                                             },
                                         ]}
                                     >
@@ -68,7 +68,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                                                     commonStyles.screenIcon,
                                                     {
                                                         color:
-                                                            rootStore.onSecondary,
+                                                            themeStore.onSecondary,
                                                     },
                                                 ]}
                                                 name="grave-stone"

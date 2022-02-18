@@ -27,8 +27,7 @@ import {
 } from "../graphql/queries/__generated__/FetchEvents";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
-import { rootStore } from "../mobx/RootStore";
-import { selectFirstCryptogotchi } from "../mobx/selectors";
+import { selectFirstCryptogotchi, selectThemeStore } from "../mobx/selectors";
 import log from "../utils/logger";
 
 type Props = ClientEvent & { name: string; index: number };
@@ -60,6 +59,8 @@ interface EventItemContainerProps {
 const EventItemContainer: FunctionComponent<EventItemContainerProps> = observer(
     (props) => {
         const tailwind = useTailwind();
+        const themeStore = useAppState(selectThemeStore);
+
         return (
             <View style={tailwind("pr-4 pl-3")}>
                 <View
@@ -70,7 +71,7 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = observer(
                         <View
                             style={[
                                 tailwind("rounded-full p-1"),
-                                { backgroundColor: rootStore.secondaryColor },
+                                { backgroundColor: themeStore.secondaryColor },
                             ]}
                         >
                             <View
@@ -83,7 +84,7 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = observer(
                             >
                                 <Icon
                                     style={[
-                                        { color: rootStore.onSecondary },
+                                        { color: themeStore.onSecondary },
                                         tailwind("opacity-75 text-lg"),
                                     ]}
                                     name={props.iconName}
@@ -92,19 +93,21 @@ const EventItemContainer: FunctionComponent<EventItemContainerProps> = observer(
                         </View>
                         <View
                             style={[
-                                { backgroundColor: rootStore.backgroundColor },
+                                { backgroundColor: themeStore.backgroundColor },
                                 tailwind("flex-1 p-3 rounded-lg"),
                             ]}
                         >
                             <View style={tailwind("mb-3")}>
-                                <Text style={{ color: rootStore.onBackground }}>
+                                <Text
+                                    style={{ color: themeStore.onBackground }}
+                                >
                                     {props.text}
                                 </Text>
                             </View>
 
                             <Text
                                 style={[
-                                    { color: rootStore.onBackground },
+                                    { color: themeStore.onBackground },
                                     tailwind("text-right text-xs opacity-50"),
                                 ]}
                             >
@@ -149,6 +152,8 @@ const FriendEditModal = observer(() => {
         variables: { id: cryptogotchi?.id ?? "", offset: 0, limit: 20 },
     });
 
+    const themeStore = useAppState(selectThemeStore);
+
     const onNameSave = async () => {
         if (!cryptogotchi) {
             log.error("No cryptogotchi to save");
@@ -168,10 +173,10 @@ const FriendEditModal = observer(() => {
         <Screen
             style={[
                 tailwind("flex-1"),
-                { backgroundColor: rootStore.secondaryColor },
+                { backgroundColor: themeStore.secondaryColor },
             ]}
         >
-            <StatusBar style={rootStore.secondaryIsDark ? "light" : "dark"} />
+            <StatusBar style={themeStore.secondaryIsDark ? "light" : "dark"} />
             <View style={tailwind("flex-1")}>
                 <FlatList
                     onEndReachedThreshold={0.5}
@@ -198,27 +203,27 @@ const FriendEditModal = observer(() => {
                         <View style={tailwind("px-4")}>
                             <View style={tailwind("rounded-lg mb-6")}>
                                 <FriendInfo
-                                    textColor={rootStore.onSecondary}
+                                    textColor={themeStore.onSecondary}
                                     clockId={"friend-edit"}
                                     cryptogotchi={cryptogotchi}
                                 />
                             </View>
                             <Input
                                 label="Change Name"
-                                textColor={rootStore.buttonTextColor}
-                                labelColor={rootStore.onSecondary}
+                                textColor={themeStore.buttonTextColor}
+                                labelColor={themeStore.onSecondary}
                                 style={[
                                     tailwind("mb-10"),
                                     {
                                         backgroundColor:
-                                            rootStore.buttonBackgroundColor,
+                                            themeStore.buttonBackgroundColor,
                                     },
                                 ]}
                                 {...name}
                                 selectTextOnFocus
                             />
                             <View style={tailwind("mb-4")}>
-                                <Text style={{ color: rootStore.onSecondary }}>
+                                <Text style={{ color: themeStore.onSecondary }}>
                                     Events
                                 </Text>
                             </View>
@@ -238,13 +243,13 @@ const FriendEditModal = observer(() => {
             <View
                 style={[
                     tailwind("p-4 flex-row"),
-                    { backgroundColor: rootStore.secondaryColor },
+                    { backgroundColor: themeStore.secondaryColor },
                 ]}
             >
                 <View style={tailwind("flex-1 mr-2")}>
                     <AppButton
-                        backgroundColor={rootStore.buttonBackgroundColor}
-                        textColor={rootStore.buttonTextColor}
+                        backgroundColor={themeStore.buttonBackgroundColor}
+                        textColor={themeStore.buttonTextColor}
                         disabled={!cryptogotchi.isAlive}
                         style={tailwind("w-full")}
                         title="Make NFT"
@@ -253,8 +258,8 @@ const FriendEditModal = observer(() => {
 
                 <View style={tailwind("flex-1 ml-2")}>
                     <AppButton
-                        backgroundColor={rootStore.buttonBackgroundColor}
-                        textColor={rootStore.buttonTextColor}
+                        backgroundColor={themeStore.buttonBackgroundColor}
+                        textColor={themeStore.buttonTextColor}
                         loading={loading && !error}
                         onPress={onNameSave}
                         disabled={!cryptogotchi.isAlive}

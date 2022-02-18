@@ -1,8 +1,10 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { observer } from "mobx-react-lite";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import useAppState from "./hooks/useAppState";
 import LeaderboardNavigator from "./LeaderboardNavigator";
 import { rootStore } from "./mobx/RootStore";
+import { selectThemeStore } from "./mobx/selectors";
 import FriendScreen from "./screens/FriendScreen";
 import Leaderboard from "./screens/LeaderboardScreen";
 
@@ -14,7 +16,8 @@ const style = {
     elevation: 0,
 };
 export const TabNavigator = observer(() => {
-    const backgroundColor = rootStore.tabBarColor;
+    const themeStore = useAppState(selectThemeStore);
+    const backgroundColor = themeStore.tabBarColor;
     return (
         <Tab.Navigator
             shifting

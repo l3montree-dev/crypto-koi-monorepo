@@ -8,3 +8,5 @@ export const selectCurrentUser = (rootStore: RootStore) =>
 export const selectFirstCryptogotchi = (rootStore: RootStore) => {
     return rootStore.authStore.currentUser?.cryptogotchies[0];
 };
+
+export const selectThemeStore = (rootStore: RootStore) => rootStore.themeStore;

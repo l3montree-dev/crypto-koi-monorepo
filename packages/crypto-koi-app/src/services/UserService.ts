@@ -33,7 +33,7 @@ class UserService {
         rootStore.authStore.setCurrentUser(user.data.user);
         const cryptogotchi = user.data.user.cryptogotchies[0];
         if (cryptogotchi) {
-            rootStore.setColor(cryptogotchi.color);
+            rootStore.themeStore.setColor(cryptogotchi.color);
         }
     }
 }
