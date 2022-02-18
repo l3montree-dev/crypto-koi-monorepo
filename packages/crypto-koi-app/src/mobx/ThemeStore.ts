@@ -68,6 +68,7 @@ export default class ThemeStore {
 
     tabBarColor: string = Colors.bgColorVariant;
     currentHeaderTintColor = "#ffffff";
+    heartColor = "#000000";
 
     constructor() {
         makeAutoObservable(this);
@@ -94,6 +95,7 @@ export default class ThemeStore {
         this.buttonTextColor = colorVariants.buttonTextColor;
         this.secondaryIsDark = colorVariants.secondaryIsDark;
         this.backgroundIsDark = colorVariants.backgroundIsDark;
+        this.heartColor = colorVariants.heartColor;
 
         this.setCurrentHeaderTintColor(colorVariants.onSecondary);
 

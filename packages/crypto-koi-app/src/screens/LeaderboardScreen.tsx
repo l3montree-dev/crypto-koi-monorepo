@@ -221,9 +221,7 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                             )}
                             backgroundStrokeColor={themeStore.onBackground}
                             radius={15}
-                            svgStyle={
-                                { color: themeStore.secondaryColor } as any
-                            }
+                            svgStyle={{ color: themeStore.heartColor } as any}
                             strokeWidth={3}
                         >
                             <View
@@ -235,7 +233,7 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                     style={[
                                         tailwind("text-lg"),
                                         {
-                                            color: themeStore.secondaryColor,
+                                            color: themeStore.heartColor,
                                         },
                                     ]}
                                     name="heart"
