@@ -23,6 +23,7 @@ import { AppButton } from "../../components/AppButton";
 import Wave from "../../components/Wave";
 import { useFloating } from "../../hooks/useFloating";
 import { userService } from "../../services/UserService";
+import { Colors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 
 const style = StyleSheet.create({
@@ -129,12 +130,12 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={tailwind("flex-1 bg-slate-700")}>
+        <View style={tailwind("flex-1 bg-zinc-300")}>
             <View style={tailwind("absolute top-0")}>
                 <Wave
                     svgStyle={[
                         style.svg,
-                        tailwind("text-slate-900"),
+                        tailwind("text-red-600"),
                         style.rotatedSvg,
                     ]}
                 />
@@ -156,20 +157,20 @@ function OnboardingScreen() {
                             <Image
                                 style={style.img}
                                 resizeMode="contain"
-                                source={require("../../../assets/image/cg-3.png")}
+                                source={require("../../../assets/image/koi.png")}
                             />
                         </RNAnimated.View>
                     </View>
                     <Text
                         style={tailwind(
-                            "text-white mt-10 text-4xl font-bold text-center"
+                            "text-black mt-10 text-4xl font-bold text-center"
                         )}
                     >
                         Welcome
                     </Text>
                     <Text
                         style={tailwind(
-                            "text-white text-lg mt-5 px-10 text-center"
+                            "text-black text-lg mt-5 px-10 text-center"
                         )}
                     >
                         Travel and have fun with your best friends
@@ -186,7 +187,7 @@ function OnboardingScreen() {
                             <Animated.Text
                                 entering={FadeIn}
                                 style={tailwind(
-                                    "text-white text-4xl font-bold text-center mb-5"
+                                    "text-black text-4xl font-bold text-center mb-5"
                                 )}
                             >
                                 Keep your friend alive
@@ -201,26 +202,26 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(500)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-amber-500")}
+                                    style={tailwind("text-4xl text-red-600")}
                                     name="food-apple"
                                 />
 
                                 <View style={tailwind("ml-5")}>
                                     <Text
-                                        style={tailwind("text-white text-lg")}
+                                        style={tailwind("text-black text-lg")}
                                     >
                                         Feed your friend
                                     </Text>
                                     <Text
                                         style={tailwind(
-                                            "text-white opacity-75"
+                                            "text-black opacity-75"
                                         )}
                                     >
                                         Every few hours
                                     </Text>
                                 </View>
                             </Animated.View>
-                            <Animated.View
+                            {/*<Animated.View
                                 style={[
                                     style.listItem,
                                     tailwind(
@@ -235,19 +236,19 @@ function OnboardingScreen() {
                                 />
                                 <View style={tailwind("ml-5")}>
                                     <Text
-                                        style={tailwind("text-white text-lg")}
+                                        style={tailwind("text-black text-lg")}
                                     >
                                         Play with him
                                     </Text>
                                     <Text
                                         style={tailwind(
-                                            "text-white opacity-75"
+                                            "text-black opacity-75"
                                         )}
                                     >
                                         And rank against your friends
                                     </Text>
                                 </View>
-                            </Animated.View>
+                                        </Animated.View>*/}
                             <Animated.View
                                 style={[
                                     style.listItem,
@@ -258,21 +259,21 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(1500)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-amber-500")}
+                                    style={tailwind("text-4xl text-red-600")}
                                     name="heart"
                                 />
                                 <View style={tailwind("ml-5")}>
                                     <Text
-                                        style={tailwind("text-white text-lg")}
+                                        style={tailwind("text-black text-lg")}
                                     >
                                         Build a relationship
                                     </Text>
                                     <Text
                                         style={tailwind(
-                                            "text-white opacity-75"
+                                            "text-black opacity-75"
                                         )}
                                     >
-                                        And show your friends your Tabito
+                                        And show your koi to your friends
                                     </Text>
                                 </View>
                             </Animated.View>
@@ -291,14 +292,14 @@ function OnboardingScreen() {
                         <Animated.View entering={FadeIn}>
                             <Text
                                 style={tailwind(
-                                    "text-white text-4xl font-bold text-center mb-5"
+                                    "text-black text-4xl font-bold text-center mb-5"
                                 )}
                             >
                                 Make it an NFT
                             </Text>
                             <Text
                                 style={tailwind(
-                                    "text-white text-lg text-center"
+                                    "text-black text-lg text-center"
                                 )}
                             >
                                 To never loose your friend again you can make
@@ -306,7 +307,7 @@ function OnboardingScreen() {
                             </Text>
                             <View style={tailwind("mt-5")}>
                                 <AppButton
-                                    backgroundColor="red"
+                                    backgroundColor={Colors.bgColorVariant}
                                     textColor="white"
                                     onPress={onPlayPress}
                                     title="Play"
@@ -318,7 +319,7 @@ function OnboardingScreen() {
             </ScrollView>
 
             <View style={tailwind("absolute -bottom-20")}>
-                <Wave svgStyle={[style.svg, tailwind("text-slate-900")]} />
+                <Wave svgStyle={[style.svg, tailwind("text-red-600")]} />
             </View>
 
             <View style={tailwind("flex-row items-center justify-between")}>
@@ -335,7 +336,7 @@ function OnboardingScreen() {
                         <View
                             key={index}
                             style={[
-                                tailwind("bg-slate-400 mx-2 rounded"),
+                                tailwind("bg-red-400 mx-2 rounded"),
                                 style.dot,
                             ]}
                         />
@@ -343,7 +344,7 @@ function OnboardingScreen() {
                     <Animated.View
                         style={[
                             style.dot,
-                            tailwind("bg-slate-200 rounded absolute mx-2"),
+                            tailwind("bg-red-200 rounded absolute mx-2"),
                             animatedActiveDotStyle,
                         ]}
                     />
