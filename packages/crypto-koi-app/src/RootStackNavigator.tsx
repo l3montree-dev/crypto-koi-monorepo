@@ -53,6 +53,8 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                         options={({ route }) => {
                             return {
                                 ...commonNavigationOptions,
+                                headerShown: true,
+                                headerTransparent: true,
                                 headerTitle: () => (
                                     <Text
                                         style={[

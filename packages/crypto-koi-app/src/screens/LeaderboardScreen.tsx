@@ -289,6 +289,7 @@ const Leaderboard = observer(() => {
                 </Text>
             </View>
             <FlatList
+                onEndReachedThreshold={0.5}
                 onEndReached={() => {
                     if (data) {
                         fetchMore({

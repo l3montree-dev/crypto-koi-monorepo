@@ -6,6 +6,7 @@ import { android_ripple } from "../styles/commonStyles";
 
 interface Props extends PressableProps {
     name: string;
+    color: string;
 }
 
 const style = StyleSheet.create({
@@ -29,7 +30,7 @@ const IconButton = (props: Props) => {
                     ]}
                 >
                     <Icon
-                        style={tailwind("text-white text-2xl ")}
+                        style={[tailwind("text-2xl "), { color: props.color }]}
                         name={name}
                     />
                 </View>

@@ -171,7 +171,7 @@ const CryptogotchiView = observer((props: Props) => {
                             <View>
                                 <Pressable onPress={handleFeed}>
                                     <Lifetime
-                                        heartColor={primaryColor}
+                                        heartColor={secondaryColor}
                                         onBackgroundColor={onBackground}
                                         clockId={
                                             props.clockIdPrefix + "-lifetime"
@@ -257,6 +257,7 @@ const CryptogotchiView = observer((props: Props) => {
                                 style={tailwind("rounded-lg overflow-hidden")}
                             >
                                 <IconButton
+                                    color={onBackground}
                                     disabled={!cryptogotchi}
                                     onPress={() => {
                                         if (!cryptogotchi) {
