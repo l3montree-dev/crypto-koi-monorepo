@@ -26,7 +26,7 @@ function NextFeedButton(props: Props) {
             const seconds = cryptogotchi.nextFeeding.diff(moment(), "seconds");
 
             // if seconds is negative - the date is in the past.
-            if (seconds < 0) {
+            if (seconds <= 0) {
                 setSeconds(-1);
                 return;
             }
