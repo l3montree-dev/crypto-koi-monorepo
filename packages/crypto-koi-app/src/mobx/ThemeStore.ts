@@ -4,42 +4,51 @@ import * as NavigationBar from "expo-navigation-bar";
 import { Colors } from "../styles/colors";
 
 export default class ThemeStore {
-    static getBestTextColor(c: string): string {
-        return tinycolor(c).isDark() ? "#ffffff" : "#000000";
+    static getBestTextColor(c: tinycolor.Instance): string {
+        return c.isDark() ? "#ffffff" : "#000000";
     }
     static calculateColorVariants(base: string) {
         const obj = tinycolor(base);
         if (obj.isDark()) {
-            const secondaryColor = obj.clone().darken(10).toString();
-            const backgroundColor = obj.clone().brighten(50).toString();
+            const secondaryColor = obj.clone().darken(10);
+            const backgroundColor = obj.clone().brighten(50);
+
             return {
                 primaryColor: base,
-                secondaryColor,
-                backgroundColor,
+                secondaryColor: secondaryColor.toHexString(),
+                backgroundColor: backgroundColor.toHexString(),
                 onSecondary: ThemeStore.getBestTextColor(secondaryColor),
                 onBackground: ThemeStore.getBestTextColor(backgroundColor),
                 buttonTextColor: "#000000",
                 buttonBackgroundColor: "#ffffff",
                 buttonProgressFilled: "rgba(255,255,255,0.6)",
                 buttonProgressUnfilled: "rgba(255,255,255,0.3)",
-                secondaryIsDark: obj.clone().darken(10).isDark(),
-                backgroundIsDark: obj.clone().lighten(50).isDark(),
+                heartColor:
+                    secondaryColor.getBrightness() < 50
+                        ? secondaryColor.clone().brighten(30).toHexString()
+                        : secondaryColor.toHexString(),
+                secondaryIsDark: secondaryColor.isDark(),
+                backgroundIsDark: backgroundColor.isDark(),
             };
         }
-        const secondaryColor = obj.clone().darken(10).toString();
-        const backgroundColor = obj.clone().brighten(50).toString();
+        const secondaryColor = obj.clone().darken(10);
+        const backgroundColor = obj.clone().brighten(50);
         return {
             primaryColor: base,
-            secondaryColor,
-            backgroundColor,
+            secondaryColor: secondaryColor.toHexString(),
+            backgroundColor: backgroundColor.toHexString(),
             onBackground: ThemeStore.getBestTextColor(backgroundColor),
             onSecondary: ThemeStore.getBestTextColor(secondaryColor),
             buttonTextColor: "#ffffff",
             buttonBackgroundColor: "#000000",
             buttonProgressFilled: "rgba(0,0,0,0.5)",
             buttonProgressUnfilled: "rgba(0,0,0,0.2)",
-            secondaryIsDark: obj.clone().darken(20).isDark(),
-            backgroundIsDark: obj.clone().lighten(30).isDark(),
+            secondaryIsDark: secondaryColor.isDark(),
+            backgroundIsDark: backgroundColor.isDark(),
+            heartColor:
+                secondaryColor.getBrightness() < 50
+                    ? secondaryColor.clone().brighten(30).toHexString()
+                    : secondaryColor.toHexString(),
         };
     }
 

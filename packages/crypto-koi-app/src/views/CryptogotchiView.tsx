@@ -124,7 +124,6 @@ const CryptogotchiView = observer((props: Props) => {
     );
 
     const {
-        primaryColor,
         backgroundColor,
         secondaryColor,
         onBackground,
@@ -133,6 +132,7 @@ const CryptogotchiView = observer((props: Props) => {
         buttonTextColor,
         buttonProgressUnfilled,
         buttonProgressFilled,
+        heartColor,
         backgroundIsDark,
     } = useMemo(() => {
         return ThemeStore.calculateColorVariants(cryptogotchi.color);
@@ -171,7 +171,7 @@ const CryptogotchiView = observer((props: Props) => {
                             <View>
                                 <Pressable onPress={handleFeed}>
                                     <Lifetime
-                                        heartColor={secondaryColor}
+                                        heartColor={heartColor}
                                         onBackgroundColor={onBackground}
                                         clockId={
                                             props.clockIdPrefix + "-lifetime"
@@ -257,7 +257,7 @@ const CryptogotchiView = observer((props: Props) => {
                                 style={tailwind("rounded-lg overflow-hidden")}
                             >
                                 <IconButton
-                                    color={onBackground}
+                                    color={onSecondary}
                                     disabled={!cryptogotchi}
                                     onPress={() => {
                                         if (!cryptogotchi) {

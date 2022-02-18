@@ -256,7 +256,7 @@ function OnboardingScreen() {
                                         "flex-row mx-0 my-2 px-4 py-3 rounded-lg items-center"
                                     ),
                                 ]}
-                                entering={FadeIn.delay(1500)}
+                                entering={FadeIn.delay(1000)}
                             >
                                 <Icon
                                     style={tailwind("text-4xl text-red-600")}
