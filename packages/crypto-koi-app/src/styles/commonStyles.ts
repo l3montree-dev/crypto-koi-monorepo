@@ -4,6 +4,7 @@ export const commonStyles = StyleSheet.create({
     screenTitle: {
         fontSize: 25,
         fontWeight: "bold",
+
         textAlign: "center",
     },
     screenIcon: {

@@ -13,7 +13,7 @@ const FriendTitle = observer((props: Props) => {
     const { cryptogotchi } = props;
     const tailwind = useTailwind();
     return (
-        <View style={tailwind("flex-row")}>
+        <View style={tailwind("flex-row flex-1")}>
             <Text
                 style={[
                     tailwind("text-3xl font-bold text-white"),

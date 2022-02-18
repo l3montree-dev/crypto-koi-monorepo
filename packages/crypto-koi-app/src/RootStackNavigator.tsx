@@ -15,6 +15,7 @@ import SnakeGameScreen from "./screens/games/snake/SnakeGameScreen";
 import OnboardingScreen from "./screens/onboarding/OnboardingScreen";
 import { commonStyles } from "./styles/commonStyles";
 import { TabNavigator } from "./TabNavigator";
+import { DimensionUtils } from "./utils/DimensionUtils";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -57,9 +58,16 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                                 headerTransparent: true,
                                 headerTitle: () => (
                                     <Text
+                                        numberOfLines={1}
+                                        ellipsizeMode="tail"
                                         style={[
                                             commonStyles.screenTitle,
                                             {
+                                                maxWidth:
+                                                    DimensionUtils.deviceWidth -
+                                                    (!route.params.isAlive
+                                                        ? 150
+                                                        : 100),
                                                 color: themeStore.onSecondary,
                                             },
                                         ]}

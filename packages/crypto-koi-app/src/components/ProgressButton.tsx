@@ -70,7 +70,10 @@ export const ProgressButton: FunctionComponent<Props> = (props) => {
                         tailwind("px-5 w-full py-2"),
                     ]}
                 >
-                    <ActivityIndicator color={"white"} size="large" />
+                    <ActivityIndicator
+                        color={props.buttonTextColor}
+                        size="large"
+                    />
                 </View>
             ) : (
                 <Pressable

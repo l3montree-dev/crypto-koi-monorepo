@@ -218,12 +218,7 @@ const CryptogotchiView = observer((props: Props) => {
                             ]}
                             resizeMode="contain"
                             source={{
-                                uri:
-                                    Config.imageUrl +
-                                    "/" +
-                                    cryptogotchi.id +
-                                    "?" +
-                                    Date.now(),
+                                uri: Config.imageUrl + "/" + cryptogotchi.id,
                             }}
                         />
                     </RNAnimated.View>
