@@ -16,6 +16,7 @@ if (Platform.OS !== 'web') {
     require("@ethersproject/shims");
     LogBox.ignoreLogs(
         [
+            "Setting a timer for a long period of time",
             "The provided value 'ms-stream' is not a valid 'responseType'.",
             "The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'.",
         ],
@@ -36,7 +37,6 @@ const { default: App } = require('./src/App');
 
 const { default: AsyncStorage } = require('@react-native-async-storage/async-storage');
 const { withWalletConnect } = require('@walletconnect/react-native-dapp');
-const { collapseTextChangeRangesAcrossMultipleVersions } = require('typescript');
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in the Expo client or in a native build,

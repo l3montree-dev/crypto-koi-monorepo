@@ -1,9 +1,13 @@
 /* eslint-disable react-native/no-raw-text */
 import { useMutation, useQuery } from "@apollo/client";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { ethers } from "ethers";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
 import React, { FunctionComponent, useEffect } from "react";
+import { useCallback } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -12,6 +16,7 @@ import { AppButton } from "../components/AppButton";
 import FriendInfo from "../components/FriendInfo";
 import Input from "../components/Input";
 import Screen from "../components/Screen";
+import { Config } from "../config";
 import {
     CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
     FETCH_EVENTS,
@@ -34,6 +39,7 @@ import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
 import { selectFirstCryptogotchi, selectThemeStore } from "../mobx/selectors";
 import log from "../utils/logger";
+import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
 
 type Props = ClientEvent & { name: string; index: number };
 
@@ -148,6 +154,8 @@ const EventItem: FunctionComponent<Props> = (props) => {
 const FriendEditModal = observer(() => {
     const cryptogotchi = useAppState(selectFirstCryptogotchi);
     const tailwind = useTailwind();
+    const connector = useWalletConnect();
+
     const name = useInput(cryptogotchi?.name);
     const [changeName, { loading, error }] = useMutation<
         ChangeCryptogotchiName,
@@ -168,15 +176,43 @@ const FriendEditModal = observer(() => {
 
     const themeStore = useAppState(selectThemeStore);
 
-    const handleMakeNft = async () => {
+    const handleMakeNft = useCallback(async () => {
         if (!cryptogotchi) {
             return;
         }
-        const result = await getNftSignature({
-            variables: { id: cryptogotchi.id, address: "0x0" },
+
+        if (!connector.connected) {
+            await connector.connect();
+        }
+
+        const provider = new WalletConnectProvider({
+            rpc: {
+                1337: Config.chainUrl,
+            },
+            chainId: 1337,
+            connector: connector,
+            qrcode: false,
         });
-        console.log(result);
-    };
+
+        await provider.enable();
+        const cryptoKoiContract = new CryptoKoiSmartContract(provider);
+
+        const result = await getNftSignature({
+            variables: {
+                id: cryptogotchi.id,
+                address: cryptoKoiContract.getUserAddress(),
+            },
+        });
+        if (!result.data) {
+            return;
+        }
+
+        await cryptoKoiContract.redeem(
+            result.data.getNftSignature.tokenId,
+            result.data.getNftSignature.signature
+        );
+    }, [cryptogotchi, connector]);
+
     const handleNameSave = async () => {
         if (!cryptogotchi) {
             log.error("No cryptogotchi to save");

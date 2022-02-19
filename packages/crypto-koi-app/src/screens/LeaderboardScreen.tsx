@@ -280,7 +280,7 @@ const Leaderboard = observer(() => {
                     style={[
                         commonStyles.screenTitle,
                         tailwind("pt-1"),
-                        { color: themeStore.onSecondary },
+                        { color: themeStore.onBackground },
                     ]}
                 >
                     Leaderboard
