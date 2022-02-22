@@ -1,61 +1,38 @@
 import { makeAutoObservable } from "mobx";
-import GameStat from "./GameStat";
-import Event from "./Event";
 import moment, { Moment } from "moment";
-import TimeUtils from "../utils/TimeUtils";
 import { ClientCryptogotchi } from "../graphql/queries/__generated__/ClientCryptogotchi";
+import TimeUtils from "../utils/TimeUtils";
 import Transformer from "../utils/Transformer";
+import Event from "./Event";
+import GameStat from "./GameStat";
 
 export default class Cryptogotchi {
-    public id: string;
-    public isAlive: boolean;
-    public name: string | null;
-    public food: number;
-    public createdAt: Moment;
-    public ownerId: string;
+    public id!: string;
+    public isAlive!: boolean;
+    public name!: string | null;
+    public food!: number;
+    public createdAt!: Moment;
+    public ownerId!: string;
     public gameStats: GameStat[] = [];
     public events: Event[] = [];
-    public minutesTillDeath: number;
-    public deathDate: Moment | null;
-    public nextFeeding: Moment;
-    public snapshotValid: Moment;
-    public maxLifetimeMinutes: number;
-    public color: string;
+    public minutesTillDeath!: number;
+    public deathDate!: Moment | null;
+    public nextFeeding!: Moment;
+    public snapshotValid!: Moment;
+    public maxLifetimeMinutes!: number;
+    public color!: string;
+    public isValidNft!: boolean;
     constructor(fragment: ClientCryptogotchi) {
         makeAutoObservable(this);
-
-        // duplicate...
-        this.id = fragment.id;
-        this.isAlive = fragment.isAlive;
-        this.name = fragment.name;
-        this.food = fragment.food;
-        this.createdAt = moment(fragment.createdAt);
-        // this.gameStats = fragment.gameStats.map(gs => new GameStat(gs))
-        // this.events = fragment.events.map(e => new Event(e))
-        this.minutesTillDeath = fragment.minutesTillDeath;
-        this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
-        this.nextFeeding = moment(fragment.nextFeeding);
-        this.snapshotValid = moment(fragment.snapshotValid);
-        this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
-        this.ownerId = fragment.ownerId;
-        this.color = fragment.color;
+        this.setFromFragment(fragment);
     }
 
     setFromFragment(fragment: ClientCryptogotchi) {
-        this.id = fragment.id;
-        this.isAlive = fragment.isAlive;
-        this.name = fragment.name;
-        this.food = fragment.food;
+        Object.assign(this, fragment);
         this.createdAt = moment(fragment.createdAt);
-        // this.gameStats = fragment.gameStats.map(gs => new GameStat(gs))
-        // this.events = fragment.events.map(e => new Event(e))
-        this.minutesTillDeath = fragment.minutesTillDeath;
         this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null;
         this.nextFeeding = moment(fragment.nextFeeding);
         this.snapshotValid = moment(fragment.snapshotValid);
-        this.maxLifetimeMinutes = fragment.maxLifetimeMinutes;
-        this.ownerId = fragment.ownerId;
-        this.color = fragment.color;
     }
 
     setName(name: string | undefined | null) {

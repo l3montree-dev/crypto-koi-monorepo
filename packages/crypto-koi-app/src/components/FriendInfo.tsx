@@ -23,14 +23,13 @@ const FriendInfo = observer((props: Props) => {
             <View style={tailwind("flex-row items-center")}>
                 <Icon
                     style={[tailwind("text-2xl opacity-50"), s]}
-                    name={cryptogotchi.id ? "shield-check" : "shield-off"}
+                    name={
+                        cryptogotchi.isValidNft ? "shield-check" : "shield-off"
+                    }
                 />
                 <Text style={[tailwind("ml-2"), s]}>
-                    #
-                    {cryptogotchi.id !== null
-                        ? Transformer.uuidToBase64(cryptogotchi.id) +
-                          " (is valid NFT)"
-                        : cryptogotchi.getBase64Uuid + " (No NFT)"}
+                    #{cryptogotchi.getBase64Uuid}
+                    {cryptogotchi.isValidNft ? " (is valid NFT)" : " (No NFT)"}
                 </Text>
             </View>
             <View style={tailwind("flex-row items-center")}>

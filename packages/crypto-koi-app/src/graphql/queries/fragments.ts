@@ -13,6 +13,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         deathDate
         nextFeeding
         snapshotValid
+        isValidNft
         color
     }
 `;

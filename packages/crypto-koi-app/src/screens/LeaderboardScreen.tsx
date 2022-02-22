@@ -163,7 +163,7 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                                 },
                                             ]}
                                             name={
-                                                props.id
+                                                props.isValidNft
                                                     ? "shield"
                                                     : "shield-off"
                                             }
@@ -177,7 +177,9 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                                 tailwind("text-xs"),
                                             ]}
                                         >
-                                            {props.id ? "Valid NFT" : "No NFT"}
+                                            {props.isValidNft
+                                                ? "Valid NFT"
+                                                : "No NFT"}
                                         </Text>
                                     </View>
                                 </View>

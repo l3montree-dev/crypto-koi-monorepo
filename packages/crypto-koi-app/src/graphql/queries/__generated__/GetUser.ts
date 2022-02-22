@@ -20,6 +20,7 @@ export interface GetUser_user_cryptogotchies {
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
+  isValidNft: boolean;
   color: string;
 }
 
