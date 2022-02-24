@@ -9,5 +9,6 @@ const opts: child_process.ExecSyncOptions = {
 };
 
 child_process.execSync("adb reverse tcp:8545 tcp:8545", opts);
+child_process.execSync("adb reverse tcp:8080 tcp:8080", opts);
 
 child_process.execSync("expo run:android", opts);

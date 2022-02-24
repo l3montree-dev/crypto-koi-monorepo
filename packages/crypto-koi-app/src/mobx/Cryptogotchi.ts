@@ -46,8 +46,8 @@ export default class Cryptogotchi {
         return moment().add(this.minutesTillDeath, "minutes");
     }
 
-    get getBase64Uuid(): string {
-        return Transformer.uuidToBase64(this.id);
+    get getUint256(): string {
+        return Transformer.uuidToUint256(this.id);
     }
 
     get deathDateString(): string | undefined {

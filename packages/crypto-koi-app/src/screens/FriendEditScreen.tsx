@@ -305,18 +305,24 @@ const FriendEditModal = observer(() => {
                     { backgroundColor: themeStore.secondaryColor },
                 ]}
             >
-                <View style={tailwind("flex-1 mr-2")}>
-                    <AppButton
-                        onPress={handleMakeNft}
-                        backgroundColor={themeStore.buttonBackgroundColor}
-                        textColor={themeStore.buttonTextColor}
-                        disabled={!cryptogotchi.isAlive}
-                        style={tailwind("w-full")}
-                        title="Make NFT"
-                    />
-                </View>
+                {!cryptogotchi.isValidNft && (
+                    <View style={tailwind("flex-1 mr-2")}>
+                        <AppButton
+                            onPress={handleMakeNft}
+                            backgroundColor={themeStore.buttonBackgroundColor}
+                            textColor={themeStore.buttonTextColor}
+                            disabled={!cryptogotchi.isAlive}
+                            style={tailwind("w-full")}
+                            title="Make NFT"
+                        />
+                    </View>
+                )}
 
-                <View style={tailwind("flex-1 ml-2")}>
+                <View
+                    style={tailwind(
+                        cryptogotchi.isValidNft ? "flex-1" : "flex-1 ml-2"
+                    )}
+                >
                     <AppButton
                         backgroundColor={themeStore.buttonBackgroundColor}
                         textColor={themeStore.buttonTextColor}

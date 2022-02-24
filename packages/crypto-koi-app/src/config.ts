@@ -12,7 +12,7 @@ export const Config = {
 
     secondsBetweenFeeding: 10 * 60,
 
-    contractAddress: "0xab4B4C0C66dd33c165Cbd937f5c6F01a225b6099",
+    contractAddress: "0xa3F9150c6b8280c08Da579F8c13E3B5CBD7E9465",
 
     chainUrl: "http://192.168.2.133:8545",
 };
