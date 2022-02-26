@@ -31,6 +31,7 @@ export interface Feed_feed {
   nextFeeding: any;
   snapshotValid: any;
   isValidNft: boolean;
+  rank: number;
   color: string;
   attributes: Feed_feed_attributes;
 }

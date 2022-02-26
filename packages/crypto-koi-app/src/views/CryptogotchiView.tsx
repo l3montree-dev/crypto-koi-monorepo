@@ -215,6 +215,38 @@ const CryptogotchiView = observer((props: Props) => {
                             <View
                                 style={[
                                     tailwind(
+                                        "mb-2 flex-1 px-2 py-2 flex items-center rounded-lg w-24"
+                                    ),
+                                    {
+                                        backgroundColor: heartColor,
+                                    },
+                                ]}
+                            >
+                                <View
+                                    style={tailwind(
+                                        "flex-row items-center w-full"
+                                    )}
+                                >
+                                    <Icon
+                                        style={{ color: onSecondary }}
+                                        name="trophy"
+                                        size={14}
+                                    />
+                                    <Text
+                                        numberOfLines={1}
+                                        ellipsizeMode="middle"
+                                        style={[
+                                            { color: onSecondary },
+                                            tailwind("ml-1 text-xs"),
+                                        ]}
+                                    >
+                                        {cryptogotchi.rank}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View
+                                style={[
+                                    tailwind(
                                         "pr-2 mb-5 flex-1 flex items-center rounded-lg w-24"
                                     ),
                                     {

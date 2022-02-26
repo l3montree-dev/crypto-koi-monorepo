@@ -31,6 +31,7 @@ export interface ClientCryptogotchi {
   nextFeeding: any;
   snapshotValid: any;
   isValidNft: boolean;
+  rank: number;
   color: string;
   attributes: ClientCryptogotchi_attributes;
 }

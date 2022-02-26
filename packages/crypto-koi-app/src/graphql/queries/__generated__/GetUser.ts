@@ -31,6 +31,7 @@ export interface GetUser_user_cryptogotchies {
   nextFeeding: any;
   snapshotValid: any;
   isValidNft: boolean;
+  rank: number;
   color: string;
   attributes: GetUser_user_cryptogotchies_attributes;
 }

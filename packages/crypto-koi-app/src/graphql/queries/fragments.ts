@@ -14,6 +14,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         nextFeeding
         snapshotValid
         isValidNft
+        rank
         color
         attributes {
             primaryColor

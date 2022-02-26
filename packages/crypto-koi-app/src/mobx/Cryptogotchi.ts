@@ -21,6 +21,7 @@ export default class Cryptogotchi {
     public snapshotValid!: Moment;
     public maxLifetimeMinutes!: number;
     public color!: string;
+    public rank!: number;
     public isValidNft!: boolean;
 
     public attributes!: ClientCryptogotchi["attributes"];

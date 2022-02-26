@@ -21,8 +21,8 @@ const style = StyleSheet.create({
         width: "100%",
     },
     imgContainer: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
     },
     wrapper: {
         borderBottomWidth: 1,
