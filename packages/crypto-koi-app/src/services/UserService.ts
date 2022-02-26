@@ -9,15 +9,15 @@ class UserService {
      * Executes side-effects. If the login is successful, it does update the authorization store.
      * @returns
      */
-    async loginUsingDeviceId(deviceId: string): Promise<void> {
-        const success = await authService.exchangeDeviceIdForToken(deviceId);
+    async loginUsingWalletAddress(walletAddress: string): Promise<void> {
+        const success = await authService.exchangeWalletAddressForToken(
+            walletAddress
+        );
         if (!success) {
             return;
         }
 
-        const user = await apolloClient.query<GetUser>({ query: GET_USER });
-
-        rootStore.authStore.setCurrentUser(user.data.user);
+        return this.sync();
     }
     /**
      * Executes side-effects. If the login is successful, it does update the authorization store.
@@ -28,10 +28,17 @@ class UserService {
         if (!success) {
             return;
         }
+        return this.sync();
+    }
 
-        const user = await apolloClient.query<GetUser>({ query: GET_USER });
+    async sync() {
+        const user = await apolloClient.query<GetUser>({
+            query: GET_USER,
+            fetchPolicy: "no-cache",
+        });
         rootStore.authStore.setCurrentUser(user.data.user);
         const cryptogotchi = user.data.user.cryptogotchies[0];
+
         if (cryptogotchi) {
             rootStore.themeStore.setColor(cryptogotchi.color);
         }

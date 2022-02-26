@@ -1,13 +1,11 @@
 /* eslint-disable react-native/no-raw-text */
 import { useMutation, useQuery } from "@apollo/client";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { ethers } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
-import React, { FunctionComponent, useEffect } from "react";
-import { useCallback } from "react";
+import React, { FunctionComponent, useCallback, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -195,6 +193,7 @@ const FriendEditModal = observer(() => {
         });
 
         await provider.enable();
+
         const cryptoKoiContract = new CryptoKoiSmartContract(provider);
 
         const result = await getNftSignature({

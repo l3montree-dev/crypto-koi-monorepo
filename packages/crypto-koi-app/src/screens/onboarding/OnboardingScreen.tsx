@@ -1,3 +1,5 @@
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import Constants from "expo-constants";
 import React, { useMemo, useRef, useState } from "react";
 import {
@@ -21,6 +23,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../../components/AppButton";
 import Wave from "../../components/Wave";
+import { config } from "../../config";
 import { useFloating } from "../../hooks/useFloating";
 import { userService } from "../../services/UserService";
 import { Colors } from "../../styles/colors";
@@ -64,6 +67,7 @@ function OnboardingScreen() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const scrollPosition = useSharedValue(0);
+    const connector = useWalletConnect();
 
     const animatedActiveDotStyle = useAnimatedStyle(() => {
         "worklet";
@@ -81,7 +85,22 @@ function OnboardingScreen() {
     });
 
     const onPlayPress = async () => {
-        await userService.loginUsingDeviceId(Constants.installationId);
+        if (!connector.connected) {
+            await connector.connect();
+        }
+
+        const provider = new WalletConnectProvider({
+            rpc: {
+                1337: config.chainUrl,
+            },
+            chainId: 1337,
+            connector: connector,
+            qrcode: false,
+        });
+
+        await provider.enable();
+
+        await userService.loginUsingWalletAddress(provider.accounts[0]);
     };
 
     const setActive = (next: number, x: number) => {

@@ -16,7 +16,6 @@ const style = {
 };
 export const TabNavigator = observer(() => {
     const themeStore = useAppState(selectThemeStore);
-    const backgroundColor = themeStore.tabBarColor;
 
     return (
         <Tab.Navigator
@@ -25,7 +24,7 @@ export const TabNavigator = observer(() => {
             inactiveColor={tinycolor(themeStore.onSecondary)
                 .setAlpha(0.5)
                 .toRgbString()}
-            barStyle={[style, { backgroundColor }]}
+            barStyle={[style, { backgroundColor: themeStore.tabBarColor }]}
         >
             <Tab.Screen
                 name="Friend"

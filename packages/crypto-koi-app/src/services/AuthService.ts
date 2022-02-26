@@ -59,14 +59,15 @@ class AuthService {
 
     refreshTokenRequest: Promise<AxiosResponse<TokenResponse>> | null = null;
 
-    async exchangeDeviceIdForToken(deviceId: string): Promise<boolean> {
+    async exchangeWalletAddressForToken(
+        walletAddress: string
+    ): Promise<boolean> {
         try {
             log.info("trying to exchange device id for token");
             const token = await this.publicClient.post<TokenResponse>(
                 "/auth/login",
                 {
-                    type: "deviceId",
-                    deviceId,
+                    walletAddress,
                 }
             );
             log.info("exchange successful. Storing token on device");

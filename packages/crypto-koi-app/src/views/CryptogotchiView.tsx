@@ -8,6 +8,7 @@ import {
     Image,
     Platform,
     Pressable,
+    RefreshControl,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -65,10 +66,16 @@ const style = StyleSheet.create({
     },
 });
 
-type Props = {
+type RefreshingProps = {
+    refreshing?: boolean;
+    onRefresh?: () => void;
+};
+
+type ViewProps = {
     cryptogotchi: Cryptogotchi;
     clockIdPrefix: string;
 };
+type Props = ViewProps | (ViewProps & RefreshingProps);
 
 const AnimatedEllipse = RNAnimated.createAnimatedComponent(Ellipse);
 
@@ -156,6 +163,14 @@ const CryptogotchiView = observer((props: Props) => {
             />
 
             <ScrollView
+                refreshControl={
+                    "onRefresh" in props ? (
+                        <RefreshControl
+                            onRefresh={props.onRefresh}
+                            refreshing={!!props.refreshing}
+                        />
+                    ) : undefined
+                }
                 //style={tailwind("bg-slate-900")}
                 contentContainerStyle={memoStyle.contentContainerStyle}
                 stickyHeaderIndices={[0]}

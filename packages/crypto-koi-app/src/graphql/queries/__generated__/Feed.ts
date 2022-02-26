@@ -16,7 +16,7 @@ export interface Feed_feed {
   createdAt: any;
   minutesTillDeath: number;
   maxLifetimeMinutes: number;
-  ownerId: string;
+  ownerAddress: string;
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
