@@ -21,7 +21,7 @@ import FriendTitle from "../components/FriendTitle";
 import IconButton from "../components/IconButton";
 import Lifetime from "../components/Lifetime";
 import NextFeedButton from "../components/NextFeedButton";
-import { Config } from "../config";
+import { config } from "../config";
 import { FEED_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
 import { Feed, FeedVariables } from "../graphql/queries/__generated__/Feed";
 import useAppState from "../hooks/useAppState";
@@ -218,7 +218,7 @@ const CryptogotchiView = observer((props: Props) => {
                             ]}
                             resizeMode="contain"
                             source={{
-                                uri: Config.imageUrl + "/" + cryptogotchi.id,
+                                uri: config.imageUrl + "/" + cryptogotchi.id,
                             }}
                         />
                     </RNAnimated.View>

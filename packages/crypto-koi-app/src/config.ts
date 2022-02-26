@@ -1,6 +1,6 @@
 import Constants from "expo-constants";
 
-export const Config = {
+export const config = {
     imageUrl: "http://192.168.2.133:8080/images",
     thumbnailUrl: "http://192.168.2.133:8080/thumbnails",
     restApiBaseUrl:
@@ -12,7 +12,7 @@ export const Config = {
 
     secondsBetweenFeeding: 10 * 60,
 
-    contractAddress: "0xa3F9150c6b8280c08Da579F8c13E3B5CBD7E9465",
+    contractAddress: "0x60d27fE16a09d6Cd0B06f788242A4A6d61C94928",
 
     chainUrl: "http://192.168.2.133:8545",
 };

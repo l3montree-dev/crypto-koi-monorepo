@@ -1,12 +1,12 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { AxiosResponse } from "axios";
 import { uniqBy } from "lodash";
-import { Config } from "../config";
+import { config } from "../config";
 import log from "../utils/logger";
 import { authService, TokenResponse } from "./AuthService";
 
 const httpLink = createHttpLink({
-    uri: Config.graphqlBaseUrl,
+    uri: config.graphqlBaseUrl,
     fetch: async (uri: RequestInfo, options) => {
         const token = authService.getAccessToken();
 

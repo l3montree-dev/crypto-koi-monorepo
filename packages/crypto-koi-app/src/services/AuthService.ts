@@ -4,7 +4,7 @@ import axios, {
     AxiosRequestConfig,
     AxiosResponse,
 } from "axios";
-import { Config } from "../config";
+import { config } from "../config";
 import log from "../utils/logger";
 import { StorageService } from "./StorageService";
 
@@ -19,12 +19,12 @@ class AuthService {
     loadTokenPromise: Promise<unknown>;
     constructor() {
         this.protectedClient = axios.create({
-            baseURL: Config.restApiBaseUrl,
+            baseURL: config.restApiBaseUrl,
             timeout: 10 * 1000,
         });
 
         this.publicClient = axios.create({
-            baseURL: Config.restApiBaseUrl,
+            baseURL: config.restApiBaseUrl,
             timeout: 10 * 1000,
         });
 

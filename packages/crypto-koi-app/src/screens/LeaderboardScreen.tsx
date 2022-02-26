@@ -17,7 +17,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import CircularProgress from "../components/CircularProgress";
 import Clock from "../components/Clock";
-import { Config } from "../config";
+import { config } from "../config";
 import { FETCH_LEADERBOARD } from "../graphql/queries/cryptogotchi";
 import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
 import useAppState from "../hooks/useAppState";
@@ -116,7 +116,7 @@ const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                 style={style.img}
                                 resizeMode="cover"
                                 source={{
-                                    uri: Config.thumbnailUrl + "/" + props.id,
+                                    uri: config.thumbnailUrl + "/" + props.id,
                                 }}
                             />
                         </View>

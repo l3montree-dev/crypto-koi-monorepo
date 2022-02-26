@@ -16,7 +16,7 @@ import { AppButton } from "../components/AppButton";
 import FriendInfo from "../components/FriendInfo";
 import Input from "../components/Input";
 import Screen from "../components/Screen";
-import { Config } from "../config";
+import { config } from "../config";
 import {
     CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
     FETCH_EVENTS,
@@ -187,7 +187,7 @@ const FriendEditModal = observer(() => {
 
         const provider = new WalletConnectProvider({
             rpc: {
-                1337: Config.chainUrl,
+                1337: config.chainUrl,
             },
             chainId: 1337,
             connector: connector,

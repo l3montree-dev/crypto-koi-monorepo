@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Config } from "../config";
+import { config } from "../config";
 import Cryptogotchi from "../mobx/Cryptogotchi";
 import { ticker } from "../services/Ticker";
 import { ProgressButton } from "./ProgressButton";
@@ -30,7 +30,7 @@ function NextFeedButton(props: Props) {
                 setSeconds(-1);
                 return;
             }
-            setSeconds(Config.secondsBetweenFeeding - seconds);
+            setSeconds(config.secondsBetweenFeeding - seconds);
         });
         return () => {
             ticker.removeTickHandler(props.clockId);
@@ -43,12 +43,12 @@ function NextFeedButton(props: Props) {
                     ? "Feed"
                     : "Feed (" +
                       moment
-                          .utc((Config.secondsBetweenFeeding - seconds) * 1000)
+                          .utc((config.secondsBetweenFeeding - seconds) * 1000)
                           .format("HH:mm:ss") +
                       ")"
             }
             progress={
-                seconds === -1 ? 1 : seconds / Config.secondsBetweenFeeding
+                seconds === -1 ? 1 : seconds / config.secondsBetweenFeeding
             }
             {...props}
             disabled={disabled}

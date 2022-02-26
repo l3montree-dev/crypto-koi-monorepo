@@ -1,6 +1,6 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { ethers, utils } from "ethers";
-import { Config } from "../config";
+import { BigNumber, ethers, utils } from "ethers";
+import { config } from "../config";
 import CryptoKoi from "./abi/CryptoKoi.json";
 
 export default class CryptoKoiSmartContract {
@@ -14,7 +14,7 @@ export default class CryptoKoiSmartContract {
         );
         this.userAddress = walletConnectProvider.accounts[0];
         this.contract = new ethers.Contract(
-            Config.contractAddress,
+            config.contractAddress,
             CryptoKoi.abi,
             this.provider.getSigner()
         );
@@ -35,15 +35,20 @@ export default class CryptoKoiSmartContract {
         return this.contract.ownerOf(tokenId);
     }
 
-    redeem(tokenId: string, signature: unknown) {
-        return this.contract.redeem(this.getUserAddress(), tokenId, signature);
+    async redeem(tokenId: string, signature: unknown) {
+        // get the price.
+        const price: BigNumber = await this.contract.getPrice();
+
+        return this.contract.redeem(this.getUserAddress(), tokenId, signature, {
+            value: price,
+        });
     }
 
     static async ownerOf(tokenId: string) {
-        const provider = ethers.getDefaultProvider(Config.chainUrl);
+        const provider = ethers.getDefaultProvider(config.chainUrl);
 
         const contract = new ethers.Contract(
-            Config.contractAddress,
+            config.contractAddress,
             CryptoKoi.abi,
             provider
         );
@@ -51,7 +56,6 @@ export default class CryptoKoiSmartContract {
     }
 
     ownBalance() {
-        console.log(this.contract);
         return this.contract.balanceOf(this.getUserAddress());
     }
 }
