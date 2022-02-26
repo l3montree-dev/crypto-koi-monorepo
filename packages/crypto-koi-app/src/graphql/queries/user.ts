@@ -6,8 +6,8 @@ export const GET_USER = gql`
     query GetUser {
         user {
             id
+            walletAddress
             createdAt
-            name
             cryptogotchies {
                 ...ClientCryptogotchi
             }

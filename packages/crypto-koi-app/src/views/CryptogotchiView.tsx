@@ -11,6 +11,7 @@ import {
     RefreshControl,
     SafeAreaView,
     ScrollView,
+    Text,
     StatusBar,
     StyleSheet,
     View,
@@ -36,6 +37,10 @@ import {
 } from "../mobx/selectors";
 import ThemeStore from "../mobx/ThemeStore";
 import { DimensionUtils } from "../utils/DimensionUtils";
+import * as Clipboard from "expo-clipboard";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import ViewUtils from "../utils/ViewUtils";
+import moment from "moment";
 
 const style = StyleSheet.create({
     img: {
@@ -85,7 +90,8 @@ const CryptogotchiView = observer((props: Props) => {
     const { translateX, translateY } = useFloating();
     const currentUser = useAppState(selectCurrentUser);
     const cryptogotchiOfUser = useAppState(selectFirstCryptogotchi);
-    const currentUserIsOwner = currentUser?.id === cryptogotchi.ownerId;
+    const currentUserIsOwner =
+        currentUser?.walletAddress === cryptogotchi.ownerAddress;
     if (currentUserIsOwner && cryptogotchiOfUser) {
         // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
         // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
@@ -145,6 +151,11 @@ const CryptogotchiView = observer((props: Props) => {
         return ThemeStore.calculateColorVariants(cryptogotchi.color);
     }, [cryptogotchi.color]);
 
+    const copyTokenId = () => {
+        Clipboard.setString(cryptogotchi.getUint256);
+        ViewUtils.toast("Copied");
+    };
+
     useEffect(() => {
         NavigationBar.setBackgroundColorAsync(secondaryColor);
         themeStore.setCurrentHeaderTintColor(onBackground);
@@ -176,7 +187,7 @@ const CryptogotchiView = observer((props: Props) => {
                 stickyHeaderIndices={[0]}
             >
                 {cryptogotchi && (
-                    <BlurView intensity={0} style={tailwind("rounded-lg")}>
+                    <>
                         <View
                             style={[
                                 style.ticker,
@@ -196,13 +207,55 @@ const CryptogotchiView = observer((props: Props) => {
                                 </Pressable>
                             </View>
                         </View>
-                    </BlurView>
+                        <View
+                            style={tailwind(
+                                "absolute items-end flex-col right-4 top-1/3"
+                            )}
+                        >
+                            <View
+                                style={[
+                                    tailwind(
+                                        "pr-2 mb-5 flex-1 flex items-center rounded-lg w-24"
+                                    ),
+                                    {
+                                        backgroundColor: heartColor,
+                                    },
+                                ]}
+                            >
+                                <Pressable
+                                    style={tailwind("flex-1 px-3 py-2")}
+                                    onPress={copyTokenId}
+                                >
+                                    <View
+                                        style={tailwind(
+                                            "flex-row items-center"
+                                        )}
+                                    >
+                                        <Text
+                                            numberOfLines={1}
+                                            ellipsizeMode="middle"
+                                            style={[
+                                                { color: onSecondary },
+                                                tailwind(""),
+                                            ]}
+                                        >
+                                            #{cryptogotchi.getUint256}
+                                        </Text>
+                                        <Icon
+                                            style={{ color: onSecondary }}
+                                            name="content-copy"
+                                        />
+                                    </View>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </>
                 )}
 
                 <View
                     style={[
                         tailwind(
-                            "flex-row absolute w-full h-44 justify-center"
+                            "flex-row absolute w-full h-72 justify-center"
                         ),
                         memoStyle.wave,
                     ]}
@@ -255,7 +308,7 @@ const CryptogotchiView = observer((props: Props) => {
                 </View>
 
                 <View style={tailwind("flex-col mx-4 justify-end")}>
-                    <View style={tailwind("flex-row justify-between")}>
+                    <View style={tailwind("flex-row mb-4 justify-between")}>
                         {cryptogotchi && (
                             <FriendTitle
                                 textColor={onSecondary}

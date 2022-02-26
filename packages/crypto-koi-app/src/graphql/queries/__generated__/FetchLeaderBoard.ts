@@ -7,6 +7,16 @@
 // GraphQL query operation: FetchLeaderBoard
 // ====================================================
 
+export interface FetchLeaderBoard_leaderboard_attributes {
+  __typename: "CryptogotchiAttributes";
+  primaryColor: string;
+  bodyColor: string;
+  finColor: string;
+  patternQuantity: number;
+  species: string;
+  birthday: number;
+}
+
 export interface FetchLeaderBoard_leaderboard {
   __typename: "Cryptogotchi";
   id: string;
@@ -22,6 +32,7 @@ export interface FetchLeaderBoard_leaderboard {
   snapshotValid: any;
   isValidNft: boolean;
   color: string;
+  attributes: FetchLeaderBoard_leaderboard_attributes;
 }
 
 export interface FetchLeaderBoard {

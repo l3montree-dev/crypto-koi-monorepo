@@ -7,6 +7,16 @@
 // GraphQL mutation operation: ChangeCryptogotchiName
 // ====================================================
 
+export interface ChangeCryptogotchiName_changeCryptogotchiName_attributes {
+  __typename: "CryptogotchiAttributes";
+  primaryColor: string;
+  bodyColor: string;
+  finColor: string;
+  patternQuantity: number;
+  species: string;
+  birthday: number;
+}
+
 export interface ChangeCryptogotchiName_changeCryptogotchiName {
   __typename: "Cryptogotchi";
   id: string;
@@ -22,6 +32,7 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   snapshotValid: any;
   isValidNft: boolean;
   color: string;
+  attributes: ChangeCryptogotchiName_changeCryptogotchiName_attributes;
 }
 
 export interface ChangeCryptogotchiName {

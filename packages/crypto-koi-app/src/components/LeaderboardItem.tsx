@@ -83,11 +83,16 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                     backgroundColor: themeStore.secondaryColor,
                                 },
                                 tailwind(
-                                    "absolute -left-2 top-0 z-10 px-1  flex-row justify-center rounded-full"
+                                    "absolute -left-2 top-0 z-10 px-2 py-1  flex-row justify-center rounded-full"
                                 ),
                             ]}
                         >
-                            <Text style={{ color: themeStore.onSecondary }}>
+                            <Text
+                                style={[
+                                    { color: themeStore.onSecondary },
+                                    tailwind("text-xs"),
+                                ]}
+                            >
                                 {props.index + 1}
                             </Text>
                         </View>

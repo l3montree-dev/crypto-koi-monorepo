@@ -15,6 +15,7 @@ import { apolloClient } from "./services/ApolloClient";
 import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
 import log from "./utils/logger";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 if (Platform.OS === "android") {
     NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
@@ -52,20 +53,22 @@ const App: FunctionComponent = () => {
     }, []);
 
     return (
-        <ApolloProvider client={apolloClient}>
-            <AppStateContext.Provider value={rootStore}>
-                <SafeAreaProvider>
-                    <TailwindProvider utilities={utilities}>
-                        <StatusBar translucent />
-                        <View style={containerStyle}>
-                            <NavigationContainer theme={Theme}>
-                                <RootStackNavigator />
-                            </NavigationContainer>
-                        </View>
-                    </TailwindProvider>
-                </SafeAreaProvider>
-            </AppStateContext.Provider>
-        </ApolloProvider>
+        <RootSiblingParent>
+            <ApolloProvider client={apolloClient}>
+                <AppStateContext.Provider value={rootStore}>
+                    <SafeAreaProvider>
+                        <TailwindProvider utilities={utilities}>
+                            <StatusBar translucent />
+                            <View style={containerStyle}>
+                                <NavigationContainer theme={Theme}>
+                                    <RootStackNavigator />
+                                </NavigationContainer>
+                            </View>
+                        </TailwindProvider>
+                    </SafeAreaProvider>
+                </AppStateContext.Provider>
+            </ApolloProvider>
+        </RootSiblingParent>
     );
 };
 

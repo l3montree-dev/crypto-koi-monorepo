@@ -7,6 +7,16 @@
 // GraphQL query operation: GetUser
 // ====================================================
 
+export interface GetUser_user_cryptogotchies_attributes {
+  __typename: "CryptogotchiAttributes";
+  primaryColor: string;
+  bodyColor: string;
+  finColor: string;
+  patternQuantity: number;
+  species: string;
+  birthday: number;
+}
+
 export interface GetUser_user_cryptogotchies {
   __typename: "Cryptogotchi";
   id: string;
@@ -22,13 +32,14 @@ export interface GetUser_user_cryptogotchies {
   snapshotValid: any;
   isValidNft: boolean;
   color: string;
+  attributes: GetUser_user_cryptogotchies_attributes;
 }
 
 export interface GetUser_user {
   __typename: "User";
   id: string;
+  walletAddress: string;
   createdAt: any;
-  name: string | null;
   cryptogotchies: GetUser_user_cryptogotchies[];
 }
 

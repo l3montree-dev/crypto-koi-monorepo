@@ -7,6 +7,16 @@
 // GraphQL fragment: ClientCryptogotchi
 // ====================================================
 
+export interface ClientCryptogotchi_attributes {
+  __typename: "CryptogotchiAttributes";
+  primaryColor: string;
+  bodyColor: string;
+  finColor: string;
+  patternQuantity: number;
+  species: string;
+  birthday: number;
+}
+
 export interface ClientCryptogotchi {
   __typename: "Cryptogotchi";
   id: string;
@@ -22,4 +32,5 @@ export interface ClientCryptogotchi {
   snapshotValid: any;
   isValidNft: boolean;
   color: string;
+  attributes: ClientCryptogotchi_attributes;
 }

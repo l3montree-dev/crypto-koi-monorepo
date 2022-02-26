@@ -12,7 +12,7 @@ export default class Cryptogotchi {
     public name!: string | null;
     public food!: number;
     public createdAt!: Moment;
-    public ownerId!: string;
+    public ownerAddress!: string;
     public gameStats: GameStat[] = [];
     public events: Event[] = [];
     public minutesTillDeath!: number;
@@ -22,6 +22,9 @@ export default class Cryptogotchi {
     public maxLifetimeMinutes!: number;
     public color!: string;
     public isValidNft!: boolean;
+
+    public attributes!: ClientCryptogotchi["attributes"];
+
     constructor(fragment: ClientCryptogotchi) {
         makeAutoObservable(this);
         this.setFromFragment(fragment);

@@ -7,6 +7,16 @@
 // GraphQL mutation operation: Feed
 // ====================================================
 
+export interface Feed_feed_attributes {
+  __typename: "CryptogotchiAttributes";
+  primaryColor: string;
+  bodyColor: string;
+  finColor: string;
+  patternQuantity: number;
+  species: string;
+  birthday: number;
+}
+
 export interface Feed_feed {
   __typename: "Cryptogotchi";
   id: string;
@@ -22,6 +32,7 @@ export interface Feed_feed {
   snapshotValid: any;
   isValidNft: boolean;
   color: string;
+  attributes: Feed_feed_attributes;
 }
 
 export interface Feed {

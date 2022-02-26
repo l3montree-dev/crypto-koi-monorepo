@@ -15,6 +15,14 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         snapshotValid
         isValidNft
         color
+        attributes {
+            primaryColor
+            bodyColor
+            finColor
+            patternQuantity
+            species
+            birthday
+        }
     }
 `;
 
