@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { FIND_CRYPTOGOTCHI } from "../graphql/queries/cryptogotchi";
 import { FindCryptogotchi } from "../graphql/queries/__generated__/FindCryptogotchi";
 import { RootStackParamList } from "../hooks/useNavigation";
@@ -29,6 +29,7 @@ const CryptogotchiScreen = observer(() => {
 
     return (
         <CryptogotchiView
+            isVisible
             clockIdPrefix="cryptogotchi-screen"
             cryptogotchi={cryptogotchi}
         />

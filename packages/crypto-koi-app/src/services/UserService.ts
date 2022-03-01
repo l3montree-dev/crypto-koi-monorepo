@@ -37,11 +37,6 @@ class UserService {
             fetchPolicy: "no-cache",
         });
         rootStore.authStore.setCurrentUser(user.data.user);
-        const cryptogotchi = user.data.user.cryptogotchies[0];
-
-        if (cryptogotchi) {
-            rootStore.themeStore.setColor(cryptogotchi.color);
-        }
     }
 }
 

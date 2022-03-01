@@ -1,5 +1,5 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { BigNumber, ethers, utils } from "ethers";
+import { BigNumber, ethers, providers, utils } from "ethers";
 import { config } from "../config";
 import CryptoKoi from "./abi/CryptoKoi.json";
 
@@ -12,6 +12,8 @@ export default class CryptoKoiSmartContract {
         this.provider = new ethers.providers.Web3Provider(
             walletConnectProvider
         );
+        // disable polling - real time events are not necessary.
+        // this.provider.polling = false;
         this.userAddress = walletConnectProvider.accounts[0];
         this.contract = new ethers.Contract(
             config.contractAddress,
@@ -36,12 +38,16 @@ export default class CryptoKoiSmartContract {
     }
 
     async redeem(tokenId: string, signature: unknown) {
-        // get the price.
         const price: BigNumber = await this.contract.getPrice();
-
-        return this.contract.redeem(this.getUserAddress(), tokenId, signature, {
-            value: price,
-        });
+        const response = (await this.contract.redeem(
+            this.getUserAddress(),
+            tokenId,
+            signature,
+            {
+                value: price,
+            }
+        )) as providers.TransactionResponse;
+        return response.wait();
     }
 
     static async ownerOf(tokenId: string) {

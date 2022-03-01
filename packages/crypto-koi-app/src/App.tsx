@@ -16,6 +16,8 @@ import { userService } from "./services/UserService";
 import { Colors } from "./styles/colors";
 import log from "./utils/logger";
 import { RootSiblingParent } from "react-native-root-siblings";
+import { appEventEmitter } from "./services/AppEventEmitter";
+import ViewUtils from "./utils/ViewUtils";
 
 if (Platform.OS === "android") {
     NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
@@ -50,6 +52,21 @@ const App: FunctionComponent = () => {
                 }, 1000);
             }
         })();
+
+        const unsub1 = appEventEmitter.registerListener(
+            "successfulRedeem",
+            () => {
+                ViewUtils.toast("Redeem successful");
+            }
+        );
+
+        const unsub2 = appEventEmitter.registerListener("failedRedeem", () => {
+            ViewUtils.toast("Redeem failed");
+        });
+        return () => {
+            unsub1();
+            unsub2();
+        };
     }, []);
 
     return (

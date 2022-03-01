@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { BlurView } from "expo-blur";
 import * as NavigationBar from "expo-navigation-bar";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
     Animated as RNAnimated,
     Image,
@@ -31,6 +31,7 @@ import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
 import Cryptogotchi from "../mobx/Cryptogotchi";
 import {
+    selectCryptogotchies,
     selectCurrentUser,
     selectFirstCryptogotchi,
     selectThemeStore,
@@ -40,7 +41,7 @@ import { DimensionUtils } from "../utils/DimensionUtils";
 import * as Clipboard from "expo-clipboard";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewUtils from "../utils/ViewUtils";
-import moment from "moment";
+import useOnScreen from "../hooks/useOnScreen";
 
 const style = StyleSheet.create({
     img: {
@@ -79,6 +80,8 @@ type RefreshingProps = {
 type ViewProps = {
     cryptogotchi: Cryptogotchi;
     clockIdPrefix: string;
+    // necessary for the horizontal scroll view in friend screen.
+    isVisible: boolean;
 };
 type Props = ViewProps | (ViewProps & RefreshingProps);
 
@@ -86,16 +89,18 @@ const AnimatedEllipse = RNAnimated.createAnimatedComponent(Ellipse);
 
 const CryptogotchiView = observer((props: Props) => {
     let { cryptogotchi } = props;
+
     const tailwind = useTailwind();
     const { translateX, translateY } = useFloating();
     const currentUser = useAppState(selectCurrentUser);
-    const cryptogotchiOfUser = useAppState(selectFirstCryptogotchi);
+    const cryptogotchies = useAppState(selectCryptogotchies);
     const currentUserIsOwner =
         currentUser?.walletAddress === cryptogotchi.ownerAddress;
-    if (currentUserIsOwner && cryptogotchiOfUser) {
+
+    if (currentUserIsOwner && cryptogotchies) {
         // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
         // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
-        cryptogotchi = cryptogotchiOfUser;
+        cryptogotchi = cryptogotchies.find((cr) => cr.id === cryptogotchi.id)!;
     }
 
     const [feed, { loading }] = useMutation<Feed, FeedVariables>(
@@ -131,6 +136,7 @@ const CryptogotchiView = observer((props: Props) => {
             },
             wave: {
                 bottom: currentUserIsOwner ? 25 : 82,
+                height: 330,
             },
         }),
         [currentUserIsOwner]
@@ -164,6 +170,10 @@ const CryptogotchiView = observer((props: Props) => {
             NavigationBar.setBackgroundColorAsync(themeStore.secondaryColor);
         };
     }, [secondaryColor, onSecondary]);
+
+    useEffect(() => {
+        if (props.isVisible) themeStore.setColor(cryptogotchi.color);
+    }, [props.isVisible, cryptogotchi.color]);
 
     return (
         <SafeAreaView
@@ -200,7 +210,9 @@ const CryptogotchiView = observer((props: Props) => {
                                         heartColor={heartColor}
                                         onBackgroundColor={onBackground}
                                         clockId={
-                                            props.clockIdPrefix + "-lifetime"
+                                            props.clockIdPrefix +
+                                            cryptogotchi.id +
+                                            "-lifetime"
                                         }
                                         cryptogotchi={cryptogotchi}
                                     />
@@ -240,7 +252,11 @@ const CryptogotchiView = observer((props: Props) => {
                                             tailwind("ml-1 text-xs"),
                                         ]}
                                     >
-                                        {cryptogotchi.rank}
+                                        {cryptogotchi.isAlive
+                                            ? cryptogotchi.rank > 0
+                                                ? cryptogotchi.rank
+                                                : "Pending"
+                                            : "Dead"}
                                     </Text>
                                 </View>
                             </View>
@@ -286,9 +302,7 @@ const CryptogotchiView = observer((props: Props) => {
 
                 <View
                     style={[
-                        tailwind(
-                            "flex-row absolute w-full h-72 justify-center"
-                        ),
+                        tailwind("flex-row absolute w-full justify-center"),
                         memoStyle.wave,
                     ]}
                 >
@@ -373,7 +387,11 @@ const CryptogotchiView = observer((props: Props) => {
                     {cryptogotchi && (
                         <FriendInfo
                             textColor={onSecondary}
-                            clockId={props.clockIdPrefix + "-friend-info"}
+                            clockId={
+                                props.clockIdPrefix +
+                                cryptogotchi.id +
+                                "-friend-info"
+                            }
                             cryptogotchi={cryptogotchi}
                         />
                     )}
@@ -383,7 +401,7 @@ const CryptogotchiView = observer((props: Props) => {
             {currentUserIsOwner && (
                 <View
                     style={[
-                        tailwind("pt-4 px-4 pb-2"),
+                        tailwind("pt-4 px-4 pb-8"),
                         { backgroundColor: secondaryColor },
                     ]}
                 >
@@ -394,7 +412,11 @@ const CryptogotchiView = observer((props: Props) => {
                         buttonProgressFilled={buttonProgressFilled}
                         disabled={!cryptogotchi.isAlive}
                         loading={loading}
-                        clockId={props.clockIdPrefix + "-next-feed-button"}
+                        clockId={
+                            props.clockIdPrefix +
+                            cryptogotchi.id +
+                            "-next-feed-button"
+                        }
                         onPress={handleFeed}
                         cryptogotchi={cryptogotchi}
                     />

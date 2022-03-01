@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-raw-text */
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { RouteProp, useFocusEffect, useRoute } from "@react-navigation/native";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { StatusBar } from "expo-status-bar";
@@ -35,7 +36,14 @@ import {
 } from "../graphql/queries/__generated__/GetNftSignature";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
-import { selectFirstCryptogotchi, selectThemeStore } from "../mobx/selectors";
+import { RootStackParamList } from "../hooks/useNavigation";
+import {
+    selectCryptogotchi,
+    selectFirstCryptogotchi,
+    selectThemeStore,
+} from "../mobx/selectors";
+import { appEventEmitter } from "../services/AppEventEmitter";
+import { userService } from "../services/UserService";
 import log from "../utils/logger";
 import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
 
@@ -150,7 +158,10 @@ const EventItem: FunctionComponent<Props> = (props) => {
 };
 
 const FriendEditModal = observer(() => {
-    const cryptogotchi = useAppState(selectFirstCryptogotchi);
+    const { params } = useRoute<
+        RouteProp<RootStackParamList, "FriendEditScreen">
+    >();
+    const cryptogotchi = useAppState(selectCryptogotchi(params.cryptogotchiId));
     const tailwind = useTailwind();
     const connector = useWalletConnect();
 
@@ -160,7 +171,7 @@ const FriendEditModal = observer(() => {
         ChangeCryptogotchiNameVariables
     >(CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION);
 
-    const { fetchMore, data: events } = useQuery<
+    const [_, { fetchMore, data: events, refetch }] = useLazyQuery<
         FetchEvents,
         FetchEventsVariables
     >(FETCH_EVENTS, {
@@ -185,10 +196,11 @@ const FriendEditModal = observer(() => {
 
         const provider = new WalletConnectProvider({
             rpc: {
-                1337: config.chainUrl,
+                [config.chainId]: config.chainUrl,
             },
-            chainId: 1337,
+            chainId: config.chainId,
             connector: connector,
+
             qrcode: false,
         });
 
@@ -206,10 +218,19 @@ const FriendEditModal = observer(() => {
             return;
         }
 
-        await cryptoKoiContract.redeem(
-            result.data.getNftSignature.tokenId,
-            result.data.getNftSignature.signature
-        );
+        log.info("calling contract redeem");
+        try {
+            const receipt = await cryptoKoiContract.redeem(
+                result.data.getNftSignature.tokenId,
+                result.data.getNftSignature.signature
+            );
+            appEventEmitter.emit("successfulRedeem", receipt);
+            log.info("successful transaction - full refresh");
+            await userService.sync();
+        } catch (e) {
+            log.error("transaction failed", e);
+            appEventEmitter.emit("failedRedeem", e);
+        }
     }, [cryptogotchi, connector]);
 
     const handleNameSave = async () => {
@@ -223,6 +244,10 @@ const FriendEditModal = observer(() => {
         cryptogotchi.setName(result.data?.changeCryptogotchiName.name);
     };
 
+    useEffect(() => {
+        if (cryptogotchi)
+            refetch({ id: cryptogotchi?.id ?? "", offset: 0, limit: 20 });
+    }, [cryptogotchi?.id]);
     if (!cryptogotchi) {
         return null;
     }
@@ -259,27 +284,23 @@ const FriendEditModal = observer(() => {
                     }
                     ListHeaderComponent={
                         <View style={tailwind("px-4")}>
-                            <View style={tailwind("rounded-lg mt-24 mb-6")}>
-                                <FriendInfo
-                                    textColor={themeStore.onSecondary}
-                                    clockId={"friend-edit"}
-                                    cryptogotchi={cryptogotchi}
+                            <View style={tailwind("rounded-lg mt-24 mb-0")}>
+                                <Input
+                                    label="Change Name"
+                                    textColor={themeStore.buttonTextColor}
+                                    labelColor={themeStore.onSecondary}
+                                    style={[
+                                        tailwind("mb-10"),
+                                        {
+                                            backgroundColor:
+                                                themeStore.buttonBackgroundColor,
+                                        },
+                                    ]}
+                                    {...name}
+                                    selectTextOnFocus
                                 />
                             </View>
-                            <Input
-                                label="Change Name"
-                                textColor={themeStore.buttonTextColor}
-                                labelColor={themeStore.onSecondary}
-                                style={[
-                                    tailwind("mb-10"),
-                                    {
-                                        backgroundColor:
-                                            themeStore.buttonBackgroundColor,
-                                    },
-                                ]}
-                                {...name}
-                                selectTextOnFocus
-                            />
+
                             <View style={tailwind("mb-4")}>
                                 <Text style={{ color: themeStore.onSecondary }}>
                                     Events

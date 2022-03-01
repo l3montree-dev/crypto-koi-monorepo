@@ -14,6 +14,15 @@ export const CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION = gql`
     }
 `;
 
+export const CREATE_CRYPTOGOTCHI_MUTATION = gql`
+    ${CLIENT_CRYPTOGOTCHI_FRAGMENT}
+    mutation CreateCryptogotchi($_: String) {
+        createCryptogotchi(_: $_) {
+            ...ClientCryptogotchi
+        }
+    }
+`;
+
 export const GET_NFT_SIGNATURE = gql`
     ${CLIENT_NFT_DATA}
     mutation GetNftSignature($id: ID!, $address: String!) {
