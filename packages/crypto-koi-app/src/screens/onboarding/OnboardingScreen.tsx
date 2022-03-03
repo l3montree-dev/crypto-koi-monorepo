@@ -192,7 +192,7 @@ function OnboardingScreen() {
                             "text-black text-lg mt-5 px-10 text-center"
                         )}
                     >
-                        Travel and have fun with your best friends
+                        Grow the oldest and rarest koi inside the blockchain
                     </Text>
                 </View>
                 <View
