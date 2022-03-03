@@ -56,6 +56,7 @@ class AuthService {
 
     private static refreshTokenStorageKey = "_auth_refreshToken";
     private static accessTokenStorageKey = "_auth_accessToken";
+    private static deviceIdStorageKey = "_auth_deviceId";
 
     refreshTokenRequest: Promise<AxiosResponse<TokenResponse>> | null = null;
 
@@ -68,6 +69,38 @@ class AuthService {
                 "/auth/login",
                 {
                     walletAddress,
+                }
+            );
+            log.info("exchange successful. Storing token on device");
+            await this.handleSuccessfulToken(token.data);
+            return true;
+        } catch (e) {
+            log.error("exchange failed", e);
+            return false;
+        }
+    }
+
+    async exchangeDeviceIdForToken() {
+        try {
+            const deviceId = await StorageService.getValueFor(
+                AuthService.deviceIdStorageKey
+            );
+
+            if (!deviceId) {
+                // generate a new one.
+                const deviceId =
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15);
+                await StorageService.save(
+                    AuthService.deviceIdStorageKey,
+                    deviceId
+                );
+            }
+            log.info("trying to exchange device id for token");
+            const token = await this.publicClient.post<TokenResponse>(
+                "/auth/login",
+                {
+                    deviceId,
                 }
             );
             log.info("exchange successful. Storing token on device");
@@ -115,6 +148,8 @@ class AuthService {
         await Promise.all([
             StorageService.delete(AuthService.refreshTokenStorageKey),
             StorageService.delete(AuthService.accessTokenStorageKey),
+            // do NOT delete the deviceId storage key.
+            // StorageService.delete(AuthService.deviceIdStorageKey),
         ]);
     }
 

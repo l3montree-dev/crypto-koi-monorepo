@@ -1,7 +1,7 @@
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Constants from "expo-constants";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
     Image,
@@ -19,6 +19,7 @@ import Animated, {
     useSharedValue,
     withSpring,
 } from "react-native-reanimated";
+import * as NavigationBar from "expo-navigation-bar";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../../components/AppButton";
@@ -84,7 +85,11 @@ function OnboardingScreen() {
         };
     });
 
-    const onPlayPress = async () => {
+    useEffect(() => {
+        NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
+    }, []);
+
+    const handlePlayWithWalletPress = async () => {
         if (!connector.connected) {
             await connector.connect();
         }
@@ -101,6 +106,10 @@ function OnboardingScreen() {
         await provider.enable();
 
         await userService.loginUsingWalletAddress(provider.accounts[0]);
+    };
+
+    const handlePlayWithoutWalletPress = () => {
+        return userService.loginUsingDeviceId();
     };
 
     const setActive = (next: number, x: number) => {
@@ -131,7 +140,7 @@ function OnboardingScreen() {
 
     const handleNext = () => {
         if (activeSlide === 2) {
-            return onPlayPress();
+            return handlePlayWithWalletPress();
         }
         if (scrollViewRef.current) {
             scrollViewRef.current.scrollTo({
@@ -328,8 +337,16 @@ function OnboardingScreen() {
                                 <AppButton
                                     backgroundColor={Colors.bgColorVariant}
                                     textColor="white"
-                                    onPress={onPlayPress}
-                                    title="Play"
+                                    onPress={handlePlayWithWalletPress}
+                                    title="I already have a Wallet"
+                                />
+                            </View>
+                            <View style={tailwind("mt-4")}>
+                                <AppButton
+                                    backgroundColor={Colors.bgColor}
+                                    textColor="white"
+                                    onPress={handlePlayWithoutWalletPress}
+                                    title="Play without connected Wallet"
                                 />
                             </View>
                         </Animated.View>

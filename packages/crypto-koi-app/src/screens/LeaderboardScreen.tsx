@@ -49,18 +49,20 @@ const Leaderboard = observer(() => {
                 style={[
                     tailwind("px-4 pb-3"),
                     style.header,
-                    { backgroundColor: themeStore.backgroundColor },
+                    { backgroundColor: themeStore.secondaryColor },
                 ]}
             >
-                <Text
-                    style={[
-                        commonStyles.screenTitle,
-                        tailwind("pt-1"),
-                        { color: themeStore.onBackground },
-                    ]}
-                >
-                    Leaderboard
-                </Text>
+                <View style={tailwind("mt-3")}>
+                    <Text
+                        style={[
+                            commonStyles.screenTitle,
+                            tailwind("pt-1"),
+                            { color: themeStore.onSecondary },
+                        ]}
+                    >
+                        Leaderboard
+                    </Text>
+                </View>
             </View>
             <FlatList
                 onEndReachedThreshold={0.5}

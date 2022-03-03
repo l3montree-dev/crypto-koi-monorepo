@@ -1,10 +1,14 @@
 import Toast from "react-native-root-toast";
 
 export default class ViewUtils {
-    static toast(message: string) {
+    static toast(
+        message: string,
+        duration = Toast.durations.LONG,
+        position = Toast.positions.BOTTOM
+    ) {
         Toast.show(message, {
-            duration: Toast.durations.LONG,
-            position: Toast.positions.BOTTOM,
+            duration,
+            position,
             animation: true,
             hideOnPress: true,
             delay: 0,

@@ -15,6 +15,7 @@ import {
     StatusBar,
     StyleSheet,
     View,
+    Linking,
 } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
 import { useTailwind } from "tailwind-rn/dist";
@@ -42,11 +43,16 @@ import * as Clipboard from "expo-clipboard";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewUtils from "../utils/ViewUtils";
 import useOnScreen from "../hooks/useOnScreen";
+import { Link } from "@react-navigation/native";
 
 const style = StyleSheet.create({
     img: {
         width: 400,
         height: 400,
+    },
+    instagramHandle: {
+        // backgroundColor: "black",
+        transform: [{ rotate: "-90deg" }, { translateY: 62 }],
     },
     z1: {
         zIndex: 1,
@@ -327,6 +333,32 @@ const CryptogotchiView = observer((props: Props) => {
                             }}
                         />
                     </RNAnimated.View>
+
+                    <View
+                        style={[
+                            style.instagramHandle,
+                            tailwind(
+                                "right-0 z-10 flex-row bottom-40 absolute"
+                            ),
+                        ]}
+                    >
+                        <Text style={{ color: onBackground }}>
+                            Artwork by:{" "}
+                        </Text>
+
+                        <Pressable
+                            onPress={() => {
+                                Linking.openURL(
+                                    "https://www.instagram.com/tamxily.tattoo/"
+                                );
+                            }}
+                        >
+                            <Text style={{ color: onBackground }}>
+                                &#64;tamxily.tattoo
+                            </Text>
+                        </Pressable>
+                    </View>
+
                     <View style={tailwind("flex-row relative justify-center")}>
                         <Svg width={150} height={75}>
                             <AnimatedEllipse

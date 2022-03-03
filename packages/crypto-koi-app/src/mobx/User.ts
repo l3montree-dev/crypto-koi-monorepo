@@ -6,7 +6,8 @@ export default class User {
     public createdAt: Moment;
     constructor(
         public id: string,
-        public walletAddress: string,
+        public walletAddress: string | null,
+        public deviceId: string | null,
         createdAt: string,
         public cryptogotchies: Cryptogotchi[]
     ) {

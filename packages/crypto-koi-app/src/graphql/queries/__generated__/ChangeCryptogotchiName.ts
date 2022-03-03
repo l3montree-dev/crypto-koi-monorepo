@@ -26,7 +26,7 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   createdAt: any;
   minutesTillDeath: number;
   maxLifetimeMinutes: number;
-  ownerAddress: string;
+  ownerAddress: string | null;
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;

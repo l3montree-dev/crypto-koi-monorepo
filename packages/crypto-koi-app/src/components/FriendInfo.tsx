@@ -47,7 +47,9 @@ const FriendInfo = observer((props: Props) => {
                 >
                     <View
                         style={[
-                            tailwind("w-10 border-2 rounded-lg mb-1 h-10"),
+                            tailwind(
+                                "w-10 border-2 border-neutral-500 rounded-lg mb-1 h-10"
+                            ),
                             {
                                 backgroundColor:
                                     cryptogotchi.attributes.primaryColor,
@@ -66,7 +68,9 @@ const FriendInfo = observer((props: Props) => {
                 >
                     <View
                         style={[
-                            tailwind("w-10 border-2 rounded-lg mb-1 h-10"),
+                            tailwind(
+                                "w-10 border-2 border-neutral-500 rounded-lg mb-1 h-10"
+                            ),
                             {
                                 backgroundColor:
                                     cryptogotchi.attributes.bodyColor,
@@ -85,7 +89,9 @@ const FriendInfo = observer((props: Props) => {
                 >
                     <View
                         style={[
-                            tailwind("w-10 border-2 rounded-lg mb-1 h-10"),
+                            tailwind(
+                                "w-10 border-2 border-neutral-500 rounded-lg mb-1 h-10"
+                            ),
                             {
                                 backgroundColor:
                                     cryptogotchi.attributes.finColor,
@@ -104,7 +110,7 @@ const FriendInfo = observer((props: Props) => {
                 >
                     <View
                         style={tailwind(
-                            "w-10 rounded-lg border-2 mb-1 flex-row items-center justify-center h-10"
+                            "w-10 rounded-lg border-2 border-neutral-500 mb-1 flex-row items-center justify-center h-10"
                         )}
                     >
                         <Text style={tailwind("font-bold text-lg")}>
@@ -156,27 +162,29 @@ const FriendInfo = observer((props: Props) => {
                 </View>
             </View>
 
-            <View style={tailwind("flex-row items-center")}>
-                <Icon
-                    style={[tailwind("text-2xl opacity-50"), s]}
-                    name="fishbowl"
-                />
-                <Text style={[tailwind("ml-2"), s]}>Owner: </Text>
-                <Text
-                    numberOfLines={1}
-                    ellipsizeMode="middle"
-                    style={[s, tailwind("flex-1")]}
-                >
-                    {cryptogotchi.ownerAddress}
-                </Text>
-                <View>
-                    <IconButton
-                        onPress={copyOwnerAddressToClipboard}
-                        color={props.textColor}
-                        name="content-copy"
+            {cryptogotchi.ownerAddress !== null && (
+                <View style={tailwind("flex-row items-center")}>
+                    <Icon
+                        style={[tailwind("text-2xl opacity-50"), s]}
+                        name="fishbowl"
                     />
+                    <Text style={[tailwind("ml-2"), s]}>Owner: </Text>
+                    <Text
+                        numberOfLines={1}
+                        ellipsizeMode="middle"
+                        style={[s, tailwind("flex-1")]}
+                    >
+                        {cryptogotchi.ownerAddress}
+                    </Text>
+                    <View>
+                        <IconButton
+                            onPress={copyOwnerAddressToClipboard}
+                            color={props.textColor}
+                            name="content-copy"
+                        />
+                    </View>
                 </View>
-            </View>
+            )}
             <View style={tailwind("flex-row items-center")}>
                 <Icon
                     style={[tailwind("text-2xl opacity-50"), s]}

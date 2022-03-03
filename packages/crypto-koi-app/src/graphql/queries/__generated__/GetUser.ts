@@ -26,7 +26,7 @@ export interface GetUser_user_cryptogotchies {
   createdAt: any;
   minutesTillDeath: number;
   maxLifetimeMinutes: number;
-  ownerAddress: string;
+  ownerAddress: string | null;
   deathDate: any | null;
   nextFeeding: any;
   snapshotValid: any;
@@ -39,7 +39,8 @@ export interface GetUser_user_cryptogotchies {
 export interface GetUser_user {
   __typename: "User";
   id: string;
-  walletAddress: string;
+  walletAddress: string | null;
+  deviceId: string | null;
   createdAt: any;
   cryptogotchies: GetUser_user_cryptogotchies[];
 }

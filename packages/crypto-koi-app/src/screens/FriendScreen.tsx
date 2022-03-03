@@ -120,7 +120,7 @@ const FriendsScreen = observer(() => {
                         </View>
                     ))}
 
-                    <View
+                    {/* <View
                         style={[
                             style.slide,
                             { backgroundColor: theme.secondaryColor },
@@ -151,33 +151,36 @@ const FriendsScreen = observer(() => {
                                 title="Create new CryptoKoi"
                             />
                         </View>
-                    </View>
+                                </View> */}
                 </ScrollView>
             </View>
-            <View
-                style={tailwind(
-                    "absolute bottom-4 w-full justify-center items-center"
-                )}
-            >
-                <View style={tailwind("flex-row")}>
-                    {cryptogotchies.map((cryptogotchi) => (
-                        <View
-                            key={cryptogotchi.id}
+            {cryptogotchies.length > 1 && (
+                <View
+                    style={tailwind(
+                        "absolute bottom-4 w-full justify-center items-center"
+                    )}
+                >
+                    <View style={tailwind("flex-row")}>
+                        {cryptogotchies.map((cryptogotchi) => (
+                            <View
+                                key={cryptogotchi.id}
+                                style={[
+                                    tailwind(
+                                        "bg-white opacity-50 mx-2 rounded"
+                                    ),
+                                    style.dot,
+                                ]}
+                            />
+                        ))}
+
+                        <Animated.View
                             style={[
-                                tailwind("bg-white opacity-50 mx-2 rounded"),
                                 style.dot,
+                                tailwind("bg-white rounded  absolute mx-2"),
+                                animatedActiveDotStyle,
                             ]}
                         />
-                    ))}
-
-                    <Animated.View
-                        style={[
-                            style.dot,
-                            tailwind("bg-white rounded  absolute mx-2"),
-                            animatedActiveDotStyle,
-                        ]}
-                    />
-                    <View
+                        {/*<View
                         style={[
                             tailwind(
                                 "bg-white flex-row justify-center items-center mx-2 rounded"
@@ -186,9 +189,10 @@ const FriendsScreen = observer(() => {
                         ]}
                     >
                         <Icon color={"rgba(0,0,0,1)"} size={10} name={"plus"} />
+                    </View>*/}
                     </View>
                 </View>
-            </View>
+            )}
         </View>
     );
 });

@@ -6,6 +6,7 @@ import useAppState from "./hooks/useAppState";
 import { selectThemeStore } from "./mobx/selectors";
 import FriendScreen from "./screens/FriendScreen";
 import Leaderboard from "./screens/LeaderboardScreen";
+import { ProfileScreen } from "./screens/ProfileScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -53,9 +54,9 @@ export const TabNavigator = observer(() => {
                 }}
             />
 
-            {/*  <Tab.Screen
+            <Tab.Screen
                 name="Profile"
-                component={SettingsScreen}
+                component={ProfileScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
@@ -65,7 +66,7 @@ export const TabNavigator = observer(() => {
                         />
                     ),
                 }}
-            /> */}
+            />
         </Tab.Navigator>
     );
 });

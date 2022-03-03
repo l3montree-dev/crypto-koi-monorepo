@@ -19,16 +19,29 @@ class UserService {
 
         return this.sync();
     }
+
+    async loginUsingDeviceId() {
+        const success = await authService.exchangeDeviceIdForToken();
+        if (!success) {
+            return;
+        }
+        return this.sync();
+    }
+
     /**
      * Executes side-effects. If the login is successful, it does update the authorization store.
      * @returns
      */
     async tryToLogin(): Promise<void> {
         const success = await authService.tryToLoginUsingStoredCredentials();
-        if (!success) {
-            return;
-        }
+        if (!success) return;
+
         return this.sync();
+    }
+
+    async logout(): Promise<void> {
+        await authService.logout();
+        rootStore.authStore.setCurrentUser(null);
     }
 
     async sync() {

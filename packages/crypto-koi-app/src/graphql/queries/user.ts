@@ -7,10 +7,19 @@ export const GET_USER = gql`
         user {
             id
             walletAddress
+            deviceId
             createdAt
             cryptogotchies {
                 ...ClientCryptogotchi
             }
+        }
+    }
+`;
+
+export const CONNECT_WALLET_MUTATION = gql`
+    mutation ConnectWallet($walletAddress: String!) {
+        connectWallet(walletAddress: $walletAddress) {
+            id
         }
     }
 `;
