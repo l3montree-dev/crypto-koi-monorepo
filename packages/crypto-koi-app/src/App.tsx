@@ -1,6 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import * as SplashScreen from "expo-splash-screen";
+import SplashScreen from "react-native-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { FunctionComponent, useEffect } from "react";
 import { View } from "react-native";
@@ -18,10 +18,6 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { appEventEmitter } from "./services/AppEventEmitter";
 import ViewUtils from "./utils/ViewUtils";
 
-// Instruct SplashScreen not to hide yet, we want to do this manually
-SplashScreen.preventAutoHideAsync().catch(() => {
-    /* reloading the app might trigger some race conditions, ignore them */
-});
 const Theme = {
     ...DefaultTheme,
     colors: {
@@ -44,7 +40,7 @@ const App: FunctionComponent = () => {
                 log.warn("login failed with:", e);
             } finally {
                 setTimeout(() => {
-                    return SplashScreen.hideAsync();
+                    return SplashScreen.hide();
                 }, 1000);
             }
         })();
