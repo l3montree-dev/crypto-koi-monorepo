@@ -27,7 +27,7 @@ interface Props extends PressableProps {
 
 const style = StyleSheet.create({
     loadingContainer: {
-        height: 49,
+        height: 51,
     },
 });
 

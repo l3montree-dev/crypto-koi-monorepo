@@ -51,6 +51,7 @@ const style = StyleSheet.create({
         height: 400,
     },
     instagramHandle: {
+        zIndex: 1,
         // backgroundColor: "black",
         transform: [{ rotate: "-90deg" }, { translateY: 62 }],
     },
@@ -218,7 +219,7 @@ const CryptogotchiView = observer((props: Props) => {
                         </View>
                         <View
                             style={tailwind(
-                                "absolute items-end flex-col right-4 top-1/3"
+                                "absolute z-50 bg-slate-500 items-end flex-col right-4 top-1/3"
                             )}
                         >
                             <View
@@ -279,10 +280,7 @@ const CryptogotchiView = observer((props: Props) => {
                                         <Text
                                             numberOfLines={1}
                                             ellipsizeMode="middle"
-                                            style={[
-                                                { color: onSecondary },
-                                                tailwind(""),
-                                            ]}
+                                            style={{ color: onSecondary }}
                                         >
                                             #{cryptogotchi.getUint256}
                                         </Text>
@@ -337,7 +335,7 @@ const CryptogotchiView = observer((props: Props) => {
                     <View
                         style={[
                             style.instagramHandle,
-                            tailwind("right-0  flex-row bottom-40 absolute"),
+                            tailwind("right-0 flex-row bottom-40 absolute"),
                         ]}
                     >
                         <Text style={{ color: onBackground }}>
