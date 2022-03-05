@@ -239,7 +239,7 @@ const FriendEditModal = observer(() => {
             return;
         }
         const result = await changeName({
-            variables: { id: cryptogotchi.id, name: name.value },
+            variables: { id: cryptogotchi.id, name: name.value.trim() },
         });
         cryptogotchi.setName(result.data?.changeCryptogotchiName.name);
     };

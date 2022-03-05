@@ -337,9 +337,7 @@ const CryptogotchiView = observer((props: Props) => {
                     <View
                         style={[
                             style.instagramHandle,
-                            tailwind(
-                                "right-0 z-10 flex-row bottom-40 absolute"
-                            ),
+                            tailwind("right-0  flex-row bottom-40 absolute"),
                         ]}
                     >
                         <Text style={{ color: onBackground }}>
