@@ -1,0 +1,104 @@
+diff --git a/node_modules/react-native-root-toast/lib/ToastContainer.js b/node_modules/react-native-root-toast/lib/ToastContainer.js
+index 7b27142..cee9844 100644
+--- a/node_modules/react-native-root-toast/lib/ToastContainer.js
++++ b/node_modules/react-native-root-toast/lib/ToastContainer.js
+@@ -3,7 +3,6 @@ import React, {
+ } from 'react';
+ import PropTypes from 'prop-types';
+ import {
+-    ViewPropTypes,
+     StyleSheet,
+     View,
+     Text,
+@@ -61,29 +60,6 @@ let styles = StyleSheet.create({
+ class ToastContainer extends Component {
+     static displayName = 'ToastContainer';
+ 
+-    static propTypes = {
+-        ...ViewPropTypes,
+-        containerStyle: ViewPropTypes.style,
+-        duration: PropTypes.number,
+-        visible: PropTypes.bool,
+-        position: PropTypes.number,
+-        animation: PropTypes.bool,
+-        shadow: PropTypes.bool,
+-        keyboardAvoiding: PropTypes.bool,
+-        backgroundColor: PropTypes.string,
+-        opacity: PropTypes.number,
+-        shadowColor: PropTypes.string,
+-        textColor: PropTypes.string,
+-        textStyle: Text.propTypes.style,
+-        delay: PropTypes.number,
+-        hideOnPress: PropTypes.bool,
+-        onPress: PropTypes.func,
+-        onHide: PropTypes.func,
+-        onHidden: PropTypes.func,
+-        onShow: PropTypes.func,
+-        onShown: PropTypes.func
+-    };
+-
+     static defaultProps = {
+         visible: false,
+         duration: durations.SHORT,
+@@ -173,7 +149,7 @@ class ToastContainer extends Component {
+                 duration: this.props.animation ? TOAST_ANIMATION_DURATION : 0,
+                 easing: Easing.out(Easing.ease),
+                 useNativeDriver: true
+-            }).start(({finished}) => {
++            }).start(({ finished }) => {
+                 if (finished) {
+                     this._animating = !finished;
+                     this.props.onShown && this.props.onShown(this.props.siblingManager);
+@@ -204,7 +180,7 @@ class ToastContainer extends Component {
+                 duration: this.props.animation ? TOAST_ANIMATION_DURATION : 0,
+                 easing: Easing.in(Easing.ease),
+                 useNativeDriver: true
+-            }).start(({finished}) => {
++            }).start(({ finished }) => {
+                 if (finished) {
+                     this._animating = false;
+                     this.props.onHidden && this.props.onHidden(this.props.siblingManager);
+@@ -214,7 +190,7 @@ class ToastContainer extends Component {
+     };
+ 
+     render() {
+-        let {props} =  this;
++        let { props } = this;
+         const { windowWidth } = this.state;
+         let offset = props.position;
+ 
+@@ -236,8 +212,8 @@ class ToastContainer extends Component {
+         >
+             <TouchableWithoutFeedback
+                 onPress={() => {
+-                  typeof this.props.onPress === 'function' ? this.props.onPress() : null
+-                  this.props.hideOnPress ? this._hide() : null
++                    typeof this.props.onPress === 'function' ? this.props.onPress() : null
++                    this.props.hideOnPress ? this._hide() : null
+                 }}
+             >
+                 <Animated.View
+@@ -245,12 +221,12 @@ class ToastContainer extends Component {
+                         styles.containerStyle,
+                         { marginHorizontal: windowWidth * ((1 - TOAST_MAX_WIDTH) / 2) },
+                         props.containerStyle,
+-                        props.backgroundColor && {backgroundColor: props.backgroundColor},
++                        props.backgroundColor && { backgroundColor: props.backgroundColor },
+                         {
+                             opacity: this.state.opacity
+                         },
+                         props.shadow && styles.shadowStyle,
+-                        props.shadowColor && {shadowColor: props.shadowColor}
++                        props.shadowColor && { shadowColor: props.shadowColor }
+                     ]}
+                     pointerEvents="none"
+                     ref={ele => this._root = ele}
+@@ -258,7 +234,7 @@ class ToastContainer extends Component {
+                     <Text style={[
+                         styles.textStyle,
+                         props.textStyle,
+-                        props.textColor && {color: props.textColor}
++                        props.textColor && { color: props.textColor }
+                     ]}>
+                         {this.props.children}
+                     </Text>

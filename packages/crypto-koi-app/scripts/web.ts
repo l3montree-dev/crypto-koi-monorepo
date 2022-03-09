@@ -8,5 +8,4 @@ const opts: child_process.ExecSyncOptions = {
     stdio: "inherit",
 };
 
-child_process.execSync("npx kill-port 8545", opts);
 child_process.execSync("expo web", opts);

@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import tinycolor from "tinycolor2";
 import * as NavigationBar from "expo-navigation-bar";
 import { Colors } from "../styles/colors";
+import { Platform } from "react-native";
 
 export default class ThemeStore {
     static getBestTextColor(c: tinycolor.Instance): string {
@@ -99,7 +100,8 @@ export default class ThemeStore {
 
         this.setCurrentHeaderTintColor(colorVariants.onSecondary);
 
-        NavigationBar.setBackgroundColorAsync(colorVariants.secondaryColor);
+        if (Platform.OS === "android")
+            NavigationBar.setBackgroundColorAsync(colorVariants.secondaryColor);
         this.setTabBarColor(colorVariants.secondaryColor);
     }
 

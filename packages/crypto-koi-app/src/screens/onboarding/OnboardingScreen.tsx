@@ -7,6 +7,7 @@ import {
     Image,
     NativeScrollEvent,
     NativeSyntheticEvent,
+    Platform,
     ScrollView,
     StyleSheet,
     Text,
@@ -86,7 +87,8 @@ function OnboardingScreen() {
     });
 
     useEffect(() => {
-        NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
+        if (Platform.OS === "android")
+            NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
     }, []);
 
     const handlePlayWithWalletPress = async () => {
