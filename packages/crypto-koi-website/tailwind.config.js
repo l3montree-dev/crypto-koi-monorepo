@@ -5,6 +5,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                poppins: ["Poppins", "sans-serif"],
+            },
             colors: {
                 cherry: {
                     DEFAULT: '#D94D61',
