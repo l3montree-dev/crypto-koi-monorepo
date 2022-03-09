@@ -1,4 +1,5 @@
 export const Colors = {
-    bgColor: "#000000",
-    bgColorVariant: "#dc2626",
+    soft: "rgb(255, 246, 241)",
+    cherry: "rgb(217, 77, 97)",
+    sea: "rgb(50, 50, 77)",
 };

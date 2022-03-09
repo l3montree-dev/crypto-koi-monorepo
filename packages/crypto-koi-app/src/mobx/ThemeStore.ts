@@ -67,7 +67,7 @@ export default class ThemeStore {
     secondaryIsDark = true;
     backgroundIsDark = true;
 
-    tabBarColor: string = Colors.bgColorVariant;
+    tabBarColor: string = Colors.cherry;
     currentHeaderTintColor = "#ffffff";
     heartColor = "#000000";
 

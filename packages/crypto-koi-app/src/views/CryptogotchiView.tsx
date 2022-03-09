@@ -219,7 +219,7 @@ const CryptogotchiView = observer((props: Props) => {
                         </View>
                         <View
                             style={tailwind(
-                                "absolute z-50 bg-slate-500 items-end flex-col right-4 top-1/3"
+                                "absolute z-50 items-end flex-col right-4 top-1/3"
                             )}
                         >
                             <View

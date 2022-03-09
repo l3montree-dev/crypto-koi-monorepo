@@ -61,7 +61,8 @@ const style = StyleSheet.create({
         alignItems: "flex-start",
     },
     listItem: {
-        backgroundColor: "rgba(255,255,255,0.2)",
+        backgroundColor: "rgb(250,250,250)",
+        elevation: 3,
     },
 });
 
@@ -88,7 +89,7 @@ function OnboardingScreen() {
 
     useEffect(() => {
         if (Platform.OS === "android")
-            NavigationBar.setBackgroundColorAsync(Colors.bgColorVariant);
+            NavigationBar.setBackgroundColorAsync(Colors.cherry);
     }, []);
 
     const handlePlayWithWalletPress = async () => {
@@ -160,12 +161,12 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={tailwind("flex-1 bg-zinc-300")}>
+        <View style={tailwind("flex-1 bg-soft-600")}>
             <View style={tailwind("absolute top-0")}>
                 <Wave
                     svgStyle={[
+                        tailwind("text-cherry-500"),
                         style.svg,
-                        tailwind("text-red-600"),
                         style.rotatedSvg,
                     ]}
                 />
@@ -193,14 +194,14 @@ function OnboardingScreen() {
                     </View>
                     <Text
                         style={tailwind(
-                            "text-black mt-10 text-4xl font-bold text-center"
+                            "mt-10 text-4xl font-bold text-sea text-center"
                         )}
                     >
                         Welcome
                     </Text>
                     <Text
                         style={tailwind(
-                            "text-black text-lg mt-5 px-10 text-center"
+                            "text-lg text-sea-500 mt-5 px-10 text-center"
                         )}
                     >
                         Grow the oldest and rarest koi inside the blockchain
@@ -217,10 +218,10 @@ function OnboardingScreen() {
                             <Animated.Text
                                 entering={FadeIn}
                                 style={tailwind(
-                                    "text-black text-4xl font-bold text-center mb-5"
+                                    "text-4xl font-bold text-sea-500 text-center mb-5"
                                 )}
                             >
-                                Keep your friend alive
+                                Keep your Koi alive
                             </Animated.Text>
                             <Animated.View
                                 style={[
@@ -232,20 +233,16 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(500)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-red-600")}
+                                    style={tailwind("text-4xl text-cherry-500")}
                                     name="food-apple"
                                 />
 
                                 <View style={tailwind("ml-5")}>
-                                    <Text
-                                        style={tailwind("text-black text-lg")}
-                                    >
+                                    <Text style={tailwind("text-sea text-lg")}>
                                         Feed your friend
                                     </Text>
                                     <Text
-                                        style={tailwind(
-                                            "text-black opacity-75"
-                                        )}
+                                        style={tailwind("text-sea opacity-75")}
                                     >
                                         Every few hours
                                     </Text>
@@ -289,19 +286,15 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(1000)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-red-600")}
+                                    style={tailwind("text-4xl text-cherry-500")}
                                     name="heart"
                                 />
                                 <View style={tailwind("ml-5")}>
-                                    <Text
-                                        style={tailwind("text-black text-lg")}
-                                    >
+                                    <Text style={tailwind("text-sea text-lg")}>
                                         Build a relationship
                                     </Text>
                                     <Text
-                                        style={tailwind(
-                                            "text-black opacity-75"
-                                        )}
+                                        style={tailwind("text-sea opacity-75")}
                                     >
                                         And show your koi to your friends
                                     </Text>
@@ -322,22 +315,20 @@ function OnboardingScreen() {
                         <Animated.View entering={FadeIn}>
                             <Text
                                 style={tailwind(
-                                    "text-black text-4xl font-bold text-center mb-5"
+                                    "text-sea text-4xl font-bold text-center mb-5"
                                 )}
                             >
                                 Make it an NFT
                             </Text>
                             <Text
-                                style={tailwind(
-                                    "text-black text-lg text-center"
-                                )}
+                                style={tailwind("text-sea text-lg text-center")}
                             >
                                 To never loose your friend again you can make
                                 him unique by putting him in an NFT
                             </Text>
                             <View style={tailwind("mt-5")}>
                                 <AppButton
-                                    backgroundColor={Colors.bgColorVariant}
+                                    backgroundColor={Colors.cherry}
                                     textColor="white"
                                     onPress={handlePlayWithWalletPress}
                                     title="I already have a Wallet"
@@ -345,7 +336,9 @@ function OnboardingScreen() {
                             </View>
                             <View style={tailwind("mt-4")}>
                                 <AppButton
-                                    backgroundColor={Colors.bgColor}
+                                    backgroundColor={
+                                        tailwind("text-sea-500").color as string
+                                    }
                                     textColor="white"
                                     onPress={handlePlayWithoutWalletPress}
                                     title="Play without connected Wallet"
@@ -357,7 +350,7 @@ function OnboardingScreen() {
             </ScrollView>
 
             <View style={tailwind("absolute -bottom-20")}>
-                <Wave svgStyle={[style.svg, tailwind("text-red-600")]} />
+                <Wave svgStyle={[style.svg, tailwind("text-cherry-500")]} />
             </View>
 
             <View style={tailwind("flex-row items-center justify-between")}>
@@ -374,7 +367,7 @@ function OnboardingScreen() {
                         <View
                             key={index}
                             style={[
-                                tailwind("bg-red-400 mx-2 rounded"),
+                                tailwind("bg-cherry-300 mx-2 rounded"),
                                 style.dot,
                             ]}
                         />
@@ -382,7 +375,7 @@ function OnboardingScreen() {
                     <Animated.View
                         style={[
                             style.dot,
-                            tailwind("bg-red-200 rounded absolute mx-2"),
+                            tailwind("bg-cherry-100 rounded absolute mx-2"),
                             animatedActiveDotStyle,
                         ]}
                     />
