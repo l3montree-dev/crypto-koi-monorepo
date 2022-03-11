@@ -1,0 +1,45 @@
+image: docker:19.03.15
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - publish
+  - deploy
+
+publish-image:
+  image: docker:19.03.15
+  stage: publish
+  services:
+    - name: docker:19.03.15-dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://localhost:2375/
+  allow_failure: false
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $IMAGE_TAG || true
+    - docker build --network=host --cache-from $IMAGE_TAG -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  only:
+    - main
+  when: manual
+
+production-master:
+  stage: deploy
+  dependencies:
+    - publish-image
+  image:
+    name: bitnami/kubectl:1.21.10
+    entrypoint: [""]
+  environment:
+    name: production
+    url: "https://l3montree.com"
+  script:
+    - echo "$K8S_CERTIFICATE" >> ca.pem
+    - kubectl --server=$K8S_API_URL --token=$K8S_TOKEN --certificate-authority=ca.pem --namespace=crypto-koi rollout restart deployment/crypto-koi-website
+  only:
+    - main
+  when: manual
