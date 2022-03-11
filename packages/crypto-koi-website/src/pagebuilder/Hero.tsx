@@ -8,6 +8,7 @@ import RoundProgress from '../components/RoundProgress'
 import ReactMarkdown from 'react-markdown'
 import { colors } from '../../styles/theme'
 import { ArrowDownIcon } from '@chakra-ui/icons'
+import CMSContent from '../components/CMSContent'
 
 const fix2Digits = (n: number) => {
   return n < 10 ? '0' + n : n
@@ -33,10 +34,10 @@ const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
     // component can only be client side rendered.
     return null
   }
-  console.log(props.Text)
+
   return (
-    <Section className="p-0">
-      <div className="p-4">
+    <Section>
+      <div className="p-4 pt-8">
         <span className="">{props.Subtitle}</span>
         <h2 className="font-poppins font-bold text-2xl">
           Let a <span className="text-cherry-600">KOI</span> steal your lifetime
@@ -71,7 +72,7 @@ const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
       </div>
 
       <div className="px-4">
-        <ReactMarkdown>{props.Text}</ReactMarkdown>
+        <CMSContent>{props.Text}</CMSContent>
       </div>
       <div className="flex-col pb-5 flex items-center">
         <span className="text-sm pb-2">{props.Learn_More}</span>

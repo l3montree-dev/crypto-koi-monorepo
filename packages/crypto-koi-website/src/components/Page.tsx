@@ -5,6 +5,7 @@ import { IFooter, ISEO } from '../cms/page'
 import { Footer } from './Footer'
 import Header from './Header'
 import Image from 'next/image'
+import { colors } from '../../styles/theme'
 
 interface Props {
   footer: IFooter
@@ -15,6 +16,7 @@ const Page: FunctionComponent<Props> = (props) => {
     <>
       <Head>
         <title>{props.seo.metaTitle}</title>
+        <meta name="theme-color" content={colors.cherry[600]}></meta>
         <meta name="description" content={props.seo.metaDescription} />
         <meta name="keywords" content={props.seo.keywords} />
         <meta name="robots" content={props.seo.metaRobots} />
@@ -30,7 +32,12 @@ const Page: FunctionComponent<Props> = (props) => {
       >
         <div className="flex flex-row items-center">
           <div className="bg-soft flex items-center justify-center w-10 rounded-lg border-black border-2 h-10">
-            <Image width={25} height={25} src={'/assets/crypto-koi-logo.svg'} />
+            <Image
+              alt="Logo"
+              width={25}
+              height={25}
+              src={'/assets/crypto-koi-logo.svg'}
+            />
           </div>
           <span className="font-bold ml-2">CryptoKoi</span>
         </div>
