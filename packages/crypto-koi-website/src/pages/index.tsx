@@ -24,13 +24,13 @@ export async function getStaticProps(
     api<{ data: IPage[] }>(
       `pages?Link=/&populate[Pagebuilder][populate]=*&populate[SEO][populate]=*&populate=*`
     ),
-    api<{ data: IFooter }>(`footer?populate=*`),
+    api<{ data: { attributes: IFooter } }>(`footer?populate=*`),
   ])
 
   return {
     props: {
       page: startPage.data[0],
-      footer: footer.data,
+      footer: footer.data.attributes,
     },
     revalidate: 60,
   }

@@ -23,9 +23,9 @@ export interface IFeaturesPB extends IPB {
 }
 
 export interface IGetYourKoiPB extends IPB, IWithTitleText {
-  __component: 'page.get-your-koi-section'
+  __component: 'general.get-your-koi-section'
   Koi_Images: {
-    data: IImg[]
+    data: { attributes: IImg; id: number }[]
   }
 }
 

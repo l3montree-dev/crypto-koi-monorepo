@@ -26,6 +26,12 @@ a {
    // background-size: cover;
     background-position: center;
 }
+
+#kois {
+    background-image: url("/assets/Curve_2.svg");
+     background-size: cover;
+     background-position: center;
+}
 p {
     padding-bottom: 16px;
 }
@@ -38,8 +44,11 @@ p {
 }
 
 main {
-    padding-bottom: 56px;
+   
     padding-top: 56px;
+}
+#colophon {
+    padding-bottom: 62px;
 }
 header {
     transition: all 0.5s;
@@ -80,7 +89,26 @@ h1 {
     font-size: 2em!important;
 }
 
+h2 {
+    font-size: 1.5em!important;
+    font-weight: bold!important;
+}
+
 h3 {
     font-size: 1.5em!important;
+    font-weight: bold!important;
+}
+
+h4 {
+    font-size: 1.2em!important;
+    font-weight: bold!important;
+}
+
+h5 {
+    font-size: 1.2em!important;
+    font-weight: bold!important;
+}
+
+h6 {
     font-weight: bold!important;
 }

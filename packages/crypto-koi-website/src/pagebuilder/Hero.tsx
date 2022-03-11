@@ -65,10 +65,19 @@ const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
           width={props.Image.data.attributes.formats.medium.width}
         />
       </div>
-      <div className="flex-row -mt-5 pb-5 justify-center flex">
+      <div className="flex-col -mt-5 pb-5 justify-center flex">
         <b className="text-center">
           {transformToString(clock, moment().endOf('hour'))}
         </b>
+        <span className="text-center text-sm">
+          <a
+            target={'_blank'}
+            href="https://www.instagram.com/tamxily.tattoo/"
+            rel="noreferrer"
+          >
+            Artwork by: <span className="text-cherry">@tamxily.tattoo</span>
+          </a>
+        </span>
       </div>
 
       <div className="px-4">

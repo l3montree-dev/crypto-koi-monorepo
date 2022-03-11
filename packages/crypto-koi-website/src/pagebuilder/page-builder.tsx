@@ -10,7 +10,7 @@ export default function pageBuilder(page: IPagebuilder[]) {
     switch (item.__component) {
       case 'page.features':
         return <Feature {...item} key={'page.features-' + item.id} />
-      case 'page.get-your-koi-section':
+      case 'general.get-your-koi-section':
         return (
           <GetYourKoi {...item} key={'page.get-your-koi-section-' + item.id} />
         )
