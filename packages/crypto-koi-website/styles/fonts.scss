@@ -11,3 +11,10 @@
     font-weight: bold;
     src: local("Poppins"), url("/fonts/Poppins-Bold.ttf"); 
 }
+
+@font-face {
+    font-family: Gochi;
+    font-weight: normal;
+    font-style: normal;
+    src: url("/fonts/GochiHand-Regular.ttf");
+}

@@ -20,3 +20,55 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#hero-wave {
+    background-image: url("/assets/Curve_1.svg");
+   // background-size: cover;
+    background-position: center;
+}
+p {
+    padding-bottom: 16px;
+}
+#round-progress {
+    transform: rotate(-90deg);
+}
+
+#app-bar {
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+}
+
+main {
+    padding-bottom: 56px;
+}
+
+.floating { 
+    animation-name: floating;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+ 
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    25%  { transform: translate(10px, 15px); }
+    50%  { transform: translate(10px, -15px); }
+    75%  { transform: translate(10px, 15px); }
+    100%   { transform: translate(0, -0px); }   
+}
+
+
+.simple-float { 
+    animation-name: simpleFloat;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+}
+ 
+@keyframes simpleFloat {
+    0% { transform: translate(0,  -5px); }
+    50%  { transform: translate(0px, 5px); }
+
+}

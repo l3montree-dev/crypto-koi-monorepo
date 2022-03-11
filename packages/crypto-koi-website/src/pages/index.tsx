@@ -1,5 +1,4 @@
 import type { GetStaticPropsContext, NextPage } from 'next'
-import Head from 'next/head'
 import { api } from '../cms/api'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'

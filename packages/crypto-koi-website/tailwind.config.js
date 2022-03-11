@@ -1,12 +1,13 @@
 module.exports = {
     content: [
-        "./pages/**/*.{js,ts,jsx,tsx}",
-        "./components/**/*.{js,ts,jsx,tsx}",
+        "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
         extend: {
             fontFamily: {
                 poppins: ["Poppins", "sans-serif"],
+                gochi: ["Gochi", "cursive"],
+                sans: ["Roboto"]
             },
             colors: {
                 cherry: {
@@ -16,7 +17,7 @@ module.exports = {
                     '200': '#EFB2BB',
                     '300': '#E7909D',
                     '400': '#E06F7F',
-                    '500': '#D94D61',
+                    '500': '#C42A40',
                     '600': '#C42A40',
                     '700': '#962031',
                     '800': '#681622',

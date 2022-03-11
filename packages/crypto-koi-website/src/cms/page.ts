@@ -80,7 +80,7 @@ export interface IImg {
   caption: string
   width: number
   height: number
-  Formats: IFormats
+  formats: IFormats
   hash: string
   ext: string
   mime: string

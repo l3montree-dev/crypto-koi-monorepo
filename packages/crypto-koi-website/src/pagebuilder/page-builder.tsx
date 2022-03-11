@@ -9,15 +9,19 @@ export default function pageBuilder(page: IPagebuilder[]) {
   return page.map((item) => {
     switch (item.__component) {
       case 'page.features':
-        return <Feature key={'page.features-' + item.id} />
+        return <Feature {...item} key={'page.features-' + item.id} />
       case 'page.get-your-koi-section':
-        return <GetYourKoi key={'page.get-your-koi-section-' + item.id} />
+        return (
+          <GetYourKoi {...item} key={'page.get-your-koi-section-' + item.id} />
+        )
       case 'page.hero-section':
-        return <Hero key={'page.hero-section-' + item.id} />
+        return <Hero {...item} key={'page.hero-section-' + item.id} />
       case 'page.image-text-cards':
-        return <ImageTextCards key={'page.image-text-cards-' + item.id} />
+        return (
+          <ImageTextCards {...item} key={'page.image-text-cards-' + item.id} />
+        )
       case 'page.title-text':
-        return <TitleText key={'page.title-text-' + item.id} />
+        return <TitleText {...item} key={'page.title-text-' + item.id} />
       default:
         return null
     }
