@@ -8,18 +8,19 @@ import CMSContent from './CMSContent'
 interface Props extends IFooter {}
 
 export const Footer: FunctionComponent<Props> = (props) => {
-  console.log(props)
   return (
     <>
-      <footer className="bg-cherry-800 mt-5 text-white">
+      <footer className="bg-cherry-800 mt-20 text-white">
         <div className="p-3 pt-5">
           <h4 className="mb-4">{props.Title}</h4>
           <CMSContent>{props.Text}</CMSContent>
 
           <div className="flex pb-5 flex-row items-center">
-            <Button leftIcon={<EmailIcon />} colorScheme={'cherry'}>
-              {props.E_Mail_With_PGP.E_Mail}
-            </Button>
+            <a href={props.E_Mail_With_PGP.Mail_to_Link}>
+              <Button leftIcon={<EmailIcon />} colorScheme={'cherry'}>
+                {props.E_Mail_With_PGP.E_Mail}
+              </Button>
+            </a>
           </div>
         </div>
       </footer>

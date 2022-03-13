@@ -21,9 +21,7 @@ export async function getStaticProps(
   context: GetStaticPropsContext
 ): Promise<StaticProps<Props>> {
   const [startPage, footer] = await Promise.all([
-    api<{ data: IPage[] }>(
-      `pages?Link=/&populate[Pagebuilder][populate]=*&populate[SEO][populate]=*&populate=*`
-    ),
+    api<{ data: IPage[] }>(`pages?Link=/&populate=deep`),
     api<{ data: { attributes: IFooter } }>(`footer?populate=*`),
   ])
 

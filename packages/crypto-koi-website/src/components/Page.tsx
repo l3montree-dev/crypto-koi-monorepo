@@ -21,7 +21,7 @@ const Page: FunctionComponent<Props> = (props) => {
         <meta name="keywords" content={props.seo.keywords} />
         <meta name="robots" content={props.seo.metaRobots} />
       </Head>
-      <div className="page bg-soft">
+      <div className="page bg-soft md:bg-white">
         <Header />
         {props.children}
         <Footer {...props.footer} />

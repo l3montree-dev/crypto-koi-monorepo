@@ -15,6 +15,7 @@ export interface IPB {
 export interface IFeatureCard {
   id: number
   Text: string
+  Icon: IWrappedImg
 }
 export interface IFeaturesPB extends IPB {
   __component: 'page.features'
