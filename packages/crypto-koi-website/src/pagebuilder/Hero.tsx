@@ -83,12 +83,16 @@ const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
                 className="floating"
                 alt={props.Image.data.attributes.alternativeText}
                 src={props.Image.data.attributes.formats.small.url}
-                height={props.Image.data.attributes.formats.small.height}
-                width={props.Image.data.attributes.formats.small.width}
+                height={Math.min(
+                  props.Image.data.attributes.formats.small.height
+                )}
+                width={Math.min(
+                  props.Image.data.attributes.formats.small.width
+                )}
               />
             </div>
 
-            <div className="flex-col -mt-5 pb-5 justify-center flex">
+            <div className="flex-col pb-5 justify-center flex">
               <b className="text-center">
                 {transformToString(clock, moment().endOf('hour'))}
               </b>

@@ -45,7 +45,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
         </div>
       </footer>
       <div className="bg-cherry-900 px-3 py-2 pb-16 md:pb-2" id="colophon">
-        <div className="max-w-screen-2xl mx-auto">
+        <div className="max-w-screen-2xl flex-wrap flex flex-row items-center justify-between mx-auto">
           <a
             target={'_blank'}
             className="items-center flex-row flex"
@@ -62,6 +62,23 @@ export const Footer: FunctionComponent<Props> = (props) => {
               Picked from l3montree
             </span>
           </a>
+          <div className="text-white opacity-50 text-sm">
+            <a
+              className="mr-4"
+              href="https://l3montree.com/en/privacy-policy"
+              target={'_blank'}
+              rel="noreferrer"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="https://l3montree.com/en/imprint"
+              target={'_blank'}
+              rel="noreferrer"
+            >
+              Imprint
+            </a>
+          </div>
         </div>
       </div>
     </>
