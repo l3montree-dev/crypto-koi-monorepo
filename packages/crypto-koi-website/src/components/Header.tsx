@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function Header() {
   const bgRef = useRef('bg-soft')
@@ -21,17 +22,19 @@ function Header() {
   return (
     <header className={'p-3 md:p-5 fixed top-0 left-0 right-0 z-10 ' + bg}>
       <div className="flex-row justify-between max-w-screen-2xl mx-auto flex items-center">
-        <div className="flex-row flex items-center">
-          <Image
-            alt="Logo"
-            width={30}
-            height={30}
-            src="/assets/crypto-koi-logo.svg"
-          />
-          <span className="title pl-2 font-poppins text-xl font-bold">
-            Crypto-Koi.io
-          </span>
-        </div>
+        <Link passHref={true} href="/">
+          <a className="flex-row flex items-center">
+            <Image
+              alt="Logo"
+              width={30}
+              height={30}
+              src="/assets/crypto-koi-logo.svg"
+            />
+            <span className="title pl-2 font-poppins text-xl font-bold">
+              Crypto-Koi.io
+            </span>
+          </a>
+        </Link>
         <div className="hidden font-bold md:flex">
           <span className="w-28">About</span>
           <span className="w-28">Features</span>
