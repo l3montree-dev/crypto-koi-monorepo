@@ -12,7 +12,7 @@ interface Props {
 const Home: NextPage<Props> = (props) => {
   return (
     <Page footer={props.footer} seo={props.page.attributes.SEO}>
-      <main>{pageBuilder(props.page.attributes.Pagebuilder)}</main>
+      {pageBuilder(props.page.attributes.Pagebuilder)}
     </Page>
   )
 }

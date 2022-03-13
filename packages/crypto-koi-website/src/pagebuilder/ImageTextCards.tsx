@@ -11,9 +11,9 @@ const ImageTextCards: FunctionComponent<IImageTextCardsPB> = (props) => {
       : ['order-last', 'order-first']
   return (
     <Section>
-      <div className="flex-col flex p-4">
+      <div className="flex-col md:flex-row max-w-screen-xl mx-auto flex p-4">
         <div
-          className={'rounded-lg mb-4 shadow-lg ' + imageOrder}
+          className={'rounded-lg mb-4 md:mx-2 w-full shadow-lg ' + imageOrder}
           style={{ backgroundColor: props.Color }}
         >
           <Image
@@ -25,7 +25,7 @@ const ImageTextCards: FunctionComponent<IImageTextCardsPB> = (props) => {
         </div>
         <div
           className={
-            'bg-cherry-600 shadow-lg text-white mb-4 p-4 rounded-lg ' +
+            'bg-cherry-600 md:mx-2 flex-col flex items-center justify-end shadow-lg w-full text-white mb-4 p-4 rounded-lg ' +
             textOrder
           }
         >

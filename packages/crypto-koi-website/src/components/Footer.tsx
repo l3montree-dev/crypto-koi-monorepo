@@ -11,9 +11,9 @@ export const Footer: FunctionComponent<Props> = (props) => {
   console.log(props)
   return (
     <>
-      <footer className="bg-cherry-800 mt-20 text-white">
-        <div className="p-3 pt-5">
-          <h4 className="mb-4">{props.Title}</h4>
+      <footer className="bg-cherry-800 text-white">
+        <div className="p-3 max-w-screen-2xl mx-auto pt-5">
+          <h4 className="mb-4 text-xl font-bold">{props.Title}</h4>
           <CMSContent>{props.Text}</CMSContent>
 
           <div className="flex pb-5 flex-row items-center">
@@ -24,7 +24,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
             </a>
           </div>
           <div>
-            <h4 className="mb-4">{props.Follow_us.Title}</h4>
+            <h4 className="mb-4 font-bold text-xl">{props.Follow_us.Title}</h4>
             {props.Follow_us.Social_Link.map((link) => (
               <div className="mb-2" key={link.id}>
                 <a
@@ -44,23 +44,25 @@ export const Footer: FunctionComponent<Props> = (props) => {
           </div>
         </div>
       </footer>
-      <div className="bg-cherry-900 px-3 py-2" id="colophon">
-        <a
-          target={'_blank'}
-          className="items-center flex-row flex"
-          href="https://l3montree.com"
-          rel="noreferrer"
-        >
-          <Image
-            alt="l3montree logo"
-            width={25}
-            height={25}
-            src="/assets/l3mon.svg"
-          />
-          <span className="text-white pl-2 opacity-50 text-sm">
-            Picked from l3montree
-          </span>
-        </a>
+      <div className="bg-cherry-900 px-3 py-2 pb-16 md:pb-2" id="colophon">
+        <div className="max-w-screen-2xl mx-auto">
+          <a
+            target={'_blank'}
+            className="items-center flex-row flex"
+            href="https://l3montree.com"
+            rel="noreferrer"
+          >
+            <Image
+              alt="l3montree logo"
+              width={25}
+              height={25}
+              src="/assets/l3mon.svg"
+            />
+            <span className="text-white pl-2 opacity-50 text-sm">
+              Picked from l3montree
+            </span>
+          </a>
+        </div>
       </div>
     </>
   )
