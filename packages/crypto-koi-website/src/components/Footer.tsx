@@ -30,13 +30,19 @@ export const Footer: FunctionComponent<Props> = (props) => {
                   className="text-white flex flex-row items-center"
                   href={link.Link}
                 >
-                  <Image
-                    alt={link.Social_Channel}
-                    width={15}
-                    height={15}
-                    src={'/assets/' + link.Social_Channel + '.svg'}
-                  />
-                  <span className="text-white ml-2">{link.Social_Channel}</span>
+                  <Button
+                    leftIcon={
+                      <Image
+                        alt={link.Social_Channel}
+                        width={15}
+                        height={15}
+                        src={'/assets/' + link.Social_Channel + '.svg'}
+                      />
+                    }
+                    colorScheme={'cherry'}
+                  >
+                    <span className="text-white">{link.Social_Channel}</span>
+                  </Button>
                 </a>
               </div>
             ))}
