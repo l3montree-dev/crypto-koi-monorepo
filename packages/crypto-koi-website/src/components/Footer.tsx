@@ -26,10 +26,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
             <h4 className="mb-4 font-bold text-xl">{props.Follow_us.Title}</h4>
             {props.Follow_us.Social_Link.map((link) => (
               <div className="mb-2" key={link.id}>
-                <a
-                  className="text-white flex flex-row items-center"
-                  href={link.Link}
-                >
+                <a target={'_blank'} href={link.Link} rel="noreferrer">
                   <Button
                     leftIcon={
                       <Image
