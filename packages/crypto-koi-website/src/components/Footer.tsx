@@ -8,7 +8,6 @@ import CMSContent from './CMSContent'
 interface Props extends IFooter {}
 
 export const Footer: FunctionComponent<Props> = (props) => {
-  console.log(props)
   return (
     <>
       <footer className="bg-cherry-800 text-white">

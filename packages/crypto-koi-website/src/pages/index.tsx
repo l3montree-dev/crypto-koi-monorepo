@@ -1,8 +1,11 @@
-import type { GetStaticPropsContext, NextPage } from 'next'
+import type {
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  NextPage,
+} from 'next'
 import { api } from '../cms/api'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
-import { StaticProps } from '../misc/types'
 import pageBuilder from '../pagebuilder/page-builder'
 
 interface Props {
@@ -19,9 +22,9 @@ const Home: NextPage<Props> = (props) => {
 
 export async function getStaticProps(
   context: GetStaticPropsContext
-): Promise<StaticProps<Props>> {
+): Promise<GetStaticPropsResult<Props>> {
   const [startPage, footer] = await Promise.all([
-    api<{ data: IPage[] }>(`pages?Link=/&populate=deep`),
+    api<{ data: IPage[] }>(`pages?filters[Link][$eq]=/&populate=deep`),
     api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
   ])
 
