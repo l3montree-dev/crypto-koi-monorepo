@@ -22,7 +22,7 @@ export async function getStaticProps(
 ): Promise<StaticProps<Props>> {
   const [startPage, footer] = await Promise.all([
     api<{ data: IPage[] }>(`pages?Link=/&populate=deep`),
-    api<{ data: { attributes: IFooter } }>(`footer?populate=*`),
+    api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
   ])
 
   return {

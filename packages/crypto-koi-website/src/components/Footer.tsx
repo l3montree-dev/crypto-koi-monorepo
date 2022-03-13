@@ -8,6 +8,7 @@ import CMSContent from './CMSContent'
 interface Props extends IFooter {}
 
 export const Footer: FunctionComponent<Props> = (props) => {
+  console.log(props)
   return (
     <>
       <footer className="bg-cherry-800 mt-20 text-white">
@@ -21,6 +22,25 @@ export const Footer: FunctionComponent<Props> = (props) => {
                 {props.E_Mail_With_PGP.E_Mail}
               </Button>
             </a>
+          </div>
+          <div>
+            <h4 className="mb-4">{props.Follow_us.Title}</h4>
+            {props.Follow_us.Social_Link.map((link) => (
+              <div className="mb-2" key={link.id}>
+                <a
+                  className="text-white flex flex-row items-center"
+                  href={link.Link}
+                >
+                  <Image
+                    alt={link.Social_Channel}
+                    width={15}
+                    height={15}
+                    src={'/assets/' + link.Social_Channel + '.svg'}
+                  />
+                  <span className="text-white ml-2">{link.Social_Channel}</span>
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </footer>
