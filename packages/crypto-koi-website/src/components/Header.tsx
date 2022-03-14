@@ -36,9 +36,9 @@ function Header() {
           </a>
         </Link>
         <div className="hidden items-center font-bold md:flex">
-          <span className="w-28">About</span>
-          <span className="w-28">Features</span>
-          <span className="w-28">Download App</span>
+          <span className="w-32">About</span>
+          <span className="w-32">Features</span>
+          <span className="w-32">Download App</span>
           <a
             target="_blank"
             className="ml-6"

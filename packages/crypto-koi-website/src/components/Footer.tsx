@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react'
 import { IFooter } from '../cms/page'
 import CMSContent from './CMSContent'
 
-interface Props extends IFooter {}
+interface Props extends IFooter { }
 
 export const Footer: FunctionComponent<Props> = (props) => {
   return (
@@ -61,7 +61,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
               src="/assets/l3mon.svg"
             />
             <span className="text-white pl-2 opacity-50 text-sm">
-              Picked from l3montree
+              © {new Date().getFullYear()} l3montree
             </span>
           </a>
           <div className="text-white opacity-50 text-sm">
