@@ -8,8 +8,8 @@ const Feature: FunctionComponent<IFeaturesPB> = (props) => {
   return (
     <Section>
       <div className="px-4 max-w-screen-xl mx-auto py-4">
-        <h2 className="text-2xl mb-2 font-bold">{props.Title}</h2>
-        <div className="md:flex flex-row">
+        <h2 className="text-3xl mb-4 font-bold font-poppins">{props.Title}</h2>
+        <div className="md:flex flex-row md:-mx-2">
           {props.Feature_Cards.map((card) => (
             <div
               className="rounded-lg md:mx-2 text-center bg-white mb-4 p-4 shadow-lg"

@@ -26,27 +26,27 @@ export const Footer: FunctionComponent<Props> = (props) => {
             <h4 className="mb-4 font-bold text-xl">{props.Follow_us.Title}</h4>
             {props.Follow_us.Social_Link.map((link) => (
               <div className="mb-2" key={link.id}>
-                <a target={'_blank'} href={link.Link} rel="noreferrer">
-                  <Button
-                    leftIcon={
-                      <Image
-                        alt={link.Social_Channel}
-                        width={15}
-                        height={15}
-                        src={'/assets/' + link.Social_Channel + '.svg'}
-                      />
-                    }
-                    colorScheme={'cherry'}
-                  >
-                    <span className="text-white">{link.Social_Channel}</span>
-                  </Button>
+                <a
+                  target={'_blank'}
+                  href={link.Link}
+                  className="flex flex-row items-center"
+                  rel="noreferrer"
+                >
+                  <Image
+                    alt={link.Social_Channel}
+                    width={15}
+                    height={15}
+                    src={'/assets/' + link.Social_Channel + '.svg'}
+                  />
+
+                  <span className="text-white ml-2">{link.Social_Channel}</span>
                 </a>
               </div>
             ))}
           </div>
         </div>
       </footer>
-      <div className="bg-cherry-900 px-3 py-2 pb-16 md:pb-2" id="colophon">
+      <div className="bg-black px-3 py-2 pb-16 md:pb-2" id="colophon">
         <div className="max-w-screen-2xl flex-wrap flex flex-row items-center justify-between mx-auto">
           <a
             target={'_blank'}

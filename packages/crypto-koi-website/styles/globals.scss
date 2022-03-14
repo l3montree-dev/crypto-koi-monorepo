@@ -89,6 +89,10 @@ header {
 }
 
 .markdown {
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+        font-family: Poppins
+    }
     h1 {
         font-size: 2em;
     }
@@ -118,6 +122,15 @@ header {
     }
     a {
         color: #D94D61;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
+
+a {
+    &:hover {
+        text-decoration: underline;
+    }
+}

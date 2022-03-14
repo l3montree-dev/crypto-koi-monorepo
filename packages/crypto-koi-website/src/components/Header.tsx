@@ -35,10 +35,25 @@ function Header() {
             </span>
           </a>
         </Link>
-        <div className="hidden font-bold md:flex">
+        <div className="hidden items-center font-bold md:flex">
           <span className="w-28">About</span>
           <span className="w-28">Features</span>
           <span className="w-28">Download App</span>
+          <a
+            target="_blank"
+            className="ml-6"
+            href="https://gitlab.com/l3montree/crypto-koi"
+            rel="noreferrer"
+          >
+            <div className="bg-black rounded-full h-8 w-8 flex flex-row justify-center items-center text-white">
+              <Image
+                alt="Gitlab Logo"
+                width={25}
+                height={25}
+                src="/assets/gitlab.svg"
+              />
+            </div>
+          </a>
         </div>
       </div>
     </header>

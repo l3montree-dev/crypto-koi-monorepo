@@ -7,7 +7,7 @@ const TitleText: FunctionComponent<ITitleTextPB> = (props) => {
   return (
     <Section>
       <div className="p-4 max-w-screen-xl mx-auto">
-        <h3 className="text-2xl font-bold">{props.Title}</h3>
+        <h3 className="text-3xl mb-4 font-bold font-poppins">{props.Title}</h3>
         <CMSContent>{props.Text}</CMSContent>
       </div>
     </Section>
