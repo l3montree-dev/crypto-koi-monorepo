@@ -16,18 +16,18 @@ const FriendTitle = observer((props: Props) => {
         <View style={tailwind("flex-row flex-1")}>
             <Text
                 style={[
-                    tailwind("text-3xl font-bold text-white"),
+                    tailwind("text-3xl flex-1 font-bold text-white"),
                     { color: props.textColor },
                 ]}
             >
                 {cryptogotchi.name}
+                {!cryptogotchi?.isAlive && (
+                    <Icon
+                        name="grave-stone"
+                        style={tailwind("text-3xl text-white opacity-50 ml-2")}
+                    />
+                )}
             </Text>
-            {!cryptogotchi?.isAlive && (
-                <Icon
-                    name="grave-stone"
-                    style={tailwind("text-3xl text-white opacity-50 ml-2")}
-                />
-            )}
         </View>
     );
 });

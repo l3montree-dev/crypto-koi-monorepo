@@ -61,8 +61,8 @@ const style = StyleSheet.create({
         alignItems: "flex-start",
     },
     listItem: {
-        backgroundColor: "rgb(250,250,250)",
-        elevation: 3,
+        backgroundColor: "rgb(255,255,255)",
+        elevation: 1,
     },
 });
 
@@ -161,7 +161,7 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={tailwind("flex-1 bg-soft-600")}>
+        <View style={tailwind("flex-1 bg-soft-500")}>
             <View style={tailwind("absolute top-0")}>
                 <Wave
                     svgStyle={[

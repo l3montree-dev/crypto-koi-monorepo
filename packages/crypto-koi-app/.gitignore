@@ -135,3 +135,4 @@ web-build/
 dist/
 
 # @end expo-cli
+android/app/google-services.json

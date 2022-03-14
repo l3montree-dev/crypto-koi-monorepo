@@ -23,3 +23,11 @@ export const CONNECT_WALLET_MUTATION = gql`
         }
     }
 `;
+
+export const ACCEPT_PUSH_NOTIFICATIONS = gql`
+    mutation AcceptPushNotifications($pushNotificationToken: String!) {
+        acceptPushNotifications(pushNotificationToken: $pushNotificationToken) {
+            id
+        }
+    }
+`;

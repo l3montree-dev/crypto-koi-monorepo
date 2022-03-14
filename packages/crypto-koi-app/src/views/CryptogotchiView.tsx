@@ -1,23 +1,23 @@
 import { useMutation } from "@apollo/client";
-import { BlurView } from "expo-blur";
-import * as NavigationBar from "expo-navigation-bar";
+import * as Clipboard from "expo-clipboard";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
     Animated as RNAnimated,
     Image,
+    Linking,
     Platform,
     Pressable,
     RefreshControl,
     SafeAreaView,
     ScrollView,
-    Text,
     StatusBar,
     StyleSheet,
+    Text,
     View,
-    Linking,
 } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import FriendInfo from "../components/FriendInfo";
 import FriendTitle from "../components/FriendTitle";
@@ -34,16 +34,11 @@ import Cryptogotchi from "../mobx/Cryptogotchi";
 import {
     selectCryptogotchies,
     selectCurrentUser,
-    selectFirstCryptogotchi,
     selectThemeStore,
 } from "../mobx/selectors";
 import ThemeStore from "../mobx/ThemeStore";
 import { DimensionUtils } from "../utils/DimensionUtils";
-import * as Clipboard from "expo-clipboard";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewUtils from "../utils/ViewUtils";
-import useOnScreen from "../hooks/useOnScreen";
-import { Link } from "@react-navigation/native";
 
 const style = StyleSheet.create({
     img: {

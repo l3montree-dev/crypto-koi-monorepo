@@ -9,6 +9,7 @@ import {
     StyleSheet,
     View,
 } from "react-native";
+import { Notifications, Registered } from "react-native-notifications";
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
@@ -18,6 +19,11 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../components/AppButton";
 import { CREATE_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
+import { ACCEPT_PUSH_NOTIFICATIONS } from "../graphql/queries/user";
+import {
+    AcceptPushNotifications,
+    AcceptPushNotificationsVariables,
+} from "../graphql/queries/__generated__/AcceptPushNotifications";
 import {
     CreateCryptogotchi,
     CreateCryptogotchiVariables,
@@ -88,10 +94,27 @@ const FriendsScreen = observer(() => {
         CreateCryptogotchiVariables
     >(CREATE_CRYPTOGOTCHI_MUTATION);
 
+    const [acceptPushNotifications] = useMutation<
+        AcceptPushNotifications,
+        AcceptPushNotificationsVariables
+    >(ACCEPT_PUSH_NOTIFICATIONS);
+
     const handleCreateCryptogotchi = React.useCallback(async () => {
         await createCryptogotchi();
         // just do a full refresh
         return userService.sync();
+    }, []);
+
+    useEffect(() => {
+        Notifications.registerRemoteNotifications();
+
+        Notifications.events().registerRemoteNotificationsRegistered(
+            (event: Registered) => {
+                return acceptPushNotifications({
+                    variables: { pushNotificationToken: event.deviceToken },
+                });
+            }
+        );
     }, []);
 
     if (!cryptogotchies) {
