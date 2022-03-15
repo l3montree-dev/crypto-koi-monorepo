@@ -1,3 +1,5 @@
+import { IKoiMetadata } from '../cms/page'
+
 export function win(): { innerWidth: number } {
   if (isBrowser()) {
     return window
@@ -30,4 +32,24 @@ export function getMobileOperatingSystem() {
   }
 
   return 'unknown'
+}
+
+export function parseKoiMetadata(metadata: IKoiMetadata) {
+  return {
+    species: (
+      metadata.attributes.find((attr) => attr.trait_type === 'Species')
+        ?.value ?? 'Koi'
+    ).toLocaleUpperCase(),
+    colors: metadata.attributes
+      .filter((attr) => {
+        return typeof attr.value === 'string' && attr.value.startsWith('#')
+      })
+      .map((attr) => attr.value),
+    patterns: +(
+      metadata.attributes.find((attr) => attr.trait_type === 'Pattern Quantity')
+        ?.value ?? 0
+    ),
+
+    image: metadata.image,
+  }
 }

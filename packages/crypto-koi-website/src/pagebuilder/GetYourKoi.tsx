@@ -6,19 +6,11 @@ import React, {
   useState,
 } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { IGetYourKoiPB } from '../cms/page'
+import { IGetYourKoiPB, IKoiMetadata } from '../cms/page'
 import CMSContent from '../components/CMSContent'
 import Koi from '../components/Koi'
 import Section from '../components/Section'
 import { config } from '../misc/config'
-
-interface IKoiMetadata {
-  image: string
-  attributes: Array<{
-    value: string
-    trait_type: string
-  }>
-}
 
 const fetchRandomKoi = async (): Promise<IKoiMetadata> => {
   const resp = await fetch(

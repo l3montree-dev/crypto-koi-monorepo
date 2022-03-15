@@ -1,14 +1,26 @@
 import { ArrowDownIcon } from '@chakra-ui/icons'
 import { Button } from '@chakra-ui/react'
 import Image from 'next/image'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { IMenu } from '../cms/menu'
-import { IHeroSectionPB } from '../cms/page'
+import { IHeroSectionPB, IKoiMetadata } from '../cms/page'
 import CMSContent from '../components/CMSContent'
 import Koi from '../components/Koi'
 import Section from '../components/Section'
+import { config } from '../misc/config'
+import { parseKoiMetadata } from '../misc/utils'
 
 const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
+  const [koi, setKoi] = useState<ReturnType<typeof parseKoiMetadata> | null>(
+    null
+  )
+  useEffect(() => {
+    ;(async function () {
+      setKoi(
+        parseKoiMetadata(await (await fetch(config.api + '/v1/fakes/0')).json())
+      )
+    })()
+  }, [])
   return (
     <Section className="hero-section md:py-0 md:bg-bottom md:bg-contain">
       <div className="max-w-screen-xl md:px-4 mx-auto">
@@ -58,12 +70,7 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
             className="flex-col flex-1 flex justify-center relative items-center"
           >
             <div className="floating pb-12  max-w-md">
-              <Koi
-                species="TANCHO KOHAKO"
-                patterns={1}
-                src={props.Image.data.attributes.url}
-                colors={['#FFFFFF', '#FFFFFF', '#BA1B05']}
-              />
+              {koi && <Koi {...koi} src={koi.image} />}
             </div>
             <div className="hidden md:flex flex-row justify-center mb-5">
               <Button

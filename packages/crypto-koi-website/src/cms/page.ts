@@ -135,3 +135,11 @@ export interface IFooter extends IWithTitleText {
     Social_Link: Array<{ id: number; Link: string; Social_Channel: string }>
   }
 }
+
+export interface IKoiMetadata {
+  image: string
+  attributes: Array<{
+    value: string
+    trait_type: string
+  }>
+}
