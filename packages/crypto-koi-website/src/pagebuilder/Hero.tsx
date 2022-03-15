@@ -15,7 +15,7 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
         <div className="md:flex md:py-20 justify-center flex-1 items-center flex-row">
           <div className="p-4 md:px-0 flex-1 pt-8">
             <span className="text-xl">{props.Subtitle}</span>
-            <h2 className="font-poppins font-bold text-2xl md:text-4xl">
+            <h2 className="font-poppins font-bold text-3xl md:text-4xl">
               Let a <span className="text-cherry-600">KOI</span> steal your
               lifetime for a <span className="line-through">speculative</span>
               <span className="font-gochi font-normal pl-2">great</span> value
@@ -101,9 +101,9 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
           </div>
         </div>
 
-        <div className="flex-col pb-5 flex items-center">
-          <span className="text-sm pb-2">{props.Learn_More}</span>
-          <ArrowDownIcon className="simple-float" fontSize={24} />
+        <div className="flex flex-col justify-center items-center">
+          <span className="text-sm text-center pb-2">{props.Learn_More}</span>
+          <ArrowDownIcon className="" fontSize={24} />
         </div>
       </div>
     </Section>
