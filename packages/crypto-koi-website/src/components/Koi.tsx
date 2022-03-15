@@ -55,7 +55,13 @@ const Koi: FunctionComponent<Props> = (props) => {
             {transformToString(clock, moment().endOf('hour'))}
           </span>
         </div>
-        <Image alt="Koi Image" width={300} height={300} src={props.src} />
+        <Image
+          quality={100}
+          alt="Koi Image"
+          width={300}
+          height={300}
+          src={props.src}
+        />
         <div className="flex-row flex justify-end px-4">
           <span className="bg-white rounded-full px-2 py-1 text-xs">
             {props.species}

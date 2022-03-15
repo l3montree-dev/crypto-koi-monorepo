@@ -22,6 +22,7 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
             </h2>
             <div className="md:block pt-5 hidden">
               <CMSContent>{props.Text}</CMSContent>
+
               <div className="flex-row flex items-start">
                 <div className="pr-3">
                   <a
@@ -64,10 +65,40 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
                 colors={['#FFFFFF', '#FFFFFF', '#BA1B05']}
               />
             </div>
+            <div className="hidden md:flex flex-row justify-center mb-5">
+              <Button
+                leftIcon={
+                  <Image
+                    alt="Opensea.io logo"
+                    height={30}
+                    width={30}
+                    src="/assets/opensea.svg"
+                  />
+                }
+                colorScheme="blue"
+              >
+                Visit collection on opensea.io
+              </Button>
+            </div>
           </div>
         </div>
         <div className="px-4 md:hidden">
           <CMSContent>{props.Text}</CMSContent>
+          <div className="flex flex-row justify-center mb-5">
+            <Button
+              leftIcon={
+                <Image
+                  alt="Opensea.io logo"
+                  height={30}
+                  width={30}
+                  src="/assets/opensea.svg"
+                />
+              }
+              colorScheme="blue"
+            >
+              Visit collection on opensea.io
+            </Button>
+          </div>
         </div>
 
         <div className="flex-col pb-5 flex items-center">
