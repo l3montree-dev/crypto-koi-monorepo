@@ -77,16 +77,18 @@ const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
                 progress={progress}
               />
             </div>
-            <div className="max-w-md">
+            <div className="floating max-w-md">
               <Image
                 id="hero-img"
-                className="floating"
                 alt={props.Image.data.attributes.alternativeText}
                 src={props.Image.data.attributes.formats.small.url}
+                quality={100}
                 height={Math.min(
+                  400,
                   props.Image.data.attributes.formats.small.height
                 )}
                 width={Math.min(
+                  400,
                   props.Image.data.attributes.formats.small.width
                 )}
               />

@@ -5,6 +5,7 @@ import {
 } from 'next'
 import React, { FunctionComponent } from 'react'
 import { api } from '../cms/api'
+import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
 import pageBuilder from '../pagebuilder/page-builder'
@@ -12,10 +13,15 @@ import pageBuilder from '../pagebuilder/page-builder'
 interface Props {
   page: IPage
   footer: IFooter
+  menu: IMenu
 }
 const DynamicPage: FunctionComponent<Props> = (props) => {
   return (
-    <Page footer={props.footer} seo={props.page.attributes.SEO}>
+    <Page
+      menu={props.menu}
+      footer={props.footer}
+      seo={props.page.attributes.SEO}
+    >
       {pageBuilder(props.page.attributes.Pagebuilder)}
     </Page>
   )
@@ -43,17 +49,17 @@ export async function getStaticProps({
     }
   }
   const link = '/' + (params.link as string[]).join('/')
-  const [pageData, footer] = await Promise.all([
+  const [pageData, footer, menu] = await Promise.all([
     api<{ data: IPage[] }>(`pages?filters[Link][$eq]=${link}&populate=deep`),
     api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
+    api<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
   ])
-
-  console.log(pageData)
 
   return {
     props: {
       page: pageData.data[0],
       footer: footer.data.attributes,
+      menu: menu.data.attributes,
     },
     revalidate: 60,
   }

@@ -29,10 +29,30 @@ a {
 }
 
 #kois {
-   //  background-image: url("/assets/Curve_2.svg");
-     background-size: cover;
-     background-position: center;
+    background-image: url("/assets/bg-image.png");
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    .koi-gradient {
+         background-color: red;
+         height: 300px;
+         width: 20%;
+         background: linear-gradient(to right, transparent 0%, #FFF6F1 100%);
+         &:nth-child(1) {
+                background: linear-gradient(to left, transparent 0%, #FFF6F1 100%);
+         }
+     }
+     .koi-selected {
+         left: 50%;
+         transform: translate(-50%);
+         bottom: -70px;
+         // border-radius: 10px;         
+     }
 }
+
+
 p {
     padding-bottom: 16px;
 }
@@ -67,9 +87,9 @@ header {
  
 @keyframes floating {
     0% { transform: translate(0,  0px); }
-    25%  { transform: translate(10px, 15px); }
-    50%  { transform: translate(10px, -15px); }
-    75%  { transform: translate(10px, 15px); }
+    25%  { transform: translate(0px, 15px); }
+    50%  { transform: translate(0px, -15px); }
+    75%  { transform: translate(0px, 15px); }
     100%   { transform: translate(0, -0px); }   
 }
 

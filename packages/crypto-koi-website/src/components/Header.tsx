@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { IMenu } from '../cms/menu'
 
-function Header() {
+interface Props extends IMenu {}
+function Header(props: IMenu) {
   const bgRef = useRef('bg-soft')
   const [bg, setBg] = useState('bg-soft')
 

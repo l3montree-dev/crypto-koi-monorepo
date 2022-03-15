@@ -6,12 +6,23 @@ import { Footer } from './Footer'
 import Header from './Header'
 import Image from 'next/image'
 import { colors } from '../../styles/theme'
+import { IMenu } from '../cms/menu'
+import { getMobileOperatingSystem } from '../misc/utils'
 
 interface Props {
   footer: IFooter
   seo: ISEO
+  menu: IMenu
 }
 const Page: FunctionComponent<Props> = (props) => {
+  const handleButtonClick = () => {
+    const os = getMobileOperatingSystem()
+    if (os === 'ios') {
+      window.open(props.menu.Store_Links.Apple_App_Store_Link, '_blank')
+    } else {
+      window.open(props.menu.Store_Links.Google_Play_Store_Link, '_blank')
+    }
+  }
   return (
     <>
       <Head>
@@ -22,7 +33,7 @@ const Page: FunctionComponent<Props> = (props) => {
         <meta name="robots" content={props.seo.metaRobots} />
       </Head>
       <div className="page bg-soft">
-        <Header />
+        <Header {...props.menu} />
         <main className="bg-soft pb-20">{props.children}</main>
         <Footer {...props.footer} />
       </div>
@@ -41,7 +52,9 @@ const Page: FunctionComponent<Props> = (props) => {
           </div>
           <span className="font-bold ml-2">CryptoKoi</span>
         </div>
-        <Button colorScheme="cherry">Get the App</Button>
+        <Button onClick={handleButtonClick} colorScheme="cherry">
+          Get the App
+        </Button>
       </div>
     </>
   )

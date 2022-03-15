@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react'
 import { IFooter } from '../cms/page'
 import CMSContent from './CMSContent'
 
-interface Props extends IFooter { }
+interface Props extends IFooter {}
 
 export const Footer: FunctionComponent<Props> = (props) => {
   return (
