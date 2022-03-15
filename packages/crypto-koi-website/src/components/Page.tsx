@@ -32,14 +32,14 @@ const Page: FunctionComponent<Props> = (props) => {
         <meta name="keywords" content={props.seo.keywords} />
         <meta name="robots" content={props.seo.metaRobots} />
       </Head>
-      <div className="page bg-soft">
+      <div className="page">
         <Header {...props.menu} />
-        <main className="bg-soft pb-20">{props.children}</main>
+        <main className="pb-20">{props.children}</main>
         <Footer {...props.footer} />
       </div>
       <div
         id="app-bar"
-        className="fixed md:hidden bottom-0 bg-white left-0 flex-row flex items-center justify-between right-0 px-4 py-2"
+        className="fixed md:hidden bottom-0 glassy left-0 flex-row flex items-center justify-between right-0 px-4 py-2"
       >
         <div className="flex flex-row items-center">
           <div className="bg-soft flex items-center justify-center w-10 rounded-lg border-black border-2 h-10">

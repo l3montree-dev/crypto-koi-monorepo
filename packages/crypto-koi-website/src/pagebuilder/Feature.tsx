@@ -12,10 +12,10 @@ const Feature: FunctionComponent<IFeaturesPB> = (props) => {
         <div className="md:flex flex-row md:-mx-2">
           {props.Feature_Cards.map((card) => (
             <div
-              className="rounded-lg md:mx-2 text-center bg-white mb-4 p-8 shadow-lg"
+              className="rounded-lg md:mx-2 text-center glassy mb-4 p-8 shadow-lg"
               key={card.id}
             >
-              <div className="w-14 rounded-full h-14 mx-auto mb-4 p-3 bg-cherry">
+              <div className="w-20 box rounded-lg h-20 mx-auto mb-4 p-0">
                 <Image
                   alt={card.Icon.data.attributes.alternativeText}
                   width={card.Icon.data.attributes.formats.small.width}

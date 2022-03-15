@@ -28,6 +28,10 @@ a {
     background-position: center;
 }
 
+#hero-img {
+    image-rendering: -moz-crisp-edges
+}
+
 #kois {
     background-image: url("/assets/bg-image.png");
     background-size: cover;
@@ -39,9 +43,9 @@ a {
          background-color: red;
          height: 300px;
          width: 20%;
-         background: linear-gradient(to right, transparent 0%, #FFF6F1 100%);
+         background: linear-gradient(to right, transparent 0%, #FFAFBD 100%);
          &:nth-child(1) {
-                background: linear-gradient(to left, transparent 0%, #FFF6F1 100%);
+                background: linear-gradient(to left, transparent 0%, #FFAFBD 100%);
          }
      }
      .koi-selected {
@@ -60,8 +64,12 @@ p {
     transform: rotate(-90deg);
 }
 
+
 #app-bar {
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
 }
 
 main {
@@ -70,10 +78,13 @@ main {
 
 header {
     transition: all 0.5s;
+    border-left: 0!important;
+    border-top:0!important;
+    border-right: 0!important;
 }
 
 #radial-gradient {
-    background: radial-gradient(circle, rgba(255,246,241,1) 20%, rgba(0,212,255,0) 100%);
+    // background: radial-gradient(circle, #ffc3a0 20%, transparent 60%);
 }
 
 .floating { 
@@ -81,7 +92,7 @@ header {
     animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
-    margin-left: 30px;
+    // margin-left: 30px;
     margin-top: 5px;
 }
  
@@ -148,3 +159,29 @@ header {
     }
 }
 
+main {
+    background: #FFAFBD;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #ffe8db, #ffcfaf); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+header {
+    border: 1px solid transparent
+}
+
+.glassy {
+    background-color: rgba(255,255,255,0.6);
+    border: 2px solid white;
+    backdrop-filter: blur(5px);
+    // color: white!important
+}
+
+.box {
+    // border-top: 2px solid rgba(255,255,255,0.5);
+    background: radial-gradient(#8850e9 50%, #6c39c5);
+}
+
+img {
+   image-rendering: -webkit-optimize-contrast
+}

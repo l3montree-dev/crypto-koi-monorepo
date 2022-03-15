@@ -10,7 +10,7 @@ interface Props extends IFooter {}
 export const Footer: FunctionComponent<Props> = (props) => {
   return (
     <>
-      <footer className="bg-cherry-900 text-white">
+      <footer className="bg-gray-800 text-white">
         <div className="p-3 max-w-screen-2xl mx-auto pt-10">
           <h4 className="mb-4 text-xl font-bold">{props.Title}</h4>
           <CMSContent>{props.Text}</CMSContent>
@@ -46,7 +46,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
           </div>
         </div>
       </footer>
-      <div className="bg-black px-3 py-2 pb-16 md:pb-2" id="colophon">
+      <div className="bg-gray-900 px-3 py-2 pb-16 md:pb-2" id="colophon">
         <div className="max-w-screen-2xl flex-wrap flex flex-row items-center justify-between mx-auto">
           <a
             target={'_blank'}

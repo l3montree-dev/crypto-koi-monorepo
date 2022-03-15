@@ -6,16 +6,11 @@ import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { colors } from '../../styles/theme'
 
 const renderMenu = (menu: IMenu['Parents']) => {
-  console.log(menu)
   return menu.map((item) => {
     if (item.Children && item.Children.length > 0) {
       return (
         <Menu key={item.id}>
-          <MenuButton
-            bgColor={colors.soft['500']}
-            as={Button}
-            aria-label="Options"
-          >
+          <MenuButton bgColor={'white'} as={Button} aria-label="Options">
             {item.Title}
           </MenuButton>
           <MenuList>
@@ -46,7 +41,7 @@ const renderMenu = (menu: IMenu['Parents']) => {
               : '_self'
           }
         >
-          <Button className="mx-5" bgColor={colors.soft['500']}>
+          <Button className="mx-5" bgColor={'white'}>
             {item.Title}
           </Button>
         </a>
@@ -57,17 +52,17 @@ const renderMenu = (menu: IMenu['Parents']) => {
 
 interface Props extends IMenu {}
 function Header(props: Props) {
-  const bgRef = useRef('bg-soft')
-  const [bg, setBg] = useState('bg-soft')
+  const bgRef = useRef('bg-transparent')
+  const [bg, setBg] = useState('bg-transparent')
 
   useEffect(() => {
     const scrollList = () => {
-      if (window.scrollY > 0 && bgRef.current === 'bg-soft') {
-        setBg('bg-white shadow-lg')
-        bgRef.current = 'bg-white shadow-lg'
+      if (window.scrollY > 0 && bgRef.current === 'bg-transparent') {
+        setBg('glassy shadow-lg')
+        bgRef.current = 'glassy shadow-lg'
       } else if (window.scrollY <= 0) {
-        setBg('bg-soft')
-        bgRef.current = 'bg-soft'
+        setBg('bg-transparent')
+        bgRef.current = 'bg-transparent'
       }
     }
     window.addEventListener('scroll', scrollList)
@@ -97,7 +92,7 @@ function Header(props: Props) {
             href="https://gitlab.com/l3montree/crypto-koi"
             rel="noreferrer"
           >
-            <div className="bg-black rounded-full h-8 w-8 flex flex-row justify-center items-center text-white">
+            <div className="bg-gray-700 rounded-full h-8 w-8 flex flex-row justify-center items-center text-white">
               <Image
                 alt="Gitlab Logo"
                 width={25}
