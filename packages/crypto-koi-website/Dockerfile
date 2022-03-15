@@ -6,6 +6,7 @@ ENV NODE_ENV production
 ENV PORT 3000
 
 ENV NEXT_PUBLIC_CMS_HOST=https://cms.crypto-koi.io
+ENV NEXT_PUBLIC_API=https://dev.api.crypto-koi.io
 
 EXPOSE 3000
 
