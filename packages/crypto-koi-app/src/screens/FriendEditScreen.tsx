@@ -1,18 +1,22 @@
 /* eslint-disable react-native/no-raw-text */
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { RouteProp, useFocusEffect, useRoute } from "@react-navigation/native";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
-import React, { FunctionComponent, useCallback, useEffect } from "react";
+import React, {
+    FunctionComponent,
+    useCallback,
+    useEffect,
+    useState,
+} from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "../components/AppButton";
-import FriendInfo from "../components/FriendInfo";
 import Input from "../components/Input";
 import Screen from "../components/Screen";
 import { config } from "../config";
@@ -37,14 +41,14 @@ import {
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
 import { RootStackParamList } from "../hooks/useNavigation";
-import {
-    selectCryptogotchi,
-    selectFirstCryptogotchi,
-    selectThemeStore,
-} from "../mobx/selectors";
+import { selectCryptogotchi, selectThemeStore } from "../mobx/selectors";
 import { appEventEmitter } from "../services/AppEventEmitter";
 import { userService } from "../services/UserService";
+import switchOrAddNetwork, {
+    newProvider as newWeb3Provider,
+} from "../services/web3";
 import log from "../utils/logger";
+import ViewUtils from "../utils/ViewUtils";
 import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
 
 type Props = ClientEvent & { name: string; index: number };
@@ -161,6 +165,9 @@ const FriendEditModal = observer(() => {
     const { params } = useRoute<
         RouteProp<RootStackParamList, "FriendEditScreen">
     >();
+
+    const [nftLoading, setNftLoading] = useState(false);
+
     const cryptogotchi = useAppState(selectCryptogotchi(params.cryptogotchiId));
     const tailwind = useTailwind();
     const connector = useWalletConnect();
@@ -189,20 +196,29 @@ const FriendEditModal = observer(() => {
         if (!cryptogotchi) {
             return;
         }
+        setNftLoading(true);
 
         if (!connector.connected) {
             await connector.connect();
         }
 
-        const provider = new WalletConnectProvider({
-            rpc: {
-                [config.chainId]: config.chainUrl,
-            },
-            chainId: config.chainId,
-            connector: connector,
+        const provider = newWeb3Provider(connector, config.chain);
 
-            qrcode: false,
-        });
+        if (provider.chainId !== config.chain.networkId) {
+            // try to switch the network.
+            // if this does not work, the user has to switch it manually.
+            try {
+                await switchOrAddNetwork(provider, config.chain);
+            } catch (e) {
+                ViewUtils.toast(
+                    "Please switch your wallet application to the " +
+                        config.chain.name +
+                        " network and restart the application"
+                );
+                setNftLoading(false);
+                return;
+            }
+        }
 
         await provider.enable();
 
@@ -230,6 +246,8 @@ const FriendEditModal = observer(() => {
         } catch (e) {
             log.error("transaction failed", e);
             appEventEmitter.emit("failedRedeem", e);
+        } finally {
+            setNftLoading(false);
         }
     }, [cryptogotchi, connector]);
 
@@ -328,6 +346,7 @@ const FriendEditModal = observer(() => {
                 {!cryptogotchi.isValidNft && (
                     <View style={tailwind("flex-1 mr-2")}>
                         <AppButton
+                            loading={nftLoading}
                             onPress={handleMakeNft}
                             backgroundColor={themeStore.buttonBackgroundColor}
                             textColor={themeStore.buttonTextColor}

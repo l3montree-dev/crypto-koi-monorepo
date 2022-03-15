@@ -35,7 +35,7 @@ export const AppButton: FunctionComponent<Props> = (props) => {
         >
             {props.loading ? (
                 <View style={tailwind("px-5 py-2")}>
-                    <ActivityIndicator color={"white"} size="large" />
+                    <ActivityIndicator color={props.textColor} size="large" />
                 </View>
             ) : (
                 <Pressable android_ripple={android_ripple} {...rest}>

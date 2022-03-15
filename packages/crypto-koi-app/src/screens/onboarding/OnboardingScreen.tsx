@@ -99,9 +99,9 @@ function OnboardingScreen() {
 
         const provider = new WalletConnectProvider({
             rpc: {
-                [config.chainId]: config.chainUrl,
+                [config.chain.networkId]: config.chain.rpc[0],
             },
-            chainId: config.chainId,
+            chainId: config.chain.networkId,
             connector: connector,
             qrcode: false,
         });

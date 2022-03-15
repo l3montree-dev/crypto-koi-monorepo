@@ -1086,12 +1086,16 @@
             "description": "",
             "args": [
               {
-                "name": "_",
+                "name": "walletAddress",
                 "description": "",
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               }
@@ -1101,7 +1105,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Cryptogotchi",
+                "name": "NftData",
                 "ofType": null
               }
             },

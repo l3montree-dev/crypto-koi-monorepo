@@ -1,22 +1,21 @@
-import { View, Text, SafeAreaView, StatusBar, StyleSheet } from "react-native";
-import React, { useMemo } from "react";
-import { useTailwind } from "tailwind-rn";
-import useAppState from "../hooks/useAppState";
-import { selectCurrentUser, selectThemeStore } from "../mobx/selectors";
-import { commonStyles } from "../styles/commonStyles";
-import { observer } from "mobx-react-lite";
-import { AppButton } from "../components/AppButton";
-import { authStore } from "../mobx/RootStore";
-import { userService } from "../services/UserService";
 import { useMutation } from "@apollo/client";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { observer } from "mobx-react-lite";
+import React, { useMemo } from "react";
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useTailwind } from "tailwind-rn";
+import { AppButton } from "../components/AppButton";
+import { config } from "../config";
 import { CONNECT_WALLET_MUTATION } from "../graphql/queries/user";
 import {
     ConnectWallet,
     ConnectWalletVariables,
 } from "../graphql/queries/__generated__/ConnectWallet";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import { config } from "../config";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import useAppState from "../hooks/useAppState";
+import { selectCurrentUser, selectThemeStore } from "../mobx/selectors";
+import { userService } from "../services/UserService";
+import { commonStyles } from "../styles/commonStyles";
 import ViewUtils from "../utils/ViewUtils";
 
 const style = StyleSheet.create({
@@ -47,9 +46,9 @@ export const ProfileScreen = observer(() => {
     const handleConnectWallet = async () => {
         const provider = new WalletConnectProvider({
             rpc: {
-                [config.chainId]: config.chainUrl,
+                [config.chain.networkId]: config.chain.rpc[0],
             },
-            chainId: config.chainId,
+            chainId: config.chain.networkId,
             connector: connector,
             qrcode: false,
         });
