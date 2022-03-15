@@ -2,9 +2,61 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IMenu } from '../cms/menu'
+import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { colors } from '../../styles/theme'
+
+const renderMenu = (menu: IMenu['Parents']) => {
+  console.log(menu)
+  return menu.map((item) => {
+    if (item.Children && item.Children.length > 0) {
+      return (
+        <Menu key={item.id}>
+          <MenuButton
+            bgColor={colors.soft['500']}
+            as={Button}
+            aria-label="Options"
+          >
+            {item.Title}
+          </MenuButton>
+          <MenuList>
+            {item.Children.map((item) => (
+              <Link href={item.Link} key={item.id}>
+                <a
+                  target={
+                    item.Link.startsWith('http://') ||
+                    item.Link.startsWith('https://')
+                      ? '_blank'
+                      : '_self'
+                  }
+                >
+                  <MenuItem>{item.Title}</MenuItem>
+                </a>
+              </Link>
+            ))}
+          </MenuList>
+        </Menu>
+      )
+    }
+    return (
+      <Link key={item.id} href={item.Link}>
+        <a
+          target={
+            item.Link.startsWith('http://') || item.Link.startsWith('https://')
+              ? '_blank'
+              : '_self'
+          }
+        >
+          <Button className="mx-5" bgColor={colors.soft['500']}>
+            {item.Title}
+          </Button>
+        </a>
+      </Link>
+    )
+  })
+}
 
 interface Props extends IMenu {}
-function Header(props: IMenu) {
+function Header(props: Props) {
   const bgRef = useRef('bg-soft')
   const [bg, setBg] = useState('bg-soft')
 
@@ -38,9 +90,7 @@ function Header(props: IMenu) {
           </a>
         </Link>
         <div className="hidden items-center font-bold md:flex">
-          <span className="w-32">About</span>
-          <span className="w-32">Features</span>
-          <span className="w-32">Download App</span>
+          {renderMenu(props.Parents)}
           <a
             target="_blank"
             className="ml-6"

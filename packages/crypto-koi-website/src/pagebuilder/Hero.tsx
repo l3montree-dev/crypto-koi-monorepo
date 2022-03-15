@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import { colors } from '../../styles/theme'
 import { ArrowDownIcon } from '@chakra-ui/icons'
 import CMSContent from '../components/CMSContent'
+import { IMenu } from '../cms/menu'
 
 const fix2Digits = (n: number) => {
   return n < 10 ? '0' + n : n
@@ -21,7 +22,7 @@ const transformToString = (from: Moment, till: Moment) => {
 
   return '' + fix2Digits(h) + ':' + fix2Digits(m) + ':' + fix2Digits(s)
 }
-const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
+const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
   const [clock, setNow] = useState(moment())
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,20 +47,31 @@ const Hero: FunctionComponent<IHeroSectionPB> = (props) => {
               <CMSContent>{props.Text}</CMSContent>
               <div className="flex-row flex items-start">
                 <div className="pr-3">
-                  <Image
-                    alt="Appstore Badge"
-                    src={'/assets/appstore-badge.svg'}
-                    height={40}
-                    width={120}
-                  />
+                  <a
+                    target={'_blank'}
+                    href={props.Store_Links.Apple_App_Store_Link}
+                    rel="noreferrer"
+                  >
+                    <Image
+                      alt="Appstore Badge"
+                      src={'/assets/appstore-badge.svg'}
+                      height={40}
+                      width={120}
+                    />
+                  </a>
                 </div>
-
-                <Image
-                  alt="Appstore Badge"
-                  src={'/assets/google-play-badge.svg'}
-                  height={40}
-                  width={130}
-                />
+                <a
+                  target={'_blank'}
+                  href={props.Store_Links.Google_Play_Store_Link}
+                  rel="noreferrer"
+                >
+                  <Image
+                    alt="Google Play Badge"
+                    src={'/assets/google-play-badge.svg'}
+                    height={40}
+                    width={130}
+                  />
+                </a>
               </div>
             </div>
           </div>

@@ -21,7 +21,7 @@ const Home: NextPage<Props> = (props) => {
       footer={props.footer}
       seo={props.page.attributes.SEO}
     >
-      {pageBuilder(props.page.attributes.Pagebuilder)}
+      {pageBuilder(props.page.attributes.Pagebuilder, props.menu)}
     </Page>
   )
 }
