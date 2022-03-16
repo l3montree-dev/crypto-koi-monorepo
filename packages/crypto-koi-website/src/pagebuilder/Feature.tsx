@@ -15,7 +15,7 @@ const Feature: FunctionComponent<IFeaturesPB> = (props) => {
               className="rounded-lg md:mx-2 text-center glassy mb-4 p-8 shadow-lg"
               key={card.id}
             >
-              <div className="w-20 box rounded-lg h-20 mx-auto mb-4 p-0">
+              <div className="w-28 box rounded-lg h-28 mx-auto mb-4 p-0">
                 <Image
                   alt={card.Icon.data.attributes.alternativeText}
                   width={card.Icon.data.attributes.formats.small.width}
