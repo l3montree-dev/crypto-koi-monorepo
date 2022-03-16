@@ -74,7 +74,6 @@ p {
 
 main {
     padding-top: 56px;
-    
 }
 
 .koi {
@@ -83,6 +82,7 @@ main {
     background-repeat:no-repeat;
     background-image: url("/assets/cherry-blossom.png");
 }
+
 .wrapper {
 
 }
@@ -187,9 +187,13 @@ header {
     // color: white!important
 }
 
+.glassy-dark {
+    border: 2px solid rgba(255,255,255,0.8);
+}
+
 .glassy-image {
     background: radial-gradient(#232e3d 50%, #111827);
-    border: 2px solid white;
+    border: 2px solid rgba(255,255,255,0.5);
     backdrop-filter: blur(5px);
     // color: white!important
 }
@@ -200,5 +204,5 @@ header {
 }
 
 img {
-   image-rendering: -webkit-optimize-contrast
+   // image-rendering: -webkit-optimize-contrast
 }

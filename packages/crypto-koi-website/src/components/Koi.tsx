@@ -33,25 +33,19 @@ const Koi: FunctionComponent<Props> = (props) => {
   const progress = moment().endOf('hour').diff(clock, 'seconds') / (60 * 60)
   return (
     <div>
-      <div className="glassy koi rounded-lg shadow-lg">
+      <div className="bg-gray-800 glassy-dark overflow-hidden pt-2 koi rounded-lg shadow-lg">
         <div className="flex-col relative items-center flex justify-center mt-2">
           <RoundProgress
-            circleOneStroke="#ba1b05"
-            circleTwoStroke="rgba(255,255,255,1)"
+            circleOneStroke="#F9C0C6"
+            circleTwoStroke="black"
             progress={progress}
-            strokeWidth={5}
+            strokeWidth={4}
             size={55}
           />
           <div className="absolute left-26 top-4">
-            <Image
-              className="text-cherry-500"
-              width={25}
-              height={25}
-              alt="Heart"
-              src="/assets/heart.svg"
-            />
+            <Image width={25} height={25} alt="Heart" src="/assets/heart.svg" />
           </div>
-          <span className="text-sm font-bold mt-2">
+          <span className="text-sm text-white font-bold mt-2">
             {transformToString(clock, moment().endOf('hour'))}
           </span>
         </div>

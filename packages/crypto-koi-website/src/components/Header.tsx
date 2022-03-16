@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IMenu } from '../cms/menu'
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import {
+  Button,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from '@chakra-ui/react'
 import { colors } from '../../styles/theme'
 
 const renderMenu = (menu: IMenu['Parents']) => {
@@ -69,7 +76,7 @@ function Header(props: Props) {
     return () => window.removeEventListener('scroll', scrollList)
   }, [])
   return (
-    <header className={'p-3 md:p-5 fixed top-0 left-0 right-0 z-10 ' + bg}>
+    <header className={'p-3 md:p-4 fixed top-0 left-0 right-0 z-10 ' + bg}>
       <div className="flex-row justify-between max-w-screen-2xl mx-auto flex items-center">
         <Link passHref={true} href="/">
           <a className="flex-row flex items-center">
@@ -88,18 +95,21 @@ function Header(props: Props) {
           {renderMenu(props.Parents)}
           <a
             target="_blank"
-            className="ml-6"
             href="https://gitlab.com/l3montree/crypto-koi"
             rel="noreferrer"
           >
-            <div className="bg-gray-700 rounded-full h-8 w-8 flex flex-row justify-center items-center text-white">
-              <Image
-                alt="Gitlab Logo"
-                width={25}
-                height={25}
-                src="/assets/gitlab.svg"
-              />
-            </div>
+            <IconButton
+              bgColor={'white'}
+              aria-label="Gitlab"
+              icon={
+                <Image
+                  alt="Gitlab Logo"
+                  width={25}
+                  height={25}
+                  src="/assets/gitlab.svg"
+                />
+              }
+            />
           </a>
         </div>
       </div>

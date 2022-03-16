@@ -16,7 +16,7 @@ const ImageTextCards: FunctionComponent<IImageTextCardsPB> = (props) => {
           <div
             // style={{ backgroundColor: props.Color }}
             className={
-              'rounded-lg glassy-image mb-4 md:mx-2 w-full shadow-lg ' +
+              'glassy-image mb-4 md:mx-2 w-full rounded-lg shadow-lg ' +
               imageOrder
             }
           >
@@ -29,7 +29,7 @@ const ImageTextCards: FunctionComponent<IImageTextCardsPB> = (props) => {
           </div>
           <div
             className={
-              'glassy md:mx-2 flex-col flex items-center justify-end shadow-lg w-full mb-4 p-8 rounded-lg' +
+              'glassy rounded-lg md:mx-2 flex-col flex items-center justify-end shadow-lg w-full mb-4 p-8 rounded-lg' +
               textOrder
             }
           >
