@@ -4,6 +4,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { observer } from "mobx-react-lite";
 import React, { useMemo } from "react";
 import {
+    Linking,
     SafeAreaView,
     StatusBar,
     StyleSheet,
@@ -168,8 +169,8 @@ export const ProfileTab = observer(() => {
                     <TouchableNativeFeedback
                         onPress={() =>
                             navigate("CMSScreen", {
-                                link: "/",
-                                title: "Terms of Use",
+                                link: "/app-imprint",
+                                title: "Imprint",
                             })
                         }
                     >
@@ -181,10 +182,9 @@ export const ProfileTab = observer(() => {
                     </TouchableNativeFeedback>
                     <TouchableNativeFeedback
                         onPress={() =>
-                            navigate("CMSScreen", {
-                                link: "/",
-                                title: "Terms of Use",
-                            })
+                            Linking.openURL(
+                                config.websiteBaseUrl + "/app-privacy-policy"
+                            )
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
@@ -195,10 +195,9 @@ export const ProfileTab = observer(() => {
                     </TouchableNativeFeedback>
                     <TouchableNativeFeedback
                         onPress={() =>
-                            navigate("CMSScreen", {
-                                link: "/",
-                                title: "Terms of Use",
-                            })
+                            Linking.openURL(
+                                config.websiteBaseUrl + "/terms-of-use"
+                            )
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
@@ -207,11 +206,20 @@ export const ProfileTab = observer(() => {
                             </Text>
                         </View>
                     </TouchableNativeFeedback>
-                    <View style={tailwind("p-4")}>
-                        <Text style={{ color: themeStore.buttonTextColor }}>
-                            Open-Source Licenses
-                        </Text>
-                    </View>
+                    <TouchableNativeFeedback
+                        onPress={() =>
+                            Linking.openURL(
+                                config.websiteBaseUrl +
+                                    "/cryptokoi-app-open-source-licenses_2022_03_18.txt"
+                            )
+                        }
+                    >
+                        <View style={tailwind("p-4")}>
+                            <Text style={{ color: themeStore.buttonTextColor }}>
+                                Open-Source Licenses
+                            </Text>
+                        </View>
+                    </TouchableNativeFeedback>
                 </View>
 
                 <AppButton

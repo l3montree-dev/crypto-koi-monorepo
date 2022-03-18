@@ -57,6 +57,9 @@ export const config = {
     restApiBaseUrl: Constants?.manifest?.extra?.API_URL,
     graphqlBaseUrl: Constants?.manifest?.extra?.API_URL + "/query",
 
+    cmsBaseUrl: "https://cms.crypto-koi.io",
+    websiteBaseUrl: "https://crypto-koi.io",
+
     secondsBetweenFeeding: 60 * 60,
 
     contractAddress: "0x2f158340c811c37284748fD2FFE298ebEB2F8c0e",
