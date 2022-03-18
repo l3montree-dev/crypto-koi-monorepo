@@ -51,6 +51,14 @@ class UserService {
         });
         rootStore.authStore.setCurrentUser(user.data.user);
     }
+
+    async deleteAccount() {
+        // makes an http call.
+        await authService.destroyAccount();
+        // just destroys the tokens.
+        await authService.logout();
+        rootStore.authStore.setCurrentUser(null);
+    }
 }
 
 export const userService = new UserService();

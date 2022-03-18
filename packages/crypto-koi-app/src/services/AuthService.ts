@@ -183,6 +183,15 @@ class AuthService {
         }
     }
 
+    async destroyAccount() {
+        try {
+            await this.protectedClient.delete("/auth");
+        } catch (e) {
+            log.error("destroy account failed", e);
+            throw e;
+        }
+    }
+
     private maybeRefreshToken() {
         if (this.refreshTokenRequest === null) {
             log.info("refreshing access token");
@@ -234,6 +243,7 @@ class AuthService {
             ...config.headers,
             Authorization: `Bearer ${this.accessToken}`,
         };
+        return config;
     }
 }
 

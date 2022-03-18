@@ -3,7 +3,6 @@ import { AxiosResponse } from "axios";
 import { uniqBy } from "lodash";
 import { config } from "../config";
 import log from "../utils/logger";
-import ViewUtils from "../utils/ViewUtils";
 import { authService, TokenResponse } from "./AuthService";
 
 const httpLink = createHttpLink({

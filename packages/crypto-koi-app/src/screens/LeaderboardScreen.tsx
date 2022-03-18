@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import {
     FlatList,
+    RefreshControl,
     SafeAreaView,
     StatusBar,
     StyleSheet,
@@ -24,10 +25,12 @@ const style = StyleSheet.create({
 
 const Leaderboard = observer(() => {
     const tailwind = useTailwind();
-    const { fetchMore, data } = useQuery<FetchLeaderBoard>(FETCH_LEADERBOARD, {
-        variables: { offset: 0, limit: 20 },
-        pollInterval: 10 * 1000,
-    });
+    const { fetchMore, data, refetch, loading } = useQuery<FetchLeaderBoard>(
+        FETCH_LEADERBOARD,
+        {
+            variables: { offset: 0, limit: 20 },
+        }
+    );
 
     const themeStore = useAppState((rootStore) => rootStore.themeStore);
 
@@ -73,6 +76,9 @@ const Leaderboard = observer(() => {
                         });
                     }
                 }}
+                refreshControl={
+                    <RefreshControl onRefresh={refetch} refreshing={loading} />
+                }
                 contentContainerStyle={tailwind("pt-0")}
                 renderItem={({ item, index }) => (
                     <LeaderboardItem index={index} key={item.id} {...item} />

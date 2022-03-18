@@ -4,6 +4,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { observer } from "mobx-react-lite";
 import React, { useMemo } from "react";
 import {
+    Alert,
     Linking,
     SafeAreaView,
     StatusBar,
@@ -88,6 +89,27 @@ export const ProfileTab = observer(() => {
     );
 
     const { navigate } = useNavigation();
+
+    const handleDeleteAccount = () => {
+        Alert.alert(
+            "Delete Account",
+            "Are you sure that you want to delete your account? This action cannot be undone.",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                {
+                    text: "Delete",
+                    onPress: async () => {
+                        await userService.deleteAccount();
+                        ViewUtils.toast("Account deleted");
+                    },
+                    style: "destructive",
+                },
+            ]
+        );
+    };
 
     return (
         <SafeAreaView
@@ -182,9 +204,7 @@ export const ProfileTab = observer(() => {
                     </TouchableNativeFeedback>
                     <TouchableNativeFeedback
                         onPress={() =>
-                            Linking.openURL(
-                                config.websiteBaseUrl + "/app-privacy-policy"
-                            )
+                            Linking.openURL(config.privacyPolicyLink)
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
@@ -195,9 +215,7 @@ export const ProfileTab = observer(() => {
                     </TouchableNativeFeedback>
                     <TouchableNativeFeedback
                         onPress={() =>
-                            Linking.openURL(
-                                config.websiteBaseUrl + "/terms-of-use"
-                            )
+                            Linking.openURL(config.termsOfServiceLink)
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
@@ -214,9 +232,22 @@ export const ProfileTab = observer(() => {
                             )
                         }
                     >
-                        <View style={tailwind("p-4")}>
+                        <View style={[tailwind("p-4"), style.listItem]}>
                             <Text style={{ color: themeStore.buttonTextColor }}>
                                 Open-Source Licenses
+                            </Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                    <TouchableNativeFeedback onPress={handleDeleteAccount}>
+                        <View style={tailwind("p-4 flex-row items-center")}>
+                            <Icon
+                                size={24}
+                                style={tailwind("mr-2 opacity-75")}
+                                name="delete-outline"
+                                color={themeStore.buttonTextColor}
+                            />
+                            <Text style={{ color: themeStore.buttonTextColor }}>
+                                Delete account
                             </Text>
                         </View>
                     </TouchableNativeFeedback>
