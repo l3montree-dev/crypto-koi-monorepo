@@ -1,8 +1,4 @@
 {
-    "splash": {
-        "image": "./assets/splash.png",
-        "backgroundColor": "#000000"
-    },
     "expo": {
         "name": "CryptoKoi",
         "slug": "cryptokoi",
@@ -23,6 +19,21 @@
         "splash": {
             "image": "./assets/splash.png",
             "backgroundColor": "#000000"
+        },
+        "plugins": [
+            "sentry-expo"
+        ],
+        "hooks": {
+            "postPublish": [
+                {
+                    "file": "sentry-expo/upload-sourcemaps",
+                    "config": {
+                        "organization": "l3montree",
+                        "project": "crypto-koi-app",
+                        "authToken": "e74adee69b9f48418c77e4f36e847f6aafb8a11e4ea546e9a9acd062b7a2145b"
+                    }
+                }
+            ]
         }
     }
 }
