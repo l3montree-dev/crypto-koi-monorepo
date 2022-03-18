@@ -66,6 +66,6 @@ export const config = {
 
     chain: mumbai,
 
-    privacyPolicyLink: "https://polygon.technology/privacy-policy",
-    termsOfServiceLink: "https://polygon.technology/terms-of-service",
+    privacyPolicyLink: "https://crypto-koi.io/app-privacy-policy",
+    termsOfServiceLink: "https://crypto-koi.io/terms-of-use",
 };

@@ -340,7 +340,6 @@ function OnboardingScreen() {
                             <View style={tailwind("bg-white rounded-lg mt-4")}>
                                 <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
                                     <Switch
-                                  
                                         value={agreedToTermsOfUse}
                                         color={Colors.cherry}
                                         onChange={() =>
@@ -349,11 +348,10 @@ function OnboardingScreen() {
                                             )
                                         }
                                     />
-                                    <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the license agreement <Text onPress={() => Linking.openURL(config.termsOfServiceLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
+                                    <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the terms of use <Text onPress={() => Linking.openURL(config.termsOfServiceLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
                                 </View>
-                                <View style={tailwind("flex p-4 flex-row items-center")}>
+                                <View style={tailwind("flex p-4 flex-row items-center mb-2")}>
                                     <Switch
-                                  
                                         value={agreedToPrivacyPolicy}
                                         color={Colors.cherry}
                                         onChange={() =>

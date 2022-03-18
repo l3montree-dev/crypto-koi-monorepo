@@ -63,7 +63,7 @@ const Wave: FunctionComponent<Props> = (props) => {
     });
 
     return (
-        <View style={style.container}>
+        <View style={style.container} pointerEvents={"none"}>
             <Svg style={props.svgStyle} viewBox="0 0 1 1">
                 {/* @ts-ignore */}
                 <AnimatedPath fill={"currentColor"} animatedProps={path1} />
