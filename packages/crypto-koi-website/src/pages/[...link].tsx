@@ -22,7 +22,9 @@ const DynamicPage: FunctionComponent<Props> = (props) => {
       footer={props.footer}
       seo={props.page.attributes.SEO}
     >
-      {pageBuilder(props.page.attributes.Pagebuilder, props.menu)}
+      <div className="px-4">
+        {pageBuilder(props.page.attributes.Pagebuilder, props.menu)}
+      </div>
     </Page>
   )
 }
