@@ -6,7 +6,7 @@ import useAppState from "./hooks/useAppState";
 import { selectThemeStore } from "./mobx/selectors";
 import FriendScreen from "./screens/FriendScreen";
 import Leaderboard from "./screens/LeaderboardScreen";
-import { ProfileScreen } from "./screens/ProfileScreen";
+import { ProfileTab } from "./screens/ProfileTab";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,12 +28,12 @@ export const TabNavigator = observer(() => {
             barStyle={[style, { backgroundColor: themeStore.tabBarColor }]}
         >
             <Tab.Screen
-                name="Friend"
+                name="CryptoKoi"
                 component={FriendScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
-                            name="egg-easter"
+                            name="fish"
                             color={color}
                             size={24}
                         />
@@ -56,7 +56,7 @@ export const TabNavigator = observer(() => {
 
             <Tab.Screen
                 name="Profile"
-                component={ProfileScreen}
+                component={ProfileTab}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons

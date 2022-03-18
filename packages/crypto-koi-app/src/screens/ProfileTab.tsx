@@ -3,11 +3,19 @@ import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { observer } from "mobx-react-lite";
 import React, { useMemo } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableNativeFeedback,
+    View,
+} from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../components/AppButton";
 import { config } from "../config";
 import { CONNECT_WALLET_MUTATION } from "../graphql/queries/user";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
     ConnectWallet,
     ConnectWalletVariables,
@@ -17,14 +25,19 @@ import { selectCurrentUser, selectThemeStore } from "../mobx/selectors";
 import { userService } from "../services/UserService";
 import { commonStyles } from "../styles/commonStyles";
 import ViewUtils from "../utils/ViewUtils";
+import { useNavigation } from "../hooks/useNavigation";
 
 const style = StyleSheet.create({
     header: {
         paddingTop: StatusBar.currentHeight ?? 0 + 5,
     },
+    listItem: {
+        borderBottomWidth: 1,
+        borderBottomColor: "rgba(125, 125, 125, 1)",
+    },
 });
 
-export const ProfileScreen = observer(() => {
+export const ProfileTab = observer(() => {
     const themeStore = useAppState(selectThemeStore);
     const user = useAppState(selectCurrentUser);
     const tailwind = useTailwind();
@@ -68,6 +81,13 @@ export const ProfileScreen = observer(() => {
         }
     };
 
+    const onButtonColor = useMemo(
+        () => ({ color: themeStore.buttonTextColor }),
+        [themeStore.buttonTextColor]
+    );
+
+    const { navigate } = useNavigation();
+
     return (
         <SafeAreaView
             style={[
@@ -95,14 +115,27 @@ export const ProfileScreen = observer(() => {
                             </Text>
                             <View
                                 style={[
-                                    tailwind("p-2 rounded-lg"),
+                                    tailwind(
+                                        "flex-row items-center p-4 rounded-lg"
+                                    ),
                                     {
                                         backgroundColor:
-                                            themeStore.primaryColor,
+                                            themeStore.buttonBackgroundColor,
                                     },
                                 ]}
                             >
-                                <Text style={{ color: themeStore.onSecondary }}>
+                                <Icon
+                                    size={24}
+                                    style={tailwind("opacity-75 mr-2")}
+                                    color={themeStore.buttonTextColor}
+                                    name="wallet"
+                                />
+
+                                <Text
+                                    numberOfLines={1}
+                                    ellipsizeMode="middle"
+                                    style={[onButtonColor, tailwind("flex-1")]}
+                                >
                                     {user?.walletAddress}
                                 </Text>
                             </View>
@@ -126,6 +159,61 @@ export const ProfileScreen = observer(() => {
                         </View>
                     )}
                 </View>
+                <View
+                    style={[
+                        tailwind("mb-4 rounded-lg"),
+                        { backgroundColor: themeStore.buttonBackgroundColor },
+                    ]}
+                >
+                    <TouchableNativeFeedback
+                        onPress={() =>
+                            navigate("CMSScreen", {
+                                link: "/",
+                                title: "Terms of Use",
+                            })
+                        }
+                    >
+                        <View style={[tailwind("p-4"), style.listItem]}>
+                            <Text style={{ color: themeStore.buttonTextColor }}>
+                                Imprint
+                            </Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                    <TouchableNativeFeedback
+                        onPress={() =>
+                            navigate("CMSScreen", {
+                                link: "/",
+                                title: "Terms of Use",
+                            })
+                        }
+                    >
+                        <View style={[tailwind("p-4"), style.listItem]}>
+                            <Text style={{ color: themeStore.buttonTextColor }}>
+                                Privacy Policy
+                            </Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                    <TouchableNativeFeedback
+                        onPress={() =>
+                            navigate("CMSScreen", {
+                                link: "/",
+                                title: "Terms of Use",
+                            })
+                        }
+                    >
+                        <View style={[tailwind("p-4"), style.listItem]}>
+                            <Text style={{ color: themeStore.buttonTextColor }}>
+                                Terms of Use
+                            </Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                    <View style={tailwind("p-4")}>
+                        <Text style={{ color: themeStore.buttonTextColor }}>
+                            Open-Source Licenses
+                        </Text>
+                    </View>
+                </View>
+
                 <AppButton
                     title="Logout"
                     onPress={handleLogout}

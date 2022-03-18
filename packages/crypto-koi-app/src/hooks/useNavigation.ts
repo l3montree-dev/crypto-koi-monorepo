@@ -14,6 +14,10 @@ export type RootStackParamList = {
         name: string;
         isAlive: boolean;
     };
+    readonly CMSScreen: {
+        link: string;
+        title: string;
+    };
 };
 
 export function useNavigation() {

@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import {
@@ -17,10 +16,7 @@ import Animated, {
     useSharedValue,
     withSpring,
 } from "react-native-reanimated";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
-import { AppButton } from "../components/AppButton";
-import { config } from "../config";
 import { CREATE_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
 import { ACCEPT_PUSH_NOTIFICATIONS } from "../graphql/queries/user";
 import {
@@ -32,14 +28,9 @@ import {
     CreateCryptogotchiVariables,
 } from "../graphql/queries/__generated__/CreateCryptogotchi";
 import useAppState from "../hooks/useAppState";
-import { appEventEmitter } from "../services/AppEventEmitter";
 import { userService } from "../services/UserService";
-import switchOrAddNetwork, { newProvider } from "../services/web3";
 import { DimensionUtils } from "../utils/DimensionUtils";
-import log from "../utils/logger";
-import ViewUtils from "../utils/ViewUtils";
 import CryptogotchiView from "../views/CryptogotchiView";
-import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
 
 const style = StyleSheet.create({
     slide: {
@@ -110,7 +101,7 @@ const FriendsScreen = observer(() => {
         AcceptPushNotificationsVariables
     >(ACCEPT_PUSH_NOTIFICATIONS);
 
-    const handleCreateCryptogotchi = React.useCallback(async () => {
+    /*const handleCreateCryptogotchi = React.useCallback(async () => {
         setNftLoading(true);
         if (!connector.connected) {
             await connector.connect();
@@ -162,7 +153,7 @@ const FriendsScreen = observer(() => {
         } finally {
             setNftLoading(false);
         }
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         Notifications.registerRemoteNotifications();
@@ -202,7 +193,7 @@ const FriendsScreen = observer(() => {
                         </View>
                     ))}
 
-                    <View
+                    {/* <View
                         style={[
                             style.slide,
                             { backgroundColor: theme.secondaryColor },
@@ -233,34 +224,37 @@ const FriendsScreen = observer(() => {
                                 title="Create new CryptoKoi"
                             />
                         </View>
-                    </View>
+                                </View> */}
                 </ScrollView>
             </View>
 
-            <View
-                style={tailwind(
-                    "absolute bottom-4 w-full justify-center items-center"
-                )}
-            >
-                <View style={tailwind("flex-row")}>
-                    {cryptogotchies.map((cryptogotchi) => (
-                        <View
-                            key={cryptogotchi.id}
+            {cryptogotchies.length > 1 && (
+                <View
+                    style={tailwind(
+                        "absolute bottom-4 w-full justify-center items-center"
+                    )}
+                >
+                    <View style={tailwind("flex-row")}>
+                        {cryptogotchies.map((cryptogotchi) => (
+                            <View
+                                key={cryptogotchi.id}
+                                style={[
+                                    tailwind(
+                                        "bg-white opacity-50 mx-2 rounded"
+                                    ),
+                                    style.dot,
+                                ]}
+                            />
+                        ))}
+
+                        <Animated.View
                             style={[
-                                tailwind("bg-white opacity-50 mx-2 rounded"),
                                 style.dot,
+                                tailwind("bg-white rounded  absolute mx-2"),
+                                animatedActiveDotStyle,
                             ]}
                         />
-                    ))}
-
-                    <Animated.View
-                        style={[
-                            style.dot,
-                            tailwind("bg-white rounded  absolute mx-2"),
-                            animatedActiveDotStyle,
-                        ]}
-                    />
-                    <View
+                        {/*<View
                         style={[
                             tailwind(
                                 "bg-white flex-row justify-center items-center mx-2 rounded"
@@ -269,9 +263,10 @@ const FriendsScreen = observer(() => {
                         ]}
                     >
                         <Icon color={"rgba(0,0,0,1)"} size={10} name={"plus"} />
+                    </View>*/}
                     </View>
                 </View>
-            </View>
+            )}
         </View>
     );
 });

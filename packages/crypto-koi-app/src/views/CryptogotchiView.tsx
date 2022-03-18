@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { useFocusEffect } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useMemo } from "react";
@@ -57,6 +58,7 @@ const style = StyleSheet.create({
         tintColor: "black",
         opacity: 0.6,
     },
+    bg: {},
     ticker: {
         ...Platform.select({
             android: {
@@ -134,7 +136,7 @@ const CryptogotchiView = observer((props: Props) => {
                 minHeight:
                     DimensionUtils.deviceHeight -
                     (currentUserIsOwner ? 36 : -39),
-                paddingBottom: 20,
+                // paddingBottom: 20,
             },
             wave: {
                 bottom: currentUserIsOwner ? 25 : 82,
@@ -164,9 +166,9 @@ const CryptogotchiView = observer((props: Props) => {
         ViewUtils.toast("Copied");
     };
 
-    useEffect(() => {
+    useFocusEffect(() => {
         if (props.isVisible) themeStore.setColor(cryptogotchi.color);
-    }, [props.isVisible, cryptogotchi.color]);
+    });
 
     return (
         <SafeAreaView
@@ -290,27 +292,6 @@ const CryptogotchiView = observer((props: Props) => {
                     </>
                 )}
 
-                <View
-                    style={[
-                        tailwind("flex-row absolute w-full justify-center"),
-                        memoStyle.wave,
-                    ]}
-                >
-                    <Svg
-                        style={{ color: secondaryColor } as any}
-                        width={DimensionUtils.deviceWidth}
-                        height={500}
-                    >
-                        <AnimatedEllipse
-                            rx={500}
-                            ry={200}
-                            cx="200"
-                            cy="200"
-                            fill={"currentColor"}
-                        />
-                    </Svg>
-                </View>
-
                 <View style={tailwind("flex-1 mt-10")}>
                     <RNAnimated.View
                         style={[{ translateX, translateY }, style.z1]}
@@ -367,7 +348,13 @@ const CryptogotchiView = observer((props: Props) => {
                     </View>
                 </View>
 
-                <View style={tailwind("flex-col mx-4 justify-end")}>
+                <View
+                    style={[
+                        tailwind("flex-col px-4 justify-end pt-4"),
+                        style.bg,
+                        { backgroundColor: secondaryColor },
+                    ]}
+                >
                     <View style={tailwind("flex-row mb-4 justify-between")}>
                         {cryptogotchi && (
                             <FriendTitle

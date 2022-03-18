@@ -39,7 +39,7 @@ const FriendInfo = observer((props: Props) => {
 
     return (
         <View>
-            <View style={tailwind("flex-row mb-4 justify-between")}>
+            <View style={tailwind("flex-row pb-4 justify-between")}>
                 <View
                     style={tailwind(
                         "p-1 pt-2 bg-white flex-1 flex-col mr-1 items-center rounded-lg"

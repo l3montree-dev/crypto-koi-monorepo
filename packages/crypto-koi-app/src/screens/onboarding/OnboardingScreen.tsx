@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
     Image,
+    Linking,
     NativeScrollEvent,
     NativeSyntheticEvent,
     Platform,
@@ -30,6 +31,9 @@ import { useFloating } from "../../hooks/useFloating";
 import { userService } from "../../services/UserService";
 import { Colors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
+import { Checkbox, Switch } from "react-native-paper";
+import ViewUtils from "../../utils/ViewUtils";
+import { Link } from "@react-navigation/native";
 
 const style = StyleSheet.create({
     slide: {
@@ -62,7 +66,7 @@ const style = StyleSheet.create({
     },
     listItem: {
         backgroundColor: "rgb(255,255,255)",
-        elevation: 1,
+        // elevation: 1,
     },
 });
 
@@ -71,6 +75,9 @@ function OnboardingScreen() {
 
     const scrollPosition = useSharedValue(0);
     const connector = useWalletConnect();
+
+    const [agreedToTermsOfUse, setAgreedToTermsOfUse] = useState(false);
+    const [agreedToPrivacyPolicy, setAgreedToPrivacyPolicy] = useState(false);
 
     const animatedActiveDotStyle = useAnimatedStyle(() => {
         "worklet";
@@ -143,7 +150,11 @@ function OnboardingScreen() {
 
     const handleNext = () => {
         if (activeSlide === 2) {
-            return handlePlayWithWalletPress();
+            if (agreedToTermsOfUse && agreedToPrivacyPolicy) {
+                return handlePlayWithoutWalletPress();
+            } else {
+                return ViewUtils.toast("Please agree to the terms of use and the privacy policy");
+            }
         }
         if (scrollViewRef.current) {
             scrollViewRef.current.scrollTo({
@@ -162,7 +173,7 @@ function OnboardingScreen() {
 
     return (
         <View style={tailwind("flex-1 bg-soft-500")}>
-            <View style={tailwind("absolute top-0")}>
+            <View style={tailwind("absolute -top-20")}>
                 <Wave
                     svgStyle={[
                         tailwind("text-cherry-500"),
@@ -326,10 +337,39 @@ function OnboardingScreen() {
                                 To never loose your friend again you can make
                                 him unique by putting him in an NFT
                             </Text>
+                            <View style={tailwind("bg-white rounded-lg mt-4")}>
+                                <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
+                                    <Switch
+                                  
+                                        value={agreedToTermsOfUse}
+                                        color={Colors.cherry}
+                                        onChange={() =>
+                                            setAgreedToTermsOfUse(
+                                                (prev) => !prev
+                                            )
+                                        }
+                                    />
+                                    <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the license agreement <Text onPress={() => Linking.openURL(config.termsOfServiceLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
+                                </View>
+                                <View style={tailwind("flex p-4 flex-row items-center")}>
+                                    <Switch
+                                  
+                                        value={agreedToPrivacyPolicy}
+                                        color={Colors.cherry}
+                                        onChange={() =>
+                                            setAgreedToPrivacyPolicy(
+                                                (prev) => !prev
+                                            )
+                                        }
+                                    />
+                                    <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the privacy policy <Text onPress={() => Linking.openURL(config.privacyPolicyLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
+                                </View>
+                            </View>
                             <View style={tailwind("mt-5")}>
                                 <AppButton
                                     backgroundColor={Colors.cherry}
                                     textColor="white"
+                                    disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
                                     onPress={handlePlayWithWalletPress}
                                     title="I already have a Wallet"
                                 />
@@ -339,6 +379,7 @@ function OnboardingScreen() {
                                     backgroundColor={
                                         tailwind("text-sea-500").color as string
                                     }
+                                    disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
                                     textColor="white"
                                     onPress={handlePlayWithoutWalletPress}
                                     title="Play without connected Wallet"

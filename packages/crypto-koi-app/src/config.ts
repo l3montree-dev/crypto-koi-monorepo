@@ -62,4 +62,7 @@ export const config = {
     contractAddress: "0x2f158340c811c37284748fD2FFE298ebEB2F8c0e",
 
     chain: mumbai,
+
+    privacyPolicyLink: "https://polygon.technology/privacy-policy",
+    termsOfServiceLink: "https://polygon.technology/terms-of-service",
 };

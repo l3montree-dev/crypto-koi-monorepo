@@ -9,6 +9,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useAppState from "./hooks/useAppState";
 import { RootStackParamList } from "./hooks/useNavigation";
 import { selectCurrentUser, selectThemeStore } from "./mobx/selectors";
+import CMSScreen from "./screens/CMSScreen";
 import CryptogotchiScreen from "./screens/CryptogotchiScreen";
 import FriendEditScreen from "./screens/FriendEditScreen";
 import SnakeGameScreen from "./screens/games/snake/SnakeGameScreen";
@@ -31,7 +32,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
             headerStyle: {
                 backgroundColor: themeStore.secondaryColor,
             },
-            headerTitleAlign: "center",
+            // headerTitleAlign: "center",
         }),
         [themeStore.secondaryColor, themeStore.currentHeaderTintColor]
     );
@@ -46,6 +47,18 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                             ...commonNavigationOptions,
                             // there is no way to redirect back
                             headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="CMSScreen"
+                        component={CMSScreen}
+                        options={({ route }) => {
+                            return {
+                                ...commonNavigationOptions,
+                                headerShown: true,
+                                headerTransparent: true,
+                                headerTitle: route.params.title,
+                            };
                         }}
                     />
                     <Stack.Screen
