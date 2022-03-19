@@ -82,13 +82,13 @@ class AuthService {
 
     async exchangeDeviceIdForToken() {
         try {
-            const deviceId = await StorageService.getValueFor(
+            let deviceId = await StorageService.getValueFor(
                 AuthService.deviceIdStorageKey
             );
 
             if (!deviceId) {
                 // generate a new one.
-                const deviceId =
+                deviceId =
                     Math.random().toString(36).substring(2, 15) +
                     Math.random().toString(36).substring(2, 15);
                 await StorageService.save(
