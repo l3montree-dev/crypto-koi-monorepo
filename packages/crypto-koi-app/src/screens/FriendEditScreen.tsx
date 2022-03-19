@@ -339,7 +339,7 @@ const FriendEditModal = observer(() => {
             </View>
             <View
                 style={[
-                    tailwind("p-4 flex-row"),
+                    tailwind("p-4 flex-row mb-4"),
                     { backgroundColor: themeStore.secondaryColor },
                 ]}
             >

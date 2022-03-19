@@ -182,6 +182,9 @@ function OnboardingScreen() {
                     ]}
                 />
             </View>
+            <View style={tailwind("absolute -bottom-20")}>
+                <Wave svgStyle={[style.svg, tailwind("text-cherry-500")]} />
+            </View>
             <ScrollView
                 decelerationRate={"fast"}
                 pagingEnabled={true}
@@ -387,11 +390,6 @@ function OnboardingScreen() {
                     )}
                 </View>
             </ScrollView>
-
-            <View style={tailwind("absolute -bottom-20")}>
-                <Wave svgStyle={[style.svg, tailwind("text-cherry-500")]} />
-            </View>
-
             <View style={tailwind("flex-row items-center justify-between")}>
                 <TouchableNativeFeedback onPress={handleBack}>
                     <View style={tailwind("px-10 rounded-lg m-2 py-4")}>

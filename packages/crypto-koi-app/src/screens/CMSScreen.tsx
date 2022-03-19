@@ -1,6 +1,6 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import {Platform, ScrollView, View} from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 // @ts-ignore
 import Markdown from "react-native-simple-markdown";
@@ -28,7 +28,13 @@ const CMSScreen = () => {
     const headerHeight = useHeaderHeight();
 
     return (
-        <View style={[{paddingTop: headerHeight}, tailwind("flex-1")]}>
+        <View
+            style={
+                Platform.OS === "ios"
+                    ? tailwind("flex-1")
+                    : [{ paddingTop: headerHeight }, tailwind("flex-1")]
+            }
+        >
             <ScrollView contentContainerStyle={tailwind("p-4")}>
                 <Markdown
                     styles={{

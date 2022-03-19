@@ -21,7 +21,7 @@ import * as Sentry from "sentry-expo";
 
 Sentry.init({
     dsn: "https://90d34b820d86480082c5361bc6b3d7ed@sentry.l3montree.com/13",
-    enableInExpoDevelopment: true,
+    enableInExpoDevelopment: false,
     debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
     beforeSend(event: any) {
         // Modify the captured event
