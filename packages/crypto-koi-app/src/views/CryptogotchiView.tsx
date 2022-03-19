@@ -98,13 +98,15 @@ const CryptogotchiView = observer((props: Props) => {
     const { translateX, translateY } = useFloating();
     const currentUser = useAppState(selectCurrentUser);
     const cryptogotchies = useAppState(selectCryptogotchies);
-    const currentUserIsOwner =
-        currentUser?.walletAddress === cryptogotchi.ownerAddress;
+    const currentUserIsOwner = currentUser?.id === cryptogotchi.id;
 
     if (currentUserIsOwner && cryptogotchies) {
         // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
         // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
-        cryptogotchi = cryptogotchies.find((cr) => cr.id === cryptogotchi.id)!;
+        cryptogotchi =
+            cryptogotchies.find((cr) => cr.id === cryptogotchi.id) ??
+            // add fallback if something else did went wrong
+            cryptogotchi;
     }
 
     const [feed, { loading }] = useMutation<Feed, FeedVariables>(

@@ -32,6 +32,7 @@ export interface FetchLeaderBoard_leaderboard {
   snapshotValid: any;
   isValidNft: boolean;
   rank: number;
+  ownerId: string;
   color: string;
   attributes: FetchLeaderBoard_leaderboard_attributes;
 }

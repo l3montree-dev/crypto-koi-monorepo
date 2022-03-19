@@ -11,15 +11,15 @@
       {
         "kind": "OBJECT",
         "name": "Query",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "leaderboard",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "offset",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -33,7 +33,7 @@
               },
               {
                 "name": "limit",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -68,11 +68,11 @@
           },
           {
             "name": "events",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "cryptogotchiId",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -86,7 +86,7 @@
               },
               {
                 "name": "offset",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -100,7 +100,7 @@
               },
               {
                 "name": "limit",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -135,11 +135,11 @@
           },
           {
             "name": "cryptogotchi",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "cryptogotchiId",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -162,7 +162,7 @@
           },
           {
             "name": "user",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -195,11 +195,11 @@
       {
         "kind": "OBJECT",
         "name": "Cryptogotchi",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -215,7 +215,7 @@
           },
           {
             "name": "isAlive",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -231,7 +231,7 @@
           },
           {
             "name": "name",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -243,7 +243,7 @@
           },
           {
             "name": "food",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -259,7 +259,7 @@
           },
           {
             "name": "minutesTillDeath",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -275,7 +275,7 @@
           },
           {
             "name": "maxLifetimeMinutes",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -291,7 +291,7 @@
           },
           {
             "name": "isValidNft",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -307,7 +307,7 @@
           },
           {
             "name": "deathDate",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -319,7 +319,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -335,7 +335,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -351,7 +351,7 @@
           },
           {
             "name": "nextFeeding",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -367,7 +367,7 @@
           },
           {
             "name": "snapshotValid",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -383,7 +383,7 @@
           },
           {
             "name": "color",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -399,7 +399,7 @@
           },
           {
             "name": "ownerAddress",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -410,8 +410,24 @@
             "deprecationReason": null
           },
           {
+            "name": "ownerId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "rank",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -427,7 +443,7 @@
           },
           {
             "name": "attributes",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -490,7 +506,7 @@
       {
         "kind": "SCALAR",
         "name": "Time",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -500,11 +516,11 @@
       {
         "kind": "OBJECT",
         "name": "CryptogotchiAttributes",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "birthday",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -520,7 +536,7 @@
           },
           {
             "name": "primaryColor",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -536,7 +552,7 @@
           },
           {
             "name": "bodyColor",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -552,7 +568,7 @@
           },
           {
             "name": "finColor",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -568,7 +584,7 @@
           },
           {
             "name": "patternQuantity",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -584,7 +600,7 @@
           },
           {
             "name": "species",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -600,7 +616,7 @@
           },
           {
             "name": "food",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -623,11 +639,11 @@
       {
         "kind": "OBJECT",
         "name": "Event",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -643,7 +659,7 @@
           },
           {
             "name": "type",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -659,7 +675,7 @@
           },
           {
             "name": "payload",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -675,7 +691,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -691,7 +707,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -707,7 +723,7 @@
           },
           {
             "name": "cryptogotchiId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -730,11 +746,11 @@
       {
         "kind": "OBJECT",
         "name": "User",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -750,7 +766,7 @@
           },
           {
             "name": "walletAddress",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -762,7 +778,7 @@
           },
           {
             "name": "deviceId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -774,7 +790,7 @@
           },
           {
             "name": "cryptogotchies",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -798,7 +814,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -814,7 +830,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -837,15 +853,15 @@
       {
         "kind": "OBJECT",
         "name": "Mutation",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "feed",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "cryptogotchiId",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -872,11 +888,11 @@
           },
           {
             "name": "startGame",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "cryptogotchiId",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -890,7 +906,7 @@
               },
               {
                 "name": "gameType",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -917,11 +933,11 @@
           },
           {
             "name": "finishGame",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "token",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -935,7 +951,7 @@
               },
               {
                 "name": "score",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -962,11 +978,11 @@
           },
           {
             "name": "changeCryptogotchiName",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "id",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -980,7 +996,7 @@
               },
               {
                 "name": "newName",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1007,11 +1023,11 @@
           },
           {
             "name": "changeUserName",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "newName",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1038,11 +1054,11 @@
           },
           {
             "name": "getNftSignature",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "id",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1056,7 +1072,7 @@
               },
               {
                 "name": "address",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1083,11 +1099,11 @@
           },
           {
             "name": "createCryptogotchi",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "walletAddress",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1114,11 +1130,11 @@
           },
           {
             "name": "connectWallet",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "walletAddress",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1145,11 +1161,11 @@
           },
           {
             "name": "acceptPushNotifications",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "pushNotificationToken",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1183,11 +1199,11 @@
       {
         "kind": "OBJECT",
         "name": "GameStartResponse",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "token",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1210,11 +1226,11 @@
       {
         "kind": "OBJECT",
         "name": "NftData",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "signature",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1230,7 +1246,7 @@
           },
           {
             "name": "address",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1246,7 +1262,7 @@
           },
           {
             "name": "tokenId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1262,7 +1278,7 @@
           },
           {
             "name": "chainId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2081,11 +2097,11 @@
       {
         "kind": "OBJECT",
         "name": "GameStat",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2101,7 +2117,7 @@
           },
           {
             "name": "type",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2117,7 +2133,7 @@
           },
           {
             "name": "score",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2129,7 +2145,7 @@
           },
           {
             "name": "cryptogotchiId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2145,7 +2161,7 @@
           },
           {
             "name": "gameFinished",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2157,7 +2173,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2173,7 +2189,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2196,7 +2212,7 @@
       {
         "kind": "SCALAR",
         "name": "Map",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -2207,15 +2223,17 @@
     "directives": [
       {
         "name": "deprecated",
-        "description": "The @deprecated directive is used within the type system definition language to indicate deprecated portions of a GraphQL service’s schema, such as deprecated fields on a type or deprecated enum values.",
+        "description": "The @deprecated built-in directive is used within the type system definition language to indicate deprecated portions of a GraphQL service's schema, such as deprecated fields on a type, arguments on a field, input fields on an input type, or values of an enum type.",
         "locations": [
           "FIELD_DEFINITION",
+          "ARGUMENT_DEFINITION",
+          "INPUT_FIELD_DEFINITION",
           "ENUM_VALUE"
         ],
         "args": [
           {
             "name": "reason",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2236,7 +2254,7 @@
         "args": [
           {
             "name": "if",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2261,13 +2279,36 @@
         "args": [
           {
             "name": "if",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ]
+      },
+      {
+        "name": "specifiedBy",
+        "description": "The @specifiedBy built-in directive is used within the type system definition language to provide a scalar specification URL for specifying the behavior of custom scalar types.",
+        "locations": [
+          "SCALAR"
+        ],
+        "args": [
+          {
+            "name": "url",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },

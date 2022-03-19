@@ -32,6 +32,7 @@ export interface FindCryptogotchi_cryptogotchi {
   snapshotValid: any;
   isValidNft: boolean;
   rank: number;
+  ownerId: string;
   color: string;
   attributes: FindCryptogotchi_cryptogotchi_attributes;
 }

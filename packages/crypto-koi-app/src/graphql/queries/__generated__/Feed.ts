@@ -32,6 +32,7 @@ export interface Feed_feed {
   snapshotValid: any;
   isValidNft: boolean;
   rank: number;
+  ownerId: string;
   color: string;
   attributes: Feed_feed_attributes;
 }

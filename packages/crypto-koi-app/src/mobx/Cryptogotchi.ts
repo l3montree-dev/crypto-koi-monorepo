@@ -13,6 +13,7 @@ export default class Cryptogotchi {
     public food!: number;
     public createdAt!: Moment;
     public ownerAddress!: string;
+    public ownerId!: string;
     public gameStats: GameStat[] = [];
     public events: Event[] = [];
     public minutesTillDeath!: number;

@@ -32,6 +32,7 @@ export interface ChangeCryptogotchiName_changeCryptogotchiName {
   snapshotValid: any;
   isValidNft: boolean;
   rank: number;
+  ownerId: string;
   color: string;
   attributes: ChangeCryptogotchiName_changeCryptogotchiName_attributes;
 }

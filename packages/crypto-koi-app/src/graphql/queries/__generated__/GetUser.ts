@@ -32,6 +32,7 @@ export interface GetUser_user_cryptogotchies {
   snapshotValid: any;
   isValidNft: boolean;
   rank: number;
+  ownerId: string;
   color: string;
   attributes: GetUser_user_cryptogotchies_attributes;
 }

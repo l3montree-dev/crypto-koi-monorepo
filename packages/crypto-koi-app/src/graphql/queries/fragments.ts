@@ -15,6 +15,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
         snapshotValid
         isValidNft
         rank
+        ownerId
         color
         attributes {
             primaryColor
