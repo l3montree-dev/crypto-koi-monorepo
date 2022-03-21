@@ -1,11 +1,12 @@
 import { IKoiMetadata } from '../cms/page'
 
-export function win(): { innerWidth: number } {
+export function win(): { innerWidth: number; innerHeight: number } {
   if (isBrowser()) {
     return window
   }
   return {
     innerWidth: 500,
+    innerHeight: 500,
   }
 }
 
@@ -50,6 +51,7 @@ export function parseKoiMetadata(metadata: IKoiMetadata) {
         ?.value ?? 0
     ),
 
-    image: metadata.image,
+    // use the higher resolution api
+    image: metadata.image.replace('/v1/', '/'),
   }
 }

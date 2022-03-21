@@ -6,21 +6,24 @@ import Image from 'next/image'
 
 const Feature: FunctionComponent<IFeaturesPB> = (props) => {
   return (
-    <Section>
-      <div className="px-4 max-w-screen-xl mx-auto py-4">
-        <h2 className="text-3xl mb-4 font-bold font-poppins">{props.Title}</h2>
+    <Section className="bg-cherry text-white">
+      <div className="px-4 text-center max-w-screen-xl mx-auto py-4">
+        <h2 className="text-4xl md:text-5xl mb-4 font-bold font-poppins">
+          {props.Title}
+        </h2>
+        <CMSContent>{props.Text}</CMSContent>
         <div className="md:flex flex-row md:-mx-2">
           {props.Feature_Cards.map((card) => (
             <div
-              className="rounded-lg md:mx-2 text-center glassy mb-4 p-8 shadow-lg"
+              className="rounded-lg md:mx-2 text-center bg-white text-black mb-4 p-8 shadow-lg"
               key={card.id}
             >
-              <div className="w-28 box rounded-lg h-28 mx-auto mb-4 p-0">
+              <div className="flex-row items-center justify-center flex rounded-lg mx-auto mb-4 p-0">
                 <Image
                   alt={card.Icon.data.attributes.alternativeText}
-                  width={card.Icon.data.attributes.formats.small.width}
-                  height={card.Icon.data.attributes.formats.small.height}
-                  src={card.Icon.data.attributes.formats.small.url}
+                  width={125}
+                  height={125}
+                  src={card.Icon.data.attributes.url}
                 />
               </div>
               <CMSContent>{card.Text}</CMSContent>

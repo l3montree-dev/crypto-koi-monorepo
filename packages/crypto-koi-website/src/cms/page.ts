@@ -20,7 +20,31 @@ export interface IFeatureCard {
 export interface IFeaturesPB extends IPB {
   __component: 'page.features'
   Title: string
+  Text: string
   Feature_Cards: IFeatureCard[]
+}
+
+export interface ButtonPB {
+  Link: string
+  Text: string
+  About_Blank: boolean
+  Icon?: IWrappedImg
+}
+export interface ITechPB extends IPB {
+  __component: 'page.tech-section'
+  Smart_Contract: {
+    Text: string
+    Contract_Address: string
+  }
+  Blockchain: {
+    Text: string
+    Button: ButtonPB
+    Value_NFT: number
+  }
+  Open_Source: {
+    Text: string
+    Button: ButtonPB
+  }
 }
 
 export interface IGetYourKoiPB extends IPB, IWithTitleText {
@@ -55,6 +79,7 @@ export type IPagebuilder =
   | ITitleTextPB
   | IHeroSectionPB
   | IImageTextCardsPB
+  | ITechPB
 
 export interface IFormat {
   ext: string

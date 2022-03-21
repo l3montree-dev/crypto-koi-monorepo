@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "./fonts";
+@import "md";
 
 html,
 body {
@@ -22,14 +23,10 @@ a {
 }
 
 .hero-section {
-    background-image: url("/assets/Curve_1.svg");
-
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-#hero-img {
-    image-rendering: -moz-crisp-edges
+    color: white;
+    background: #23074d;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(-45deg, #cc5333, #23074d);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg,  #101a33 ,rgb(1, 3, 14) 40% 80%,#38121b, ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #kois {
@@ -72,10 +69,6 @@ p {
     border-right: 0;
 }
 
-main {
-    padding-top: 56px;
-}
-
 .koi {
     background-size: cover;
     background-position: left bottom;
@@ -83,9 +76,7 @@ main {
     background-image: url("/assets/cherry-blossom.png");
 }
 
-.wrapper {
 
-}
 header {
     transition: all 0.5s;
     border-left: 0!important;
@@ -93,9 +84,6 @@ header {
     border-right: 0!important;
 }
 
-#radial-gradient {
-    // background: radial-gradient(circle, #ffc3a0 20%, transparent 60%);
-}
 
 .floating { 
     animation-name: floating;
@@ -173,27 +161,45 @@ header {
         font-weight: bold;
     }
     a {
-        color: #D94D61;
+        color: #D33148;
         &:hover {
             text-decoration: underline;
         }
     }
 }
 
-main {
-    background: #FFAFBD;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #ffe8db, #ffcfaf); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+.hero-bg {
+   
 }
 
-header {
-    border: 1px solid transparent
+.min-h-90 {
+    min-height: 90vh;
 }
 
 .glassy {
-    background-color: rgba(255,255,255,0.6);
-    border: 2px solid white;
+    backdrop-filter: blur(5px);
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.5)
+}
+header {
+    border-bottom: 1px solid transparent;
+    color: white;
+    &.scrolled {
+        button {
+            color: black!important;
+            &:hover {
+                color: white!important;
+            }
+        }
+        color: black;
+        background-color: white;
+        border-bottom: 1px solid rgba(0,0,0,0.1)
+    }
+}
+
+.glassy {
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.2);
     backdrop-filter: blur(5px);
     // color: white!important
 }
@@ -212,8 +218,4 @@ header {
 .box {
     // border-top: 2px solid rgba(255,255,255,0.5);
     background: radial-gradient(#232e3d 50%, #111827);
-}
-
-img {
-   // image-rendering: -webkit-optimize-contrast
 }

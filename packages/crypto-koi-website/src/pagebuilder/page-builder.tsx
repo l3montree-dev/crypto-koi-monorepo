@@ -4,6 +4,7 @@ import Feature from './Feature'
 import GetYourKoi from './GetYourKoi'
 import Hero from './Hero'
 import ImageTextCards from './ImageTextCards'
+import Tech from './Tech'
 import TitleText from './TitleText'
 
 export default function pageBuilder(page: IPagebuilder[], menu: IMenu) {
@@ -15,6 +16,8 @@ export default function pageBuilder(page: IPagebuilder[], menu: IMenu) {
         return (
           <GetYourKoi {...item} key={'page.get-your-koi-section-' + item.id} />
         )
+      case 'page.tech-section':
+        return <Tech {...item} key={'page.tech-section-' + item.id} />
       case 'page.hero-section':
         return <Hero {...menu} {...item} key={'page.hero-section-' + item.id} />
       case 'page.image-text-cards':
