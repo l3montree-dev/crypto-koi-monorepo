@@ -14,7 +14,7 @@ const Onboarding: FunctionComponent<IOnboardingPB> = (props) => {
         <div className="md:text-center">
           <CMSContent>{props.Text}</CMSContent>
         </div>
-        <div className="relative">
+        <div className="relative mt-10">
           <div className="absolute bottom-0 top-0 onboarding-dots border-slate-200 border-l-4 border-dotted" />
           <div className="relative">
             {props.Onboarding_Steps.map((step, index) => {
