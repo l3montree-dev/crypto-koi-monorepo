@@ -10,7 +10,7 @@ import Section from '../components/Section'
 const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
   return (
     <Section className="hero-section relative pt-14 md:py-0">
-      <div className="absolute hidden md:block right-0 bottom-0">
+      <div className="absolute hidden md:block pb-10 right-0 bottom-0">
         <Image
           width={props.Image.data.attributes.width}
           height={props.Image.data.attributes.height}

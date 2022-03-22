@@ -73,6 +73,15 @@ export interface IImageTextCardsPB extends IPB, IWithAlignment {
   Image: IWrappedImg
 }
 
+export interface IOnboardingPB extends IPB {
+  __component: 'page.onboarding-story'
+  Onboarding_Steps: Array<{
+    id: number
+    Text: string
+    Image: IWrappedImg
+  }>
+}
+
 export type IPagebuilder =
   | IFeaturesPB
   | IGetYourKoiPB
@@ -80,6 +89,7 @@ export type IPagebuilder =
   | IHeroSectionPB
   | IImageTextCardsPB
   | ITechPB
+  | IOnboardingPB
 
 export interface IFormat {
   ext: string
