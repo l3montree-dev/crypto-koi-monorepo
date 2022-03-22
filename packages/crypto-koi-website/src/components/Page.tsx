@@ -34,7 +34,7 @@ const Page: FunctionComponent<Props> = (props) => {
       </Head>
       <div className="page">
         <Header {...props.menu} />
-        <main className="pb-20">
+        <main>
           <div className="wrapper">{props.children} </div>
         </main>
         <Footer {...props.footer} />

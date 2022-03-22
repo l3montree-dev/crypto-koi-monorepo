@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { useInView } from 'react-intersection-observer'
 import { IGetYourKoiPB, IKoiMetadata } from '../cms/page'
 import CMSContent from '../components/CMSContent'
 import Koi from '../components/Koi'
@@ -28,6 +27,7 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
       colors: string[]
       patterns: number
       species: string
+      bgColor: string
     }>
   >([])
 
@@ -39,8 +39,13 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
     }
     const data = await Promise.all(promises)
 
+    console.log(data)
     setKois(
       data.map((el) => ({
+        bgColor:
+          el.attributes.find((attr) => {
+            return typeof attr.value === 'string' && attr.value.startsWith('#')
+          })?.value ?? '#fff',
         species: (
           el.attributes.find((attr) => attr.trait_type === 'Species')?.value ??
           'Koi'
@@ -62,14 +67,16 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
   useEffect(() => {
     regenerate()
   }, [regenerate])
+
   return (
-    <Section>
+    <Section className="bg-slate-200">
       <div className="p-4 max-w-screen-xl mx-auto">
         <h3 className="text-3xl mb-4 font-bold font-poppins">{props.Title}</h3>
         <CMSContent>{props.Text}</CMSContent>
-        <div className="flex justify-around flex-row">
+        <div className="flex justify-around mt-10 flex-row">
           {kois.map((k) => (
             <Koi
+              bgColor={k.bgColor}
               species={k.species}
               colors={k.colors}
               patterns={k.patterns}

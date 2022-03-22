@@ -53,7 +53,7 @@ const renderMenu = (menu: IMenu['Parents']) => {
           }
         >
           <Button
-            _hover={{ bgColor: colors.cherry['500'], color: 'white' }}
+            _hover={{ bgColor: colors.slate['200'], color: 'white' }}
             className="mx-2"
             bgColor={'rgba(255,255,255,0.05)'}
           >
@@ -110,7 +110,7 @@ function Header(props: Props) {
             <IconButton
               bgColor={'rgba(255,255,255,0.1)'}
               aria-label="Gitlab"
-              _hover={{ bgColor: colors.cherry['500'], color: 'white' }}
+              _hover={{ bgColor: colors.slate['200'] }}
               icon={
                 <svg
                   width="25px"
