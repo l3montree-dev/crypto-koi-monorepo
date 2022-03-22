@@ -5,7 +5,9 @@ const Section: FunctionComponent<
   Partial<IWithAlignment & { className: string }>
 > = (props) => {
   return (
-    <section className={'py-10 ' + props.className}>{props.children}</section>
+    <section className={'py-10 md:py-14 ' + props.className}>
+      {props.children}
+    </section>
   )
 }
 

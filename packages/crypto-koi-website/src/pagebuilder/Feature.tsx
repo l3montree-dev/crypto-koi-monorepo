@@ -7,7 +7,7 @@ import Image from 'next/image'
 const Feature: FunctionComponent<IFeaturesPB> = (props) => {
   return (
     <Section className="bg-cherry text-white">
-      <div className="px-4 text-center max-w-screen-xl mx-auto py-4">
+      <div className="px-4 text-center max-w-screen-xl mx-auto">
         <h2 className="text-4xl md:text-5xl mb-4 font-bold font-poppins">
           {props.Title}
         </h2>

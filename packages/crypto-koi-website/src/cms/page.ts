@@ -75,6 +75,8 @@ export interface IImageTextCardsPB extends IPB, IWithAlignment {
 
 export interface IOnboardingPB extends IPB {
   __component: 'page.onboarding-story'
+  Text: string
+  Title: string
   Onboarding_Steps: Array<{
     id: number
     Text: string
