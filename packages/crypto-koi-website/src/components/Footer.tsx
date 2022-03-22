@@ -18,7 +18,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
           <CMSContent>{props.Text}</CMSContent>
 
           <div className="flex pb-8 flex-row items-center">
-            <a href={props.E_Mail_With_PGP.Mail_to_Link}>
+            <a href={props.E_Mail_With_PGP.Mail_To_Link}>
               <Button leftIcon={<EmailIcon />} colorScheme={'cherry'}>
                 {props.E_Mail_With_PGP.E_Mail}
               </Button>

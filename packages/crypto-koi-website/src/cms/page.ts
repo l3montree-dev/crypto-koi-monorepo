@@ -178,7 +178,7 @@ export interface IPage {
 }
 
 export interface IFooter extends IWithTitleText {
-  E_Mail_With_PGP: { E_Mail: string; Mail_to_Link: string }
+  E_Mail_With_PGP: { E_Mail: string; Mail_To_Link: string }
   Follow_us: {
     Title: string
     Social_Link: Array<{ id: number; Link: string; Social_Channel: string }>
