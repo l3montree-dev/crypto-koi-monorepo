@@ -15,18 +15,20 @@ const Onboarding: FunctionComponent<IOnboardingPB> = (props) => {
           <CMSContent>{props.Text}</CMSContent>
         </div>
         <div className="relative mt-10">
-          <div className="absolute bottom-0 top-0 onboarding-dots border-slate-200 border-l-4 border-dotted" />
-          <div className="relative">
+          <div className="absolute bottom-0 top-0 md:hidden onboarding-dots border-slate-200 border-l-4 md:border-l-0 md:border-t-4 border-dotted" />
+          <div className="relative flex-wrap md:flex justify-center flex-row">
             {props.Onboarding_Steps.map((step, index) => {
               return (
                 <div
-                  className={'mb-5 flex-row items-center flex'}
+                  className={
+                    'mb-5 flex-row md:w-1/3 md:px-5 items-center md:flex-col flex'
+                  }
                   key={step.id}
                 >
-                  <span className="bg-slate-100 border-4 border-white rounded-full h-10 w-10 flex flex-row items-center justify-center font-bold">
+                  <span className="bg-slate-100 flex border-4 border-white rounded-full h-10 w-10 flex flex-row items-center justify-center font-bold">
                     {index + 1}.
                   </span>
-                  <div className="flex-1 md:flex flex-row items-end">
+                  <div className="md:flex flex-1 flex-col">
                     <Image
                       src={step.Image.data.attributes.formats.small.url}
                       height={step.Image.data.attributes.formats.small.height}
