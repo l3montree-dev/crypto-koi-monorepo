@@ -15,34 +15,61 @@ export const Footer: FunctionComponent<Props> = (props) => {
           <h4 className="mb-4 text-xl font-bold">{props.Title}</h4>
           <CMSContent>{props.Text}</CMSContent>
 
-          <div className="flex pb-5 flex-row items-center">
+          <div className="flex pb-8 flex-row items-center">
             <a href={props.E_Mail_With_PGP.Mail_to_Link}>
               <Button leftIcon={<EmailIcon />} colorScheme={'cherry'}>
                 {props.E_Mail_With_PGP.E_Mail}
               </Button>
             </a>
           </div>
-          <div>
-            <h4 className="mb-4 font-bold text-xl">{props.Follow_us.Title}</h4>
-            {props.Follow_us.Social_Link.map((link) => (
-              <div className="mb-2" key={link.id}>
+          <div className="flex">
+            <div>
+              <h4 className="mb-4 font-bold text-xl">
+                {props.Follow_us.Title}
+              </h4>
+              {props.Follow_us.Social_Link.map((link) => (
+                <div className="mb-2" key={link.id}>
+                  <a
+                    target={'_blank'}
+                    href={link.Link}
+                    className="flex flex-row items-center"
+                    rel="noreferrer"
+                  >
+                    <Image
+                      alt={link.Social_Channel}
+                      width={15}
+                      height={15}
+                      src={'/assets/' + link.Social_Channel + '.svg'}
+                    />
+
+                    <span className="text-white ml-2">
+                      {link.Social_Channel}
+                    </span>
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className="ml-24">
+              <h4 className="mb-4 font-bold text-xl">Legal</h4>
+              <div className="mb-2">
                 <a
-                  target={'_blank'}
-                  href={link.Link}
+                  href={'/app-privacy-policy'}
                   className="flex flex-row items-center"
                   rel="noreferrer"
                 >
-                  <Image
-                    alt={link.Social_Channel}
-                    width={15}
-                    height={15}
-                    src={'/assets/' + link.Social_Channel + '.svg'}
-                  />
-
-                  <span className="text-white ml-2">{link.Social_Channel}</span>
+                  <span className="text-white">Privacy Policy (App)</span>
                 </a>
               </div>
-            ))}
+              <div className="mb-2">
+                <a
+                  href={'/terms-of-use'}
+                  className="flex flex-row items-center"
+                  rel="noreferrer"
+                >
+                  <span className="text-white">Terms of Use (App)</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

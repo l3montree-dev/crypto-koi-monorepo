@@ -31,31 +31,31 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
 
               <div className="flex-row flex justify-center md:justify-start">
                 <div className="pr-3">
-                  <a
+                  {/*<a
                     target={'_blank'}
                     href={props.Store_Links.Apple_App_Store_Link}
                     rel="noreferrer"
-                  >
-                    <Image
-                      alt="Appstore Badge"
-                      src={'/assets/appstore-badge.svg'}
-                      height={40}
-                      width={120}
-                    />
-                  </a>
+                  >*/}
+                  <Image
+                    alt="Appstore Badge"
+                    src={'/assets/appstore-badge.svg'}
+                    height={40}
+                    width={120}
+                  />
+                  {/*</a>*/}
                 </div>
-                <a
+                {/*<a
                   target={'_blank'}
                   href={props.Store_Links.Google_Play_Store_Link}
                   rel="noreferrer"
-                >
-                  <Image
-                    alt="Google Play Badge"
-                    src={'/assets/google-play-badge.svg'}
-                    height={40}
-                    width={130}
-                  />
-                </a>
+                >*/}
+                <Image
+                  alt="Google Play Badge"
+                  src={'/assets/google-play-badge.svg'}
+                  height={40}
+                  width={130}
+                />
+                {/*</a>*/}
               </div>
               <div className="md:hidden">
                 <Image

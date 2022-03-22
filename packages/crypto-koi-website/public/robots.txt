@@ -1,0 +1,3 @@
+User-Agent: *
+Allow: /
+Sitemap: https://crypto-koi.io/sitemap.xml
