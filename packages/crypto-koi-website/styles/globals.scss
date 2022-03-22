@@ -199,6 +199,22 @@ header {
     }
 }
 
+.story {
+    height: 600vh;
+    background: #1a2a6c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    .story-item {
+        height: 80vh
+    }
+}
+
+.sticky-story {
+    top: 61px;
+    // 100vh - (header height + app bar height)
+    height: calc(100vh - (61px + 56px))
+}
+
 .glassy {
     background-color: rgba(255,255,255,0.2);
     border: 1px solid rgba(255,255,255,0.2);

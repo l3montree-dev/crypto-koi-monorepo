@@ -82,6 +82,13 @@ export interface IOnboardingPB extends IPB {
   }>
 }
 
+export interface IStoryPB extends IPB {
+  __component: 'page.story'
+  Text: string
+  Title: string
+  Story_Steps: Array<{ id: number; Text: string; Image: IMaybeWrappedImg }>
+}
+
 export type IPagebuilder =
   | IFeaturesPB
   | IGetYourKoiPB
@@ -90,6 +97,7 @@ export type IPagebuilder =
   | IImageTextCardsPB
   | ITechPB
   | IOnboardingPB
+  | IStoryPB
 
 export interface IFormat {
   ext: string
@@ -131,6 +139,10 @@ export interface IImg {
 
 export interface IWrappedImg {
   data: { attributes: IImg }
+}
+
+export interface IMaybeWrappedImg {
+  data?: { attributes: IImg }
 }
 
 export interface ISEO {

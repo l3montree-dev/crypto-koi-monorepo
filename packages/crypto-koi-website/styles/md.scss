@@ -3,4 +3,9 @@
         background-repeat: no-repeat;
         background-position: calc(100%) bottom;
     }
+
+    .sticky-story {
+        top: 73px;
+        height: calc(100vh - (73px))
+    }
 }

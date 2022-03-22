@@ -39,7 +39,6 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
     }
     const data = await Promise.all(promises)
 
-    console.log(data)
     setKois(
       data.map((el) => ({
         bgColor:
