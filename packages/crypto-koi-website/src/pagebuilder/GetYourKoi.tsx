@@ -10,6 +10,7 @@ import CMSContent from '../components/CMSContent'
 import Koi from '../components/Koi'
 import Section from '../components/Section'
 import { config } from '../misc/config'
+import tinycolor from 'tinycolor2'
 
 const fetchRandomKoi = async (): Promise<IKoiMetadata> => {
   const resp = await fetch(
@@ -41,10 +42,13 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
 
     setKois(
       data.map((el) => ({
-        bgColor:
+        bgColor: tinycolor(
           el.attributes.find((attr) => {
             return typeof attr.value === 'string' && attr.value.startsWith('#')
-          })?.value ?? '#fff',
+          })?.value ?? '#fff'
+        )
+          .lighten(20)
+          .toHexString(),
         species: (
           el.attributes.find((attr) => attr.trait_type === 'Species')?.value ??
           'Koi'
