@@ -1,3 +1,5 @@
+import { IconButtonProps } from '@chakra-ui/react'
+
 export interface IWithAlignment {
   Alignment: 'Left' | 'Force_Left' | 'Center'
 }
@@ -27,7 +29,7 @@ export interface IFeaturesPB extends IPB {
 export interface ButtonPB {
   Link: string
   Text: string
-  About_Blank: boolean
+  Target_Blank: boolean
   Icon?: IWrappedImg
 }
 export interface ITechPB extends IPB {
@@ -62,6 +64,7 @@ export interface IHeroSectionPB extends IPB, IWithTitleText {
   __component: 'page.hero-section'
   Subtitle: string
   Learn_More: string
+  Button: ButtonPB
   Image: IWrappedImg
 }
 

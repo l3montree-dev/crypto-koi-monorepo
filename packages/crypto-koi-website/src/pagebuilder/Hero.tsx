@@ -67,19 +67,25 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
                 />
               </div>
               <div className="mt-4 flex-row flex justify-center lg:justify-start">
-                <Button
-                  leftIcon={
-                    <Image
-                      alt="Opensea.io logo"
-                      height={30}
-                      width={30}
-                      src="/assets/opensea.svg"
-                    />
-                  }
-                  colorScheme="cherry"
+                <a
+                  href={props.Button.Link}
+                  target={props.Button.Target_Blank ? '_blank' : ''}
+                  rel="noreferrer"
                 >
-                  Visit collection on opensea.io
-                </Button>
+                  <Button
+                    leftIcon={
+                      <Image
+                        alt="Opensea.io logo"
+                        height={30}
+                        width={30}
+                        src="/assets/opensea.svg"
+                      />
+                    }
+                    colorScheme="cherry"
+                  >
+                    {props.Button.Text}
+                  </Button>
+                </a>
               </div>
             </div>
           </div>

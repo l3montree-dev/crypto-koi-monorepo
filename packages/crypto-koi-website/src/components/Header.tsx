@@ -104,12 +104,12 @@ function Header(props: Props) {
           <a
             target="_blank"
             className="text-white mx-2"
-            href="https://gitlab.com/l3montree/crypto-koi"
+            href="https://github.com/l3montree-dev"
             rel="noreferrer"
           >
             <IconButton
               bgColor={'rgba(255,255,255,0.1)'}
-              aria-label="Gitlab"
+              aria-label="GitHub"
               _hover={{ bgColor: colors.slate['200'] }}
               icon={
                 <svg
