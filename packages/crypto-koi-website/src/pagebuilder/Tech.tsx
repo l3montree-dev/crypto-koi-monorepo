@@ -53,60 +53,64 @@ const Tech: FunctionComponent<ITechPB> = (props) => {
         </div>
         <div className="mt-10 md:w-1/3 md:mt-0 md:mx-5">
           <CMSContent>{props.Blockchain.Text}</CMSContent>
-          <a
-            href={props.Blockchain.Button.Link}
-            target={props.Blockchain.Button.Target_Blank ? '_blank' : ''}
-            rel="noreferrer"
-          >
-            <Button
-              leftIcon={
-                props.Blockchain.Button.Icon ? (
-                  <Image
-                    alt={
-                      props.Blockchain.Button.Icon.data.attributes
-                        .alternativeText
-                    }
-                    src={props.Blockchain.Button.Icon.data.attributes.url}
-                    width={25}
-                    height={25}
-                  />
-                ) : undefined
-              }
-              colorScheme={'sea'}
+          <div className="flex-row md:block flex justify-end items-start">
+            <span className="bg-slate-200 text-sm font-bold rounded-full px-2 py-1 mr-2">
+              ~ {props.Blockchain.Value_NFT}$ / NFT
+            </span>
+            <a
+              href={props.Blockchain.Button.Link}
+              target={props.Blockchain.Button.Target_Blank ? '_blank' : ''}
+              rel="noreferrer"
             >
-              {props.Blockchain.Button.Text}
-            </Button>
-          </a>
-          <span className="bg-slate-200 text-sm font-bold rounded-full px-2 py-1 ml-2">
-            ~ {props.Blockchain.Value_NFT}$ / NFT
-          </span>
+              <Button
+                leftIcon={
+                  props.Blockchain.Button.Icon ? (
+                    <Image
+                      alt={
+                        props.Blockchain.Button.Icon.data.attributes
+                          .alternativeText
+                      }
+                      src={props.Blockchain.Button.Icon.data.attributes.url}
+                      width={25}
+                      height={25}
+                    />
+                  ) : undefined
+                }
+                colorScheme={'sea'}
+              >
+                {props.Blockchain.Button.Text}
+              </Button>
+            </a>
+          </div>
         </div>
         <div className="mt-10 md:w-1/3 md:mt-0 md:ml-10">
           <CMSContent>{props.Open_Source.Text}</CMSContent>
-          <a
-            href={props.Open_Source.Button.Link}
-            target={props.Blockchain.Button.Target_Blank ? '_blank' : ''}
-            rel="noreferrer"
-          >
-            <Button
-              leftIcon={
-                props.Open_Source.Button.Icon ? (
-                  <Image
-                    alt={
-                      props.Open_Source.Button.Icon.data.attributes
-                        .alternativeText
-                    }
-                    src={props.Open_Source.Button.Icon.data.attributes.url}
-                    width={25}
-                    height={25}
-                  />
-                ) : undefined
-              }
-              colorScheme={'cherry'}
+          <div className="flex md:block flex-row justify-end">
+            <a
+              href={props.Open_Source.Button.Link}
+              target={props.Blockchain.Button.Target_Blank ? '_blank' : ''}
+              rel="noreferrer"
             >
-              {props.Open_Source.Button.Text}
-            </Button>
-          </a>
+              <Button
+                leftIcon={
+                  props.Open_Source.Button.Icon ? (
+                    <Image
+                      alt={
+                        props.Open_Source.Button.Icon.data.attributes
+                          .alternativeText
+                      }
+                      src={props.Open_Source.Button.Icon.data.attributes.url}
+                      width={25}
+                      height={25}
+                    />
+                  ) : undefined
+                }
+                colorScheme={'cherry'}
+              >
+                {props.Open_Source.Button.Text}
+              </Button>
+            </a>
+          </div>
         </div>
       </div>
     </Section>
