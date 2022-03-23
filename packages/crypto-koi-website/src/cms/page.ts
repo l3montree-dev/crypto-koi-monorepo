@@ -149,15 +149,11 @@ export interface IMaybeWrappedImg {
 
 export interface ISEO {
   id: number
-  metaTitle: string
-  metaDescription: string
-  keywords: string
-  metaRobots?: any
-  structuredData?: any
-  metaViewport?: any
-  canonicalURL?: any
-  metaImage: IWrappedImg
-  metaSocial: any[]
+  Meta_Title: string
+  Meta_Description: string
+  Keywords?: string
+  Meta_Robots?: any
+  Meta_Image: IWrappedImg
 }
 
 export interface IAttributes {

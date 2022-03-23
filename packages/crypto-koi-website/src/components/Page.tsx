@@ -26,11 +26,11 @@ const Page: FunctionComponent<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>{props.seo.metaTitle}</title>
+        <title>{props.seo.Meta_Title}</title>
         <meta name="theme-color" content={colors.cherry[600]}></meta>
-        <meta name="description" content={props.seo.metaDescription} />
-        <meta name="keywords" content={props.seo.keywords} />
-        <meta name="robots" content={props.seo.metaRobots} />
+        <meta name="description" content={props.seo.Meta_Description} />
+        <meta name="keywords" content={props.seo.Keywords} />
+        <meta name="robots" content={props.seo.Meta_Robots} />
       </Head>
       <div className="page">
         <Header {...props.menu} />
