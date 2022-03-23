@@ -65,10 +65,12 @@ const renderMenu = (menu: IMenu['Parents']) => {
   })
 }
 
-interface Props extends IMenu {}
+interface Props extends IMenu {
+  initialHeaderClass: string
+}
 function Header(props: Props) {
   const isScrolled = useRef(false)
-  const [bg, setBg] = useState('')
+  const [bg, setBg] = useState(props.initialHeaderClass)
 
   useEffect(() => {
     const scrollList = () => {

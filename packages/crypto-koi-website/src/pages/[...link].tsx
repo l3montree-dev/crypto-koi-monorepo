@@ -18,11 +18,13 @@ interface Props {
 const DynamicPage: FunctionComponent<Props> = (props) => {
   return (
     <Page
+      // just set it to be scrolled - otherwise the buttons and icons wont be visible.
+      initialHeaderClass="scrolled"
       menu={props.menu}
       footer={props.footer}
       seo={props.page.attributes.SEO}
     >
-      <div className="px-4">
+      <div className="px-4 py-20">
         {pageBuilder(props.page.attributes.Pagebuilder, props.menu)}
       </div>
     </Page>

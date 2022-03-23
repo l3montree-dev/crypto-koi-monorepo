@@ -13,6 +13,7 @@ interface Props {
   footer: IFooter
   seo: ISEO
   menu: IMenu
+  initialHeaderClass: string
 }
 const Page: FunctionComponent<Props> = (props) => {
   const handleButtonClick = () => {
@@ -33,7 +34,7 @@ const Page: FunctionComponent<Props> = (props) => {
         <meta name="robots" content={props.seo.Meta_Robots} />
       </Head>
       <div className="page">
-        <Header {...props.menu} />
+        <Header initialHeaderClass={props.initialHeaderClass} {...props.menu} />
         <main>
           <div className="wrapper">{props.children} </div>
         </main>

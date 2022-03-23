@@ -17,6 +17,7 @@ interface Props {
 const Home: NextPage<Props> = (props) => {
   return (
     <Page
+      initialHeaderClass=""
       menu={props.menu}
       footer={props.footer}
       seo={props.page.attributes.SEO}
