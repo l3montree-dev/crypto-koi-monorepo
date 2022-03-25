@@ -1,0 +1,20 @@
+{
+    "name": "@crypto-koi/common",
+    "version": "0.1.0",
+    "description": "Common code for the web and native client",
+    "author": "\"\"timbastin\"\" <\"\"bastin.tim@gmail.com\"\">",
+    "homepage": "",
+    "license": "ISC",
+    "main": "lib/index.ts",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "dev": "tsc --watch",
+        "build": "tsc",
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "dependencies": {
+        "typescript": "^4.6.3"
+    }
+}
