@@ -1,6 +1,6 @@
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import Constants from "expo-constants";
+import * as NavigationBar from "expo-navigation-bar";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
     Animated as RNAnimated,
@@ -13,27 +13,26 @@ import {
     StyleSheet,
     Text,
     TouchableNativeFeedback,
-    View,
+    View
 } from "react-native";
+import { Switch } from "react-native-paper";
 import Animated, {
     FadeIn,
     useAnimatedStyle,
     useSharedValue,
-    withSpring,
+    withSpring
 } from "react-native-reanimated";
-import * as NavigationBar from "expo-navigation-bar";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../../components/AppButton";
 import Wave from "../../components/Wave";
 import { config } from "../../config";
 import { useFloating } from "../../hooks/useFloating";
-import { userService } from "../../services/UserService";
+import { nativeUserService } from "../../services/NativeUserService";
 import { Colors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
-import { Checkbox, Switch } from "react-native-paper";
 import ViewUtils from "../../utils/ViewUtils";
-import { Link } from "@react-navigation/native";
+
 
 const style = StyleSheet.create({
     slide: {
@@ -115,11 +114,11 @@ function OnboardingScreen() {
 
         await provider.enable();
 
-        await userService.loginUsingWalletAddress(provider.accounts[0]);
+        await nativeUserService.loginUsingWalletAddress(provider.accounts[0]);
     };
 
     const handlePlayWithoutWalletPress = () => {
-        return userService.loginUsingDeviceId();
+        return nativeUserService.loginUsingDeviceId();
     };
 
     const setActive = (next: number, x: number) => {

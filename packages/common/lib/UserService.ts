@@ -1,16 +1,20 @@
-import { GET_USER } from "../graphql/queries/user";
-import { GetUser } from "../graphql/queries/__generated__/GetUser";
-import { rootStore } from "../mobx/RootStore";
-import { apolloClient } from "./ApolloClient";
-import { authService } from "./AuthService";
+import { GET_USER } from "../../../apps/native/src/graphql/queries/user";
+import { GetUser } from "../../../apps/native/src/graphql/queries/__generated__/GetUser";
+import { rootStore } from "../../../apps/native/src/mobx/RootStore";
+import { AuthService } from "@crypto-koi/common/lib/AuthService";
+import { ApolloClient, NormalizedCache, NormalizedCacheObject } from "@apollo/client";
 
-class UserService {
+export class UserService {
+    constructor(
+        protected authService: AuthService,
+        protected apolloClient: ApolloClient<NormalizedCacheObject>
+    ) {}
     /**
      * Executes side-effects. If the login is successful, it does update the authorization store.
      * @returns
      */
     async loginUsingWalletAddress(walletAddress: string): Promise<void> {
-        const success = await authService.exchangeWalletAddressForToken(
+        const success = await this.authService.exchangeWalletAddressForToken(
             walletAddress
         );
         if (!success) {
@@ -21,7 +25,7 @@ class UserService {
     }
 
     async loginUsingDeviceId() {
-        const success = await authService.exchangeDeviceIdForToken();
+        const success = await this.authService.exchangeDeviceIdForToken();
         if (!success) {
             return;
         }
@@ -33,19 +37,19 @@ class UserService {
      * @returns
      */
     async tryToLogin(): Promise<void> {
-        const success = await authService.tryToLoginUsingStoredCredentials();
+        const success = await this.authService.tryToLoginUsingStoredCredentials();
         if (!success) return;
 
         return this.sync();
     }
 
     async logout(): Promise<void> {
-        await authService.logout();
+        await this.authService.logout();
         rootStore.authStore.setCurrentUser(null);
     }
 
     async sync() {
-        const user = await apolloClient.query<GetUser>({
+        const user = await this.apolloClient.query<GetUser>({
             query: GET_USER,
             fetchPolicy: "no-cache",
         });
@@ -54,11 +58,9 @@ class UserService {
 
     async deleteAccount() {
         // makes an http call.
-        await authService.destroyAccount();
+        await this.authService.destroyAccount();
         // just destroys the tokens.
-        await authService.logout();
+        await this.authService.logout();
         rootStore.authStore.setCurrentUser(null);
     }
 }
-
-export const userService = new UserService();

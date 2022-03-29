@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import {
@@ -17,18 +16,13 @@ import Animated, {
     withSpring,
 } from "react-native-reanimated";
 import { useTailwind } from "tailwind-rn";
-import { CREATE_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
 import { ACCEPT_PUSH_NOTIFICATIONS } from "../graphql/queries/user";
 import {
     AcceptPushNotifications,
     AcceptPushNotificationsVariables,
 } from "../graphql/queries/__generated__/AcceptPushNotifications";
-import {
-    CreateCryptogotchi,
-    CreateCryptogotchiVariables,
-} from "../graphql/queries/__generated__/CreateCryptogotchi";
 import useAppState from "../hooks/useAppState";
-import { userService } from "../services/UserService";
+import { nativeUserService } from "../services/NativeUserService";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import CryptogotchiView from "../views/CryptogotchiView";
 
@@ -47,16 +41,16 @@ const FriendsScreen = observer(() => {
         (rootStore) => rootStore.authStore.currentUser?.cryptogotchies
     );
 
-    const [nftLoading, setNftLoading] = useState(false);
+    // const [nftLoading, setNftLoading] = useState(false);
 
     const [active, setActive] = useState(0);
-    const theme = useAppState((rootStore) => rootStore.themeStore);
+    // const theme = useAppState((rootStore) => rootStore.themeStore);
 
     const tailwind = useTailwind();
     const [refreshing, setRefreshing] = React.useState(false);
 
     const scrollPosition = useSharedValue(0);
-    const connector = useWalletConnect();
+    // const connector = useWalletConnect();
 
     const scrollHandler = (ev: NativeSyntheticEvent<NativeScrollEvent>) => {
         scrollPosition.value = ev.nativeEvent.contentOffset.x;
@@ -85,23 +79,25 @@ const FriendsScreen = observer(() => {
     const handleRefresh = React.useCallback(async () => {
         setRefreshing(true);
         try {
-            await userService.sync();
+            await nativeUserService.sync();
         } finally {
             setRefreshing(false);
         }
     }, []);
 
+    const [acceptPushNotifications] = useMutation<
+        AcceptPushNotifications,
+        AcceptPushNotificationsVariables
+    >(ACCEPT_PUSH_NOTIFICATIONS);
+    /*
     const [createCryptogotchi, { loading }] = useMutation<
         CreateCryptogotchi,
         CreateCryptogotchiVariables
     >(CREATE_CRYPTOGOTCHI_MUTATION);
 
-    const [acceptPushNotifications] = useMutation<
-        AcceptPushNotifications,
-        AcceptPushNotificationsVariables
-    >(ACCEPT_PUSH_NOTIFICATIONS);
+  
 
-    /*const handleCreateCryptogotchi = React.useCallback(async () => {
+    const handleCreateCryptogotchi = React.useCallback(async () => {
         setNftLoading(true);
         if (!connector.connected) {
             await connector.connect();

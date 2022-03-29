@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { config } from "../config";
 import Cryptogotchi from "../mobx/Cryptogotchi";
-import { ticker } from "../services/Ticker";
+import { ticker } from "@crypto-koi/common/lib/Ticker";
 import { ProgressButton } from "./ProgressButton";
 
 interface Props {

@@ -8,7 +8,6 @@ import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
 import pageBuilder from '../pagebuilder/page-builder'
-import { commonTest } from '@crypto-koi/common'
 
 interface Props {
     page: IPage
@@ -16,7 +15,6 @@ interface Props {
     menu: IMenu
 }
 const Home: NextPage<Props> = (props) => {
-    commonTest()
     return (
         <Page
             initialHeaderClass=""

@@ -23,7 +23,8 @@
     },
     "include": [
         "**/*.ts",
-        "**/*.tsx"
+        "**/*.tsx",
+        "../../packages/common/lib/Ticker.ts"
     ],
     "exclude": [
         "node_modules",

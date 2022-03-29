@@ -24,10 +24,10 @@ import {
 } from "../graphql/queries/__generated__/ConnectWallet";
 import useAppState from "../hooks/useAppState";
 import { selectCurrentUser, selectThemeStore } from "../mobx/selectors";
-import { userService } from "../services/UserService";
 import { commonStyles } from "../styles/commonStyles";
 import ViewUtils from "../utils/ViewUtils";
 import { useNavigation } from "../hooks/useNavigation";
+import { nativeUserService } from "../services/NativeUserService";
 
 const style = StyleSheet.create({
     header: {
@@ -55,7 +55,7 @@ export const ProfileTab = observer(() => {
     >(CONNECT_WALLET_MUTATION);
 
     const handleLogout = () => {
-        userService.logout();
+        nativeUserService.logout();
     };
 
     const handleConnectWallet = async () => {
@@ -102,7 +102,7 @@ export const ProfileTab = observer(() => {
                 {
                     text: "Delete",
                     onPress: async () => {
-                        await userService.deleteAccount();
+                        await nativeUserService.deleteAccount();
                         ViewUtils.toast("Account deleted");
                     },
                     style: "destructive",

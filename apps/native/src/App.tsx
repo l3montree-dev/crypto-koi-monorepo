@@ -1,30 +1,30 @@
 import { ApolloProvider } from "@apollo/client";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import SplashScreen from "react-native-splash-screen";
+import { Event } from "@sentry/react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { FunctionComponent, useEffect } from "react";
 import { View } from "react-native";
+import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import SplashScreen from "react-native-splash-screen";
+import * as Sentry from "sentry-expo";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
 import { AppStateContext } from "./mobx/AppStateContext";
 import { rootStore } from "./mobx/RootStore";
 import RootStackNavigator from "./RootStackNavigator";
-import { apolloClient } from "./services/ApolloClient";
-import { userService } from "./services/UserService";
+import { appEventEmitter } from "./services/AppEventEmitter";
+import { nativeApolloClient } from "./services/NativeApolloClient";
+import { nativeUserService } from "./services/NativeUserService";
 import { Colors } from "./styles/colors";
 import log from "./utils/logger";
-import { RootSiblingParent } from "react-native-root-siblings";
-import { appEventEmitter } from "./services/AppEventEmitter";
 import ViewUtils from "./utils/ViewUtils";
-import * as Sentry from "sentry-expo";
-import { commonTest } from '@crypto-koi/common'
 
 Sentry.init({
     dsn: "https://90d34b820d86480082c5361bc6b3d7ed@sentry.l3montree.com/13",
     enableInExpoDevelopment: false,
     debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
-    beforeSend(event: any) {
+    beforeSend(event: Event) {
         // Modify the captured event
         if (event.user) {
             // Don't send user's personal data
@@ -48,13 +48,12 @@ const Theme = {
 const containerStyle = { flex: 1, backgroundColor: "red" };
 
 const App: FunctionComponent = () => {
-    commonTest();
     useEffect(() => {
         // start the login routine.
         (async function () {
             try {
                 log.info("Boot");
-                await userService.tryToLogin();
+                await nativeUserService.tryToLogin();
             } catch (e) {
                 log.warn("login failed with:", e);
             } finally {
@@ -82,7 +81,7 @@ const App: FunctionComponent = () => {
 
     return (
         <RootSiblingParent>
-            <ApolloProvider client={apolloClient}>
+            <ApolloProvider client={nativeApolloClient}>
                 <AppStateContext.Provider value={rootStore}>
                     <SafeAreaProvider>
                         <TailwindProvider utilities={utilities}>

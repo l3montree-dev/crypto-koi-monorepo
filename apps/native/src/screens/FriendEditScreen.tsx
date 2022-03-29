@@ -2,7 +2,6 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
@@ -43,10 +42,9 @@ import useInput from "../hooks/useInput";
 import { RootStackParamList } from "../hooks/useNavigation";
 import { selectCryptogotchi, selectThemeStore } from "../mobx/selectors";
 import { appEventEmitter } from "../services/AppEventEmitter";
-import { userService } from "../services/UserService";
-import switchOrAddNetwork, {
-    newProvider as newWeb3Provider,
-} from "../services/web3";
+import { nativeUserService } from "../services/NativeUserService";
+import { switchOrAddNetwork } from "../services/web3";
+import { newProvider as newWeb3Provider } from "@crypto-koi/common/lib/web3";
 import log from "../utils/logger";
 import ViewUtils from "../utils/ViewUtils";
 import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
@@ -178,12 +176,12 @@ const FriendEditModal = observer(() => {
         ChangeCryptogotchiNameVariables
     >(CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION);
 
-    const [_, { fetchMore, data: events, refetch }] = useLazyQuery<
+    const { fetchMore, data: events, refetch } = useLazyQuery<
         FetchEvents,
         FetchEventsVariables
     >(FETCH_EVENTS, {
         variables: { id: cryptogotchi?.id ?? "", offset: 0, limit: 20 },
-    });
+    })[1];
 
     const [getNftSignature] = useMutation<
         GetNftSignature,
@@ -242,7 +240,7 @@ const FriendEditModal = observer(() => {
             );
             appEventEmitter.emit("successfulRedeem", receipt);
             log.info("successful transaction - full refresh");
-            await userService.sync();
+            await nativeUserService.sync();
         } catch (e) {
             log.error("transaction failed", e);
             appEventEmitter.emit("failedRedeem", e);

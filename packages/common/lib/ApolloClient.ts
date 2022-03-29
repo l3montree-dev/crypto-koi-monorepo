@@ -1,11 +1,11 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { AxiosResponse } from "axios";
 import { uniqBy } from "lodash";
-import { config } from "../config";
-import log from "../utils/logger";
-import { authService, TokenResponse } from "./AuthService";
+import { config } from "../../../apps/native/src/config";
+import log from "../../../apps/native/src/utils/logger";
+import { AuthService, TokenResponse } from "./AuthService";
 
-const httpLink = createHttpLink({
+const httpLink = (authService: AuthService) => createHttpLink({
     uri: config.graphqlBaseUrl,
     fetch: async (uri: RequestInfo, options) => {
         const token = authService.getAccessToken();
@@ -60,8 +60,8 @@ const uniqueByIdOffsetLimitPagination = <T>(keyArgs?: string[]) => {
     };
 };
 
-export const apolloClient = new ApolloClient({
-    link: httpLink,
+export const apolloClientFactory = (authService: AuthService) => new ApolloClient({
+    link: httpLink(authService),
     cache: new InMemoryCache({
         typePolicies: {
             Query: {

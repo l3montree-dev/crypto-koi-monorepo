@@ -1,7 +1,15 @@
 import { observer } from "mobx-react-lite";
 import moment from "moment";
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+    Image,
+    Pressable,
+    StyleProp,
+    StyleSheet,
+    Text,
+    View,
+    ViewStyle,
+} from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
@@ -9,7 +17,7 @@ import { config } from "../config";
 import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
 import useAppState from "../hooks/useAppState";
 import { useNavigation } from "../hooks/useNavigation";
-import { ticker } from "../services/Ticker";
+import { ticker } from "@crypto-koi/common/lib/Ticker";
 import { android_ripple } from "../styles/commonStyles";
 import Transformer from "../utils/Transformer";
 import CircularProgress from "./CircularProgress";
@@ -216,7 +224,11 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                             )}
                             backgroundStrokeColor={themeStore.onBackground}
                             radius={15}
-                            svgStyle={{ color: themeStore.heartColor } as any}
+                            svgStyle={
+                                {
+                                    color: themeStore.heartColor,
+                                } as StyleProp<ViewStyle>
+                            }
                             strokeWidth={3}
                         >
                             <View

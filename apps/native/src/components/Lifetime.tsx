@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { StyleProp, Text, View, ViewStyle } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import Cryptogotchi from "../mobx/Cryptogotchi";
-import { ticker } from "../services/Ticker";
+import { ticker } from "@crypto-koi/common/lib/Ticker";
 import TimeUtils from "../utils/TimeUtils";
 import CircularProgress from "./CircularProgress";
 
@@ -40,7 +40,7 @@ const Lifetime = observer((props: Props) => {
                 )}
                 backgroundStrokeColor={props.onBackgroundColor}
                 radius={25}
-                svgStyle={{ color: props.heartColor } as any}
+                svgStyle={{ color: props.heartColor } as StyleProp<ViewStyle>}
                 strokeWidth={6}
             >
                 <View

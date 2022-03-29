@@ -1,5 +1,5 @@
 class Ticker {
-    private interval: NodeJS.Timeout;
+    private interval: NodeJS.Timeout | number;
 
     private tickers: { [s: string]: () => void | Promise<void> } = {};
 
@@ -21,6 +21,10 @@ class Ticker {
 
     removeTickHandler(id: string) {
         delete this.tickers[id];
+    }
+
+    clear() {
+        clearInterval(this.interval as NodeJS.Timeout);
     }
 }
 

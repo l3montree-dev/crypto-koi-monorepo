@@ -4,8 +4,8 @@ import axios, {
     AxiosRequestConfig,
     AxiosResponse,
 } from "axios";
-import { config } from "../config";
-import log from "../utils/logger";
+import { config } from "../../../apps/native/src/config";
+import log from "../../../apps/native/src/utils/logger";
 import { StorageService } from "./StorageService";
 
 export interface TokenResponse {
@@ -13,11 +13,11 @@ export interface TokenResponse {
     refreshToken: string;
 }
 
-class AuthService {
+export class AuthService {
     publicClient: AxiosInstance;
     protectedClient: AxiosInstance;
     loadTokenPromise: Promise<unknown>;
-    constructor() {
+    constructor(protected storageService: StorageService) {
         this.protectedClient = axios.create({
             baseURL: config.restApiBaseUrl,
             timeout: 10 * 1000,
@@ -41,8 +41,8 @@ class AuthService {
         );
         // load the tokens.
         this.loadTokenPromise = Promise.all([
-            StorageService.getValueFor(AuthService.refreshTokenStorageKey),
-            StorageService.getValueFor(AuthService.accessTokenStorageKey),
+            this.storageService.getValueFor(AuthService.refreshTokenStorageKey),
+            this.storageService.getValueFor(AuthService.accessTokenStorageKey),
         ]).then(([refreshToken, accessToken]) => {
             this.accessToken = accessToken;
             this.refreshToken = refreshToken;
@@ -82,7 +82,7 @@ class AuthService {
 
     async exchangeDeviceIdForToken() {
         try {
-            let deviceId = await StorageService.getValueFor(
+            let deviceId = await this.storageService.getValueFor(
                 AuthService.deviceIdStorageKey
             );
 
@@ -91,7 +91,7 @@ class AuthService {
                 deviceId =
                     Math.random().toString(36).substring(2, 15) +
                     Math.random().toString(36).substring(2, 15);
-                await StorageService.save(
+                await this.storageService.save(
                     AuthService.deviceIdStorageKey,
                     deviceId
                 );
@@ -146,8 +146,8 @@ class AuthService {
     async logout() {
         // destroy the tokens from the storage
         await Promise.all([
-            StorageService.delete(AuthService.refreshTokenStorageKey),
-            StorageService.delete(AuthService.accessTokenStorageKey),
+            this.storageService.delete(AuthService.refreshTokenStorageKey),
+            this.storageService.delete(AuthService.accessTokenStorageKey),
             // do NOT delete the deviceId storage key.
             // StorageService.delete(AuthService.deviceIdStorageKey),
         ]);
@@ -155,11 +155,11 @@ class AuthService {
 
     async handleSuccessfulToken(token: TokenResponse) {
         await Promise.all([
-            StorageService.save(
+            this.storageService.save(
                 AuthService.accessTokenStorageKey,
                 token.accessToken
             ),
-            StorageService.save(
+            this.storageService.save(
                 AuthService.refreshTokenStorageKey,
                 token.refreshToken
             ),
@@ -246,5 +246,3 @@ class AuthService {
         return config;
     }
 }
-
-export const authService = new AuthService();
