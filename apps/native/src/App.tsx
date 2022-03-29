@@ -18,6 +18,7 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { appEventEmitter } from "./services/AppEventEmitter";
 import ViewUtils from "./utils/ViewUtils";
 import * as Sentry from "sentry-expo";
+import { commonTest } from '@crypto-koi/common'
 
 Sentry.init({
     dsn: "https://90d34b820d86480082c5361bc6b3d7ed@sentry.l3montree.com/13",
@@ -47,6 +48,7 @@ const Theme = {
 const containerStyle = { flex: 1, backgroundColor: "red" };
 
 const App: FunctionComponent = () => {
+    commonTest();
     useEffect(() => {
         // start the login routine.
         (async function () {

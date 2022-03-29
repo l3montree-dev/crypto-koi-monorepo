@@ -1,10 +1,5 @@
 {
     "compilerOptions": {
         "baseUrl": "./packages",
-        "paths": {
-            "@crypto-koi/common": [
-                "common/lib"
-            ]
-        },
     }
 }

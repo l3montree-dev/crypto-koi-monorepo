@@ -1,4 +1,4 @@
-const withTM = require('next-transpile-modules')(['common'])
+const withTM = require('next-transpile-modules')(['@crypto-koi/common'])
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({

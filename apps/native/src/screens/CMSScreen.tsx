@@ -2,8 +2,8 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {Platform, ScrollView, View} from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
-// @ts-ignore
-import Markdown from "react-native-simple-markdown";
+
+import Markdown from "react-native-markdown-renderer";
 import { useTailwind } from "tailwind-rn";
 import { config } from "../config";
 import { RootStackParamList } from "../hooks/useNavigation";
@@ -37,7 +37,7 @@ const CMSScreen = () => {
         >
             <ScrollView contentContainerStyle={tailwind("p-4")}>
                 <Markdown
-                    styles={{
+                    style={{
                         heading1: tailwind("font-bold text-3xl"),
                         heading2: tailwind("font-bold text-2xl"),
                         heading3: tailwind("font-bold text-xl mt-5"),
