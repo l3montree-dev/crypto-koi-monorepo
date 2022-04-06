@@ -1,4 +1,4 @@
-import { IKoiMetadata } from '../cms/page'
+import { IKoiMetadata } from './cms/page'
 
 export function win(): { innerWidth: number; innerHeight: number } {
     if (isBrowser()) {

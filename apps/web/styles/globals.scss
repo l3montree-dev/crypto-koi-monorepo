@@ -184,19 +184,23 @@ header {
 header {
     border-bottom: 1px solid transparent;
     color: white;
-    button {
+    button:not(.start-button) {
         &:hover {
             color: black!important;
         }
     }
     &.scrolled {
-        button {
+        button:not(.start-button) {
             color: black!important;
         }
         color: black;
         background-color: white;
         border-bottom: 1px solid rgba(0,0,0,0.1)
     }
+}
+
+.header-padding {
+    padding-top: 73px;
 }
 
 .story {

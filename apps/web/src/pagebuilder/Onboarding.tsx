@@ -44,18 +44,22 @@ const Onboarding: FunctionComponent<IOnboardingPB> = (props) => {
                                         <div
                                             onClick={() =>
                                                 setLightboxImg({
-                                                    alt: step.Image.data
-                                                        .attributes
-                                                        .alternativeText,
-                                                    width: step.Image.data
-                                                        .attributes.formats
-                                                        .medium.width,
-                                                    height: step.Image.data
-                                                        .attributes.formats
-                                                        .medium.height,
-                                                    src: step.Image.data
-                                                        .attributes.formats
-                                                        .medium.url,
+                                                    alt:
+                                                        step.Image.data
+                                                            .attributes
+                                                            .alternativeText,
+                                                    width:
+                                                        step.Image.data
+                                                            .attributes.formats
+                                                            .medium.width,
+                                                    height:
+                                                        step.Image.data
+                                                            .attributes.formats
+                                                            .medium.height,
+                                                    src:
+                                                        step.Image.data
+                                                            .attributes.formats
+                                                            .medium.url,
                                                     text: step.Text,
                                                 })
                                             }

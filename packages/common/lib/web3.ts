@@ -8,25 +8,25 @@ export function newProvider(
 ): WalletConnectProvider {
     return new WalletConnectProvider({
         rpc: {
-            [network.networkId]: network.rpc[0],
+            [parseInt(network.chainId.substring(2), 16)]: network.rpcUrls[0],
         },
-        chainId: network.networkId,
+        chainId: parseInt(network.chainId.substring(2), 16),
         connector: connector,
     });
 }
 
 
 type LogFn = (...args: Array<string | number>) => void;
-export const switchOrAddNetworkFactory = (log: {warn: LogFn, info: LogFn, error: LogFn}) => (
+export const switchOrAddNetworkFactory = (log: {warn: LogFn, info: LogFn, error: LogFn}, timeout = 5000) => (
     provider: WalletConnectProvider,
     network: typeof commonConfig.chain
 ) => {
     return new Promise<void>((resolve, reject) => {
         // resolve after 5 seconds automatically.
-        const timeout = setTimeout(() => {
-            log.warn("Timeout reached. Switching to network:", network.name);
+        const timeoutId = setTimeout(() => {
+            log.warn("Timeout reached. Switching to network:", network.chainName);
             reject();
-        }, 5000);
+        }, timeout);
 
         log.info(
             "chain ID mismatch - sending wallet_switchEthereumChain request with chain id: " +
@@ -39,12 +39,12 @@ export const switchOrAddNetworkFactory = (log: {warn: LogFn, info: LogFn, error:
             })
             .then(() => {
                 log.info("wallet_switchEthereumChain request successful");
-                clearTimeout(timeout);
+                clearTimeout(timeoutId);
                 resolve();
             })
             .catch(async (switchErr) => {
                 // it did respond - therefore clear the timeout.
-                clearTimeout(timeout);
+                clearTimeout(timeoutId);
 
                 if (
                     typeof switchErr === "object" &&
@@ -59,6 +59,13 @@ export const switchOrAddNetworkFactory = (log: {warn: LogFn, info: LogFn, error:
                         method: "wallet_addEthereumChain",
                         params: [network],
                     });
+
+                    // wait for the chain to be added
+                    await provider.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [{ chainId: network.chainId }],
+                    })
+                    resolve();
                 } else {
                     log.error(
                         "switchOrAddNetwork failed with error: " + switchErr

@@ -9,7 +9,7 @@ import { IGetYourKoiPB, IKoiMetadata } from '../cms/page'
 import CMSContent from '../components/CMSContent'
 import Koi from '../components/Koi'
 import Section from '../components/Section'
-import { config } from '../misc/config'
+import { config } from '../config'
 import tinycolor from 'tinycolor2'
 
 const fetchRandomKoi = async (): Promise<IKoiMetadata> => {

@@ -51,7 +51,7 @@ export default class CryptoKoiSmartContract {
     }
 
     static async ownerOf(tokenId: string) {
-        const provider = ethers.getDefaultProvider(config.chain.rpc[0]);
+        const provider = ethers.getDefaultProvider(config.chain.rpcUrls[0]);
 
         const contract = new ethers.Contract(
             config.contractAddress,

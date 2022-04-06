@@ -70,25 +70,28 @@ const renderMenu = (menu: IMenu['Parents']) => {
 }
 
 interface Props extends IMenu {
-    initialHeaderClass: string
+    animate: boolean
 }
 function Header(props: Props) {
     const isScrolled = useRef(false)
-    const [bg, setBg] = useState(props.initialHeaderClass)
+    const [bg, setBg] = useState(props.animate ? '' : 'scrolled')
 
     useEffect(() => {
-        const scrollList = () => {
-            if (window.scrollY > 0 && !isScrolled.current) {
-                setBg('scrolled')
-                isScrolled.current = true
-            } else if (window.scrollY <= 0 && isScrolled.current) {
-                setBg('')
-                isScrolled.current = false
+        if (props.animate) {
+            const scrollList = () => {
+                if (window.scrollY > 0 && !isScrolled.current) {
+                    setBg('scrolled')
+                    isScrolled.current = true
+                } else if (window.scrollY <= 0 && isScrolled.current) {
+                    setBg('')
+                    isScrolled.current = false
+                }
             }
+
+            window.addEventListener('scroll', scrollList)
+            return () => window.removeEventListener('scroll', scrollList)
         }
-        window.addEventListener('scroll', scrollList)
-        return () => window.removeEventListener('scroll', scrollList)
-    }, [])
+    }, [props.animate])
     return (
         <header className={'p-3 md:p-4 fixed top-0 left-0 right-0 z-10 ' + bg}>
             <div className="flex-row justify-between max-w-screen-2xl mx-auto flex items-center">
@@ -107,6 +110,16 @@ function Header(props: Props) {
                 </Link>
                 <div className="hidden items-center font-bold md:flex">
                     {renderMenu(props.Parents)}
+                    <Link href="/register">
+                        <a>
+                            <Button
+                                className="start-button mx-2"
+                                colorScheme={'cherry'}
+                            >
+                                Start
+                            </Button>
+                        </a>
+                    </Link>
                     <a
                         target="_blank"
                         className="text-white mx-2"

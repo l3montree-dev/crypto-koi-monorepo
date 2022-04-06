@@ -61,9 +61,10 @@ export const ProfileTab = observer(() => {
     const handleConnectWallet = async () => {
         const provider = new WalletConnectProvider({
             rpc: {
-                [config.chain.networkId]: config.chain.rpc[0],
+                [parseInt(config.chain.chainId.substring(2), 16)]: config.chain
+                    .rpcUrls[0],
             },
-            chainId: config.chain.networkId,
+            chainId: parseInt(config.chain.chainId.substring(2), 16),
             connector: connector,
             qrcode: false,
         });
