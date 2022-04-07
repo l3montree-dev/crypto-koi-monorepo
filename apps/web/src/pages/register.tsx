@@ -16,6 +16,7 @@ import useInput from '../hooks/useInput'
 import { connectToWallet, WalletDescriptor } from '../web3'
 import Image from 'next/image'
 import { notEmpty, validEmail } from '@crypto-koi/common/lib/validators'
+import { userService } from '../services'
 
 interface Props {
     page: IPage
@@ -40,6 +41,17 @@ const Register: NextPage<Props> = (props) => {
             console.error(e)
         }
     }
+
+    const handleRegister = async () => {
+        console.log(
+            await userService.registerUsingWalletAddress({
+                email: email.value,
+                name: name.value,
+                walletAddress: wallet?.address,
+            })
+        )
+    }
+
     return (
         <Page
             addHeaderPadding={true}
@@ -48,7 +60,7 @@ const Register: NextPage<Props> = (props) => {
             footer={props.footer}
             animateHeader={false}
         >
-            <div className="md:py-20 py-4 md:bg-slate-200 px-4">
+            <div className="md:py-20 pt-5 pb-10 md:bg-slate-200 px-4">
                 <form className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border">
                     <h2 className="font-bold text-2xl font-poppins">
                         Registration

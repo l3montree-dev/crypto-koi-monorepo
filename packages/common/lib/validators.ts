@@ -1,10 +1,10 @@
 export const notEmpty = (value: any) => {
-    return Boolean(value);
+    return Boolean(value)
 }
 
 export const validEmail = (email: string) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
-      return true
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        return true
     }
     return false
 }

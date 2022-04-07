@@ -1,0 +1,5 @@
+make: Entering directory '/home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo'
+yarn install || (npm i --global yarn && yarn install)
+yarn workspace @crypto-koi/web dev
+make: Leaving directory '/home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo'
+ 
