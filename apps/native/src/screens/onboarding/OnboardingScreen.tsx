@@ -33,6 +33,8 @@ import { nativeUserService } from "../../services/NativeUserService";
 import { Colors, CustomColors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
+import Svg, { Defs, Ellipse, LinearGradient, Path, Rect, Stop } from "react-native-svg";
+import GradientBackground from "../../components/GradientBackground";
 
 
 const style = StyleSheet.create({
@@ -101,8 +103,8 @@ function OnboardingScreen() {
                 {
                     translateX: withSpring(
                         (scrollPosition.value /
-                            (DimensionUtils.deviceWidth * 3)) *
-                        79
+                            (DimensionUtils.deviceWidth * 3.075)) *
+                        80
                     ),
                 },
             ],
@@ -188,7 +190,7 @@ function OnboardingScreen() {
 
     return (
         <View style={[{ backgroundColor: CustomColors.bgDark }, tailwind("flex-1"),]}>
-            <View style={tailwind("absolute -top-20")}>
+            {/*<View style={tailwind("absolute -top-20")}>
                 <Wave
                     svgStyle={[
                         style.svg,
@@ -198,6 +200,9 @@ function OnboardingScreen() {
             </View>
             <View style={tailwind("absolute -bottom-20")}>
                 <Wave svgStyle={style.svg} />
+                </View>*/}
+            <View style={tailwind("absolute")}>
+                <GradientBackground />
             </View>
             <ScrollView
                 decelerationRate={"fast"}
@@ -328,6 +333,30 @@ function OnboardingScreen() {
                                     </Text>
                                 </View>
                             </Animated.View>
+                            <Animated.View
+                                style={[
+                                    style.listItem,
+                                    tailwind(
+                                        "flex-row mx-0 my-2 px-4 py-3 rounded-lg items-center"
+                                    ),
+                                ]}
+                                entering={FadeIn.delay(1500)}
+                            >
+                                <Icon
+                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
+                                    name="arch"
+                                />
+                                <View style={tailwind("ml-5")}>
+                                    <Text style={tailwind("text-sea text-lg")}>
+                                        Play and compete
+                                    </Text>
+                                    <Text
+                                        style={tailwind("text-sea opacity-75")}
+                                    >
+                                        Keep your friend alive as long as possible
+                                    </Text>
+                                </View>
+                            </Animated.View>
                         </>
                     )}
                 </View>
@@ -450,7 +479,7 @@ function OnboardingScreen() {
                         <View
                             key={index}
                             style={[
-                                tailwind("bg-cherry-300 mx-2 rounded"),
+                                tailwind("bg-white mx-2 rounded"),
                                 style.dot,
                             ]}
                         />
@@ -458,8 +487,9 @@ function OnboardingScreen() {
                     <Animated.View
                         style={[
                             style.dot,
-                            tailwind("bg-cherry-100 rounded absolute mx-2"),
+                            tailwind("rounded absolute mx-2"),
                             animatedActiveDotStyle,
+                            { backgroundColor: CustomColors.waves }
                         ]}
                     />
                 </View>
@@ -471,7 +501,7 @@ function OnboardingScreen() {
                     </View>
                 </TouchableNativeFeedback>
             </View>
-        </View>
+        </View >
     );
 }
 
