@@ -20,5 +20,8 @@
         "@walletconnect/web3-provider": "^1.7.7",
         "axios": "^0.26.1",
         "typescript": "^4.6.3"
+    },
+    "devDependencies": {
+        "jest": "^27.5.1"
     }
 }
