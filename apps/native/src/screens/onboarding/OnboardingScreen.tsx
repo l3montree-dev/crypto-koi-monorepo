@@ -91,6 +91,7 @@ function OnboardingScreen() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const scrollPosition = useSharedValue(0);
+    const dotContainerWidth = useSharedValue(0);
     const connector = useWalletConnect();
 
     const [agreedToTermsOfUse, setAgreedToTermsOfUse] = useState(false);
@@ -99,15 +100,11 @@ function OnboardingScreen() {
     const animatedActiveDotStyle = useAnimatedStyle(() => {
         "worklet";
         return {
-            transform: [
-                {
-                    translateX: withSpring(
-                        (scrollPosition.value /
-                            (DimensionUtils.deviceWidth * 3.075)) *
-                        80
-                    ),
-                },
-            ],
+            left: withSpring(
+                (scrollPosition.value /
+                    (DimensionUtils.deviceWidth * 4)) *
+                dotContainerWidth.value
+            ),
         };
     });
 
@@ -474,7 +471,7 @@ function OnboardingScreen() {
                     </View>
                 </TouchableNativeFeedback>
 
-                <View style={tailwind("flex-row")}>
+                <View style={tailwind("flex-row")} onLayout={(e) => { dotContainerWidth.value = e.nativeEvent.layout.width }}>
                     {[0, 1, 2, 3].map((_, index) => (
                         <View
                             key={index}
@@ -489,7 +486,7 @@ function OnboardingScreen() {
                             style.dot,
                             tailwind("rounded absolute mx-2"),
                             animatedActiveDotStyle,
-                            { backgroundColor: CustomColors.waves }
+                            { backgroundColor: CustomColors.waves },
                         ]}
                     />
                 </View>
