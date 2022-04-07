@@ -30,9 +30,11 @@ import Wave from "../../components/Wave";
 import { config } from "../../config";
 import { useFloating } from "../../hooks/useFloating";
 import { nativeUserService } from "../../services/NativeUserService";
-import { Colors } from "../../styles/colors";
+import { Colors, CustomColors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
+import Svg, { Defs, Ellipse, LinearGradient, Path, Rect, Stop } from "react-native-svg";
+import GradientBackground from "../../components/GradientBackground";
 
 
 const style = StyleSheet.create({
@@ -47,18 +49,33 @@ const style = StyleSheet.create({
     svg: {
         height: DimensionUtils.deviceWidth,
         width: DimensionUtils.deviceWidth,
+        color: CustomColors.waves,
     },
     rotatedSvg: {
         transform: [{ rotate: "180deg" }],
     },
     img: {
         // maxHeight: 400,
-        width: 200,
-        height: 400,
+        width: 400,
+        height: 420,
 
         aspectRatio: 1,
         top: 0,
         // ackgroundColor: "red",
+
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+    },
+    dragon: {
+        // maxHeight: 400,
+        width: 440,
+        height: 440,
+
+        aspectRatio: 1,
+        top: 0,
+        right: 40,
+        //backgroundColor: "red",
 
         display: "flex",
         justifyContent: "flex-start",
@@ -74,6 +91,7 @@ function OnboardingScreen() {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const scrollPosition = useSharedValue(0);
+    const dotContainerWidth = useSharedValue(0);
     const connector = useWalletConnect();
 
     const [agreedToTermsOfUse, setAgreedToTermsOfUse] = useState(false);
@@ -82,15 +100,11 @@ function OnboardingScreen() {
     const animatedActiveDotStyle = useAnimatedStyle(() => {
         "worklet";
         return {
-            transform: [
-                {
-                    translateX: withSpring(
-                        (scrollPosition.value /
-                            (DimensionUtils.deviceWidth * 3)) *
-                            79
-                    ),
-                },
-            ],
+            left: withSpring(
+                (scrollPosition.value /
+                    (DimensionUtils.deviceWidth * 4)) *
+                dotContainerWidth.value
+            ),
         };
     });
 
@@ -149,7 +163,7 @@ function OnboardingScreen() {
     };
 
     const handleNext = () => {
-        if (activeSlide === 2) {
+        if (activeSlide === 3) {
             if (agreedToTermsOfUse && agreedToPrivacyPolicy) {
                 return handlePlayWithoutWalletPress();
             } else {
@@ -172,18 +186,20 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={tailwind("flex-1 bg-soft-500")}>
-            <View style={tailwind("absolute -top-20")}>
+        <View style={[{ backgroundColor: CustomColors.bgDark }, tailwind("flex-1"),]}>
+            {/*<View style={tailwind("absolute -top-20")}>
                 <Wave
                     svgStyle={[
-                        tailwind("text-cherry-500"),
                         style.svg,
                         style.rotatedSvg,
                     ]}
                 />
             </View>
             <View style={tailwind("absolute -bottom-20")}>
-                <Wave svgStyle={[style.svg, tailwind("text-cherry-500")]} />
+                <Wave svgStyle={style.svg} />
+                </View>*/}
+            <View style={tailwind("absolute")}>
+                <GradientBackground />
             </View>
             <ScrollView
                 decelerationRate={"fast"}
@@ -208,14 +224,14 @@ function OnboardingScreen() {
                     </View>
                     <Text
                         style={tailwind(
-                            "mt-10 text-4xl font-bold text-sea text-center"
+                            "mt-10 text-4xl font-bold text-white text-center"
                         )}
                     >
                         Welcome
                     </Text>
                     <Text
                         style={tailwind(
-                            "text-lg text-sea-500 mt-5 px-10 text-center"
+                            "text-lg text-white mt-5 px-10 text-center"
                         )}
                     >
                         Grow the oldest and rarest koi inside the blockchain
@@ -232,7 +248,7 @@ function OnboardingScreen() {
                             <Animated.Text
                                 entering={FadeIn}
                                 style={tailwind(
-                                    "text-4xl font-bold text-sea-500 text-center mb-5"
+                                    "text-4xl font-bold text-white text-center mb-5"
                                 )}
                             >
                                 Keep your Koi alive
@@ -247,7 +263,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(500)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-cherry-500")}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
                                     name="food-apple"
                                 />
 
@@ -300,7 +316,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(1000)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-cherry-500")}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
                                     name="heart"
                                 />
                                 <View style={tailwind("ml-5")}>
@@ -314,8 +330,64 @@ function OnboardingScreen() {
                                     </Text>
                                 </View>
                             </Animated.View>
+                            <Animated.View
+                                style={[
+                                    style.listItem,
+                                    tailwind(
+                                        "flex-row mx-0 my-2 px-4 py-3 rounded-lg items-center"
+                                    ),
+                                ]}
+                                entering={FadeIn.delay(1500)}
+                            >
+                                <Icon
+                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
+                                    name="arch"
+                                />
+                                <View style={tailwind("ml-5")}>
+                                    <Text style={tailwind("text-sea text-lg")}>
+                                        Play and compete
+                                    </Text>
+                                    <Text
+                                        style={tailwind("text-sea opacity-75")}
+                                    >
+                                        Keep your friend alive as long as possible
+                                    </Text>
+                                </View>
+                            </Animated.View>
                         </>
                     )}
+                </View>
+                <View
+                    style={[
+                        style.slide,
+                        tailwind("flex-1 px-4 justify-center"),
+                    ]}
+                >
+                    {activeSlide === 2 && (<>
+                        <View>
+                            <RNAnimated.View style={{ translateX, translateY }}>
+                                <Image
+                                    style={style.dragon}
+                                    resizeMode="contain"
+                                    source={require("../../../assets/image/dragon.png")}
+                                />
+                            </RNAnimated.View>
+                        </View>
+                        <Text
+                            style={tailwind(
+                                "mt-10 text-4xl font-bold text-white text-center"
+                            )}
+                        >
+                            Proof your determination
+                        </Text>
+                        <Text
+                            style={tailwind(
+                                "text-lg text-white mt-5 px-10 text-center"
+                            )}
+                        >
+                            Let your Koi evolve into a dragon
+                        </Text>
+                    </>)}
                 </View>
                 <View
                     style={[
@@ -325,17 +397,17 @@ function OnboardingScreen() {
                         ),
                     ]}
                 >
-                    {activeSlide === 2 && (
+                    {activeSlide === 3 && (
                         <Animated.View entering={FadeIn}>
                             <Text
                                 style={tailwind(
-                                    "text-sea text-4xl font-bold text-center mb-5"
+                                    "text-white text-4xl font-bold text-center mb-5"
                                 )}
                             >
                                 Make it an NFT
                             </Text>
                             <Text
-                                style={tailwind("text-sea text-lg text-center")}
+                                style={tailwind("text-white text-lg text-center")}
                             >
                                 To never loose your friend again you can make
                                 him unique by putting him in an NFT
@@ -378,7 +450,7 @@ function OnboardingScreen() {
                             <View style={tailwind("mt-4")}>
                                 <AppButton
                                     backgroundColor={
-                                        tailwind("text-sea-500").color as string
+                                        CustomColors.onBgDark
                                     }
                                     disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
                                     textColor="white"
@@ -399,12 +471,12 @@ function OnboardingScreen() {
                     </View>
                 </TouchableNativeFeedback>
 
-                <View style={tailwind("flex-row")}>
-                    {[0, 1, 2].map((_, index) => (
+                <View style={tailwind("flex-row")} onLayout={(e) => { dotContainerWidth.value = e.nativeEvent.layout.width }}>
+                    {[0, 1, 2, 3].map((_, index) => (
                         <View
                             key={index}
                             style={[
-                                tailwind("bg-cherry-300 mx-2 rounded"),
+                                tailwind("bg-white mx-2 rounded"),
                                 style.dot,
                             ]}
                         />
@@ -412,20 +484,21 @@ function OnboardingScreen() {
                     <Animated.View
                         style={[
                             style.dot,
-                            tailwind("bg-cherry-100 rounded absolute mx-2"),
+                            tailwind("rounded absolute mx-2"),
                             animatedActiveDotStyle,
+                            { backgroundColor: CustomColors.waves },
                         ]}
                     />
                 </View>
                 <TouchableNativeFeedback onPress={handleNext}>
                     <View style={tailwind("py-4 m-2 px-10 rounded-lg")}>
                         <Text style={tailwind("text-white")}>
-                            {activeSlide === 2 ? "Play" : "Next"}
+                            {activeSlide === 3 ? "Play" : "Next"}
                         </Text>
                     </View>
                 </TouchableNativeFeedback>
             </View>
-        </View>
+        </View >
     );
 }
 
