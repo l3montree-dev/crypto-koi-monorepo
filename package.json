@@ -6,8 +6,7 @@
         "packages": [
             "packages/*",
             "apps/*"
-        ],
-        "nohoist": []
+        ]
     },
     "packageManager": "yarn@3.2.0"
 }
