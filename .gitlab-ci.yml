@@ -1,0 +1,10 @@
+# Parent gitlab pipeline 
+
+apps_web: 
+  trigger: 
+    include: apps/web/.gitlab-ci.yml
+
+apps_native: 
+  trigger: 
+    include: apps/native/.gitlab-ci.yml
+
