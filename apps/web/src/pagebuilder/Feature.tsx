@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { IFeaturesPB } from '../cms/page'
-import CMSContent from '../components/CMSContent'
+import { CMSContent } from '../components/CMSContent'
 import Section from '../components/Section'
 import Image from 'next/image'
 

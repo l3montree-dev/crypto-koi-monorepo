@@ -8,7 +8,10 @@ import { Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useAppState from "./hooks/useAppState";
 import { RootStackParamList } from "./hooks/useNavigation";
-import { selectCurrentUser, selectThemeStore } from "./mobx/selectors";
+import {
+    selectCurrentUser,
+    selectThemeStore,
+} from "@crypto-koi/common/lib/mobx/selectors";
 import CMSScreen from "./screens/CMSScreen";
 import CryptogotchiScreen from "./screens/CryptogotchiScreen";
 import FriendEditScreen from "./screens/FriendEditScreen";

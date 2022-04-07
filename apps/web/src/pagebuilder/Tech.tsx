@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { ITechPB } from '../cms/page'
-import CMSContent from '../components/CMSContent'
+import { CMSContent } from '../components/CMSContent'
 import Section from '../components/Section'
 import copy from 'copy-to-clipboard'
 import Image from 'next/image'

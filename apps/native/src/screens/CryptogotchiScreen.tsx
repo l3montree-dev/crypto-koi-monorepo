@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useMemo } from "react";
-import { FIND_CRYPTOGOTCHI } from "../graphql/queries/cryptogotchi";
-import { FindCryptogotchi } from "../graphql/queries/__generated__/FindCryptogotchi";
+import React, { useMemo } from "react";
+import { FIND_CRYPTOGOTCHI } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
+import { FindCryptogotchi } from "@crypto-koi/common/lib/graphql/queries/__generated__/FindCryptogotchi";
 import { RootStackParamList } from "../hooks/useNavigation";
-import Cryptogotchi from "../mobx/Cryptogotchi";
+import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
 import CryptogotchiView from "../views/CryptogotchiView";
 
 const CryptogotchiScreen = observer(() => {

@@ -12,8 +12,8 @@ import {
 } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import { LeaderboardItem } from "../components/LeaderboardItem";
-import { FETCH_LEADERBOARD } from "../graphql/queries/cryptogotchi";
-import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
+import { FETCH_LEADERBOARD } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
+import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
 import useAppState from "../hooks/useAppState";
 import { commonStyles } from "../styles/commonStyles";
 

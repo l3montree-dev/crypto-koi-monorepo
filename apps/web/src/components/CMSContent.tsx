@@ -1,12 +1,3 @@
-import React, { FunctionComponent } from 'react'
-import ReactMarkdown from 'react-markdown'
+import dynamic from 'next/dynamic'
 
-const CMSContent: FunctionComponent<{ children: string }> = (props) => {
-    return (
-        <div className="markdown">
-            <ReactMarkdown>{props.children}</ReactMarkdown>
-        </div>
-    )
-}
-
-export default CMSContent
+export const CMSContent = dynamic(() => import('./_CMSContent'), { ssr: false })

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
 import { IMenu } from '../cms/menu'
 import { IHeroSectionPB } from '../cms/page'
-import CMSContent from '../components/CMSContent'
+import { CMSContent } from '../components/CMSContent'
 import Section from '../components/Section'
 
 const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {

@@ -16,14 +16,17 @@ import {
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../components/AppButton";
 import { config } from "../config";
-import { CONNECT_WALLET_MUTATION } from "../graphql/queries/user";
+import { CONNECT_WALLET_MUTATION } from "@crypto-koi/common/lib/graphql/queries/user";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
     ConnectWallet,
     ConnectWalletVariables,
-} from "../graphql/queries/__generated__/ConnectWallet";
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/ConnectWallet";
 import useAppState from "../hooks/useAppState";
-import { selectCurrentUser, selectThemeStore } from "../mobx/selectors";
+import {
+    selectCurrentUser,
+    selectThemeStore,
+} from "@crypto-koi/common/lib/mobx/selectors";
 import { commonStyles } from "../styles/commonStyles";
 import ViewUtils from "../utils/ViewUtils";
 import { useNavigation } from "../hooks/useNavigation";

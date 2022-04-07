@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import tinycolor from "tinycolor2";
 import useAppState from "./hooks/useAppState";
-import { selectThemeStore } from "./mobx/selectors";
+import { selectThemeStore } from "@crypto-koi/common/lib/mobx/selectors";
 import FriendScreen from "./screens/FriendScreen";
 import Leaderboard from "./screens/LeaderboardScreen";
 import { ProfileTab } from "./screens/ProfileTab";
@@ -25,7 +25,12 @@ export const TabNavigator = observer(() => {
             inactiveColor={tinycolor(themeStore.onSecondary)
                 .setAlpha(0.5)
                 .toRgbString()}
-            barStyle={[style, { backgroundColor: themeStore.tabBarColor }]}
+            barStyle={[
+                style,
+                {
+                    backgroundColor: themeStore.secondaryColor,
+                },
+            ]}
         >
             <Tab.Screen
                 name="CryptoKoi"

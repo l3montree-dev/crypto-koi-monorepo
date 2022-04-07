@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
 import { IImageTextCardsPB } from '../cms/page'
-import CMSContent from '../components/CMSContent'
+import { CMSContent } from '../components/CMSContent'
 import Section from '../components/Section'
 
 const ImageTextCards: FunctionComponent<IImageTextCardsPB> = (props) => {

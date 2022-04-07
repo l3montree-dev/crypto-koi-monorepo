@@ -11,9 +11,9 @@ import * as Sentry from "sentry-expo";
 import { TailwindProvider } from "tailwind-rn";
 import utilities from "../tailwind.json";
 import { AppStateContext } from "./mobx/AppStateContext";
-import { rootStore } from "./mobx/RootStore";
+import { nativeRootStore } from "./mobx/NativeRootStore";
 import RootStackNavigator from "./RootStackNavigator";
-import { appEventEmitter } from "./services/AppEventEmitter";
+import { nativeEventEmitter } from "./services/NativeAppEventEmitter";
 import { nativeApolloClient } from "./services/NativeApolloClient";
 import { nativeUserService } from "./services/NativeUserService";
 import { Colors } from "./styles/colors";
@@ -63,16 +63,19 @@ const App: FunctionComponent = () => {
             }
         })();
 
-        const unsub1 = appEventEmitter.registerListener(
+        const unsub1 = nativeEventEmitter.registerListener(
             "successfulRedeem",
             () => {
                 ViewUtils.toast("Redeem successful");
             }
         );
 
-        const unsub2 = appEventEmitter.registerListener("failedRedeem", () => {
-            ViewUtils.toast("Redeem failed");
-        });
+        const unsub2 = nativeEventEmitter.registerListener(
+            "failedRedeem",
+            () => {
+                ViewUtils.toast("Redeem failed");
+            }
+        );
         return () => {
             unsub1();
             unsub2();
@@ -82,7 +85,7 @@ const App: FunctionComponent = () => {
     return (
         <RootSiblingParent>
             <ApolloProvider client={nativeApolloClient}>
-                <AppStateContext.Provider value={rootStore}>
+                <AppStateContext.Provider value={nativeRootStore}>
                     <SafeAreaProvider>
                         <TailwindProvider utilities={utilities}>
                             <StatusBar translucent />

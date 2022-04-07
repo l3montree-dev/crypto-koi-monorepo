@@ -4,8 +4,14 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
+  - scanning
   - publish
   - deploy
+
+gitguardian scan:
+  image: gitguardian/ggshield:latest
+  stage: scanning
+  script: ggshield scan ci
 
 publish-image:
   image: docker:19.03.15
@@ -32,11 +38,11 @@ production-master:
   dependencies:
     - publish-image
   image:
-    name: bitnami/kubectl:1.21.10
+    name: bitnami/kubectl:1.21.11
     entrypoint: [""]
   environment:
     name: production
-    url: "https://l3montree.com"
+    url: "https://crypto-koi.io"
   script:
     - echo "$K8S_CERTIFICATE" >> ca.pem
     - kubectl --server=$K8S_API_URL --token=$K8S_TOKEN --certificate-authority=ca.pem --namespace=crypto-koi rollout restart deployment/crypto-koi-website

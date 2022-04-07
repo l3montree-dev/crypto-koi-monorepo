@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
     Animated as RNAnimated,
     Image,
@@ -26,18 +26,22 @@ import IconButton from "../components/IconButton";
 import Lifetime from "../components/Lifetime";
 import NextFeedButton from "../components/NextFeedButton";
 import { config } from "../config";
-import { FEED_CRYPTOGOTCHI_MUTATION } from "../graphql/queries/cryptogotchi";
-import { Feed, FeedVariables } from "../graphql/queries/__generated__/Feed";
+import * as NavigationBar from "expo-navigation-bar";
+import { FEED_CRYPTOGOTCHI_MUTATION } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
+import {
+    Feed,
+    FeedVariables,
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/Feed";
 import useAppState from "../hooks/useAppState";
 import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
-import Cryptogotchi from "../mobx/Cryptogotchi";
+import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
 import {
     selectCryptogotchies,
     selectCurrentUser,
     selectThemeStore,
-} from "../mobx/selectors";
-import ThemeStore from "../mobx/ThemeStore";
+} from "@crypto-koi/common/lib/mobx/selectors";
+import ThemeStore from "@crypto-koi/common/lib/mobx/ThemeStore";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import ViewUtils from "../utils/ViewUtils";
 
@@ -169,7 +173,13 @@ const CryptogotchiView = observer((props: Props) => {
     };
 
     useFocusEffect(() => {
-        if (props.isVisible) themeStore.setColor(cryptogotchi.color);
+        if (props.isVisible) {
+            themeStore.setColor(cryptogotchi.color);
+            if (Platform.OS === "android")
+                NavigationBar.setBackgroundColorAsync(
+                    themeStore.secondaryColor
+                );
+        }
     });
 
     return (

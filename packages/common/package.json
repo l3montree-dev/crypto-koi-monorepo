@@ -1,32 +1,51 @@
 {
-  "name": "@crypto-koi/common",
-  "version": "0.1.0",
-  "description": "Common code for the web and native client",
-  "author": "\"\"timbastin\"\" <\"\"bastin.tim@gmail.com\"\">",
-  "homepage": "",
-  "license": "ISC",
-  "main": "lib/index.ts",
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc",
-    "test": "jest"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.5.10",
-    "@walletconnect/react-native-dapp": "^1.7.7",
-    "@walletconnect/web3-provider": "^1.7.7",
-    "axios": "^0.26.1",
-    "typescript": "^4.6.3"
-  },
-  "devDependencies": {
-    "@babel/preset-typescript": "^7.16.7",
-    "@types/jest": "^27.4.1",
-    "eslint": "^8.12.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.5.1",
-    "prettier": "^2.6.2"
-  }
+    "name": "@crypto-koi/common",
+    "version": "0.1.0",
+    "description": "Common code for the web and native client",
+    "author": "\"\"timbastin\"\" <\"\"bastin.tim@gmail.com\"\">",
+    "homepage": "",
+    "license": "ISC",
+    "main": "lib/index.ts",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "dev": "tsc --watch",
+        "build": "tsc",
+        "test": "jest",
+        "codegen": "yarn fetch-graphql-schema && npm run generate-graphql-types",
+        "generate-graphql-types": "npx apollo codegen:generate --localSchemaFile=lib/graphql/schema.json --target=typescript --tagName=gql",
+        "fetch-graphql-schema": "npx apollo service:download --endpoint=http://localhost:8080/query ./lib/graphql/schema.json"
+    },
+    "dependencies": {
+        "@apollo/client": "^3.5.10",
+        "@walletconnect/react-native-dapp": "^1.7.7",
+        "@walletconnect/web3-provider": "^1.7.7",
+        "axios": "^0.26.1",
+        "bufferutil": "^4.0.6",
+        "ethers": "^5.6.2",
+        "graphql": "^16.3.0",
+        "lodash": "^4.17.21",
+        "mobx": "^6.5.0",
+        "mobx-react-lite": "^3.3.0",
+        "moment": "^2.29.2",
+        "react": "17.0.1",
+        "tinycolor2": "^1.4.2",
+        "typescript": "^4.6.3",
+        "utf-8-validate": "^5.0.9"
+    },
+    "devDependencies": {
+        "@babel/preset-typescript": "^7.16.7",
+        "@types/graphql": "^14.5.0",
+        "@types/jest": "^27.4.1",
+        "@types/lodash": "^4.14.181",
+        "@types/tinycolor2": "^1.4.3",
+        "@typescript-eslint/eslint-plugin": "^5.18.0",
+        "@typescript-eslint/parser": "^5.18.0",
+        "eslint": "^8.12.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "jest": "^27.5.1",
+        "prettier": "^2.6.2"
+    }
 }

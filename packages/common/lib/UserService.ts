@@ -1,14 +1,15 @@
-import { GET_USER } from '../../../apps/native/src/graphql/queries/user'
-import { GetUser } from '../../../apps/native/src/graphql/queries/__generated__/GetUser'
-import { rootStore } from '../../../apps/native/src/mobx/RootStore'
 import {
     AuthService,
     RegisterRequest,
 } from '@crypto-koi/common/lib/AuthService'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { GET_USER } from './graphql/queries/user'
+import { GetUser } from './graphql/queries/__generated__/GetUser'
+import RootStore from './mobx/RootStore'
 
 export class UserService {
     constructor(
+        protected rootStore: RootStore,
         protected authService: AuthService,
         protected apolloClient: ApolloClient<NormalizedCacheObject>
     ) {}
@@ -57,7 +58,7 @@ export class UserService {
 
     async logout(): Promise<void> {
         await this.authService.logout()
-        rootStore.authStore.setCurrentUser(null)
+        this.rootStore.authStore.setCurrentUser(null)
     }
 
     async sync() {
@@ -65,7 +66,7 @@ export class UserService {
             query: GET_USER,
             fetchPolicy: 'no-cache',
         })
-        rootStore.authStore.setCurrentUser(user.data.user)
+        this.rootStore.authStore.setCurrentUser(user.data.user)
     }
 
     async deleteAccount() {
@@ -73,6 +74,6 @@ export class UserService {
         await this.authService.destroyAccount()
         // just destroys the tokens.
         await this.authService.logout()
-        rootStore.authStore.setCurrentUser(null)
+        this.rootStore.authStore.setCurrentUser(null)
     }
 }

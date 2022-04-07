@@ -9,8 +9,10 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@apollo/client": "^3.5.10",
         "@chakra-ui/icons": "^1.1.7",
         "@chakra-ui/react": "^1.8.6",
+        "@crypto-koi/common": "workspace:^",
         "@emotion/react": "^11.8.1",
         "@emotion/styled": "^11.8.1",
         "@types/node": "17.0.21",
@@ -28,6 +30,9 @@
         "eslint-plugin-prettier": "^4.0.0",
         "ethers": "^5.6.2",
         "framer-motion": "^6.2.8",
+        "graphql": "^16.3.0",
+        "mobx": "^6.5.0",
+        "mobx-react-lite": "^3.3.0",
         "moment": "^2.29.1",
         "next": "12.1.0",
         "next-transpile-modules": "^9.0.0",

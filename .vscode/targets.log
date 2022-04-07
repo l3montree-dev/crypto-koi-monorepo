@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Apr  7 16:36:48 2022
+# Make data base, printed on Thu Apr  7 20:51:22 2022
 
 # Variables
 
@@ -17,15 +17,11 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
-NO_AT_BRIDGE = 1
-# environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-GJS_DEBUG_OUTPUT = stderr
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-9a5fdbe9-92da-496a-b8ab-0d1cf0144113.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2e29d358-cb5d-4657-9621-677640e3394b.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
@@ -75,7 +71,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.112
+GNOME_TERMINAL_SERVICE = :1.114
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -109,13 +105,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 18396
+VSCODE_PID = 6395
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/15042,unix/avocado:/tmp/.ICE-unix/15042
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/3037,unix/avocado:/tmp/.ICE-unix/3037
 # automatic
 *F = $(notdir $*)
 # environment
@@ -139,19 +135,15 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/002e8ab8_fed5_4888_bd11_4ee746ef45a8
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/eff37cbe_0f8f_4617_80d6_fcfe26af15bb
 # environment
 MAKELEVEL := 0
-# environment
-IM_CONFIG_CHECK_ENV = 1
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/home/timbastin/.cargo/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/timbastin/.dotnet/tools:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/.dotnet/tools:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin
+PATH = /home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.cargo/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/timbastin/.dotnet/tools:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin
 # default
 MAKEFILES := 
 # automatic
@@ -181,9 +173,9 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 15321
+SYSTEMD_EXEC_PID = 3236
 # environment
-DISPLAY = :1
+DISPLAY = :0
 # environment
 USER = timbastin
 # environment
@@ -239,7 +231,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=114/1024=11%, Rehash=0, Collisions=12/144=8%
+# Load=110/1024=11%, Rehash=0, Collisions=12/140=9%
 
 # Pattern-specific Variable Values
 
@@ -247,9 +239,9 @@ GDMSESSION = ubuntu-xorg
 
 # Directories
 
-# . (device 64769, inode 38031588): 14 files, no impossibilities.
+# . (device 64769, inode 38031588): 15 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -296,12 +288,12 @@ native: install
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 7):
 	yarn workspace @crypto-koi/native android
- 
-make: *** No rule to make target 'all'.  Stop.
-
 
 web: install
 #  Phony target (prerequisite of .PHONY).
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -342,12 +334,12 @@ apps/native/package.json:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 290 B / avg = 10 B
-# current buf: size = 8162 B / used = 290 B / count = 27 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 28 / storage = 305 B / avg = 10 B
+# current buf: size = 8162 B / used = 305 B / count = 28 / avg = 10 B
 
-# strcache performance: lookups = 42 / hit rate = 35%
+# strcache performance: lookups = 43 / hit rate = 34%
 # hash-table stats:
-# Load=27/8192=0%, Rehash=0, Collisions=3/42=7%
-# Finished Make data base on Thu Apr  7 16:36:48 2022
+# Load=28/8192=0%, Rehash=0, Collisions=3/43=7%
+# Finished Make data base on Thu Apr  7 20:51:23 2022
 
  

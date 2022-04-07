@@ -4,7 +4,7 @@ import axios, {
     AxiosRequestConfig,
     AxiosResponse,
 } from 'axios'
-import log from '../../../apps/native/src/utils/logger'
+import { Logger } from './logger'
 import { StorageService } from './StorageService'
 
 export interface RegisterRequest {
@@ -25,7 +25,8 @@ export class AuthService {
     loadTokenPromise: Promise<unknown>
     constructor(
         protected storageService: StorageService,
-        restApiBaseUrl: string
+        restApiBaseUrl: string,
+        protected logger: Logger
     ) {
         this.protectedClient = axios.create({
             baseURL: restApiBaseUrl,
@@ -73,18 +74,18 @@ export class AuthService {
         walletAddress: string
     ): Promise<boolean> {
         try {
-            log.info('trying to exchange device id for token')
+            this.logger.info('trying to exchange device id for token')
             const token = await this.publicClient.post<TokenResponse>(
                 '/auth/login',
                 {
                     walletAddress,
                 }
             )
-            log.info('exchange successful. Storing token on device')
+            this.logger.info('exchange successful. Storing token on device')
             await this.handleSuccessfulToken(token.data)
             return true
-        } catch (e) {
-            log.error('exchange failed', e)
+        } catch (e: any) {
+            this.logger.error('exchange failed', e)
             return false
         }
     }
@@ -105,18 +106,18 @@ export class AuthService {
                     deviceId
                 )
             }
-            log.info('trying to exchange device id for token')
+            this.logger.info('trying to exchange device id for token')
             const token = await this.publicClient.post<TokenResponse>(
                 '/auth/login',
                 {
                     deviceId,
                 }
             )
-            log.info('exchange successful. Storing token on device')
+            this.logger.info('exchange successful. Storing token on device')
             await this.handleSuccessfulToken(token.data)
             return true
-        } catch (e) {
-            log.error('exchange failed', e)
+        } catch (e: any) {
+            this.logger.error('exchange failed', e)
             return false
         }
     }
@@ -126,11 +127,11 @@ export class AuthService {
      * @returns A promise that resolves to the success state.
      */
     async tryToLoginUsingStoredCredentials(): Promise<boolean> {
-        log.info('trying to login using stored credentials')
+        this.logger.info('trying to login using stored credentials')
         // check if the tokens do exist.
         await this.loadTokenPromise
         if (this.accessToken === null) {
-            log.warn('no access token found. stopping login')
+            this.logger.warn('no access token found. stopping login')
             return false
         }
         // they do exist.
@@ -139,7 +140,7 @@ export class AuthService {
         try {
             const token = await this.refreshAccessToken()
             await this.handleSuccessfulToken(token.data)
-            log.info(
+            this.logger.info(
                 'login successful. Token stored on device for next session'
             )
             return true
@@ -149,7 +150,7 @@ export class AuthService {
     }
 
     async register(registerRequest: RegisterRequest) {
-        log.info('start register')
+        this.logger.info('start register')
         // they do exist.
         // check if they are still valid.
         // we can do this by just refreshing the access token.
@@ -159,7 +160,7 @@ export class AuthService {
                 registerRequest
             )
             await this.handleSuccessfulToken(token.data)
-            log.info(
+            this.logger.info(
                 'register successful. Token stored on device for next session'
             )
             return true
@@ -206,8 +207,8 @@ export class AuthService {
                 }
             )
             return token
-        } catch (e) {
-            log.error('refresh access token failed', e)
+        } catch (e: any) {
+            this.logger.error('refresh access token failed', e)
             throw e
         }
     }
@@ -215,28 +216,28 @@ export class AuthService {
     async destroyAccount() {
         try {
             await this.protectedClient.delete('/auth')
-        } catch (e) {
-            log.error('destroy account failed', e)
+        } catch (e: any) {
+            this.logger.error('destroy account failed', e)
             throw e
         }
     }
 
     private maybeRefreshToken() {
         if (this.refreshTokenRequest === null) {
-            log.info('refreshing access token')
+            this.logger.info('refreshing access token')
             this.refreshTokenRequest = this.refreshAccessToken()
         }
     }
 
     private rejectedInterceptor(error?: AxiosError) {
         if (!error || !error.config) {
-            log.error(
+            this.logger.error(
                 'no error passed to rejectedInterceptor: ' +
                     JSON.stringify(error)
             )
             return Promise.reject(error)
         }
-        log.warn(
+        this.logger.warn(
             'request to url: ' +
                 error?.config?.url +
                 ' failed with status code: ' +
@@ -257,12 +258,12 @@ export class AuthService {
 
     private async requestInterceptor(config: AxiosRequestConfig) {
         if (this.refreshTokenRequest !== null) {
-            log.warn('waiting for refresh token request')
+            this.logger.warn('waiting for refresh token request')
             try {
                 await this.refreshTokenRequest
                 this.refreshTokenRequest = null
-            } catch (e) {
-                log.error('refresh token request failed', e)
+            } catch (e: any) {
+                this.logger.error('refresh token request failed', e)
                 this.refreshTokenRequest = null
                 return new axios.Cancel('refresh token failed')
             }

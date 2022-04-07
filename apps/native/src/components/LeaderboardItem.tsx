@@ -14,12 +14,12 @@ import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { config } from "../config";
-import { FetchLeaderBoard } from "../graphql/queries/__generated__/FetchLeaderBoard";
+import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
 import useAppState from "../hooks/useAppState";
 import { useNavigation } from "../hooks/useNavigation";
 import { ticker } from "@crypto-koi/common/lib/Ticker";
 import { android_ripple } from "../styles/commonStyles";
-import Transformer from "../utils/Transformer";
+import Transformer from "@crypto-koi/common/lib/Transformer";
 import CircularProgress from "./CircularProgress";
 import Clock from "./Clock";
 

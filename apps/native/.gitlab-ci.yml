@@ -1,0 +1,12 @@
+image: node:16
+stages:
+  - scanning
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+gitguardian scan:
+  image: gitguardian/ggshield:latest
+  stage: scanning
+  script: ggshield scan ci
+

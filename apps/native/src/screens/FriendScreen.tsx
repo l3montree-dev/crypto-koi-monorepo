@@ -16,11 +16,11 @@ import Animated, {
     withSpring,
 } from "react-native-reanimated";
 import { useTailwind } from "tailwind-rn";
-import { ACCEPT_PUSH_NOTIFICATIONS } from "../graphql/queries/user";
+import { ACCEPT_PUSH_NOTIFICATIONS } from "@crypto-koi/common/lib/graphql/queries/user";
 import {
     AcceptPushNotifications,
     AcceptPushNotificationsVariables,
-} from "../graphql/queries/__generated__/AcceptPushNotifications";
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/AcceptPushNotifications";
 import useAppState from "../hooks/useAppState";
 import { nativeUserService } from "../services/NativeUserService";
 import { DimensionUtils } from "../utils/DimensionUtils";

@@ -1,4 +1,5 @@
 import { createContext } from "react";
-import RootStore, { rootStore } from "./RootStore";
+import RootStore from "../../../../packages/common/lib/mobx/RootStore";
+import { nativeRootStore } from "./NativeRootStore";
 
-export const AppStateContext = createContext<RootStore>(rootStore);
+export const AppStateContext = createContext<RootStore>(nativeRootStore);

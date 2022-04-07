@@ -2,6 +2,11 @@ const withTM = require('next-transpile-modules')(['@crypto-koi/common'])
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({
+    webpack: (config, { isServer }) => {
+        // eslint-disable-next-line space-before-blocks
+
+        return config
+    },
     reactStrictMode: true,
     images: {
         domains: [

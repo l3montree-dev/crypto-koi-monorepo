@@ -2,7 +2,7 @@ import moment, { Moment } from "moment";
 import React, { useEffect, useState } from "react";
 import { Text, TextStyle } from "react-native";
 import { ticker } from "@crypto-koi/common/lib/Ticker";
-import TimeUtils from "../utils/TimeUtils";
+import TimeUtils from "@crypto-koi/common/lib/TimeUtils";
 
 interface Props {
     style?: TextStyle | TextStyle[];

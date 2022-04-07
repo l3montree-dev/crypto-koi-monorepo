@@ -6,7 +6,7 @@ import React, {
     useState,
 } from 'react'
 import { IGetYourKoiPB, IKoiMetadata } from '../cms/page'
-import CMSContent from '../components/CMSContent'
+import { CMSContent } from '../components/CMSContent'
 import Koi from '../components/Koi'
 import Section from '../components/Section'
 import { config } from '../config'

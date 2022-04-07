@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { FunctionComponent, useState } from 'react'
 import { IOnboardingPB } from '../cms/page'
-import CMSContent from '../components/CMSContent'
+import { CMSContent } from '../components/CMSContent'
 import Lightbox from '../components/Lightbox'
 import Section from '../components/Section'
 
@@ -44,22 +44,18 @@ const Onboarding: FunctionComponent<IOnboardingPB> = (props) => {
                                         <div
                                             onClick={() =>
                                                 setLightboxImg({
-                                                    alt:
-                                                        step.Image.data
-                                                            .attributes
-                                                            .alternativeText,
-                                                    width:
-                                                        step.Image.data
-                                                            .attributes.formats
-                                                            .medium.width,
-                                                    height:
-                                                        step.Image.data
-                                                            .attributes.formats
-                                                            .medium.height,
-                                                    src:
-                                                        step.Image.data
-                                                            .attributes.formats
-                                                            .medium.url,
+                                                    alt: step.Image.data
+                                                        .attributes
+                                                        .alternativeText,
+                                                    width: step.Image.data
+                                                        .attributes.formats
+                                                        .medium.width,
+                                                    height: step.Image.data
+                                                        .attributes.formats
+                                                        .medium.height,
+                                                    src: step.Image.data
+                                                        .attributes.formats
+                                                        .medium.url,
                                                     text: step.Text,
                                                 })
                                             }

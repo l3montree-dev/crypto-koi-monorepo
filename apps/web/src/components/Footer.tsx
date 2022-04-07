@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/react'
 import Image from 'next/image'
 import { FunctionComponent } from 'react'
 import { IFooter } from '../cms/page'
-import CMSContent from './CMSContent'
+import { CMSContent } from './CMSContent'
 
 interface Props extends IFooter {}
 

@@ -23,31 +23,37 @@ import {
     CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
     FETCH_EVENTS,
     GET_NFT_SIGNATURE,
-} from "../graphql/queries/cryptogotchi";
+} from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
 import {
     ChangeCryptogotchiName,
     ChangeCryptogotchiNameVariables,
-} from "../graphql/queries/__generated__/ChangeCryptogotchiName";
-import { ClientEvent } from "../graphql/queries/__generated__/ClientEvent";
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/ChangeCryptogotchiName";
+import { ClientEvent } from "@crypto-koi/common/lib/graphql/queries/__generated__/ClientEvent";
 import {
     FetchEvents,
     FetchEventsVariables,
-} from "../graphql/queries/__generated__/FetchEvents";
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchEvents";
 import {
     GetNftSignature,
     GetNftSignatureVariables,
-} from "../graphql/queries/__generated__/GetNftSignature";
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/GetNftSignature";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
 import { RootStackParamList } from "../hooks/useNavigation";
-import { selectCryptogotchi, selectThemeStore } from "../mobx/selectors";
-import { appEventEmitter } from "../services/AppEventEmitter";
+import { nativeEventEmitter } from "../services/NativeAppEventEmitter";
 import { nativeUserService } from "../services/NativeUserService";
 import { switchOrAddNetwork } from "../services/web3";
-import { newProvider as newWeb3Provider } from "@crypto-koi/common/lib/web3";
+import {
+    hexChainId2Number,
+    newProvider as newWeb3Provider,
+} from "@crypto-koi/common/lib/web3";
 import log from "../utils/logger";
 import ViewUtils from "../utils/ViewUtils";
 import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
+import {
+    selectThemeStore,
+    selectCryptogotchi,
+} from "@crypto-koi/common/lib/mobx/selectors";
 
 type Props = ClientEvent & { name: string; index: number };
 
@@ -202,7 +208,7 @@ const FriendEditModal = observer(() => {
 
         const provider = newWeb3Provider(connector, config.chain);
 
-        if (provider.chainId !== config.chain.networkId) {
+        if (provider.chainId !== hexChainId2Number(config.chain.chainId)) {
             // try to switch the network.
             // if this does not work, the user has to switch it manually.
             try {
@@ -210,7 +216,7 @@ const FriendEditModal = observer(() => {
             } catch (e) {
                 ViewUtils.toast(
                     "Please switch your wallet application to the " +
-                        config.chain.name +
+                        config.chain.chainName +
                         " network and restart the application"
                 );
                 setNftLoading(false);
@@ -238,12 +244,12 @@ const FriendEditModal = observer(() => {
                 result.data.getNftSignature.tokenId,
                 result.data.getNftSignature.signature
             );
-            appEventEmitter.emit("successfulRedeem", receipt);
+            nativeEventEmitter.emit("successfulRedeem", receipt);
             log.info("successful transaction - full refresh");
             await nativeUserService.sync();
         } catch (e) {
             log.error("transaction failed", e);
-            appEventEmitter.emit("failedRedeem", e);
+            nativeEventEmitter.emit("failedRedeem", e);
         } finally {
             setNftLoading(false);
         }
