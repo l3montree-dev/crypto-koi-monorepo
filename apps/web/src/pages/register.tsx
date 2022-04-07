@@ -1,11 +1,21 @@
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import {
+    Button,
+    FormControl,
+    FormErrorMessage,
+    FormHelperText,
+    FormLabel,
+    Input,
+} from '@chakra-ui/react'
 import { GetStaticPropsResult, NextPage } from 'next'
-import React from 'react'
+import React, { useState } from 'react'
 import { api } from '../cms/api'
 import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
-import { connectToWallet } from '../web3'
+import useInput from '../hooks/useInput'
+import { connectToWallet, WalletDescriptor } from '../web3'
+import Image from 'next/image'
+import { notEmpty, validEmail } from '@crypto-koi/common/lib/validators'
 
 interface Props {
     page: IPage
@@ -14,11 +24,20 @@ interface Props {
 }
 
 const Register: NextPage<Props> = (props) => {
+    const email = useInput({ validator: validEmail, initialState: '' })
+    const name = useInput({ validator: notEmpty, initialState: '' })
+    const [wallet, setWallet] = useState<{
+        address: string
+        descriptor: WalletDescriptor
+    } | null>(null)
+
     const handleConnectWallet = async () => {
         try {
-            console.log('ADDRESS', await connectToWallet())
+            const [address, descriptor] = await connectToWallet()
+            setWallet({ address, descriptor })
         } catch (e) {
-            console.log(e)
+            // TODO: Handle error
+            console.error(e)
         }
     }
     return (
@@ -35,29 +54,76 @@ const Register: NextPage<Props> = (props) => {
                         Registration
                     </h2>
 
-                    <FormControl className="pt-5">
+                    <FormControl isInvalid={name.isInvalid} className="pt-5">
+                        <FormLabel htmlFor="name">Username</FormLabel>
+                        <Input
+                            autoFocus
+                            errorBorderColor="cherry.500"
+                            id="name"
+                            type="string"
+                            variant="filled"
+                            {...name}
+                        />
+                        <FormHelperText>
+                            This name will be visible to other users.
+                        </FormHelperText>
+                        <FormErrorMessage>Name is required.</FormErrorMessage>
+                    </FormControl>
+                    <FormControl isInvalid={email.isInvalid} className="pt-5">
                         <FormLabel htmlFor="email">Email address</FormLabel>
                         <Input
+                            errorBorderColor="cherry.500"
                             placeholder="user@example.com"
                             id="email"
                             type="email"
+                            isRequired
                             variant="filled"
+                            {...email}
                         />
+                        <FormHelperText>
+                            We&apos;ll never share your email.
+                        </FormHelperText>
+                        <FormErrorMessage>Invalid Email.</FormErrorMessage>
                     </FormControl>
                     <div className="pt-5 flex-row flex">
                         <div className="flex-1">
-                            <Button onClick={handleConnectWallet} isFullWidth>
-                                Connect Wallet
-                            </Button>
-                        </div>
-
-                        <div className="flex-row text-sm pl-2 text-cherry flex items-center">
-                            <div className="h-2 mr-2 w-2 bg-cherry rounded-full" />
-                            <span>Wallet not connected</span>
+                            {wallet === null ? (
+                                <Button
+                                    onClick={handleConnectWallet}
+                                    isFullWidth
+                                >
+                                    Connect Wallet
+                                </Button>
+                            ) : (
+                                <Button
+                                    leftIcon={
+                                        <Image
+                                            width={30}
+                                            height={30}
+                                            alt={wallet.descriptor.name}
+                                            src={wallet.descriptor.iconUrl}
+                                        />
+                                    }
+                                    isFullWidth
+                                    className="rounded-lg"
+                                >
+                                    <span>
+                                        Connected with {wallet.descriptor.name}
+                                    </span>
+                                </Button>
+                            )}
                         </div>
                     </div>
-                    <div className="pt-5">
-                        <Button isFullWidth colorScheme={'cherry'}>
+                    <div className="pt-3">
+                        <Button
+                            disabled={
+                                wallet === null ||
+                                email.isInvalid ||
+                                name.isInvalid
+                            }
+                            isFullWidth
+                            colorScheme={'cherry'}
+                        >
                             Get your CryptoKoi
                         </Button>
                     </div>
