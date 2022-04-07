@@ -30,7 +30,7 @@ import Wave from "../../components/Wave";
 import { config } from "../../config";
 import { useFloating } from "../../hooks/useFloating";
 import { nativeUserService } from "../../services/NativeUserService";
-import { Colors } from "../../styles/colors";
+import { Colors, CustomColors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
 
@@ -47,14 +47,15 @@ const style = StyleSheet.create({
     svg: {
         height: DimensionUtils.deviceWidth,
         width: DimensionUtils.deviceWidth,
+        color: CustomColors.waves,
     },
     rotatedSvg: {
         transform: [{ rotate: "180deg" }],
     },
     img: {
         // maxHeight: 400,
-        width: 200,
-        height: 400,
+        width: 400,
+        height: 420,
 
         aspectRatio: 1,
         top: 0,
@@ -87,7 +88,7 @@ function OnboardingScreen() {
                     translateX: withSpring(
                         (scrollPosition.value /
                             (DimensionUtils.deviceWidth * 3)) *
-                            79
+                        79
                     ),
                 },
             ],
@@ -172,18 +173,17 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={tailwind("flex-1 bg-soft-500")}>
+        <View style={[{ backgroundColor: CustomColors.bgDark }, tailwind("flex-1"),]}>
             <View style={tailwind("absolute -top-20")}>
                 <Wave
                     svgStyle={[
-                        tailwind("text-cherry-500"),
                         style.svg,
                         style.rotatedSvg,
                     ]}
                 />
             </View>
             <View style={tailwind("absolute -bottom-20")}>
-                <Wave svgStyle={[style.svg, tailwind("text-cherry-500")]} />
+                <Wave svgStyle={style.svg} />
             </View>
             <ScrollView
                 decelerationRate={"fast"}
@@ -208,14 +208,14 @@ function OnboardingScreen() {
                     </View>
                     <Text
                         style={tailwind(
-                            "mt-10 text-4xl font-bold text-sea text-center"
+                            "mt-10 text-4xl font-bold text-white text-center"
                         )}
                     >
                         Welcome
                     </Text>
                     <Text
                         style={tailwind(
-                            "text-lg text-sea-500 mt-5 px-10 text-center"
+                            "text-lg text-white mt-5 px-10 text-center"
                         )}
                     >
                         Grow the oldest and rarest koi inside the blockchain
@@ -232,7 +232,7 @@ function OnboardingScreen() {
                             <Animated.Text
                                 entering={FadeIn}
                                 style={tailwind(
-                                    "text-4xl font-bold text-sea-500 text-center mb-5"
+                                    "text-4xl font-bold text-white text-center mb-5"
                                 )}
                             >
                                 Keep your Koi alive
@@ -247,7 +247,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(500)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-cherry-500")}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
                                     name="food-apple"
                                 />
 
@@ -300,7 +300,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(1000)}
                             >
                                 <Icon
-                                    style={tailwind("text-4xl text-cherry-500")}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
                                     name="heart"
                                 />
                                 <View style={tailwind("ml-5")}>
@@ -329,13 +329,13 @@ function OnboardingScreen() {
                         <Animated.View entering={FadeIn}>
                             <Text
                                 style={tailwind(
-                                    "text-sea text-4xl font-bold text-center mb-5"
+                                    "text-white text-4xl font-bold text-center mb-5"
                                 )}
                             >
                                 Make it an NFT
                             </Text>
                             <Text
-                                style={tailwind("text-sea text-lg text-center")}
+                                style={tailwind("text-white text-lg text-center")}
                             >
                                 To never loose your friend again you can make
                                 him unique by putting him in an NFT
@@ -378,7 +378,7 @@ function OnboardingScreen() {
                             <View style={tailwind("mt-4")}>
                                 <AppButton
                                     backgroundColor={
-                                        tailwind("text-sea-500").color as string
+                                        CustomColors.onBgDark
                                     }
                                     disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
                                     textColor="white"
