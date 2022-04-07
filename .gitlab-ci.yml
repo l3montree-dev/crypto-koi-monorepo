@@ -1,10 +1,14 @@
 # Parent gitlab pipeline 
+stages:
+  - initial
 
 apps_web: 
-  trigger: 
+  stage: initial
+  trigger:
     include: apps/web/.gitlab-ci.yml
 
 apps_native: 
+  stage: initial
   trigger: 
     include: apps/native/.gitlab-ci.yml
 
