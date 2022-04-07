@@ -8,9 +8,9 @@ export function newProvider(
 ): WalletConnectProvider {
     return new WalletConnectProvider({
         rpc: {
-            [parseInt(network.chainId.substring(2), 16)]: network.rpcUrls[0],
+            [hexChainId2Number(network.chainId)]: network.rpcUrls[0],
         },
-        chainId: parseInt(network.chainId.substring(2), 16),
+        chainId: hexChainId2Number(network.chainId),
         connector: connector,
     });
 }

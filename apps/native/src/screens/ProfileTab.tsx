@@ -28,6 +28,7 @@ import { commonStyles } from "../styles/commonStyles";
 import ViewUtils from "../utils/ViewUtils";
 import { useNavigation } from "../hooks/useNavigation";
 import { nativeUserService } from "../services/NativeUserService";
+import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
 
 const style = StyleSheet.create({
     header: {
@@ -61,10 +62,10 @@ export const ProfileTab = observer(() => {
     const handleConnectWallet = async () => {
         const provider = new WalletConnectProvider({
             rpc: {
-                [parseInt(config.chain.chainId.substring(2), 16)]: config.chain
+                [hexChainId2Number(config.chain.chainId)]: config.chain
                     .rpcUrls[0],
             },
-            chainId: parseInt(config.chain.chainId.substring(2), 16),
+            chainId: hexChainId2Number(config.chain.chainId),
             connector: connector,
             qrcode: false,
         });

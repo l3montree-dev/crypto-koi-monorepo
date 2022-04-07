@@ -1,27 +1,29 @@
 {
-    "name": "@crypto-koi/common",
-    "version": "0.1.0",
-    "description": "Common code for the web and native client",
-    "author": "\"\"timbastin\"\" <\"\"bastin.tim@gmail.com\"\">",
-    "homepage": "",
-    "license": "ISC",
-    "main": "lib/index.ts",
-    "publishConfig": {
-        "access": "public"
-    },
-    "scripts": {
-        "dev": "tsc --watch",
-        "build": "tsc",
-        "test": "echo \"Error: run tests from root\" && exit 1"
-    },
-    "dependencies": {
-        "@apollo/client": "^3.5.10",
-        "@walletconnect/react-native-dapp": "^1.7.7",
-        "@walletconnect/web3-provider": "^1.7.7",
-        "axios": "^0.26.1",
-        "typescript": "^4.6.3"
-    },
-    "devDependencies": {
-        "jest": "^27.5.1"
-    }
+  "name": "@crypto-koi/common",
+  "version": "0.1.0",
+  "description": "Common code for the web and native client",
+  "author": "\"\"timbastin\"\" <\"\"bastin.tim@gmail.com\"\">",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.5.10",
+    "@walletconnect/react-native-dapp": "^1.7.7",
+    "@walletconnect/web3-provider": "^1.7.7",
+    "axios": "^0.26.1",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1"
+  }
 }

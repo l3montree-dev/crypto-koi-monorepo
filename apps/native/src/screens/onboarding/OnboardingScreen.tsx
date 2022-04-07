@@ -1,3 +1,4 @@
+import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import * as NavigationBar from "expo-navigation-bar";
@@ -105,9 +106,9 @@ function OnboardingScreen() {
 
         const provider = new WalletConnectProvider({
             rpc: {
-                [parseInt(config.chain.chainId.substring(2), 16)]: config.chain.rpcUrls[0],
+                [hexChainId2Number(config.chain.chainId)]: config.chain.rpcUrls[0],
             },
-            chainId: parseInt(config.chain.chainId.substring(2), 16),
+            chainId: hexChainId2Number(config.chain.chainId),
             connector: connector,
             qrcode: false,
         });
