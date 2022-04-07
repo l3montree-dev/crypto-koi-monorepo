@@ -65,6 +65,20 @@ const style = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "flex-start",
     },
+    dragon: {
+        // maxHeight: 400,
+        width: 440,
+        height: 440,
+
+        aspectRatio: 1,
+        top: 0,
+        right: 40,
+        //backgroundColor: "red",
+
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+    },
     listItem: {
         backgroundColor: "rgb(255,255,255)",
         // elevation: 1,
@@ -150,7 +164,7 @@ function OnboardingScreen() {
     };
 
     const handleNext = () => {
-        if (activeSlide === 2) {
+        if (activeSlide === 3) {
             if (agreedToTermsOfUse && agreedToPrivacyPolicy) {
                 return handlePlayWithoutWalletPress();
             } else {
@@ -320,12 +334,44 @@ function OnboardingScreen() {
                 <View
                     style={[
                         style.slide,
+                        tailwind("flex-1 px-4 justify-center"),
+                    ]}
+                >
+                    {activeSlide === 2 && (<>
+                        <View>
+                            <RNAnimated.View style={{ translateX, translateY }}>
+                                <Image
+                                    style={style.dragon}
+                                    resizeMode="contain"
+                                    source={require("../../../assets/image/dragon.png")}
+                                />
+                            </RNAnimated.View>
+                        </View>
+                        <Text
+                            style={tailwind(
+                                "mt-10 text-4xl font-bold text-white text-center"
+                            )}
+                        >
+                            Proof your determination
+                        </Text>
+                        <Text
+                            style={tailwind(
+                                "text-lg text-white mt-5 px-10 text-center"
+                            )}
+                        >
+                            Let your Koi evolve into a dragon
+                        </Text>
+                    </>)}
+                </View>
+                <View
+                    style={[
+                        style.slide,
                         tailwind(
                             "flex-col flex-1 justify-center px-4 items-center"
                         ),
                     ]}
                 >
-                    {activeSlide === 2 && (
+                    {activeSlide === 3 && (
                         <Animated.View entering={FadeIn}>
                             <Text
                                 style={tailwind(
@@ -400,7 +446,7 @@ function OnboardingScreen() {
                 </TouchableNativeFeedback>
 
                 <View style={tailwind("flex-row")}>
-                    {[0, 1, 2].map((_, index) => (
+                    {[0, 1, 2, 3].map((_, index) => (
                         <View
                             key={index}
                             style={[
@@ -420,7 +466,7 @@ function OnboardingScreen() {
                 <TouchableNativeFeedback onPress={handleNext}>
                     <View style={tailwind("py-4 m-2 px-10 rounded-lg")}>
                         <Text style={tailwind("text-white")}>
-                            {activeSlide === 2 ? "Play" : "Next"}
+                            {activeSlide === 3 ? "Play" : "Next"}
                         </Text>
                     </View>
                 </TouchableNativeFeedback>
