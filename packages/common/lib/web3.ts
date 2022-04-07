@@ -15,6 +15,16 @@ export function newProvider(
     });
 }
 
+export const hexChainId2Number = (chainId: string): number => {
+    // example chain id = "0x1683"
+    return parseInt(chainId.substring(2), 16);
+}
+
+export const chainId2Hex = (chainId: number): string => {
+    // example chain id = "80001"
+    return "0x" + chainId.toString(16);
+}
+
 
 type LogFn = (...args: Array<string | number>) => void;
 export const switchOrAddNetworkFactory = (log: {warn: LogFn, info: LogFn, error: LogFn}, timeout = 5000) => (
