@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { config } from "../config";
-import Cryptogotchi from "../mobx/Cryptogotchi";
+import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
 import { ticker } from "@crypto-koi/common/lib/Ticker";
 import { ProgressButton } from "./ProgressButton";
 

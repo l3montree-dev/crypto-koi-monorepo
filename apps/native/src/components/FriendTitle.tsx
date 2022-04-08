@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
-import Cryptogotchi from "../mobx/Cryptogotchi";
+import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
 
 interface Props {
     cryptogotchi: Cryptogotchi;
