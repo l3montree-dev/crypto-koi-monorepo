@@ -3,8 +3,11 @@
 web: install
 	yarn workspace @crypto-koi/web dev
 
-native: install
+native-android: install
 	yarn workspace @crypto-koi/native android
+
+native-ios: install
+	yarn workspace @crypto-koi/native ios
 
 native-start: install
 	yarn workspace @crypto-koi/native start

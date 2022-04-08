@@ -16,6 +16,8 @@ import { FETCH_LEADERBOARD } from "@crypto-koi/common/lib/graphql/queries/crypto
 import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
 import useAppState from "../hooks/useAppState";
 import { commonStyles } from "../styles/commonStyles";
+import { CustomColors } from "../styles/colors";
+import GradientBackground from "../components/GradientBackground";
 
 const style = StyleSheet.create({
     header: {
@@ -35,24 +37,16 @@ const Leaderboard = observer(() => {
     const themeStore = useAppState((rootStore) => rootStore.themeStore);
 
     return (
-        <SafeAreaView
-            style={[
-                tailwind("flex-1 flex-col"),
-                { backgroundColor: themeStore.backgroundColor },
-            ]}
-        >
-            <StatusBar
-                barStyle={
-                    themeStore.secondaryIsDark
-                        ? "light-content"
-                        : "dark-content"
-                }
-            />
+        <SafeAreaView style={tailwind("flex-1 flex-col")}>
+            <StatusBar barStyle={"light-content"} />
+            <View style={tailwind("absolute")}>
+                <GradientBackground inSafeAreaView={true} />
+            </View>
             <View
                 style={[
                     tailwind("px-4 pb-3"),
                     style.header,
-                    { backgroundColor: themeStore.secondaryColor },
+                    { backgroundColor: CustomColors.bgDark },
                 ]}
             >
                 <View style={tailwind("mt-3")}>

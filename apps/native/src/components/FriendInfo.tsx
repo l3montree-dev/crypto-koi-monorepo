@@ -1,7 +1,7 @@
 import * as Clipboard from "expo-clipboard";
 import { observer } from "mobx-react-lite";
 import React, { useMemo } from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { config } from "../config";
@@ -15,6 +15,15 @@ interface Props {
     clockId: string;
     textColor: string;
 }
+
+const style = StyleSheet.create({
+    colorListing: {
+        backgroundColor: "rgba(255,255,255,0.06)",
+    },
+    colorBorder: {
+        borderColor: "white",
+    },
+});
 
 const FriendInfo = observer((props: Props) => {
     const { cryptogotchi } = props;
@@ -41,83 +50,95 @@ const FriendInfo = observer((props: Props) => {
         <View>
             <View style={tailwind("flex-row pb-4 justify-between")}>
                 <View
-                    style={tailwind(
-                        "p-1 pt-2 bg-white flex-1 flex-col mr-1 items-center rounded-lg"
-                    )}
+                    style={[
+                        tailwind(
+                            "p-1 pt-2 flex-1 flex-col mr-1 items-center rounded-lg"
+                        ),
+                        style.colorListing,
+                    ]}
                 >
                     <View
                         style={[
-                            tailwind(
-                                "w-10 border-2 border-neutral-500 rounded-lg mb-1 h-10"
-                            ),
+                            tailwind("w-10 border-2 rounded-lg mb-1 h-10"),
                             {
                                 backgroundColor:
                                     cryptogotchi.attributes.primaryColor,
                             },
+                            style.colorBorder,
                         ]}
                     />
-                    <Text style={tailwind("text-black text-xs")}>
+                    <Text style={tailwind("text-white text-xs")}>
                         {cryptogotchi.attributes.primaryColor}
                     </Text>
                 </View>
 
                 <View
-                    style={tailwind(
-                        "p-1 pt-2 bg-white flex-1 mx-2 flex-col items-center rounded-lg"
-                    )}
+                    style={[
+                        tailwind(
+                            "p-1 pt-2 flex-1 flex-col mr-1 items-center rounded-lg"
+                        ),
+                        style.colorListing,
+                    ]}
                 >
                     <View
                         style={[
-                            tailwind(
-                                "w-10 border-2 border-neutral-500 rounded-lg mb-1 h-10"
-                            ),
+                            tailwind("w-10 border-2 rounded-lg mb-1 h-10"),
                             {
                                 backgroundColor:
                                     cryptogotchi.attributes.bodyColor,
                             },
+                            style.colorBorder,
                         ]}
                     />
-                    <Text style={tailwind("text-black text-xs text-center")}>
+                    <Text style={tailwind("text-white text-xs text-center")}>
                         {cryptogotchi.attributes.bodyColor}
                     </Text>
                 </View>
 
                 <View
-                    style={tailwind(
-                        "p-1 pt-2 bg-white flex-1 mx-2 flex-col items-center rounded-lg"
-                    )}
+                    style={[
+                        tailwind(
+                            "p-1 pt-2 flex-1 flex-col mr-1 items-center rounded-lg"
+                        ),
+                        style.colorListing,
+                    ]}
                 >
                     <View
                         style={[
-                            tailwind(
-                                "w-10 border-2 border-neutral-500 rounded-lg mb-1 h-10"
-                            ),
+                            tailwind("w-10 border-2 rounded-lg mb-1 h-10"),
                             {
                                 backgroundColor:
                                     cryptogotchi.attributes.finColor,
                             },
+                            style.colorBorder,
                         ]}
                     />
-                    <Text style={tailwind("text-black text-xs text-center")}>
+                    <Text style={tailwind("text-white text-xs text-center")}>
                         {cryptogotchi.attributes.finColor}{" "}
                     </Text>
                 </View>
 
                 <View
-                    style={tailwind(
-                        "p-1 pt-2 bg-white flex-1 ml-1 flex-col items-center rounded-lg"
-                    )}
+                    style={[
+                        tailwind(
+                            "p-1 pt-2 flex-1 flex-col mr-1 items-center rounded-lg"
+                        ),
+                        style.colorListing,
+                    ]}
                 >
                     <View
-                        style={tailwind(
-                            "w-10 rounded-lg border-2 border-neutral-500 mb-1 flex-row items-center justify-center h-10"
-                        )}
+                        style={[
+                            tailwind(
+                                "w-10 rounded-lg border-2 mb-1 flex-row items-center justify-center h-10"
+                            ),
+                            style.colorBorder,
+                        ]}
                     >
-                        <Text style={tailwind("font-bold text-lg")}>
+                        <Text style={tailwind("font-bold text-lg text-white")}>
                             {cryptogotchi.attributes.patternQuantity}
                         </Text>
                     </View>
-                    <Text style={tailwind("text-black text-xs text-center")}>
+                    <Text style={tailwind("text-white text-xs text-center")}>
                         Patterns
                     </Text>
                 </View>

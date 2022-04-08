@@ -69,7 +69,7 @@ const FriendsScreen = observer(() => {
                     translateX: withSpring(
                         (scrollPosition.value /
                             (DimensionUtils.deviceWidth * 3)) *
-                        79
+                            79
                     ),
                 },
             ],

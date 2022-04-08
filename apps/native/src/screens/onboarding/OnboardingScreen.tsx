@@ -199,7 +199,7 @@ function OnboardingScreen() {
                 <Wave svgStyle={style.svg} />
                 </View>*/}
             <View style={tailwind("absolute")}>
-                <GradientBackground />
+                <GradientBackground inSafeAreaView={false} />
             </View>
             <ScrollView
                 decelerationRate={"fast"}

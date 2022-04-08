@@ -32,6 +32,7 @@ import ViewUtils from "../utils/ViewUtils";
 import { useNavigation } from "../hooks/useNavigation";
 import { nativeUserService } from "../services/NativeUserService";
 import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
+import { CustomColors } from "../styles/colors";
 
 const style = StyleSheet.create({
     header: {
@@ -120,14 +121,14 @@ export const ProfileTab = observer(() => {
         <SafeAreaView
             style={[
                 tailwind("flex-1 flex-col"),
-                { backgroundColor: themeStore.secondaryColor },
+                { backgroundColor: CustomColors.bgDark },
             ]}
         >
             <View
                 style={[
                     tailwind("px-4 mt-3 pb-3"),
                     style.header,
-                    { backgroundColor: themeStore.secondaryColor },
+                    { backgroundColor: CustomColors.bgDark },
                 ]}
             >
                 <Text style={[commonStyles.screenTitle, tailwind("pt-1"), c]}>
@@ -249,9 +250,9 @@ export const ProfileTab = observer(() => {
                                 size={24}
                                 style={tailwind("mr-2 opacity-75")}
                                 name="delete-outline"
-                                color={themeStore.buttonTextColor}
+                                color={CustomColors.waves}
                             />
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text style={{ color: CustomColors.waves }}>
                                 Delete account
                             </Text>
                         </View>
