@@ -11,8 +11,6 @@ PODS:
     - ExpoModulesCore
   - EXDevice (4.1.1):
     - ExpoModulesCore
-  - EXErrorRecovery (3.0.5):
-    - ExpoModulesCore
   - EXFileSystem (13.1.4):
     - ExpoModulesCore
   - EXFont (10.0.5):
@@ -33,7 +31,7 @@ PODS:
     - ExpoModulesCore
     - React-Core
   - EXStructuredHeaders (2.1.1)
-  - EXUpdates (0.11.6):
+  - EXUpdates (0.11.7):
     - EXManifests
     - ExpoModulesCore
     - EXStructuredHeaders
@@ -320,7 +318,7 @@ PODS:
     - React-Core
   - RNCMaskedView (0.2.6):
     - React-Core
-  - RNReanimated (2.3.2):
+  - RNReanimated (2.3.3):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -351,16 +349,16 @@ PODS:
   - RNScreens (3.10.2):
     - React-Core
     - React-RCTImage
-  - RNSentry (3.3.3):
+  - RNSentry (3.4.0):
     - React-Core
-    - Sentry (= 7.10.2)
+    - Sentry (= 7.11.0)
   - RNSVG (9.6.4):
     - React
   - RNVectorIcons (9.1.0):
     - React-Core
-  - Sentry (7.10.2):
-    - Sentry/Core (= 7.10.2)
-  - Sentry/Core (7.10.2)
+  - Sentry (7.11.0):
+    - Sentry/Core (= 7.11.0)
+  - Sentry/Core (7.11.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -370,7 +368,6 @@ DEPENDENCIES:
   - EXClipboard (from `../node_modules/expo-clipboard/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXDevice (from `../node_modules/expo-device/ios`)
-  - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
@@ -443,8 +440,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-constants/ios"
   EXDevice:
     :path: "../node_modules/expo-device/ios"
-  EXErrorRecovery:
-    :path: "../node_modules/expo-error-recovery/ios"
   EXFileSystem:
     :path: "../node_modules/expo-file-system/ios"
   EXFont:
@@ -556,7 +551,6 @@ SPEC CHECKSUMS:
   EXClipboard: 8123fcda680538bb0e1f4e6511106553e52d3760
   EXConstants: 88bf79622fbd9b476c96d8ec57fe97ca44fe8e3c
   EXDevice: aa5e1edbf350481a948c3258b750dd11e6e4579e
-  EXErrorRecovery: b0d7582714a2cc896e94a2308a356f94dbf14ef7
   EXFileSystem: 08a3033ac372b6346becf07839e1ccef26fb1058
   EXFont: 2597c10ac85a69d348d44d7873eccf5a7576ef5e
   EXJSONUtils: 5ee0d5cf76da70ad86f0be1a41cc70f47d69e06f
@@ -567,10 +561,10 @@ SPEC CHECKSUMS:
   EXSecureStore: b80c74c5ee29d0160c2aace3fd9a24a5edc20015
   EXSplashScreen: 21669e598804ee810547dbb6692c8deb5dd8dbf3
   EXStructuredHeaders: 4993087b2010dbcc510f5d92555b36f523425e8d
-  EXUpdates: bd5fa64f02685ed3e96be86b5ca350cdc2cd8d02
+  EXUpdates: a83e036243b0f6ece53a8c1cb883b6751c88a5f8
   EXUpdatesInterface: a9814f422d3cd6e7cfd260d13c27786148ece20e
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: 27b46c59230235a94b3cb8de4cc3c40cf41fdcdc
+  FBReactNativeSpec: 1869ba08033ec63cb214cf26745384f91ff02032
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: d34bf57e17cb6e3b2681f4809b13843c021feb6c
@@ -602,12 +596,12 @@ SPEC CHECKSUMS:
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
   RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
-  RNReanimated: db6fc1362254dfd18b4ef5f921af9bb72b2e42d0
+  RNReanimated: 0e5ef4a7e4e79f84efbe5b40771c31044c51e7d0
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
-  RNSentry: e18c74a900defb174302793c5bedbbe8bcb1120e
+  RNSentry: ec3c033c13bcb65c79f19d54ca54c514d1832bb5
   RNSVG: a53a5de0d90ec96a6502cc3a4534dfcc0c130622
   RNVectorIcons: 7923e585eaeb139b9f4531d25a125a1500162a0b
-  Sentry: 7bf9bfe713692cf87812e55f0999260494ba7982
+  Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
 
 PODFILE CHECKSUM: 0e9caf2101d921b71fce2298e1ecd6390143c284

@@ -44,6 +44,8 @@ import {
 import ThemeStore from "@crypto-koi/common/lib/mobx/ThemeStore";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import ViewUtils from "../utils/ViewUtils";
+import { CustomColors } from "../styles/colors";
+import GradientBackground from "../components/GradientBackground";
 
 const style = StyleSheet.create({
     img: {
@@ -152,21 +154,6 @@ const CryptogotchiView = observer((props: Props) => {
         [currentUserIsOwner]
     );
 
-    const {
-        backgroundColor,
-        secondaryColor,
-        onBackground,
-        onSecondary,
-        buttonBackgroundColor,
-        buttonTextColor,
-        buttonProgressUnfilled,
-        buttonProgressFilled,
-        heartColor,
-        backgroundIsDark,
-    } = useMemo(() => {
-        return ThemeStore.calculateColorVariants(cryptogotchi.color);
-    }, [cryptogotchi.color]);
-
     const copyTokenId = () => {
         Clipboard.setString(cryptogotchi.getUint256);
         ViewUtils.toast("Copied");
@@ -183,12 +170,11 @@ const CryptogotchiView = observer((props: Props) => {
     });
 
     return (
-        <SafeAreaView
-            style={[tailwind("flex-1 flex-col"), { backgroundColor }]}
-        >
-            <StatusBar
-                barStyle={backgroundIsDark ? "light-content" : "dark-content"}
-            />
+        <SafeAreaView style={tailwind("flex-1 flex-col")}>
+            <StatusBar barStyle={"light-content"} />
+            <View style={tailwind("absolute")}>
+                <GradientBackground inSafeAreaView={true} />
+            </View>
 
             <ScrollView
                 refreshControl={
@@ -214,8 +200,10 @@ const CryptogotchiView = observer((props: Props) => {
                             <View>
                                 <Pressable onPress={handleFeed}>
                                     <Lifetime
-                                        heartColor={heartColor}
-                                        onBackgroundColor={onBackground}
+                                        heartColor={CustomColors.heartColor}
+                                        onBackgroundColor={
+                                            CustomColors.onBackground
+                                        }
                                         clockId={
                                             props.clockIdPrefix +
                                             cryptogotchi.id +
@@ -237,7 +225,8 @@ const CryptogotchiView = observer((props: Props) => {
                                         "mb-2 flex-1 px-2 py-2 flex items-center rounded-lg w-24"
                                     ),
                                     {
-                                        backgroundColor: heartColor,
+                                        backgroundColor:
+                                            CustomColors.heartColor,
                                     },
                                 ]}
                             >
@@ -247,7 +236,9 @@ const CryptogotchiView = observer((props: Props) => {
                                     )}
                                 >
                                     <Icon
-                                        style={{ color: onSecondary }}
+                                        style={{
+                                            color: CustomColors.onSecondary,
+                                        }}
                                         name="trophy"
                                         size={14}
                                     />
@@ -255,7 +246,7 @@ const CryptogotchiView = observer((props: Props) => {
                                         numberOfLines={1}
                                         ellipsizeMode="middle"
                                         style={[
-                                            { color: onSecondary },
+                                            { color: CustomColors.onSecondary },
                                             tailwind("ml-1 text-xs"),
                                         ]}
                                     >
@@ -273,7 +264,8 @@ const CryptogotchiView = observer((props: Props) => {
                                         "pr-2 mb-5 flex-1 flex items-center rounded-lg w-24"
                                     ),
                                     {
-                                        backgroundColor: heartColor,
+                                        backgroundColor:
+                                            CustomColors.heartColor,
                                     },
                                 ]}
                             >
@@ -289,12 +281,16 @@ const CryptogotchiView = observer((props: Props) => {
                                         <Text
                                             numberOfLines={1}
                                             ellipsizeMode="middle"
-                                            style={{ color: onSecondary }}
+                                            style={{
+                                                color: CustomColors.onSecondary,
+                                            }}
                                         >
                                             #{cryptogotchi.getUint256}
                                         </Text>
                                         <Icon
-                                            style={{ color: onSecondary }}
+                                            style={{
+                                                color: CustomColors.onSecondary,
+                                            }}
                                             name="content-copy"
                                         />
                                     </View>
@@ -326,7 +322,7 @@ const CryptogotchiView = observer((props: Props) => {
                             tailwind("right-0 flex-row bottom-40 absolute"),
                         ]}
                     >
-                        <Text style={{ color: onBackground }}>
+                        <Text style={{ color: CustomColors.onBackground }}>
                             Artwork by:{" "}
                         </Text>
 
@@ -337,13 +333,13 @@ const CryptogotchiView = observer((props: Props) => {
                                 );
                             }}
                         >
-                            <Text style={{ color: onBackground }}>
+                            <Text style={{ color: CustomColors.onBackground }}>
                                 &#64;tamxily.tattoo
                             </Text>
                         </Pressable>
                     </View>
 
-                    <View style={tailwind("flex-row relative justify-center")}>
+                    {/*<View style={tailwind("flex-row relative justify-center")}>
                         <Svg width={150} height={75}>
                             <AnimatedEllipse
                                 rx={RNAnimated.diffClamp(
@@ -354,23 +350,17 @@ const CryptogotchiView = observer((props: Props) => {
                                 ry={10}
                                 cx="75"
                                 cy="25"
-                                fill="rgba(0,0,0,0.2)"
+                                fill="rgba(0,0,0,0.8)"
                             />
                         </Svg>
-                    </View>
+                                </View>*/}
                 </View>
 
-                <View
-                    style={[
-                        tailwind("flex-col px-4 justify-end pt-4"),
-                        style.bg,
-                        { backgroundColor: secondaryColor },
-                    ]}
-                >
+                <View style={tailwind("flex-col px-4 justify-end pt-4")}>
                     <View style={tailwind("flex-row mb-4 justify-between")}>
                         {cryptogotchi && (
                             <FriendTitle
-                                textColor={onSecondary}
+                                textColor={CustomColors.onSecondary}
                                 cryptogotchi={cryptogotchi}
                             />
                         )}
@@ -379,7 +369,7 @@ const CryptogotchiView = observer((props: Props) => {
                                 style={tailwind("rounded-lg overflow-hidden")}
                             >
                                 <IconButton
-                                    color={onSecondary}
+                                    color={CustomColors.onSecondary}
                                     disabled={!cryptogotchi}
                                     onPress={() => {
                                         if (!cryptogotchi) {
@@ -399,7 +389,7 @@ const CryptogotchiView = observer((props: Props) => {
 
                     {cryptogotchi && (
                         <FriendInfo
-                            textColor={onSecondary}
+                            textColor={CustomColors.onSecondary}
                             clockId={
                                 props.clockIdPrefix +
                                 cryptogotchi.id +
@@ -415,14 +405,18 @@ const CryptogotchiView = observer((props: Props) => {
                 <View
                     style={[
                         tailwind("pt-4 px-4 pb-8"),
-                        { backgroundColor: secondaryColor },
+                        { backgroundColor: CustomColors.onSecondary },
                     ]}
                 >
                     <NextFeedButton
-                        buttonBackgroundColor={buttonBackgroundColor}
-                        buttonTextColor={buttonTextColor}
-                        buttonProgressUnfilled={buttonProgressUnfilled}
-                        buttonProgressFilled={buttonProgressFilled}
+                        buttonBackgroundColor={
+                            CustomColors.buttonBackgroundColor
+                        }
+                        buttonTextColor={CustomColors.buttonTextColor}
+                        buttonProgressUnfilled={
+                            CustomColors.buttonProgressUnfilled
+                        }
+                        buttonProgressFilled={CustomColors.buttonProgressFilled}
                         disabled={!cryptogotchi.isAlive}
                         loading={loading}
                         clockId={

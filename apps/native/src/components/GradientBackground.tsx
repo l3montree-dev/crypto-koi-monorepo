@@ -4,7 +4,11 @@ import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
 import { CustomColors } from "../styles/colors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 
-const Wave: FunctionComponent = () => {
+interface Props {
+    inSafeAreaView: boolean;
+}
+
+const GradientBackground: FunctionComponent<Props> = (props) => {
     return (
         <View pointerEvents={"none"}>
             <Svg
@@ -15,14 +19,16 @@ const Wave: FunctionComponent = () => {
                     <LinearGradient
                         id="Gradient"
                         x1="0%"
-                        y1="100"
+                        y1={props.inSafeAreaView ? "10%" : "100"}
                         x2="200%"
-                        y2="200%"
+                        y2={props.inSafeAreaView ? "150%" : "200%"}
                     >
                         <Stop
                             offset="0%"
-                            stopColor="white"
-                            stopOpacity="0.05"
+                            stopColor={
+                                props.inSafeAreaView ? "#101A33" : "white"
+                            }
+                            stopOpacity={props.inSafeAreaView ? 1 : 0.05}
                         />
                         <Stop
                             offset="25%"
@@ -31,8 +37,12 @@ const Wave: FunctionComponent = () => {
                         />
                         <Stop
                             offset="500%"
-                            stopColor={CustomColors.waves}
-                            stopOpacity="0.35"
+                            stopColor={
+                                props.inSafeAreaView
+                                    ? "#331019"
+                                    : CustomColors.waves
+                            }
+                            stopOpacity={props.inSafeAreaView ? "1" : "0.35"}
                         />
                     </LinearGradient>
                 </Defs>
@@ -48,4 +58,4 @@ const Wave: FunctionComponent = () => {
     );
 };
 
-export default Wave;
+export default GradientBackground;

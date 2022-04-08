@@ -22,6 +22,7 @@ import { android_ripple } from "../styles/commonStyles";
 import Transformer from "@crypto-koi/common/lib/Transformer";
 import CircularProgress from "./CircularProgress";
 import Clock from "./Clock";
+import { CustomColors } from "../styles/colors";
 
 const style = StyleSheet.create({
     img: {
@@ -34,7 +35,7 @@ const style = StyleSheet.create({
     },
     wrapper: {
         borderBottomWidth: 1,
-        borderBottomColor: "rgba(0,0,0,0.2)",
+        borderBottomColor: "rgba(255,255,255,0.1)",
     },
 });
 
@@ -88,7 +89,8 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                         <View
                             style={[
                                 {
-                                    backgroundColor: themeStore.secondaryColor,
+                                    backgroundColor:
+                                        CustomColors.secondaryColor,
                                 },
                                 tailwind(
                                     "absolute -left-2 top-0 z-10 px-2 py-1  flex-row justify-center rounded-full"
@@ -97,7 +99,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                         >
                             <Text
                                 style={[
-                                    { color: themeStore.onSecondary },
+                                    { color: CustomColors.onSecondary },
                                     tailwind("text-xs"),
                                 ]}
                             >
@@ -123,7 +125,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                             <Text
                                 style={[
                                     tailwind("mb-0"),
-                                    { color: themeStore.onBackground },
+                                    { color: CustomColors.onSecondary },
                                 ]}
                             >
                                 {props.name}
@@ -132,7 +134,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                 numberOfLines={1}
                                 ellipsizeMode="middle"
                                 style={[
-                                    { color: themeStore.onBackground },
+                                    { color: CustomColors.onBackground },
                                     tailwind("opacity-75 w-4/5 text-xs mb-1"),
                                 ]}
                             >
@@ -148,7 +150,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                         style={[
                                             {
                                                 backgroundColor:
-                                                    themeStore.secondaryColor,
+                                                    CustomColors.secondaryColor,
                                             },
                                             tailwind(
                                                 "flex-row items-center px-2 rounded-full"
@@ -160,7 +162,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                                 tailwind("text-lg mr-1"),
                                                 {
                                                     color:
-                                                        themeStore.onSecondary,
+                                                        CustomColors.onSecondary,
                                                 },
                                             ]}
                                             name={
@@ -173,7 +175,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                             style={[
                                                 {
                                                     color:
-                                                        themeStore.onSecondary,
+                                                        CustomColors.onSecondary,
                                                 },
                                                 tailwind("text-xs"),
                                             ]}
@@ -188,7 +190,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                     style={[
                                         {
                                             backgroundColor:
-                                                themeStore.secondaryColor,
+                                                CustomColors.secondaryColor,
                                         },
                                         tailwind(
                                             "flex-row rounded-full px-2 items-center"
@@ -199,7 +201,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                         style={[
                                             tailwind("text-xl mr-2"),
                                             {
-                                                color: themeStore.onSecondary,
+                                                color: CustomColors.onSecondary,
                                             },
                                         ]}
                                         name="information-outline"
@@ -207,7 +209,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
 
                                     <Clock
                                         style={{
-                                            color: themeStore.onSecondary,
+                                            color: CustomColors.onSecondary,
                                         }}
                                         id={props.id}
                                         date={props.createdAt}
@@ -222,11 +224,11 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                 0,
                                 diffSeconds / (props.maxLifetimeMinutes * 60)
                             )}
-                            backgroundStrokeColor={themeStore.onBackground}
+                            backgroundStrokeColor={CustomColors.onBackground}
                             radius={15}
                             svgStyle={
                                 {
-                                    color: themeStore.heartColor,
+                                    color: CustomColors.heartColor,
                                 } as StyleProp<ViewStyle>
                             }
                             strokeWidth={3}
@@ -240,7 +242,7 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
                                     style={[
                                         tailwind("text-lg"),
                                         {
-                                            color: themeStore.heartColor,
+                                            color: CustomColors.heartColor,
                                         },
                                     ]}
                                     name="heart"

@@ -33,6 +33,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import { nativeUserService } from "../services/NativeUserService";
 import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
 import { nativeRootStore } from "../mobx/NativeRootStore";
+import { CustomColors } from "../styles/colors";
 
 const style = StyleSheet.create({
     header: {
@@ -123,14 +124,14 @@ export const ProfileTab = observer(() => {
         <SafeAreaView
             style={[
                 tailwind("flex-1 flex-col"),
-                { backgroundColor: themeStore.secondaryColor },
+                { backgroundColor: CustomColors.bgDark },
             ]}
         >
             <View
                 style={[
                     tailwind("px-4 mt-3 pb-3"),
                     style.header,
-                    { backgroundColor: themeStore.secondaryColor },
+                    { backgroundColor: CustomColors.bgDark },
                 ]}
             >
                 <Text style={[commonStyles.screenTitle, tailwind("pt-1"), c]}>
@@ -151,14 +152,14 @@ export const ProfileTab = observer(() => {
                                     ),
                                     {
                                         backgroundColor:
-                                            themeStore.buttonBackgroundColor,
+                                            CustomColors.buttonBackgroundColor,
                                     },
                                 ]}
                             >
                                 <Icon
                                     size={24}
                                     style={tailwind("opacity-75 mr-2")}
-                                    color={themeStore.buttonTextColor}
+                                    color={CustomColors.buttonTextColor}
                                     name="wallet"
                                 />
 
@@ -182,9 +183,9 @@ export const ProfileTab = observer(() => {
                                 loading={loading}
                                 title="Connect Wallet"
                                 onPress={handleConnectWallet}
-                                textColor={themeStore.buttonTextColor}
+                                textColor={CustomColors.buttonTextColor}
                                 backgroundColor={
-                                    themeStore.buttonBackgroundColor
+                                    CustomColors.buttonBackgroundColor
                                 }
                             />
                         </View>
@@ -193,7 +194,7 @@ export const ProfileTab = observer(() => {
                 <View
                     style={[
                         tailwind("mb-4 rounded-lg"),
-                        { backgroundColor: themeStore.buttonBackgroundColor },
+                        { backgroundColor: CustomColors.buttonBackgroundColor },
                     ]}
                 >
                     <TouchableNativeFeedback
@@ -205,7 +206,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Imprint
                             </Text>
                         </View>
@@ -216,7 +219,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Privacy Policy
                             </Text>
                         </View>
@@ -227,7 +232,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Terms of Use
                             </Text>
                         </View>
@@ -241,7 +248,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Open-Source Licenses
                             </Text>
                         </View>
@@ -252,9 +261,9 @@ export const ProfileTab = observer(() => {
                                 size={24}
                                 style={tailwind("mr-2 opacity-75")}
                                 name="delete-outline"
-                                color={themeStore.buttonTextColor}
+                                color={CustomColors.waves}
                             />
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text style={{ color: CustomColors.waves }}>
                                 Delete account
                             </Text>
                         </View>
@@ -264,8 +273,8 @@ export const ProfileTab = observer(() => {
                 <AppButton
                     title="Logout"
                     onPress={handleLogout}
-                    textColor={themeStore.buttonTextColor}
-                    backgroundColor={themeStore.buttonBackgroundColor}
+                    textColor={CustomColors.buttonTextColor}
+                    backgroundColor={CustomColors.buttonBackgroundColor}
                 />
             </View>
         </SafeAreaView>

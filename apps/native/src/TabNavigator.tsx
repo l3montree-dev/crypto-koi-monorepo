@@ -7,6 +7,7 @@ import { selectThemeStore } from "@crypto-koi/common/lib/mobx/selectors";
 import FriendScreen from "./screens/FriendScreen";
 import Leaderboard from "./screens/LeaderboardScreen";
 import { ProfileTab } from "./screens/ProfileTab";
+import { CustomColors } from "./styles/colors";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,7 +29,7 @@ export const TabNavigator = observer(() => {
             barStyle={[
                 style,
                 {
-                    backgroundColor: themeStore.secondaryColor,
+                    backgroundColor: CustomColors.bgDark,
                 },
             ]}
         >
