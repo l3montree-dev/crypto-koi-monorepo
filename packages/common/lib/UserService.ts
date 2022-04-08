@@ -9,7 +9,6 @@ import RootStore from './mobx/RootStore'
 
 export class UserService {
     constructor(
-        protected rootStore: RootStore,
         protected authService: AuthService,
         protected apolloClient: ApolloClient<NormalizedCacheObject>
     ) {}
@@ -17,12 +16,14 @@ export class UserService {
      * Executes side-effects. If the login is successful, it does update the authorization store.
      * @returns
      */
-    async loginUsingWalletAddress(walletAddress: string): Promise<void> {
+    async loginUsingWalletAddress(
+        walletAddress: string
+    ): Promise<GetUser['user'] | null> {
         const success = await this.authService.exchangeWalletAddressForToken(
             walletAddress
         )
         if (!success) {
-            return
+            return null
         }
 
         return this.sync()
@@ -48,17 +49,16 @@ export class UserService {
      * Executes side-effects. If the login is successful, it does update the authorization store.
      * @returns
      */
-    async tryToLogin(): Promise<void> {
+    async tryToLogin(): Promise<GetUser['user'] | null> {
         const success =
             await this.authService.tryToLoginUsingStoredCredentials()
-        if (!success) return
+        if (!success) return null
 
         return this.sync()
     }
 
     async logout(): Promise<void> {
         await this.authService.logout()
-        this.rootStore.authStore.setCurrentUser(null)
     }
 
     async sync() {
@@ -66,7 +66,8 @@ export class UserService {
             query: GET_USER,
             fetchPolicy: 'no-cache',
         })
-        this.rootStore.authStore.setCurrentUser(user.data.user)
+
+        return user.data.user
     }
 
     async deleteAccount() {
@@ -74,6 +75,5 @@ export class UserService {
         await this.authService.destroyAccount()
         // just destroys the tokens.
         await this.authService.logout()
-        this.rootStore.authStore.setCurrentUser(null)
     }
 }

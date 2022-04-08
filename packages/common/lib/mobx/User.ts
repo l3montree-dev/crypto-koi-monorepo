@@ -1,18 +1,25 @@
-import { makeAutoObservable } from "mobx";
-import moment, { Moment } from "moment";
-import Cryptogotchi from "./Cryptogotchi";
+import { makeAutoObservable } from 'mobx'
+import moment, { Moment } from 'moment'
+import Cryptogotchi from './Cryptogotchi'
 
 export default class User {
-    public createdAt: Moment;
+    _createdAt: string
+
+    public cryptogotchies: Cryptogotchi[]
+
     constructor(
         public id: string,
         public walletAddress: string | null,
         public deviceId: string | null,
         createdAt: string,
-        public cryptogotchies: Cryptogotchi[]
+        cryptogotchies: Cryptogotchi[]
     ) {
-        makeAutoObservable(this);
+        makeAutoObservable(this)
+        this.cryptogotchies = cryptogotchies
+        this._createdAt = createdAt
+    }
 
-        this.createdAt = moment(createdAt);
+    get createdAt(): Moment {
+        return moment(this._createdAt)
     }
 }

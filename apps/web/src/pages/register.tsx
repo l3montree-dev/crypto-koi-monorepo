@@ -1,21 +1,33 @@
-import { GetStaticPropsResult, NextPage } from 'next'
+import AuthStore from '@crypto-koi/common/lib/mobx/AuthStore'
+import RootStore, {
+    HydrationState,
+} from '@crypto-koi/common/lib/mobx/RootStore'
+import ThemeStore from '@crypto-koi/common/lib/mobx/ThemeStore'
+import {
+    GetServerSidePropsContext,
+    GetServerSidePropsResult,
+    NextPage,
+} from 'next'
 import React from 'react'
 import { api } from '../cms/api'
 import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
 import RegistrationForm from '../components/RegistrationForm'
+import CookieStorage from '../CookieStorage'
 import { AppStateProvider } from '../hooks/AppStateContext'
+import { buildServiceLayer } from '../service-layer'
 
 interface Props {
     page: IPage
     footer: IFooter
     menu: IMenu
+    hydrationState?: HydrationState | null
 }
 
 const Register: NextPage<Props> = (props) => {
     return (
-        <AppStateProvider>
+        <AppStateProvider hydrationState={props.hydrationState}>
             <Page
                 addHeaderPadding={true}
                 seo={props.page.attributes.SEO}
@@ -31,13 +43,23 @@ const Register: NextPage<Props> = (props) => {
     )
 }
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-    const [page, footer, menu] = await Promise.all([
+export async function getServerSideProps(
+    context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<Props>> {
+    const rootStore = new RootStore(new AuthStore(), new ThemeStore())
+
+    const services = buildServiceLayer(new CookieStorage(context.req.cookies))
+
+    const [page, footer, menu, hydrationState] = await Promise.all([
         api<{ data: IPage[] }>(
             `pages?filters[Link][$eq]=/register&populate=deep`
         ),
         api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
         api<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
+        services.authService
+            .waitForTokenLoad()
+            .then(() => services.userService.sync())
+            .catch(() => null),
     ])
 
     return {
@@ -45,8 +67,8 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
             page: page.data[0],
             footer: footer.data.attributes,
             menu: menu.data.attributes,
+            hydrationState,
         },
-        revalidate: 60,
     }
 }
 

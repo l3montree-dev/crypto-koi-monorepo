@@ -5,7 +5,7 @@ import axios, {
     AxiosResponse,
 } from 'axios'
 import { Logger } from './logger'
-import { StorageService } from './StorageService'
+import { TokenStorage } from './TokenStorage'
 
 export interface RegisterRequest {
     name: string
@@ -24,7 +24,7 @@ export class AuthService {
     protectedClient: AxiosInstance
     loadTokenPromise: Promise<unknown>
     constructor(
-        protected storageService: StorageService,
+        protected tokenService: TokenStorage,
         restApiBaseUrl: string,
         protected logger: Logger
     ) {
@@ -51,8 +51,8 @@ export class AuthService {
         )
         // load the tokens.
         this.loadTokenPromise = Promise.all([
-            this.storageService.getValueFor(AuthService.refreshTokenStorageKey),
-            this.storageService.getValueFor(AuthService.accessTokenStorageKey),
+            this.tokenService.getRefreshToken(),
+            this.tokenService.getAccessToken(),
         ]).then(([refreshToken, accessToken]) => {
             this.accessToken = accessToken
             this.refreshToken = refreshToken
@@ -64,9 +64,7 @@ export class AuthService {
     private accessToken: string | null = null
     private refreshToken: string | null = null
 
-    private static refreshTokenStorageKey = '_auth_refreshToken'
-    private static accessTokenStorageKey = '_auth_accessToken'
-    private static deviceIdStorageKey = '_auth_deviceId'
+    static deviceIdStorageKey = '_auth_deviceId'
 
     refreshTokenRequest: Promise<AxiosResponse<TokenResponse>> | null = null
 
@@ -90,21 +88,17 @@ export class AuthService {
         }
     }
 
+    waitForTokenLoad() {
+        return this.loadTokenPromise
+    }
+
     async exchangeDeviceIdForToken() {
         try {
-            let deviceId = await this.storageService.getValueFor(
-                AuthService.deviceIdStorageKey
-            )
+            let deviceId = await this.tokenService.getDeviceId()
 
             if (!deviceId) {
                 // generate a new one.
-                deviceId =
-                    Math.random().toString(36).substring(2, 15) +
-                    Math.random().toString(36).substring(2, 15)
-                await this.storageService.save(
-                    AuthService.deviceIdStorageKey,
-                    deviceId
-                )
+                deviceId = await this.tokenService.generateDeviceId()
             }
             this.logger.info('trying to exchange device id for token')
             const token = await this.publicClient.post<TokenResponse>(
@@ -175,24 +169,14 @@ export class AuthService {
 
     async logout() {
         // destroy the tokens from the storage
-        await Promise.all([
-            this.storageService.delete(AuthService.refreshTokenStorageKey),
-            this.storageService.delete(AuthService.accessTokenStorageKey),
-            // do NOT delete the deviceId storage key.
-            // StorageService.delete(AuthService.deviceIdStorageKey),
-        ])
+        await this.tokenService.deleteTokens()
+        // do NOT delete the deviceId storage key.
     }
 
     async handleSuccessfulToken(token: TokenResponse) {
         await Promise.all([
-            this.storageService.save(
-                AuthService.accessTokenStorageKey,
-                token.accessToken
-            ),
-            this.storageService.save(
-                AuthService.refreshTokenStorageKey,
-                token.refreshToken
-            ),
+            this.tokenService.saveAccessToken(token.accessToken),
+            this.tokenService.saveRefreshToken(token.refreshToken),
         ])
         this.accessToken = token.accessToken
         this.refreshToken = token.refreshToken

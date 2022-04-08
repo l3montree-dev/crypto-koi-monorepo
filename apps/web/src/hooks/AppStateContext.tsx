@@ -1,21 +1,15 @@
-import RootStore from '@crypto-koi/common/lib/mobx/RootStore'
-import { UserService } from '@crypto-koi/common/lib/UserService'
-import { AppEventEmitter } from '@crypto-koi/common/lib/AppEventEmitter'
+import { ApolloProvider } from '@apollo/client'
+import RootStore, {
+    HydrationState,
+} from '@crypto-koi/common/lib/mobx/RootStore'
 import { createContext, ReactNode } from 'react'
 import { initStore } from '../mobx/store'
-import { AuthService } from '@crypto-koi/common/lib/AuthService'
-import { apolloClientFactory } from '@crypto-koi/common/lib/ApolloClient'
-import { WebStorage } from '../WebStorage'
-import { config } from '../config'
-import { ApolloProvider } from '@apollo/client'
+import { buildServiceLayer, ServiceLayer } from '../service-layer'
+import { WebStorage } from '../WebTokenStorage'
 
 export interface WebContext {
     store: RootStore
-    services: {
-        userService: UserService
-        appEventEmitter: AppEventEmitter
-        authService: AuthService
-    }
+    services: ServiceLayer
 }
 
 export let AppStateContext: React.Context<WebContext>
@@ -26,37 +20,22 @@ export let AppStateContext: React.Context<WebContext>
  */
 export const AppStateProvider = ({
     children,
-    hydrationData,
+    hydrationState: hydrationData,
 }: {
     children: ReactNode
-    hydrationData?: Parameters<typeof RootStore.prototype.hydrate>[0]
+    hydrationState?: HydrationState | null
 }) => {
     const rootStore = initStore(hydrationData)
-
-    const appEventEmitter = new AppEventEmitter()
-
-    const authService = new AuthService(new WebStorage(), config.api, console)
-
-    const apolloClient = apolloClientFactory(
-        authService,
-        config.graphqlBaseUrl,
-        console
-    )
-    const userService = new UserService(rootStore, authService, apolloClient)
-
+    const services = buildServiceLayer(new WebStorage())
     const webContext: WebContext = {
         store: rootStore,
-        services: {
-            userService,
-            appEventEmitter,
-            authService,
-        },
+        services: services,
     }
 
     // set the global variable - now the AppState can be accessed by child components.
     AppStateContext = createContext<WebContext>(webContext)
     return (
-        <ApolloProvider client={apolloClient}>
+        <ApolloProvider client={services.apolloClient}>
             <AppStateContext.Provider value={webContext}>
                 {children}
             </AppStateContext.Provider>

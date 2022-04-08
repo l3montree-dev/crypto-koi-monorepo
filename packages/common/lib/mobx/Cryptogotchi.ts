@@ -11,15 +11,15 @@ export default class Cryptogotchi {
     public isAlive!: boolean
     public name!: string | null
     public food!: number
-    public createdAt!: Moment
+    public _createdAt!: string
     public ownerAddress!: string
     public ownerId!: string
     public gameStats: GameStat[] = []
     public events: Event[] = []
     public minutesTillDeath!: number
-    public deathDate!: Moment | null
-    public nextFeeding!: Moment
-    public snapshotValid!: Moment
+    public _deathDate!: string | null
+    public _nextFeeding!: string
+    public _snapshotValid!: string
     public maxLifetimeMinutes!: number
     public color!: string
     public rank!: number
@@ -33,11 +33,29 @@ export default class Cryptogotchi {
     }
 
     setFromFragment(fragment: ClientCryptogotchi) {
-        Object.assign(this, fragment)
-        this.createdAt = moment(fragment.createdAt)
-        this.deathDate = fragment.deathDate ? moment(fragment.deathDate) : null
-        this.nextFeeding = moment(fragment.nextFeeding)
-        this.snapshotValid = moment(fragment.snapshotValid)
+        const { createdAt, deathDate, nextFeeding, snapshotValid, ...rest } =
+            fragment
+        Object.assign(this, rest)
+        this._createdAt = createdAt
+        this._deathDate = deathDate
+        this._nextFeeding = nextFeeding
+        this._snapshotValid = snapshotValid
+    }
+
+    get createdAt(): Moment {
+        return moment(this._createdAt)
+    }
+
+    get deathDate(): Moment | null {
+        return this._deathDate === null ? null : moment(this._deathDate)
+    }
+
+    get nextFeeding(): Moment {
+        return moment(this._nextFeeding)
+    }
+
+    get snapshotValid(): Moment {
+        return moment(this._snapshotValid)
     }
 
     setName(name: string | undefined | null) {

@@ -8,13 +8,13 @@ import {
 } from '@chakra-ui/react'
 import { validEmail, notEmpty } from '@crypto-koi/common/lib/validators'
 import Image from 'next/image'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppStateContext } from '../hooks/AppStateContext'
 import useInput from '../hooks/useInput'
 import { WalletDescriptor, connectToWallet } from '../web3'
 
 const RegistrationForm = () => {
-    const { services } = useContext(AppStateContext)
+    const { services, store } = useContext(AppStateContext)
 
     const email = useInput({ validator: validEmail, initialState: '' })
     const name = useInput({ validator: notEmpty, initialState: '' })
@@ -34,7 +34,7 @@ const RegistrationForm = () => {
     }
 
     const handleRegister = async () => {
-        console.log(
+        store.authStore.setCurrentUser(
             await services.userService.registerUsingWalletAddress({
                 email: email.value,
                 name: name.value,
@@ -107,6 +107,7 @@ const RegistrationForm = () => {
                     disabled={
                         wallet === null || email.isInvalid || name.isInvalid
                     }
+                    onClick={handleRegister}
                     isFullWidth
                     colorScheme={'cherry'}
                 >

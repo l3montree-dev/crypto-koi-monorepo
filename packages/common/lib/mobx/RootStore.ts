@@ -1,16 +1,24 @@
 import { makeAutoObservable } from 'mobx'
+import { GetUser } from '../graphql/queries/__generated__/GetUser'
 import AuthStore from './AuthStore'
 import ThemeStore from './ThemeStore'
 
+export type HydrationState = GetUser['user']
 /**
  * The mobx root store of the application
  */
 export default class RootStore {
-    constructor(public authStore: AuthStore, public themeStore: ThemeStore) {
+    public authStore: AuthStore
+
+    public themeStore: ThemeStore
+
+    constructor(authStore: AuthStore, themeStore: ThemeStore) {
+        this.authStore = authStore
+        this.themeStore = themeStore
         makeAutoObservable(this)
     }
 
-    hydrate(initialState: Parameters<typeof AuthStore.prototype.hydrate>[0]) {
-        this.authStore.hydrate(initialState)
+    hydrate(initialState: HydrationState) {
+        this.authStore.setCurrentUser(initialState)
     }
 }

@@ -53,7 +53,8 @@ const App: FunctionComponent = () => {
         (async function () {
             try {
                 log.info("Boot");
-                await nativeUserService.tryToLogin();
+                const user = await nativeUserService.tryToLogin();
+                nativeRootStore.authStore.setCurrentUser(user);
             } catch (e) {
                 log.warn("login failed with:", e);
             } finally {

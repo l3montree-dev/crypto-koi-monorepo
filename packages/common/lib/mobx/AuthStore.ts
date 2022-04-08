@@ -7,18 +7,13 @@ import User from './User'
  * Handles authorization state.
  */
 export default class AuthStore {
-    currentUser: User | null
+    currentUser: User | null = null
 
     constructor() {
         makeAutoObservable(this)
-        this.currentUser = null
     }
 
-    hydrate(initialState: GetUser['user'] | null) {
-        this.setCurrentUser(initialState)
-    }
-
-    setCurrentUser(user: GetUser['user'] | null) {
+    setCurrentUser(user: GetUser['user'] | null | undefined) {
         if (user) {
             this.currentUser = new User(
                 user.id,

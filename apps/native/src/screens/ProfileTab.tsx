@@ -32,6 +32,7 @@ import ViewUtils from "../utils/ViewUtils";
 import { useNavigation } from "../hooks/useNavigation";
 import { nativeUserService } from "../services/NativeUserService";
 import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
+import { nativeRootStore } from "../mobx/NativeRootStore";
 
 const style = StyleSheet.create({
     header: {
@@ -60,6 +61,7 @@ export const ProfileTab = observer(() => {
 
     const handleLogout = () => {
         nativeUserService.logout();
+        nativeRootStore.authStore.setCurrentUser(null);
     };
 
     const handleConnectWallet = async () => {
@@ -108,6 +110,7 @@ export const ProfileTab = observer(() => {
                     text: "Delete",
                     onPress: async () => {
                         await nativeUserService.deleteAccount();
+                        nativeRootStore.authStore.setCurrentUser(null);
                         ViewUtils.toast("Account deleted");
                     },
                     style: "destructive",

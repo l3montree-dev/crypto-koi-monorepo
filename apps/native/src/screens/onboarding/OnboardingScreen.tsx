@@ -35,6 +35,7 @@ import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
 import Svg, { Defs, Ellipse, LinearGradient, Path, Rect, Stop } from "react-native-svg";
 import GradientBackground from "../../components/GradientBackground";
+import { nativeRootStore } from "../../mobx/NativeRootStore";
 
 
 const style = StyleSheet.create({
@@ -129,11 +130,13 @@ function OnboardingScreen() {
 
         await provider.enable();
 
-        await nativeUserService.loginUsingWalletAddress(provider.accounts[0]);
+        const user = await nativeUserService.loginUsingWalletAddress(provider.accounts[0]);
+        nativeRootStore.authStore.setCurrentUser(user)
     };
 
-    const handlePlayWithoutWalletPress = () => {
-        return nativeUserService.loginUsingDeviceId();
+    const handlePlayWithoutWalletPress = async () => {
+        const user = await nativeUserService.loginUsingDeviceId();
+        nativeRootStore.authStore.setCurrentUser(user)
     };
 
     const setActive = (next: number, x: number) => {
