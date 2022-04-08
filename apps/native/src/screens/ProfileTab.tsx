@@ -149,14 +149,14 @@ export const ProfileTab = observer(() => {
                                     ),
                                     {
                                         backgroundColor:
-                                            themeStore.buttonBackgroundColor,
+                                            CustomColors.buttonBackgroundColor,
                                     },
                                 ]}
                             >
                                 <Icon
                                     size={24}
                                     style={tailwind("opacity-75 mr-2")}
-                                    color={themeStore.buttonTextColor}
+                                    color={CustomColors.buttonTextColor}
                                     name="wallet"
                                 />
 
@@ -180,9 +180,9 @@ export const ProfileTab = observer(() => {
                                 loading={loading}
                                 title="Connect Wallet"
                                 onPress={handleConnectWallet}
-                                textColor={themeStore.buttonTextColor}
+                                textColor={CustomColors.buttonTextColor}
                                 backgroundColor={
-                                    themeStore.buttonBackgroundColor
+                                    CustomColors.buttonBackgroundColor
                                 }
                             />
                         </View>
@@ -191,7 +191,7 @@ export const ProfileTab = observer(() => {
                 <View
                     style={[
                         tailwind("mb-4 rounded-lg"),
-                        { backgroundColor: themeStore.buttonBackgroundColor },
+                        { backgroundColor: CustomColors.buttonBackgroundColor },
                     ]}
                 >
                     <TouchableNativeFeedback
@@ -203,7 +203,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Imprint
                             </Text>
                         </View>
@@ -214,7 +216,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Privacy Policy
                             </Text>
                         </View>
@@ -225,7 +229,9 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Terms of Use
                             </Text>
                         </View>
@@ -234,12 +240,14 @@ export const ProfileTab = observer(() => {
                         onPress={() =>
                             Linking.openURL(
                                 config.websiteBaseUrl +
-                                    "/cryptokoi-app-open-source-licenses_2022_03_18.txt"
+                                "/cryptokoi-app-open-source-licenses_2022_03_18.txt"
                             )
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text style={{ color: themeStore.buttonTextColor }}>
+                            <Text
+                                style={{ color: CustomColors.buttonTextColor }}
+                            >
                                 Open-Source Licenses
                             </Text>
                         </View>
@@ -262,8 +270,8 @@ export const ProfileTab = observer(() => {
                 <AppButton
                     title="Logout"
                     onPress={handleLogout}
-                    textColor={themeStore.buttonTextColor}
-                    backgroundColor={themeStore.buttonBackgroundColor}
+                    textColor={CustomColors.buttonTextColor}
+                    backgroundColor={CustomColors.buttonBackgroundColor}
                 />
             </View>
         </SafeAreaView>
