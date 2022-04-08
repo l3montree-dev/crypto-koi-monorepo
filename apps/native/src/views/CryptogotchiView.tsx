@@ -339,7 +339,7 @@ const CryptogotchiView = observer((props: Props) => {
                         </Pressable>
                     </View>
 
-                    <View style={tailwind("flex-row relative justify-center")}>
+                    {/*<View style={tailwind("flex-row relative justify-center")}>
                         <Svg width={150} height={75}>
                             <AnimatedEllipse
                                 rx={RNAnimated.diffClamp(
@@ -350,10 +350,10 @@ const CryptogotchiView = observer((props: Props) => {
                                 ry={10}
                                 cx="75"
                                 cy="25"
-                                fill="rgba(0,0,0,0.2)"
+                                fill="rgba(0,0,0,0.8)"
                             />
                         </Svg>
-                    </View>
+                                </View>*/}
                 </View>
 
                 <View style={tailwind("flex-col px-4 justify-end pt-4")}>
