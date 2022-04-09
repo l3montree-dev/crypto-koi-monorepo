@@ -41,11 +41,10 @@ const RegistrationForm = () => {
             name: name.value,
             walletAddress: wallet?.address,
         })
-        console.log(user)
         if (user) {
             store.authStore.setCurrentUser(user)
             // redirect to app page.
-            console.log('REDIRECTING')
+
             router.push('/app/users/' + user.id)
         } else {
             // TODO: Show error to the user

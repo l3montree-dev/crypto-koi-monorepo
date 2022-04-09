@@ -35,6 +35,7 @@ const RoundProgress: FunctionComponent<Props> = (props) => {
                 strokeDashoffset={1 - progress * circumference}
                 strokeDasharray={circumference}
                 strokeWidth={strokeWidth + 1}
+                strokeLinecap="round"
             />
         </svg>
     )

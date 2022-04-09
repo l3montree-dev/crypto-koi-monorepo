@@ -4,7 +4,10 @@ import {
 } from '@crypto-koi/common/lib/AuthService'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { GET_SELF, GET_USER } from './graphql/queries/user'
-import { GetUser } from './graphql/queries/__generated__/GetUser'
+import {
+    GetUser,
+    GetUserVariables,
+} from './graphql/queries/__generated__/GetUser'
 import RootStore from './mobx/RootStore'
 import { Self } from './graphql/queries/__generated__/Self'
 
@@ -76,5 +79,16 @@ export class UserService {
         await this.authService.destroyAccount()
         // just destroys the tokens.
         await this.authService.logout()
+    }
+
+    async findById(id: string) {
+        const res = await this.apolloClient.query<GetUser, GetUserVariables>({
+            query: GET_USER,
+            variables: {
+                id: id,
+            },
+        })
+
+        return res.data.user
     }
 }

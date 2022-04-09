@@ -9,7 +9,7 @@ import {
     NextPage,
 } from 'next'
 import React from 'react'
-import { api } from '../../cms/api'
+import { cmsApi } from '../../cms/api'
 import { IMenu } from '../../cms/menu'
 import { IFooter, IPage } from '../../cms/page'
 import Page from '../../components/Page'
@@ -46,11 +46,11 @@ export async function getServerSideProps(
     const services = buildServiceLayer(new CookieStorage(context.req.cookies))
 
     const [page, footer, menu, hydrationState] = await Promise.all([
-        api<{ data: IPage[] }>(
+        cmsApi<{ data: IPage[] }>(
             `pages?filters[Link][$eq]=/register&populate=deep`
         ),
-        api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
-        api<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
+        cmsApi<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
+        cmsApi<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
         services.authService
             .waitForTokenLoad()
             .then(() => services.userService.sync())

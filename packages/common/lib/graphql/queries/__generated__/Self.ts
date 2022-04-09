@@ -43,6 +43,7 @@ export interface Self_self {
   walletAddress: string | null;
   deviceId: string | null;
   createdAt: any;
+  name: string;
   cryptogotchies: Self_self_cryptogotchies[];
 }
 

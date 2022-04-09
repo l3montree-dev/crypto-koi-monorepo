@@ -9,6 +9,7 @@ export const GET_USER = gql`
             walletAddress
             deviceId
             createdAt
+            name
             cryptogotchies {
                 ...ClientCryptogotchi
             }
@@ -24,6 +25,7 @@ export const GET_SELF = gql`
             walletAddress
             deviceId
             createdAt
+            name
             cryptogotchies {
                 ...ClientCryptogotchi
             }

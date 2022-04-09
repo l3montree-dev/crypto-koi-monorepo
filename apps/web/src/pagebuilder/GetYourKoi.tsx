@@ -52,10 +52,9 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
                 )
                     .lighten(20)
                     .toHexString(),
-                species: (
+                species:
                     el.attributes.find((attr) => attr.trait_type === 'Species')
-                        ?.value ?? 'Koi'
-                ).toLocaleUpperCase(),
+                        ?.value ?? 'Koi',
                 colors: el.attributes
                     .filter((attr) => {
                         return (

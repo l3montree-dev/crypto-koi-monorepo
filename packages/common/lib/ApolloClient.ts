@@ -13,14 +13,19 @@ const httpLink = (
         uri: graphqlBaseUrl,
         fetch: async (uri: RequestInfo, options) => {
             const token = authService.getAccessToken()
+            let request
+            if (token) {
+                request = fetch(uri, {
+                    ...options,
+                    headers: {
+                        ...options?.headers,
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+            } else {
+                request = fetch(uri, options)
+            }
 
-            const request = fetch(uri, {
-                ...options,
-                headers: {
-                    ...options?.headers,
-                    Authorization: `Bearer ${token}`,
-                },
-            })
             const response = await request
 
             if (response.status === 401) {

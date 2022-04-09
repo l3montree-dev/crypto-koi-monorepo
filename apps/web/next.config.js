@@ -9,6 +9,7 @@ const nextConfig = withTM({
             'localhost',
             'dev.api.crypto-koi.io',
             'api.crypto-koi.io',
+            "192.168.0.83"
         ],
     },
 })

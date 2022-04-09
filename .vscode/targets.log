@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Apr  9 07:30:36 2022
+# Make data base, printed on Sat Apr  9 18:58:53 2022
 
 # Variables
 
@@ -23,13 +25,15 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
 UUID = db47ae1d-cad0-41cc-8b86-20922bc283be
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3c155cdd-59a6-48d4-8e8a-8b1906c204a4.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-153cd384-a1da-48d7-8ee2-4a8ce3c5e9e4.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
-VSCODE_CWD = /home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo
+VSCODE_CWD = /home/timbastin/Schreibtisch/l3montree/crypto-koi/crypto-koi-api
 # environment
 WINDOWPATH = 2
 # environment
@@ -77,7 +81,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.115
+GNOME_TERMINAL_SERVICE = :1.111
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -113,13 +117,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 11236
+VSCODE_PID = 6247
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/3231,unix/avocado:/tmp/.ICE-unix/3231
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/3004,unix/avocado:/tmp/.ICE-unix/3004
 # automatic
 *F = $(notdir $*)
 # environment
@@ -143,9 +147,11 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/90e0a868_137e_4055_af5a_f31fb18e47f9
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/45ab8e1c_0122_4992_8362_fd4c95e00964
 # environment
 MAKELEVEL := 0
 # default
@@ -183,7 +189,7 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 3428
+SYSTEMD_EXEC_PID = 3024
 # environment
 DISPLAY = :0
 # environment
@@ -245,7 +251,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=117/1024=11%, Rehash=0, Collisions=12/147=8%
+# Load=119/1024=12%, Rehash=0, Collisions=13/149=9%
 
 # Pattern-specific Variable Values
 
@@ -275,6 +281,7 @@ packages/common/package.json:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 
 # Not a target:
 apps/web/package.json:
@@ -292,9 +299,6 @@ native-android: install
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 #  Last modified 2022-04-08 21:53:28.938681363
 #  File has been updated.
 #  Successfully updated.
@@ -366,6 +370,6 @@ apps/native/package.json:
 # strcache performance: lookups = 46 / hit rate = 34%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=1/46=2%
-# Finished Make data base on Sat Apr  9 07:30:37 2022
+# Finished Make data base on Sat Apr  9 18:58:53 2022
 
  

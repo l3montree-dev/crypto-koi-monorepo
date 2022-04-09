@@ -43,6 +43,7 @@ export interface GetUser_user {
   walletAddress: string | null;
   deviceId: string | null;
   createdAt: any;
+  name: string;
   cryptogotchies: GetUser_user_cryptogotchies[];
 }
 

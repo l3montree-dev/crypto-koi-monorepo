@@ -1,6 +1,18 @@
 import { useMutation } from "@apollo/client";
+import { FEED_CRYPTOGOTCHI_MUTATION } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
+import {
+    Feed,
+    FeedVariables,
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/Feed";
+import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
+import {
+    selectCryptogotchies,
+    selectCurrentUser,
+    selectThemeStore,
+} from "@crypto-koi/common/lib/mobx/selectors";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
+import * as NavigationBar from "expo-navigation-bar";
 import { observer } from "mobx-react-lite";
 import React, { useMemo } from "react";
 import {
@@ -17,35 +29,22 @@ import {
     Text,
     View,
 } from "react-native";
-import Svg, { Ellipse } from "react-native-svg";
+import { Ellipse } from "react-native-svg";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import FriendInfo from "../components/FriendInfo";
 import FriendTitle from "../components/FriendTitle";
+import GradientBackground from "../components/GradientBackground";
 import IconButton from "../components/IconButton";
 import Lifetime from "../components/Lifetime";
 import NextFeedButton from "../components/NextFeedButton";
 import { config } from "../config";
-import * as NavigationBar from "expo-navigation-bar";
-import { FEED_CRYPTOGOTCHI_MUTATION } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
-import {
-    Feed,
-    FeedVariables,
-} from "@crypto-koi/common/lib/graphql/queries/__generated__/Feed";
 import useAppState from "../hooks/useAppState";
 import { useFloating } from "../hooks/useFloating";
 import { useNavigation } from "../hooks/useNavigation";
-import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
-import {
-    selectCryptogotchies,
-    selectCurrentUser,
-    selectThemeStore,
-} from "@crypto-koi/common/lib/mobx/selectors";
-import ThemeStore from "@crypto-koi/common/lib/mobx/ThemeStore";
+import { CustomColors } from "../styles/colors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import ViewUtils from "../utils/ViewUtils";
-import { CustomColors } from "../styles/colors";
-import GradientBackground from "../components/GradientBackground";
 
 const style = StyleSheet.create({
     img: {

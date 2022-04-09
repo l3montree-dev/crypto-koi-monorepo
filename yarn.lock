@@ -2948,6 +2948,7 @@ __metadata:
     prettier: ^2.5.1
     react: ^17.0.0
     react-dom: ^17.0.0
+    react-icons: ^4.3.1
     react-intersection-observer: ^8.33.1
     react-markdown: ^8.0.0
     sass: ^1.49.9
@@ -25062,6 +25063,15 @@ __metadata:
   peerDependencies:
     react: ^17.0.0
   checksum: c746b9d369c77296c277626cf7dd5ff24d49657e2f16412d14f845d1b428588184c0009374119f7dec24be37ab8c134d15aa4ecd57360c874880af508dcc577b
+  languageName: node
+  linkType: hard
+
+"react-icons@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "react-icons@npm:4.3.1"
+  peerDependencies:
+    react: "*"
+  checksum: 2cc608acdd3e906aa3aaee290b8398220639677c949382d86e554020e5dab6a9f1ed7484418aa5272cb5c5c018e1fc9a323d433d901697a76530029f9ecb1263
   languageName: node
   linkType: hard
 

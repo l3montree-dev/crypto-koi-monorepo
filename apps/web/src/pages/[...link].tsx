@@ -4,7 +4,7 @@ import {
     GetStaticPropsResult,
 } from 'next'
 import React, { FunctionComponent } from 'react'
-import { api } from '../cms/api'
+import { cmsApi } from '../cms/api'
 import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
@@ -32,7 +32,7 @@ const DynamicPage: FunctionComponent<Props> = (props) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const pages = (await api<{ data: IPage[] }>(`pages`)).data
+    const pages = (await cmsApi<{ data: IPage[] }>(`pages`)).data
         .filter((p) => p.attributes.Link !== '/')
         .map((p) => ({
             params: { link: p.attributes.Link.substring(1).split('/') },
@@ -54,11 +54,11 @@ export async function getStaticProps({
     }
     const link = '/' + (params.link as string[]).join('/')
     const [pageData, footer, menu] = await Promise.all([
-        api<{ data: IPage[] }>(
+        cmsApi<{ data: IPage[] }>(
             `pages?filters[Link][$eq]=${link}&populate=deep`
         ),
-        api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
-        api<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
+        cmsApi<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
+        cmsApi<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
     ])
 
     return {
