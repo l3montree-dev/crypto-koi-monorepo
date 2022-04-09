@@ -1,9 +1,3 @@
-import { useMutation } from "@apollo/client";
-import { FEED_CRYPTOGOTCHI_MUTATION } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
-import {
-    Feed,
-    FeedVariables,
-} from "@crypto-koi/common/lib/graphql/queries/__generated__/Feed";
 import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
 import {
     selectCryptogotchies,
@@ -29,7 +23,6 @@ import {
     Text,
     View,
 } from "react-native";
-import { Ellipse } from "react-native-svg";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import FriendInfo from "../components/FriendInfo";
@@ -45,6 +38,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import { CustomColors } from "../styles/colors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import ViewUtils from "../utils/ViewUtils";
+import { useFeedCryptogotchi } from "@crypto-koi/common/lib/hooks/useFeedCryptogotchi";
 
 const style = StyleSheet.create({
     img: {
@@ -94,48 +88,33 @@ type ViewProps = {
 };
 type Props = ViewProps | (ViewProps & RefreshingProps);
 
-const AnimatedEllipse = RNAnimated.createAnimatedComponent(Ellipse);
-
 const CryptogotchiView = observer((props: Props) => {
-    let { cryptogotchi } = props;
-
     const tailwind = useTailwind();
     const { translateX, translateY } = useFloating();
     const currentUser = useAppState(selectCurrentUser);
     const cryptogotchies = useAppState(selectCryptogotchies);
-    const currentUserIsOwner = currentUser?.id === cryptogotchi.id;
 
-    if (currentUserIsOwner && cryptogotchies) {
-        // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
-        // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
-        cryptogotchi =
-            cryptogotchies.find((cr) => cr.id === cryptogotchi.id) ??
-            // add fallback if something else did went wrong
-            cryptogotchi;
-    }
+    const currentUserIsOwner = currentUser?.id === props.cryptogotchi.id;
+    // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
+    // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
+    const cryptogotchi = useMemo(() => {
+        if (currentUserIsOwner && cryptogotchies) {
+            return (
+                cryptogotchies.find((cr) => cr.id === props.cryptogotchi.id) ??
+                props.cryptogotchi
+            );
+        }
 
-    const [feed, { loading }] = useMutation<Feed, FeedVariables>(
-        FEED_CRYPTOGOTCHI_MUTATION
+        return props.cryptogotchi;
+    }, [props.cryptogotchi.id]);
+
+    const { handleFeed, loading } = useFeedCryptogotchi(
+        currentUser,
+        cryptogotchi
     );
-
     const themeStore = useAppState(selectThemeStore);
 
     const { navigate } = useNavigation();
-    const handleFeed = async () => {
-        if (!currentUserIsOwner) {
-            return;
-        }
-        try {
-            const res = await feed({ variables: { id: cryptogotchi.id } });
-            if (!res.data) {
-                return;
-            }
-
-            cryptogotchi.setFromFragment(res.data.feed);
-        } catch (e) {
-            //
-        }
-    };
 
     const memoStyle = useMemo(
         () => ({

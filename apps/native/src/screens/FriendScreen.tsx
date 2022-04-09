@@ -25,6 +25,7 @@ import useAppState from "../hooks/useAppState";
 import { nativeUserService } from "../services/NativeUserService";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import CryptogotchiView from "../views/CryptogotchiView";
+import { selectCryptogotchies } from "@crypto-koi/common/lib/mobx/selectors";
 
 const style = StyleSheet.create({
     slide: {
@@ -37,9 +38,7 @@ const style = StyleSheet.create({
 });
 
 const FriendsScreen = observer(() => {
-    const cryptogotchies = useAppState(
-        (rootStore) => rootStore.authStore.currentUser?.cryptogotchies
-    );
+    const cryptogotchies = useAppState(selectCryptogotchies);
 
     // const [nftLoading, setNftLoading] = useState(false);
 

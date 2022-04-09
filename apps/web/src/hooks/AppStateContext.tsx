@@ -2,7 +2,7 @@ import { ApolloProvider } from '@apollo/client'
 import RootStore, {
     HydrationState,
 } from '@crypto-koi/common/lib/mobx/RootStore'
-import { createContext, ReactNode } from 'react'
+import { createContext, ReactNode, useContext } from 'react'
 import { useInitStore as useInitStore } from '../mobx/store'
 import { buildServiceLayer, ServiceLayer } from '../service-layer'
 import { WebStorage } from '../WebTokenStorage'
@@ -41,4 +41,19 @@ export const AppStateProvider = ({
             </AppStateContext.Provider>
         </ApolloProvider>
     )
+}
+
+export function useAppState(): RootStore
+export function useAppState<T>(selectorFn: (store: RootStore) => T): T
+export function useAppState<T = RootStore>(
+    selectorFn?: (state: RootStore) => T
+): T {
+    const context = useContext(AppStateContext)
+    if (!context) {
+        throw new Error('useAppState must be used within a AppStateProvider')
+    }
+    if (selectorFn) {
+        return selectorFn(context.store)
+    }
+    return context.store as unknown as T
 }
