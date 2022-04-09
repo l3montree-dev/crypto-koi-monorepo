@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { validEmail, notEmpty } from '@crypto-koi/common/lib/validators'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { AppStateContext } from '../hooks/AppStateContext'
 import useInput from '../hooks/useInput'
@@ -16,6 +17,7 @@ import { WalletDescriptor, connectToWallet } from '../web3'
 const RegistrationForm = () => {
     const { services, store } = useContext(AppStateContext)
 
+    const router = useRouter()
     const email = useInput({ validator: validEmail, initialState: '' })
     const name = useInput({ validator: notEmpty, initialState: '' })
     const [wallet, setWallet] = useState<{
@@ -34,13 +36,20 @@ const RegistrationForm = () => {
     }
 
     const handleRegister = async () => {
-        store.authStore.setCurrentUser(
-            await services.userService.registerUsingWalletAddress({
-                email: email.value,
-                name: name.value,
-                walletAddress: wallet?.address,
-            })
-        )
+        const user = await services.userService.registerUsingWalletAddress({
+            email: email.value,
+            name: name.value,
+            walletAddress: wallet?.address,
+        })
+        console.log(user)
+        if (user) {
+            store.authStore.setCurrentUser(user)
+            // redirect to app page.
+            console.log('REDIRECTING')
+            router.push('/app/users/' + user.id)
+        } else {
+            // TODO: Show error to the user
+        }
     }
 
     return (

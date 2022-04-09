@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetUser
+// GraphQL query operation: User
 // ====================================================
 
-export interface GetUser_user_cryptogotchies_attributes {
+export interface User_user_cryptogotchies_attributes {
   __typename: "CryptogotchiAttributes";
   primaryColor: string;
   bodyColor: string;
@@ -17,7 +17,7 @@ export interface GetUser_user_cryptogotchies_attributes {
   birthday: number;
 }
 
-export interface GetUser_user_cryptogotchies {
+export interface User_user_cryptogotchies {
   __typename: "Cryptogotchi";
   id: string;
   isAlive: boolean;
@@ -34,22 +34,18 @@ export interface GetUser_user_cryptogotchies {
   rank: number;
   ownerId: string;
   color: string;
-  attributes: GetUser_user_cryptogotchies_attributes;
+  attributes: User_user_cryptogotchies_attributes;
 }
 
-export interface GetUser_user {
+export interface User_user {
   __typename: "User";
   id: string;
   walletAddress: string | null;
   deviceId: string | null;
   createdAt: any;
-  cryptogotchies: GetUser_user_cryptogotchies[];
+  cryptogotchies: User_user_cryptogotchies[];
 }
 
-export interface GetUser {
-  user: GetUser_user | null;
-}
-
-export interface GetUserVariables {
-  id: string;
+export interface User {
+  user: User_user | null;
 }

@@ -3,10 +3,12 @@ import QRCodeModal from '@walletconnect/qrcode-modal'
 import { ethers } from 'ethers'
 import { commonConfig } from '@crypto-koi/common/lib/commonConfig'
 import {
+    hexChainId2Number,
     newProvider,
     switchOrAddNetworkFactory,
 } from '@crypto-koi/common/lib/web3'
 import { Web3Provider } from '@ethersproject/providers'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 
 export type WalletDescriptor = { iconUrl: string; name: string; color: string }
 declare const window: any
@@ -14,6 +16,12 @@ declare const window: any
 const connector = new WalletConnect({
     bridge: 'https://bridge.walletconnect.org', // Required
     qrcodeModal: QRCodeModal,
+    clientMeta: {
+        description: 'CryptoKoi. A digital Art project.',
+        url: 'https://crypto-koi.io',
+        icons: ['https://crypto-koi.io/assets/crypto-koi-logo.svg'],
+        name: 'CryptoKoi',
+    },
 })
 
 // use a 5 min timeout for the user to complete the request.

@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
     fragment ClientCryptogotchi on Cryptogotchi {
@@ -26,7 +26,7 @@ export const CLIENT_CRYPTOGOTCHI_FRAGMENT = gql`
             birthday
         }
     }
-`;
+`
 
 export const CLIENT_EVENT_FRAGMENT = gql`
     fragment ClientEvent on Event {
@@ -35,7 +35,7 @@ export const CLIENT_EVENT_FRAGMENT = gql`
         payload
         createdAt
     }
-`;
+`
 
 export const CLIENT_NFT_DATA = gql`
     fragment ClientNftData on NftData {
@@ -43,4 +43,4 @@ export const CLIENT_NFT_DATA = gql`
         address
         tokenId
     }
-`;
+`

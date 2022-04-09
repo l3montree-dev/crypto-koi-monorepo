@@ -9,14 +9,13 @@ import {
     NextPage,
 } from 'next'
 import React from 'react'
-import { api } from '../cms/api'
-import { IMenu } from '../cms/menu'
-import { IFooter, IPage } from '../cms/page'
-import Page from '../components/Page'
-import RegistrationForm from '../components/RegistrationForm'
-import CookieStorage from '../CookieStorage'
-import { AppStateProvider } from '../hooks/AppStateContext'
-import { buildServiceLayer, fetchHydrationState } from '../service-layer'
+import { api } from '../../cms/api'
+import { IMenu } from '../../cms/menu'
+import { IFooter, IPage } from '../../cms/page'
+import Page from '../../components/Page'
+import CookieStorage from '../../CookieStorage'
+import { AppStateProvider } from '../../hooks/AppStateContext'
+import { buildServiceLayer } from '../../service-layer'
 
 interface Props {
     page: IPage
@@ -35,9 +34,7 @@ const Register: NextPage<Props> = (props) => {
                 footer={props.footer}
                 animateHeader={false}
             >
-                <div className="md:py-20 pt-5 pb-10 md:bg-slate-200 px-4">
-                    <RegistrationForm />
-                </div>
+                <div className="md:py-20 pt-5 pb-10 md:bg-slate-200 px-4"></div>
             </Page>
         </AppStateProvider>
     )
@@ -54,19 +51,11 @@ export async function getServerSideProps(
         ),
         api<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
         api<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
-        fetchHydrationState(services),
+        services.authService
+            .waitForTokenLoad()
+            .then(() => services.userService.sync())
+            .catch(() => null),
     ])
-
-    if (hydrationState) {
-        // this means the user does already exists and he has an access token.
-        // we redirect him to the home page.
-        return {
-            redirect: {
-                permanent: false,
-                destination: '/app/users/' + hydrationState.id,
-            },
-        }
-    }
 
     return {
         props: {

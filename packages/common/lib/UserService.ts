@@ -3,9 +3,10 @@ import {
     RegisterRequest,
 } from '@crypto-koi/common/lib/AuthService'
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import { GET_USER } from './graphql/queries/user'
+import { GET_SELF, GET_USER } from './graphql/queries/user'
 import { GetUser } from './graphql/queries/__generated__/GetUser'
 import RootStore from './mobx/RootStore'
+import { Self } from './graphql/queries/__generated__/Self'
 
 export class UserService {
     constructor(
@@ -62,12 +63,12 @@ export class UserService {
     }
 
     async sync() {
-        const user = await this.apolloClient.query<GetUser>({
-            query: GET_USER,
+        const res = await this.apolloClient.query<Self>({
+            query: GET_SELF,
             fetchPolicy: 'no-cache',
         })
 
-        return user.data.user
+        return res.data.self
     }
 
     async deleteAccount() {

@@ -1,9 +1,9 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 import {
     CLIENT_CRYPTOGOTCHI_FRAGMENT,
     CLIENT_EVENT_FRAGMENT,
     CLIENT_NFT_DATA,
-} from "./fragments";
+} from './fragments'
 
 export const CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION = gql`
     ${CLIENT_CRYPTOGOTCHI_FRAGMENT}
@@ -12,7 +12,7 @@ export const CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION = gql`
             ...ClientCryptogotchi
         }
     }
-`;
+`
 
 export const CREATE_CRYPTOGOTCHI_MUTATION = gql`
     ${CLIENT_NFT_DATA}
@@ -21,7 +21,7 @@ export const CREATE_CRYPTOGOTCHI_MUTATION = gql`
             ...ClientNftData
         }
     }
-`;
+`
 
 export const GET_NFT_SIGNATURE = gql`
     ${CLIENT_NFT_DATA}
@@ -30,7 +30,7 @@ export const GET_NFT_SIGNATURE = gql`
             ...ClientNftData
         }
     }
-`;
+`
 
 export const FEED_CRYPTOGOTCHI_MUTATION = gql`
     ${CLIENT_CRYPTOGOTCHI_FRAGMENT}
@@ -39,7 +39,7 @@ export const FEED_CRYPTOGOTCHI_MUTATION = gql`
             ...ClientCryptogotchi
         }
     }
-`;
+`
 
 export const FIND_CRYPTOGOTCHI = gql`
     ${CLIENT_CRYPTOGOTCHI_FRAGMENT}
@@ -48,7 +48,7 @@ export const FIND_CRYPTOGOTCHI = gql`
             ...ClientCryptogotchi
         }
     }
-`;
+`
 
 export const FETCH_EVENTS = gql`
     ${CLIENT_EVENT_FRAGMENT}
@@ -57,7 +57,7 @@ export const FETCH_EVENTS = gql`
             ...ClientEvent
         }
     }
-`;
+`
 
 export const FETCH_LEADERBOARD = gql`
     ${CLIENT_CRYPTOGOTCHI_FRAGMENT}
@@ -66,4 +66,4 @@ export const FETCH_LEADERBOARD = gql`
             ...ClientCryptogotchi
         }
     }
-`;
+`
