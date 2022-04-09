@@ -26,14 +26,6 @@ interface Props {
     hydrationState?: HydrationState | null
 }
 const Home: NextPage<Props> = (props) => {
-    const handleButtonClick = () => {
-        const os = getMobileOperatingSystem()
-        if (os === 'ios') {
-            window.open(props.menu.Store_Links.Apple_App_Store_Link, '_blank')
-        } else {
-            window.open(props.menu.Store_Links.Google_Play_Store_Link, '_blank')
-        }
-    }
     return (
         <AppStateProvider hydrationState={props.hydrationState}>
             <Page

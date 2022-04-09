@@ -3,7 +3,7 @@ import RootStore, {
     HydrationState,
 } from '@crypto-koi/common/lib/mobx/RootStore'
 import { createContext, ReactNode } from 'react'
-import { initStore } from '../mobx/store'
+import { useInitStore as useInitStore } from '../mobx/store'
 import { buildServiceLayer, ServiceLayer } from '../service-layer'
 import { WebStorage } from '../WebTokenStorage'
 
@@ -25,8 +25,8 @@ export const AppStateProvider = ({
     children: ReactNode
     hydrationState?: HydrationState | null
 }) => {
-    const rootStore = initStore(hydrationData)
     const services = buildServiceLayer(new WebStorage())
+    const rootStore = useInitStore(services, hydrationData)
     const webContext: WebContext = {
         store: rootStore,
         services: services,
