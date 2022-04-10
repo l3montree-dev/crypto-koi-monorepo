@@ -11,6 +11,10 @@ import {
     MenuList,
 } from '@chakra-ui/react'
 import { colors } from '../../styles/theme'
+import { useAppState } from '../hooks/AppStateContext'
+import { selectCurrentUser } from '@crypto-koi/common/lib/mobx/selectors'
+import { observer } from 'mobx-react-lite'
+import { MdAccountCircle } from 'react-icons/md'
 
 const renderMenu = (menu: IMenu['Parents']) => {
     return menu.map((item) => {
@@ -72,9 +76,10 @@ const renderMenu = (menu: IMenu['Parents']) => {
 interface Props extends IMenu {
     animate: boolean
 }
-function Header(props: Props) {
+const Header = observer((props: Props) => {
     const isScrolled = useRef(false)
     const [bg, setBg] = useState(props.animate ? '' : 'scrolled')
+    const currentUser = useAppState(selectCurrentUser)
 
     useEffect(() => {
         if (props.animate) {
@@ -110,16 +115,31 @@ function Header(props: Props) {
                 </Link>
                 <div className="hidden items-center font-bold md:flex">
                     {renderMenu(props.Parents)}
-                    <Link href="/register">
-                        <a>
-                            <Button
-                                className="start-button mx-2"
-                                colorScheme={'cherry'}
-                            >
-                                Start
-                            </Button>
-                        </a>
-                    </Link>
+                    {currentUser !== null ? (
+                        <Link href={'/app/users/' + currentUser.id}>
+                            <a>
+                                <Button
+                                    bgColor={'rgba(255,255,255,0.05)'}
+                                    leftIcon={<MdAccountCircle size={26} />}
+                                    className="mx-2"
+                                >
+                                    {currentUser.name}
+                                </Button>
+                            </a>
+                        </Link>
+                    ) : (
+                        <Link href="/register">
+                            <a>
+                                <Button
+                                    className="start-button mx-2"
+                                    colorScheme={'cherry'}
+                                >
+                                    Start
+                                </Button>
+                            </a>
+                        </Link>
+                    )}
+
                     <a
                         target="_blank"
                         className="text-white mx-2"
@@ -149,6 +169,6 @@ function Header(props: Props) {
             </div>
         </header>
     )
-}
+})
 
 export default Header

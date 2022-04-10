@@ -1,34 +1,19 @@
-import { Button } from '@chakra-ui/react'
-import { ClientCryptogotchi } from '@crypto-koi/common/lib/graphql/queries/__generated__/ClientCryptogotchi'
 import { GetUser_user } from '@crypto-koi/common/lib/graphql/queries/__generated__/GetUser'
 import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
-import Transformer from '@crypto-koi/common/lib/Transformer'
 import {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
     NextPage,
 } from 'next'
-import Image from 'next/image'
-import React, { FunctionComponent, useContext, useMemo } from 'react'
+import React, { FunctionComponent } from 'react'
 import { cmsApi } from '../../../cms/api'
 import { IMenu } from '../../../cms/menu'
 import { IFooter, IPage } from '../../../cms/page'
+import { CryptogotchiView } from '../../../components/CryptogotchiView'
 import Page from '../../../components/Page'
-import { config } from '../../../config'
 import CookieStorage from '../../../CookieStorage'
-import {
-    AppStateContext,
-    AppStateProvider,
-} from '../../../hooks/AppStateContext'
-import { BsShieldFillCheck, BsFillShieldSlashFill } from 'react-icons/bs'
-import { MdInfoOutline } from 'react-icons/md'
+import { AppStateProvider } from '../../../hooks/AppStateContext'
 import { buildServiceLayer, fetchHydrationState } from '../../../service-layer'
-import Clock from '../../../components/Clock'
-import moment from 'moment'
-import Lifetime from '../../../components/Lifetime'
-import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
-import { useFeedCryptogotchi } from '@crypto-koi/common/lib/hooks/useFeedCryptogotchi'
-import { observer } from 'mobx-react-lite'
 
 const UserContent: FunctionComponent<GetUser_user> = (props) => {
     return (

@@ -38,7 +38,7 @@ import { useNavigation } from "../hooks/useNavigation";
 import { CustomColors } from "../styles/colors";
 import { DimensionUtils } from "../utils/DimensionUtils";
 import ViewUtils from "../utils/ViewUtils";
-import { useFeedCryptogotchi } from "@crypto-koi/common/lib/hooks/useFeedCryptogotchi";
+import { useFeedCryptogotchi } from "../hooks/useFeedCryptogotchi";
 
 const style = StyleSheet.create({
     img: {

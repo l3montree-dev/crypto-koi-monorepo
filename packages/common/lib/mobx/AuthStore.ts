@@ -17,6 +17,7 @@ export default class AuthStore {
         if (user) {
             this.currentUser = new User(
                 user.id,
+                user.name,
                 user.walletAddress,
                 user.deviceId,
                 user.createdAt,

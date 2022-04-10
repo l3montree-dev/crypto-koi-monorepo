@@ -6,14 +6,20 @@ import TimeUtils from '@crypto-koi/common/lib/TimeUtils'
 interface Props {
     date: Moment
     id: string
+    runTill?: Moment
 }
 
 function Clock(props: Props) {
-    const [value, setValue] = useState(moment())
+    const [value, setValue] = useState(props.runTill ?? moment())
     useEffect(() => {
-        ticker.addTickHandler(props.id, () => setValue(moment()))
-        return () => ticker.removeTickHandler(props.id)
-    }, [props.date, props.id])
+        if (!props.runTill || props.runTill.isAfter(moment())) {
+            ticker.addTickHandler(props.id, () => setValue(moment()))
+        }
+        return () => {
+            if (!props.runTill || props.runTill?.isAfter(moment()))
+                ticker.removeTickHandler(props.id)
+        }
+    }, [props.date, props.id, props.runTill])
 
     return <span>{TimeUtils.getTimeString(value, props.date)}</span>
 }

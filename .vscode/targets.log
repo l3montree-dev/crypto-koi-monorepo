@@ -6,12 +6,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Apr  9 21:09:39 2022
+# Make data base, printed on Sun Apr 10 12:54:06 2022
 
 # Variables
 
-# environment
-PROVIDE_FULLSTACK_ACTION = true
 # environment
 JAVA_HOME = /usr/lib/jvm/java-11-openjdk-amd64
 # environment
@@ -25,9 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-UUID = db47ae1d-cad0-41cc-8b86-20922bc283be
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3ce0dfcf-09bc-4bcb-99c5-da5d45b75dd7.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-decb2e45-51ca-4fc6-a12b-7a9ad11ccb40.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
@@ -38,8 +34,6 @@ WINDOWPATH = 2
 NVM_DIR = /home/timbastin/.nvm
 # default
 MAKE_COMMAND := make
-# environment
-THREE_SCALE_USER_TOKEN = 207c527cfc2a6b8dcf4fa43ad7a976da
 # environment
 QT_ACCESSIBILITY = 1
 # environment
@@ -79,15 +73,13 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.112
+GNOME_TERMINAL_SERVICE = :1.113
 # makefile
 MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo
 # environment
 VSCODE_PIPE_LOGGING = true
-# environment
-UTM_SOURCE = vscode
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
@@ -115,13 +107,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 16155
+VSCODE_PID = 15260
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/14319,unix/avocado:/tmp/.ICE-unix/14319
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/11798,unix/avocado:/tmp/.ICE-unix/11798
 # automatic
 *F = $(notdir $*)
 # environment
@@ -149,7 +141,7 @@ GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/9dccc323_1fd1_4003_aea1_c38baaf5e251
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/b48e1942_2cff_4019_aeab_6bc25655baeb
 # environment
 MAKELEVEL := 0
 # environment
@@ -166,8 +158,6 @@ MAKEFILES :=
 VSCODE_LOG_NATIVE = false
 # environment
 USERNAME = timbastin
-# environment
-RECOMMENDER_API_URL = https://gw.api.openshift.io//api/v2
 # automatic
 ?F = $(notdir $?)
 # environment
@@ -189,9 +179,9 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 14339
+SYSTEMD_EXEC_PID = 11818
 # environment
-DISPLAY = :1
+DISPLAY = :0
 # environment
 USER = timbastin
 # environment
@@ -212,8 +202,6 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 COLORTERM = truecolor
 # environment
 NVM_CD_FLAGS = -q
-# environment
-GOLANG_EXECUTABLE = go
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -239,8 +227,6 @@ SUFFIXES :=
 # environment
 VSCODE_CLI = 1
 # environment
-TELEMETRY_ID = 2ba7c192-a2f5-46f6-8779-cde9eef73a86
-# environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VTE_VERSION = 6402
@@ -251,7 +237,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=120/1024=12%, Rehash=0, Collisions=13/150=9%
+# Load=113/1024=11%, Rehash=0, Collisions=12/143=8%
 
 # Pattern-specific Variable Values
 
@@ -290,6 +276,9 @@ apps/web/package.json:
 
 native-android: install
 #  Implicit rule search has not been done.
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 7):
@@ -298,9 +287,6 @@ native-android: install
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 #  Last modified 2022-04-08 21:53:28.938681363
 #  File has been updated.
 #  Successfully updated.
@@ -372,6 +358,6 @@ apps/native/package.json:
 # strcache performance: lookups = 46 / hit rate = 34%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=1/46=2%
-# Finished Make data base on Sat Apr  9 21:09:41 2022
+# Finished Make data base on Sun Apr 10 12:54:06 2022
 
  

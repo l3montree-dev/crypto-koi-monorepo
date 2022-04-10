@@ -9,6 +9,7 @@ export default class User {
 
     constructor(
         public id: string,
+        public name: string,
         public walletAddress: string | null,
         public deviceId: string | null,
         createdAt: string,

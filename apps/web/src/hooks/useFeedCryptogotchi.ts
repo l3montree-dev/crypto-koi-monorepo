@@ -1,8 +1,11 @@
 import { useMutation } from '@apollo/client'
-import { FEED_CRYPTOGOTCHI_MUTATION } from '../graphql/queries/cryptogotchi'
-import { Feed, FeedVariables } from '../graphql/queries/__generated__/Feed'
-import Cryptogotchi from '../mobx/Cryptogotchi'
-import User from '../mobx/User'
+import { FEED_CRYPTOGOTCHI_MUTATION } from '@crypto-koi/common/lib/graphql/queries/cryptogotchi'
+import {
+    Feed,
+    FeedVariables,
+} from '@crypto-koi/common/lib/graphql/queries/__generated__/Feed'
+import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
+import User from '@crypto-koi/common/lib/mobx/User'
 
 export function useFeedCryptogotchi(
     currentUser: User | null,
@@ -26,7 +29,7 @@ export function useFeedCryptogotchi(
 
             cryptogotchi.setFromFragment(res.data.feed)
         } catch (e) {
-            //
+            console.error(e)
         }
     }
 

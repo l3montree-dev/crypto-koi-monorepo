@@ -1,19 +1,19 @@
 import { Button } from '@chakra-ui/react'
 import { ClientCryptogotchi } from '@crypto-koi/common/lib/graphql/queries/__generated__/ClientCryptogotchi'
-import { useFeedCryptogotchi } from '@crypto-koi/common/lib/hooks/useFeedCryptogotchi'
+import { useFeedCryptogotchi } from '../hooks/useFeedCryptogotchi'
 import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
 import Transformer from '@crypto-koi/common/lib/Transformer'
 import { observer } from 'mobx-react-lite'
 import moment from 'moment'
+import Image from 'next/image'
 import { FunctionComponent, useContext, useMemo } from 'react'
-import { BsShieldFillCheck, BsFillShieldSlashFill } from 'react-icons/bs'
+import { BsFillShieldSlashFill, BsShieldFillCheck } from 'react-icons/bs'
 import { MdInfoOutline } from 'react-icons/md'
+import { config } from '../config'
 import { AppStateContext } from '../hooks/AppStateContext'
 import Clock from './Clock'
-import Lifetime from './Lifetime'
-import Image from 'next/image'
-import { config } from '../config'
 import { Attributes } from './KoiAttributes'
+import Lifetime from './Lifetime'
 
 export const CryptogotchiView: FunctionComponent<ClientCryptogotchi> = observer(
     (props) => {
@@ -54,12 +54,13 @@ export const CryptogotchiView: FunctionComponent<ClientCryptogotchi> = observer(
                         <Image
                             width={500}
                             height={500}
+                            quality={100}
                             alt={cryptogotchi.name ?? 'CryptoKoi'}
                             src={
                                 config.api +
                                 '/images/' +
                                 Transformer.uuidToUint256(cryptogotchi.id) +
-                                '?size=500'
+                                '?size=1024'
                             }
                         />
                     </div>
@@ -86,6 +87,10 @@ export const CryptogotchiView: FunctionComponent<ClientCryptogotchi> = observer(
                             <div className="ml-2">
                                 Age:{' '}
                                 <Clock
+                                    runTill={moment().add(
+                                        props.minutesTillDeath,
+                                        'minutes'
+                                    )}
                                     id={props.id + '-age'}
                                     date={moment(props.createdAt)}
                                 />

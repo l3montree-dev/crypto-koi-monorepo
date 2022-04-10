@@ -18,6 +18,9 @@ interface Props {
 }
 
 const fix2Digits = (n: number) => {
+    if (n < 0) {
+        return '00'
+    }
     return n < 10 ? '0' + n : n
 }
 const transformToString = (from: Moment, till: Moment) => {
@@ -32,18 +35,27 @@ const transformToString = (from: Moment, till: Moment) => {
 
 const Lifetime: FunctionComponent<Props> = (props) => {
     const [clock, setNow] = useState(moment())
+    console.log(props.minutesTillDeath)
     const till = useMemo(() => {
         const d = moment()
         d.add(props.minutesTillDeath, 'minutes')
-        return moment(d.toISOString())
+        return d
     }, [props.minutesTillDeath])
 
     useEffect(() => {
-        ticker.addTickHandler(props.id, () => setNow(moment()))
-        return () => ticker.removeTickHandler(props.id)
+        if (props.minutesTillDeath > 0) {
+            ticker.addTickHandler(props.id, () => setNow(moment()))
+        }
+        return () => {
+            if (props.minutesTillDeath > 0) {
+                ticker.removeTickHandler(props.id)
+            }
+        }
     }, [props.id])
     const progress =
-        clock.diff(till, 'seconds') / (props.maxLifetimeMinutes * 60)
+        props.minutesTillDeath > 0
+            ? clock.diff(till, 'seconds') / (props.maxLifetimeMinutes * 60)
+            : 0
 
     // console.log(till.current.add(props.minutesTillDeath, 'minutes'))
     return (

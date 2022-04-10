@@ -25,7 +25,6 @@ const Koi: FunctionComponent<Props> = (props) => {
                                     minutesTillDeath={moment()
                                         .endOf('hour')
                                         .diff(moment(), 'minute')}
-                                    snapshotValid={moment()}
                                 />
                             </div>
                         </div>
