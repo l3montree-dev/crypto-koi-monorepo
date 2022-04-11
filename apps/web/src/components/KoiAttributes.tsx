@@ -13,7 +13,7 @@ export const Attributes: FunctionComponent<ClientCryptogotchi['attributes']> = (
                 .map(([attr, value]) => (
                     <div
                         key={attr}
-                        className="bg-sea-600 mr-2 mb-2 text-white rounded-lg p-4 flex flex-col items-center justify-center"
+                        className="bg-white mr-2 mb-2 rounded-lg p-3 flex flex-col items-center justify-center"
                     >
                         <div
                             className="w-10 h-10 border-2 rounded-lg"
@@ -24,7 +24,7 @@ export const Attributes: FunctionComponent<ClientCryptogotchi['attributes']> = (
                         <span className="mt-2">{value}</span>
                     </div>
                 ))}
-            <div className="bg-sea-600 text-white rounded-lg p-4 mb-2 flex flex-col items-center justify-center">
+            <div className="bg-white rounded-lg p-3 mb-2 flex flex-col items-center justify-center">
                 <div className="w-10 flex-row flex items-center justify-center font-bold h-10 border-2 rounded-lg">
                     {props.patternQuantity}
                 </div>

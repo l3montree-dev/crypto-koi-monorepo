@@ -116,7 +116,7 @@ const Header = observer((props: Props) => {
                 <div className="hidden items-center font-bold md:flex">
                     {renderMenu(props.Parents)}
                     {currentUser !== null ? (
-                        <Link href={'/app/users/' + currentUser.id}>
+                        <Link href={'/users/' + currentUser.id}>
                             <a>
                                 <Button
                                     bgColor={'rgba(255,255,255,0.05)'}

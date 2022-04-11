@@ -6,18 +6,18 @@ import {
     NextPage,
 } from 'next'
 import React, { FunctionComponent } from 'react'
-import { cmsApi } from '../../../cms/api'
-import { IMenu } from '../../../cms/menu'
-import { IFooter, IPage } from '../../../cms/page'
-import { CryptogotchiView } from '../../../components/CryptogotchiView'
-import Page from '../../../components/Page'
-import CookieStorage from '../../../CookieStorage'
-import { AppStateProvider } from '../../../hooks/AppStateContext'
-import { buildServiceLayer, fetchHydrationState } from '../../../service-layer'
+import { cmsApi } from '../../cms/api'
+import { IMenu } from '../../cms/menu'
+import { IFooter, IPage } from '../../cms/page'
+import { CryptogotchiView } from '../../components/CryptogotchiView'
+import Page from '../../components/Page'
+import CookieStorage from '../../CookieStorage'
+import { AppStateProvider } from '../../hooks/AppStateContext'
+import { buildServiceLayer, fetchHydrationState } from '../../service-layer'
 
 const UserContent: FunctionComponent<GetUser_user> = (props) => {
     return (
-        <div className="max-w-screen-md mx-auto">
+        <div className="max-w-screen-xl mx-auto">
             {props.cryptogotchies.map((c) => (
                 <CryptogotchiView {...c} key={c.id} />
             ))}
@@ -44,7 +44,7 @@ const UserPage: NextPage<Props> = (props) => {
                 footer={props.footer}
                 animateHeader={false}
             >
-                <div className="md:py-20 koi-gradient pt-5 pb-10 md:bg-slate-200 px-4">
+                <div className="md:py-20 pt-5 pb-10 bg-slate-200 px-4">
                     <UserContent {...props.user} />
                 </div>
             </Page>
@@ -71,7 +71,13 @@ export async function getServerSideProps(
         cmsApi<{ data: { attributes: IFooter } }>(`footer?populate=deep`),
         cmsApi<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
         fetchHydrationState(services),
-        services.userService.findById(userId),
+        (async () => {
+            try {
+                return await services.userService.findById(userId)
+            } catch (e) {
+                return null
+            }
+        })(),
     ])
 
     if (!user) {

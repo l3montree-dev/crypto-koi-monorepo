@@ -92,6 +92,10 @@ export class AuthService {
         return this.loadTokenPromise
     }
 
+    hasTokens() {
+        return !!this.accessToken && !!this.refreshToken
+    }
+
     async exchangeDeviceIdForToken() {
         try {
             let deviceId = await this.tokenService.getDeviceId()

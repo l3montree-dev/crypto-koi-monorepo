@@ -1,16 +1,10 @@
-import {
-    Button,
-    Input,
-    InputGroup,
-    InputRightAddon,
-    useToast,
-} from '@chakra-ui/react'
+import { Button, useToast } from '@chakra-ui/react'
+import copy from 'copy-to-clipboard'
+import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
 import { ITechPB } from '../cms/page'
 import { CMSContent } from '../components/CMSContent'
 import Section from '../components/Section'
-import copy from 'copy-to-clipboard'
-import Image from 'next/image'
 import Toast from '../components/Toast'
 
 const Tech: FunctionComponent<ITechPB> = (props) => {

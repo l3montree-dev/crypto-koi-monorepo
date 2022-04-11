@@ -294,4 +294,12 @@ header {
     background: radial-gradient(#232e3d 50%, #111827);
 }
 
+.progress-button {
+
+    &:focus,
+    &:focus-within {
+        box-shadow: var(--chakra-shadows-outline)
+    }
+}
+
 @import "md";

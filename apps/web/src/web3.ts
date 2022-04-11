@@ -8,7 +8,8 @@ import {
     switchOrAddNetworkFactory,
 } from '@crypto-koi/common/lib/web3'
 import { Web3Provider } from '@ethersproject/providers'
-import WalletConnectProvider from '@walletconnect/web3-provider'
+import CryptoKoiSmartContract from '@crypto-koi/common/lib/contracts/CryptoKoiSmartContract'
+import { AppEventEmitter } from '@crypto-koi/common/lib/AppEventEmitter'
 
 export type WalletDescriptor = { iconUrl: string; name: string; color: string }
 declare const window: any
@@ -27,9 +28,11 @@ const connector = new WalletConnect({
 // use a 5 min timeout for the user to complete the request.
 const switchOrAddNetwork = switchOrAddNetworkFactory(console, 5 * 60 * 1000)
 
-export const connectToWallet = async (): Promise<
-    [string, WalletDescriptor]
-> => {
+/**
+ * Returns either a metamask or a wallet connect provider.
+ * this depends on the browser.
+ */
+const getFittingWeb3Provider = async (): Promise<Web3Provider> => {
     // check if the browser is running metamask
     let provider: Web3Provider
     if (window.ethereum) {
@@ -44,6 +47,33 @@ export const connectToWallet = async (): Promise<
 
     await switchOrAddNetwork(window.ethereum, commonConfig.chain)
 
+    return provider
+}
+
+export const makeNft = async (
+    getNftSignature: (
+        userAddress: string
+    ) => Promise<{ tokenId: string; signature: string }>
+) => {
+    const provider = await getFittingWeb3Provider()
+
+    const cryptoKoiContract = new CryptoKoiSmartContract(
+        await provider.getSigner().getAddress(),
+        provider
+    )
+
+    const result = await getNftSignature(cryptoKoiContract.getUserAddress())
+    if (!result) {
+        return
+    }
+
+    return cryptoKoiContract.redeem(result.tokenId, result.signature)
+}
+
+export const connectToWallet = async (): Promise<
+    [string, WalletDescriptor]
+> => {
+    const provider = await getFittingWeb3Provider()
     const signer = provider.getSigner()
 
     return [

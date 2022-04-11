@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Apr 10 12:54:06 2022
+# Make data base, printed on Mon Apr 11 20:44:07 2022
 
 # Variables
 
@@ -21,9 +23,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-GJS_DEBUG_OUTPUT = stderr
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-decb2e45-51ca-4fc6-a12b-7a9ad11ccb40.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-17cd886d-bad7-434e-b71c-9f00db04470e.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
@@ -73,7 +73,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.113
+GNOME_TERMINAL_SERVICE = :1.106
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -107,13 +107,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 15260
+VSCODE_PID = 7271
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/11798,unix/avocado:/tmp/.ICE-unix/11798
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/2966,unix/avocado:/tmp/.ICE-unix/2966
 # automatic
 *F = $(notdir $*)
 # environment
@@ -137,19 +137,15 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/b48e1942_2cff_4019_aeab_6bc25655baeb
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/77c4d468_9d2c_408e_8fd7_e0d2129de155
 # environment
 MAKELEVEL := 0
-# environment
-IM_CONFIG_CHECK_ENV = 1
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/home/timbastin/.cargo/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/timbastin/.dotnet/tools:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/.dotnet/tools:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin
+PATH = /home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.cargo/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/timbastin/.dotnet/tools:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin
 # default
 MAKEFILES := 
 # automatic
@@ -179,7 +175,7 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 11818
+SYSTEMD_EXEC_PID = 3161
 # environment
 DISPLAY = :0
 # environment
@@ -237,7 +233,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=113/1024=11%, Rehash=0, Collisions=12/143=8%
+# Load=110/1024=11%, Rehash=0, Collisions=12/140=9%
 
 # Pattern-specific Variable Values
 
@@ -276,9 +272,6 @@ apps/web/package.json:
 
 native-android: install
 #  Implicit rule search has not been done.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 7):
@@ -292,6 +285,7 @@ Makefile:
 #  Successfully updated.
 
 # Not a target:
+ 
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -358,6 +352,6 @@ apps/native/package.json:
 # strcache performance: lookups = 46 / hit rate = 34%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=1/46=2%
-# Finished Make data base on Sun Apr 10 12:54:06 2022
+# Finished Make data base on Mon Apr 11 20:44:08 2022
 
  

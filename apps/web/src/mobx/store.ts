@@ -34,13 +34,22 @@ export const useInitStore = (
             // if we are on client side, we need to hydrate the store with the data from server
             // we can do this by calling the hydrate method on the store
             ;(async function () {
-                store.hydrate(await services.userService.sync())
-                // save the client store - on subsequent calls, the condition will return false and we are never hydrating
-                // the store client side.
-                clientStore = store
+                try {
+                    await services.authService.waitForTokenLoad()
+                    if (services.authService.hasTokens()) {
+                        const res = await services.userService.sync()
+                        store.hydrate(res)
+                    }
+                } catch (e) {
+                    console.error(e)
+                } finally {
+                    // save the client store - on subsequent calls, the condition will return false and we are never hydrating
+                    // the store client side.
+                    clientStore = store
+                }
             })()
         }
-    }, [initData, services.userService, store])
+    }, [initData, services.userService, store, services.authService])
 
     return store
 }

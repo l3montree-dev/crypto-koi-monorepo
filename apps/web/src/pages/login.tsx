@@ -12,6 +12,7 @@ import React from 'react'
 import { cmsApi } from '../cms/api'
 import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
+import LoginForm from '../components/LoginForm'
 import Page from '../components/Page'
 import RegistrationForm from '../components/RegistrationForm'
 import CookieStorage from '../CookieStorage'
@@ -25,7 +26,7 @@ interface Props {
     hydrationState?: HydrationState | null
 }
 
-const Register: NextPage<Props> = (props) => {
+const Login: NextPage<Props> = (props) => {
     return (
         <AppStateProvider hydrationState={props.hydrationState}>
             <Page
@@ -36,7 +37,7 @@ const Register: NextPage<Props> = (props) => {
                 animateHeader={false}
             >
                 <div className="md:py-20 pt-5 pb-10 md:bg-slate-200 px-4">
-                    <RegistrationForm />
+                    <LoginForm />
                 </div>
             </Page>
         </AppStateProvider>
@@ -78,4 +79,4 @@ export async function getServerSideProps(
     }
 }
 
-export default Register
+export default Login
