@@ -14,8 +14,8 @@ EXPOSE 3000
 
 COPY . .
 
-RUN npm install
+RUN yarn install
 
-RUN NODE_OPTIONS=--max_old_space_size=4096 npm run build
+RUN NODE_OPTIONS=--max_old_space_size=4096 next build
 
-CMD [ "npm", "start" ]
+CMD [ "next", "start" ]
