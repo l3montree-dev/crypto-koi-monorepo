@@ -48,7 +48,7 @@ interface Props {
     hydrationState?: HydrationState | null
 }
 
-const UserPage: NextPage<Props> = (props) => {
+const UserPage: NextPage<Props> = observer((props) => {
     return (
         <AppStateProvider hydrationState={props.hydrationState}>
             <Page
@@ -64,8 +64,7 @@ const UserPage: NextPage<Props> = (props) => {
             </Page>
         </AppStateProvider>
     )
-}
-
+})
 export async function getServerSideProps(
     context: GetServerSidePropsContext<{ user: string }>
 ): Promise<GetServerSidePropsResult<Props>> {

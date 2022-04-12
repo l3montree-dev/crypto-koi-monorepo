@@ -3,9 +3,9 @@ import moment, { Moment } from 'moment'
 import Cryptogotchi from './Cryptogotchi'
 
 export default class User {
-    _createdAt: string
+    _createdAt: string = ''
 
-    public cryptogotchies: Cryptogotchi[]
+    public cryptogotchies: Cryptogotchi[] = []
 
     constructor(
         public id: string,

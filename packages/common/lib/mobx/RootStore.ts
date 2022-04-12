@@ -8,9 +8,9 @@ export type HydrationState = GetUser['user']
  * The mobx root store of the application
  */
 export default class RootStore {
-    public authStore: AuthStore
+    public authStore: AuthStore = new AuthStore()
 
-    public themeStore: ThemeStore
+    public themeStore: ThemeStore = new ThemeStore()
 
     constructor(authStore: AuthStore, themeStore: ThemeStore) {
         makeAutoObservable(this)

@@ -15,10 +15,11 @@ import {
 import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
 import Transformer from '@crypto-koi/common/lib/Transformer'
 import copyToClipboard from 'copy-to-clipboard'
+import { makeAutoObservable } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import moment from 'moment'
 import Image from 'next/image'
-import { FunctionComponent, useContext, useState } from 'react'
+import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import {
     BsFillShieldSlashFill,
     BsFillTrophyFill,

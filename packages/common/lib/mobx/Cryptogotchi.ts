@@ -7,23 +7,23 @@ import Event from './Event'
 import GameStat from './GameStat'
 
 export default class Cryptogotchi {
-    public id!: string
+    public id: string = ''
     public isAlive!: boolean
-    public name!: string | null
-    public food!: number
-    public _createdAt!: string
-    public ownerAddress!: string
-    public ownerId!: string
+    public name: string | null = null
+    public food: number = 0
+    public _createdAt: string = ''
+    public ownerAddress: string = ''
+    public ownerId: string = ''
     public gameStats: GameStat[] = []
     public events: Event[] = []
-    public minutesTillDeath!: number
-    public _deathDate!: string | null
-    public _nextFeeding!: string
-    public _snapshotValid!: string
-    public maxLifetimeMinutes!: number
-    public color!: string
-    public rank!: number
-    public isValidNft!: boolean
+    public minutesTillDeath: number = 0
+    public _deathDate: string | null = null
+    public _nextFeeding: string = ''
+    public _snapshotValid: string = ''
+    public maxLifetimeMinutes: number = 0
+    public color: string = '#000000'
+    public rank: number = -1
+    public isValidNft: boolean = false
 
     public attributes!: ClientCryptogotchi['attributes']
 
