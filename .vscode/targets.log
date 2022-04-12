@@ -8,10 +8,12 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Apr 11 20:44:07 2022
+# Make data base, printed on Tue Apr 12 07:52:03 2022
 
 # Variables
 
+# environment
+PROVIDE_FULLSTACK_ACTION = true
 # environment
 JAVA_HOME = /usr/lib/jvm/java-11-openjdk-amd64
 # environment
@@ -23,17 +25,21 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-17cd886d-bad7-434e-b71c-9f00db04470e.sock
+UUID = db47ae1d-cad0-41cc-8b86-20922bc283be
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7422e8ae-2a15-4a17-b078-537e1bac43d2.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
-VSCODE_CWD = /home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo
+VSCODE_CWD = /home/timbastin/Schreibtisch/l3montree/crypto-koi/crypto-koi-api
 # environment
 WINDOWPATH = 2
 # environment
 NVM_DIR = /home/timbastin/.nvm
 # default
 MAKE_COMMAND := make
+# environment
+THREE_SCALE_USER_TOKEN = 207c527cfc2a6b8dcf4fa43ad7a976da
 # environment
 QT_ACCESSIBILITY = 1
 # environment
@@ -73,13 +79,15 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.106
+GNOME_TERMINAL_SERVICE = :1.102
 # makefile
 MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo
 # environment
 VSCODE_PIPE_LOGGING = true
+# environment
+UTM_SOURCE = vscode
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
@@ -107,13 +115,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 7271
+VSCODE_PID = 6248
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/2966,unix/avocado:/tmp/.ICE-unix/2966
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/3078,unix/avocado:/tmp/.ICE-unix/3078
 # automatic
 *F = $(notdir $*)
 # environment
@@ -139,7 +147,7 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/77c4d468_9d2c_408e_8fd7_e0d2129de155
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/2cbec1da_4e08_4a36_ae29_94fe52f67666
 # environment
 MAKELEVEL := 0
 # default
@@ -154,6 +162,8 @@ MAKEFILES :=
 VSCODE_LOG_NATIVE = false
 # environment
 USERNAME = timbastin
+# environment
+RECOMMENDER_API_URL = https://gw.api.openshift.io//api/v2
 # automatic
 ?F = $(notdir $?)
 # environment
@@ -175,7 +185,7 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 3161
+SYSTEMD_EXEC_PID = 3266
 # environment
 DISPLAY = :0
 # environment
@@ -198,6 +208,8 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 COLORTERM = truecolor
 # environment
 NVM_CD_FLAGS = -q
+# environment
+GOLANG_EXECUTABLE = go
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -223,6 +235,8 @@ SUFFIXES :=
 # environment
 VSCODE_CLI = 1
 # environment
+TELEMETRY_ID = 2ba7c192-a2f5-46f6-8779-cde9eef73a86
+# environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VTE_VERSION = 6402
@@ -233,7 +247,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=110/1024=11%, Rehash=0, Collisions=12/140=9%
+# Load=117/1024=11%, Rehash=0, Collisions=12/147=8%
 
 # Pattern-specific Variable Values
 
@@ -277,6 +291,7 @@ native-android: install
 #  recipe to execute (from 'Makefile', line 7):
 	yarn workspace @crypto-koi/native android
 
+ 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
@@ -285,7 +300,6 @@ Makefile:
 #  Successfully updated.
 
 # Not a target:
- 
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -352,6 +366,6 @@ apps/native/package.json:
 # strcache performance: lookups = 46 / hit rate = 34%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=1/46=2%
-# Finished Make data base on Mon Apr 11 20:44:08 2022
+# Finished Make data base on Tue Apr 12 07:52:03 2022
 
  

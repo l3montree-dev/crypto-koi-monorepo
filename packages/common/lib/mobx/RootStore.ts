@@ -13,9 +13,9 @@ export default class RootStore {
     public themeStore: ThemeStore
 
     constructor(authStore: AuthStore, themeStore: ThemeStore) {
+        makeAutoObservable(this)
         this.authStore = authStore
         this.themeStore = themeStore
-        makeAutoObservable(this)
     }
 
     hydrate(initialState: HydrationState) {

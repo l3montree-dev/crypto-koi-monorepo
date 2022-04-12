@@ -86,7 +86,7 @@ export const Footer: FunctionComponent<Props> = (props) => {
                     </div>
                 </div>
             </footer>
-            <div className="bg-sea-800 px-3 py-2 pb-16 md:pb-2" id="colophon">
+            <div className="bg-gray-900 px-3 py-2 pb-16 md:pb-2" id="colophon">
                 <div className="max-w-screen-2xl flex-wrap flex flex-row items-center justify-between mx-auto">
                     <a
                         target={'_blank'}

@@ -25,6 +25,7 @@ export const AppStateProvider = ({
     children: ReactNode
     hydrationState?: HydrationState | null
 }) => {
+    console.log('Initializing AppState and service layer')
     const services = buildServiceLayer(new WebStorage())
     const rootStore = useInitStore(services, hydrationData)
     const webContext: WebContext = {

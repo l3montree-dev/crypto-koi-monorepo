@@ -1,5 +1,29 @@
 /* eslint-disable react-native/no-raw-text */
 import { useLazyQuery, useMutation } from "@apollo/client";
+import CryptoKoiSmartContract from "@crypto-koi/common/lib/contracts/CryptoKoiSmartContract";
+import {
+    CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
+    FETCH_EVENTS,
+    GET_NFT_SIGNATURE,
+} from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
+import {
+    ChangeCryptogotchiName,
+    ChangeCryptogotchiNameVariables,
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/ChangeCryptogotchiName";
+import { ClientEvent } from "@crypto-koi/common/lib/graphql/queries/__generated__/ClientEvent";
+import {
+    FetchEvents,
+    FetchEventsVariables,
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchEvents";
+import {
+    GetNftSignature,
+    GetNftSignatureVariables,
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/GetNftSignature";
+import {
+    selectCryptogotchi,
+    selectThemeStore,
+} from "@crypto-koi/common/lib/mobx/selectors";
+import { newProvider as newWeb3Provider } from "@crypto-koi/common/lib/web3";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { StatusBar } from "expo-status-bar";
@@ -19,41 +43,13 @@ import { AppButton } from "../components/AppButton";
 import Input from "../components/Input";
 import Screen from "../components/Screen";
 import { config } from "../config";
-import {
-    CHANGE_NAME_OF_CRYPTOGOTCHI_MUTATION,
-    FETCH_EVENTS,
-    GET_NFT_SIGNATURE,
-} from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
-import {
-    ChangeCryptogotchiName,
-    ChangeCryptogotchiNameVariables,
-} from "@crypto-koi/common/lib/graphql/queries/__generated__/ChangeCryptogotchiName";
-import { ClientEvent } from "@crypto-koi/common/lib/graphql/queries/__generated__/ClientEvent";
-import {
-    FetchEvents,
-    FetchEventsVariables,
-} from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchEvents";
-import {
-    GetNftSignature,
-    GetNftSignatureVariables,
-} from "@crypto-koi/common/lib/graphql/queries/__generated__/GetNftSignature";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
 import { RootStackParamList } from "../hooks/useNavigation";
 import { nativeEventEmitter } from "../services/NativeAppEventEmitter";
 import { nativeUserService } from "../services/NativeUserService";
-import { switchOrAddNetwork } from "../services/web3";
-import {
-    hexChainId2Number,
-    newProvider as newWeb3Provider,
-} from "@crypto-koi/common/lib/web3";
 import log from "../utils/logger";
-import ViewUtils from "../utils/ViewUtils";
-import CryptoKoiSmartContract from "../web3/CryptoKoiSmartContract";
-import {
-    selectThemeStore,
-    selectCryptogotchi,
-} from "@crypto-koi/common/lib/mobx/selectors";
+import ethers from "ethers";
 
 type Props = ClientEvent & { name: string; index: number };
 
@@ -208,25 +204,12 @@ const FriendEditModal = observer(() => {
 
         const provider = newWeb3Provider(connector, config.chain);
 
-        if (provider.chainId !== hexChainId2Number(config.chain.chainId)) {
-            // try to switch the network.
-            // if this does not work, the user has to switch it manually.
-            try {
-                await switchOrAddNetwork(provider, config.chain);
-            } catch (e) {
-                ViewUtils.toast(
-                    "Please switch your wallet application to the " +
-                        config.chain.chainName +
-                        " network and restart the application"
-                );
-                setNftLoading(false);
-                return;
-            }
-        }
-
         await provider.enable();
 
-        const cryptoKoiContract = new CryptoKoiSmartContract(provider);
+        const cryptoKoiContract = new CryptoKoiSmartContract(
+            provider.accounts[0],
+            new ethers.providers.Web3Provider(provider)
+        );
 
         const result = await getNftSignature({
             variables: {

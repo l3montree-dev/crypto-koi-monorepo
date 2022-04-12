@@ -1,29 +1,43 @@
 import { GetUser_user } from '@crypto-koi/common/lib/graphql/queries/__generated__/GetUser'
+import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
 import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
+import { selectCurrentUser } from '@crypto-koi/common/lib/mobx/selectors'
+import { observer } from 'mobx-react-lite'
 import {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
     NextPage,
 } from 'next'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { cmsApi } from '../../cms/api'
 import { IMenu } from '../../cms/menu'
 import { IFooter, IPage } from '../../cms/page'
 import { CryptogotchiView } from '../../components/CryptogotchiView'
 import Page from '../../components/Page'
 import CookieStorage from '../../CookieStorage'
-import { AppStateProvider } from '../../hooks/AppStateContext'
+import { AppStateProvider, useAppState } from '../../hooks/AppStateContext'
 import { buildServiceLayer, fetchHydrationState } from '../../service-layer'
 
-const UserContent: FunctionComponent<GetUser_user> = (props) => {
+const UserContent: FunctionComponent<GetUser_user> = observer((props) => {
+    const currentUser = useAppState(selectCurrentUser)
+
     return (
         <div className="max-w-screen-xl mx-auto">
-            {props.cryptogotchies.map((c) => (
-                <CryptogotchiView {...c} key={c.id} />
-            ))}
+            {props.cryptogotchies.map((c) => {
+                let crypt: Cryptogotchi
+                if (c.ownerId === currentUser?.id) {
+                    crypt =
+                        currentUser.cryptogotchies.find(
+                            (gotchi) => gotchi.id === c.id
+                        ) ?? new Cryptogotchi(c)
+                } else {
+                    crypt = new Cryptogotchi(c)
+                }
+                return <CryptogotchiView cryptogotchi={crypt} key={c.id} />
+            })}
         </div>
     )
-}
+})
 
 interface Props {
     page: IPage

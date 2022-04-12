@@ -1,6 +1,12 @@
 import { Moment } from 'moment'
 
 export default class TimeUtils {
+    static fix2Digits = (n: number) => {
+        if (n < 0) {
+            return '00'
+        }
+        return n < 10 ? '0' + n : n
+    }
     static getTimeString(now: Moment, since: Moment) {
         let seconds = now.diff(since, 'second')
 
@@ -24,7 +30,13 @@ export default class TimeUtils {
             hours -= days * 24
         }
 
-        let timeString = hours + 'h ' + minutes + 'm ' + seconds + 's'
+        let timeString =
+            this.fix2Digits(hours) +
+            'h ' +
+            this.fix2Digits(minutes) +
+            'm ' +
+            this.fix2Digits(seconds) +
+            's'
 
         // only display days if it's more than a day
         if (days > 0) {

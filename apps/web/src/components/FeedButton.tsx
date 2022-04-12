@@ -38,6 +38,7 @@ const FeedButton: FunctionComponent<Props> = observer((props) => {
         // use a regular chakra button for the designing.
         return (
             <Button
+                disabled={props.disabled}
                 isFullWidth={true}
                 onClick={props.onClick}
                 height={'100%'}

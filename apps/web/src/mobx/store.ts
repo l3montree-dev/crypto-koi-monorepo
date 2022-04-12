@@ -43,6 +43,7 @@ export const useInitStore = (
                 } catch (e) {
                     console.error(e)
                 } finally {
+                    console.log('setting client store')
                     // save the client store - on subsequent calls, the condition will return false and we are never hydrating
                     // the store client side.
                     clientStore = store

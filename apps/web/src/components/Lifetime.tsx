@@ -10,6 +10,8 @@ import RoundProgress from './RoundProgress'
 import Image from 'next/image'
 import moment, { Moment } from 'moment'
 import { ticker } from '@crypto-koi/common/lib/Ticker'
+import { observer } from 'mobx-react-lite'
+import TimeUtils from '@crypto-koi/common/lib/TimeUtils'
 
 interface Props {
     id: string
@@ -17,12 +19,6 @@ interface Props {
     minutesTillDeath: number
 }
 
-const fix2Digits = (n: number) => {
-    if (n < 0) {
-        return '00'
-    }
-    return n < 10 ? '0' + n : n
-}
 const transformToString = (from: Moment, till: Moment) => {
     const diff = till.diff(from, 'seconds')
 
@@ -30,7 +26,14 @@ const transformToString = (from: Moment, till: Moment) => {
     const h = Math.floor(diff / (60 * 60))
     const m = Math.floor(diff / 60) % 60
 
-    return '' + fix2Digits(h) + ':' + fix2Digits(m) + ':' + fix2Digits(s)
+    return (
+        '' +
+        TimeUtils.fix2Digits(h) +
+        ':' +
+        TimeUtils.fix2Digits(m) +
+        ':' +
+        TimeUtils.fix2Digits(s)
+    )
 }
 
 const Lifetime: FunctionComponent<Props> = (props) => {

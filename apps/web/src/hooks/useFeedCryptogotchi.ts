@@ -19,6 +19,11 @@ export function useFeedCryptogotchi(
 
     const handleFeed = async () => {
         if (!currentUserIsOwner) {
+            console.error(
+                'Current user is not the owner',
+                currentUser?.id,
+                cryptogotchi.ownerId
+            )
             return
         }
         try {
