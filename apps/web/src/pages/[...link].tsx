@@ -31,9 +31,11 @@ const DynamicPage: FunctionComponent<Props> = (props) => {
     )
 }
 
+const alreadyDefinedPages = ['/register', '/login', '/users', '/kois', '/']
+
 export const getStaticPaths: GetStaticPaths = async () => {
     const pages = (await cmsApi<{ data: IPage[] }>(`pages`)).data
-        .filter((p) => p.attributes.Link !== '/')
+        .filter((p) => !alreadyDefinedPages.includes(p.attributes.Link))
         .map((p) => ({
             params: { link: p.attributes.Link.substring(1).split('/') },
         }))

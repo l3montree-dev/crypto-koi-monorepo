@@ -1,14 +1,13 @@
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import {
     AuthService,
     RegisterRequest,
 } from '@crypto-koi/common/lib/AuthService'
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { GET_SELF, GET_USER } from './graphql/queries/user'
 import {
     GetUser,
     GetUserVariables,
 } from './graphql/queries/__generated__/GetUser'
-import RootStore from './mobx/RootStore'
 import { Self } from './graphql/queries/__generated__/Self'
 
 export class UserService {

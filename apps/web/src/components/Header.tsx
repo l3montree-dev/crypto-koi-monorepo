@@ -98,7 +98,7 @@ const Header = observer((props: Props) => {
         }
     }, [props.animate])
     return (
-        <header className={'p-3 md:p-4 fixed top-0 left-0 right-0 z-10 ' + bg}>
+        <header className={'p-3 md:p-4 fixed top-0 left-0 right-0 z-50 ' + bg}>
             <div className="flex-row justify-between max-w-screen-2xl mx-auto flex items-center">
                 <Link passHref={true} href="/">
                     <a className="flex-row flex items-center">

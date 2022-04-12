@@ -1,13 +1,10 @@
-import { Button } from '@chakra-ui/button'
 import Head from 'next/head'
 import React, { FunctionComponent } from 'react'
+import { colors } from '../../styles/theme'
+import { IMenu } from '../cms/menu'
 import { IFooter, ISEO } from '../cms/page'
 import { Footer } from './Footer'
 import Header from './Header'
-import Image from 'next/image'
-import { colors } from '../../styles/theme'
-import { IMenu } from '../cms/menu'
-import { getMobileOperatingSystem } from '../utils'
 
 interface Props {
     footer: IFooter

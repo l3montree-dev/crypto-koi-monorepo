@@ -156,7 +156,7 @@ export interface ISEO {
     Meta_Description: string
     Keywords?: string
     Meta_Robots?: any
-    Meta_Image: IWrappedImg
+    Meta_Image?: IWrappedImg
 }
 
 export interface IAttributes {

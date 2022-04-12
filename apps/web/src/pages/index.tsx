@@ -1,23 +1,20 @@
 import { Button } from '@chakra-ui/react'
+import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
 import type {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
-    GetStaticPropsContext,
-    GetStaticPropsResult,
     NextPage,
 } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import { cmsApi } from '../cms/api'
 import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
-import pageBuilder from '../pagebuilder/page-builder'
-import Image from 'next/image'
-import { getMobileOperatingSystem } from '../utils'
-import Link from 'next/link'
-import { AppStateProvider } from '../hooks/AppStateContext'
-import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
-import { buildServiceLayer, fetchHydrationState } from '../service-layer'
 import CookieStorage from '../CookieStorage'
+import { AppStateProvider } from '../hooks/AppStateContext'
+import pageBuilder from '../pagebuilder/page-builder'
+import { buildServiceLayer, fetchHydrationState } from '../service-layer'
 
 interface Props {
     page: IPage
