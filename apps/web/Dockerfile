@@ -16,6 +16,6 @@ COPY . .
 
 RUN yarn install
 
-RUN NODE_OPTIONS=--max_old_space_size=4096 yarn workspace @crypto-koi/web build
+RUN cd apps/web && NODE_OPTIONS=--max_old_space_size=4096 yarn run build
 
 CMD [ "yarn", "workspace", "@crypto-koi/web", "start" ]
