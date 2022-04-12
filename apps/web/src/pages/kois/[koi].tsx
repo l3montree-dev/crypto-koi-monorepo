@@ -5,7 +5,6 @@ import {
     FindCryptogotchiVariables,
     FindCryptogotchi_cryptogotchi,
 } from '@crypto-koi/common/lib/graphql/queries/__generated__/FindCryptogotchi'
-import { GetUser_user } from '@crypto-koi/common/lib/graphql/queries/__generated__/GetUser'
 import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
 import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
 import { selectCurrentUser } from '@crypto-koi/common/lib/mobx/selectors'
