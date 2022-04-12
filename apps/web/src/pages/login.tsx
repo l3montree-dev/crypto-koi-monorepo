@@ -1,8 +1,4 @@
-import AuthStore from '@crypto-koi/common/lib/mobx/AuthStore'
-import RootStore, {
-    HydrationState,
-} from '@crypto-koi/common/lib/mobx/RootStore'
-import ThemeStore from '@crypto-koi/common/lib/mobx/ThemeStore'
+import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
 import {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
@@ -14,7 +10,6 @@ import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import LoginForm from '../components/LoginForm'
 import Page from '../components/Page'
-import RegistrationForm from '../components/RegistrationForm'
 import CookieStorage from '../CookieStorage'
 import { AppStateProvider } from '../hooks/AppStateContext'
 import { buildServiceLayer, fetchHydrationState } from '../service-layer'

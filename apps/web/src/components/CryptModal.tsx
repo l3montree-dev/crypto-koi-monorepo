@@ -55,7 +55,7 @@ const CryptModal: FunctionComponent<Props> = (props) => {
         if (isOpen) {
             refetch()
         }
-    }, [props.isOpen])
+    }, [isOpen, refetch])
 
     return (
         <Modal isCentered size={'xl'} isOpen={isOpen} onClose={onClose}>

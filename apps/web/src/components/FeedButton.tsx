@@ -31,9 +31,9 @@ const FeedButton: FunctionComponent<Props> = observer((props) => {
             setSeconds(config.secondsBetweenFeeding - seconds)
         })
         return () => {
-            ticker.removeTickHandler(props.cryptogotchi.id + '-feeding')
+            ticker.removeTickHandler(cryptogotchi.id + '-feeding')
         }
-    }, [])
+    }, [cryptogotchi.id, cryptogotchi.nextFeeding])
     if (seconds === -1) {
         // use a regular chakra button for the designing.
         return (

@@ -1,4 +1,6 @@
 import { Button } from '@chakra-ui/react'
+import { ClientCryptogotchi } from '@crypto-koi/common/lib/graphql/queries/__generated__/ClientCryptogotchi'
+import moment from 'moment'
 import React, {
     FunctionComponent,
     useCallback,
@@ -10,7 +12,6 @@ import { CMSContent } from '../components/CMSContent'
 import Koi from '../components/Koi'
 import Section from '../components/Section'
 import { config } from '../config'
-import tinycolor from 'tinycolor2'
 
 const fetchRandomKoi = async (): Promise<IKoiMetadata> => {
     const resp = await fetch(
@@ -21,16 +22,17 @@ const fetchRandomKoi = async (): Promise<IKoiMetadata> => {
     )
     return resp.json()
 }
+
+function getAttribute<T>(koi: IKoiMetadata, name: string, d: T): T {
+    return (
+        (koi.attributes.find((a) => a.trait_type === name)?.value as
+            | T
+            | undefined) ?? d
+    )
+}
+
 const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
-    const [kois, setKois] = useState<
-        Array<{
-            image: string
-            colors: string[]
-            patterns: number
-            species: string
-            bgColor: string
-        }>
-    >([])
+    const [kois, setKois] = useState<Array<ClientCryptogotchi>>([])
 
     const regenerate = useCallback(async () => {
         const amountOfKois = window.innerWidth > 992 ? 3 : 1
@@ -40,39 +42,37 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
         }
         const data = await Promise.all(promises)
 
-        setKois(
-            data.map((el) => ({
-                bgColor: tinycolor(
-                    el.attributes.find((attr) => {
-                        return (
-                            typeof attr.value === 'string' &&
-                            attr.value.startsWith('#')
-                        )
-                    })?.value ?? '#fff'
-                )
-                    .lighten(20)
-                    .toHexString(),
-                species:
-                    el.attributes.find((attr) => attr.trait_type === 'Species')
-                        ?.value ?? 'Koi',
-                colors: el.attributes
-                    .filter((attr) => {
-                        return (
-                            typeof attr.value === 'string' &&
-                            attr.value.startsWith('#')
-                        )
-                    })
-                    .map((attr) => attr.value),
-                patterns: +(
-                    el.attributes.find(
-                        (attr) => attr.trait_type === 'Pattern Quantity'
-                    )?.value ?? 0
-                ),
+        const arr = data.map((koi) => ({
+            __typename: 'Cryptogotchi' as const,
+            id: (+(koi.image.split('/').pop() as string)).toString(16),
+            isAlive: true,
+            minutesTillDeath: moment().endOf('hour').diff(moment(), 'minute'),
+            maxLifetimeMinutes: 60,
+            food: 0,
+            nextFeeding: 0,
+            ownerAddress: '',
+            rank: -1,
+            color: '',
+            isValidNft: false,
+            deathDate: null,
+            ownerId: '',
+            createdAt: moment().startOf('hour'),
+            attributes: {
+                finColor: getAttribute(koi, 'Fin Color', ''),
+                bodyColor: getAttribute(koi, 'Body Color', ''),
+                patternQuantity: +getAttribute(koi, 'Pattern Quantity', '0'),
+                __typename: 'CryptogotchiAttributes' as const,
+                primaryColor: getAttribute(koi, 'Primary Color', ''),
+                species: getAttribute(koi, 'Species', ''),
+                birthday: moment().startOf('hour').unix(),
+            },
+            snapshotValid: true,
+            name: getAttribute(koi, 'Species', ''),
+        }))
 
-                image: el.image,
-            }))
-        )
+        setKois(arr)
     }, [])
+
     useEffect(() => {
         regenerate()
     }, [regenerate])
@@ -86,14 +86,7 @@ const GetYourKoi: FunctionComponent<IGetYourKoiPB> = (props) => {
                 <CMSContent>{props.Text}</CMSContent>
                 <div className="flex justify-around mt-10 flex-row">
                     {kois.map((k) => (
-                        <Koi
-                            bgColor={k.bgColor}
-                            species={k.species}
-                            colors={k.colors}
-                            patterns={k.patterns}
-                            key={k.image}
-                            src={k.image}
-                        />
+                        <Koi key={k.id} {...k} />
                     ))}
                 </div>
                 <div className="flex flex-row justify-center mt-5">
