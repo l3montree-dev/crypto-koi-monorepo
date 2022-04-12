@@ -2,7 +2,7 @@ const withTM = require('next-transpile-modules')(['@crypto-koi/common'])
 const withPWA = require("next-pwa");
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withTM({
+module.exports = withTM(withPWA({
     reactStrictMode: true,
     images: {
         domains: [
@@ -13,12 +13,10 @@ const nextConfig = withTM({
             "192.168.0.83"
         ],
     },
-})
-
-module.exports = [nextConfig, withPWA({
     pwa: {
         dest: "public",
         register: true,
         skipWaiting: true,
     },
-})]
+}))
+

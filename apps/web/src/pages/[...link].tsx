@@ -1,20 +1,14 @@
 import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
-import {
-    GetServerSideProps,
-    GetServerSidePropsContext,
-    GetStaticPaths,
-    GetStaticPropsContext,
-    GetStaticPropsResult,
-} from 'next'
+import { GetServerSidePropsContext, GetStaticPropsResult } from 'next'
 import React, { FunctionComponent } from 'react'
 import { cmsApi } from '../cms/api'
 import { IMenu } from '../cms/menu'
 import { IFooter, IPage } from '../cms/page'
 import Page from '../components/Page'
 import CookieStorage from '../CookieStorage'
+import { AppStateProvider } from '../hooks/AppStateContext'
 import pageBuilder from '../pagebuilder/page-builder'
 import { buildServiceLayer, fetchHydrationState } from '../service-layer'
-import { AppStateProvider } from '../hooks/AppStateContext'
 interface Props {
     page: IPage
     footer: IFooter
