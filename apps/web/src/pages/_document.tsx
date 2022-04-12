@@ -5,7 +5,11 @@ export default class Document extends NextDocument {
     render() {
         return (
             <Html lang="de">
-                <Head />
+                <Head>
+                    <link rel="manifest" href="/manifest.json" />
+                    <link rel="apple-touch-icon" href="/icon.png"></link>
+                    <meta name="theme-color" content="#fff" />
+                </Head>
                 <script
                     data-website-id="eb66d026-ab52-4f6f-83b4-efe828b7e742"
                     async

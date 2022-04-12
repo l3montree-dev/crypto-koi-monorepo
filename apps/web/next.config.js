@@ -1,4 +1,5 @@
 const withTM = require('next-transpile-modules')(['@crypto-koi/common'])
+const withPWA = require("next-pwa");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withTM({
@@ -14,4 +15,10 @@ const nextConfig = withTM({
     },
 })
 
-module.exports = nextConfig
+module.exports = [nextConfig, withPWA({
+    pwa: {
+        dest: "public",
+        register: true,
+        skipWaiting: true,
+    },
+})]
