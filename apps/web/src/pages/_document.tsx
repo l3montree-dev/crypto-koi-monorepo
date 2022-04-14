@@ -14,7 +14,7 @@ export default class Document extends NextDocument {
                         async
                         defer
                         src="https://peek.l3montree.com/umami.js"
-                        integrity="sha256-Iu824csMXYHj2h2prIxlQVcYjaYggAfZG623+2aeDCg="
+                        integrity="sha256-YPlcWStQyt6XusHt8RZcGD2qBQ1WSMd/xNPIOvtx+tA="
                         crossOrigin="anonymous"
                     />
                 </Head>
