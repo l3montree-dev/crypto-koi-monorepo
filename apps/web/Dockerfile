@@ -9,10 +9,16 @@ ARG API_HOST
 ENV NEXT_PUBLIC_API_HOST=$API_HOST
 ARG CMS_HOST
 ENV NEXT_PUBLIC_CMS_HOST=$CMS_HOST
+ARG SENTRY_AUTH_TOKEN
+ENV SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
 
 EXPOSE 3000
 
 COPY . .
+
+RUN touch apps/web/.sentryclirc
+RUN echo "[auth]" >> apps/web/.sentryclirc
+RUN "$SENTRY_AUTH_TOKEN" >> apps/web/.sentryclirc
 
 RUN yarn install
 
