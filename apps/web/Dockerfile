@@ -16,10 +16,6 @@ EXPOSE 3000
 
 COPY . .
 
-RUN touch apps/web/.sentryclirc
-RUN echo "[auth]" >> apps/web/.sentryclirc
-RUN echo "$SENTRY_AUTH_TOKEN" >> apps/web/.sentryclirc
-
 RUN yarn install
 
 RUN cd apps/web && NODE_OPTIONS=--max_old_space_size=4096 yarn run build
