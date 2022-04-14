@@ -18,7 +18,7 @@ COPY . .
 
 RUN touch apps/web/.sentryclirc
 RUN echo "[auth]" >> apps/web/.sentryclirc
-RUN "$SENTRY_AUTH_TOKEN" >> apps/web/.sentryclirc
+RUN echo "$SENTRY_AUTH_TOKEN" >> apps/web/.sentryclirc
 
 RUN yarn install
 
