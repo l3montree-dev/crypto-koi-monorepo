@@ -15,18 +15,26 @@ import {
     NextPage,
 } from 'next'
 import Link from 'next/link'
-import React, { FunctionComponent } from 'react'
+import { useRouter } from 'next/router'
+import React, { FunctionComponent, useContext } from 'react'
 import { cmsApi } from '../../cms/api'
 import { IMenu } from '../../cms/menu'
 import { IFooter, IPage } from '../../cms/page'
 import Koi from '../../components/Koi'
 import Page from '../../components/Page'
 import CookieStorage from '../../CookieStorage'
-import { AppStateProvider, useAppState } from '../../hooks/AppStateContext'
+import {
+    AppStateContext,
+    AppStateProvider,
+    useAppState,
+} from '../../hooks/AppStateContext'
 import { buildServiceLayer, fetchHydrationState } from '../../service-layer'
 
 const UserContent: FunctionComponent<GetUser_user> = observer((props) => {
     const currentUser = useAppState(selectCurrentUser)
+
+    const { services, store } = useContext(AppStateContext)
+    const router = useRouter()
     return (
         <div className="max-w-screen-xl mx-auto">
             <h2 className="font-bold font-poppins text-2xl mb-2">
@@ -43,7 +51,16 @@ const UserContent: FunctionComponent<GetUser_user> = observer((props) => {
             </div>
             {props.id === currentUser?.id && (
                 <div className="mb-5">
-                    <Button colorScheme={'sea'}>Logout</Button>
+                    <Button
+                        onClick={async () => {
+                            store.authStore.setCurrentUser(null)
+                            await services.userService.logout()
+                            router.push('/')
+                        }}
+                        colorScheme={'sea'}
+                    >
+                        Logout
+                    </Button>
                 </div>
             )}
             <h3 className="font-bold font-poppins text-2xl mb-2">CryptoKois</h3>

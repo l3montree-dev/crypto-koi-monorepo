@@ -45,7 +45,7 @@ const getFittingWeb3Provider = async (): Promise<Web3Provider> => {
         provider = new ethers.providers.Web3Provider(p)
     }
 
-    await switchOrAddNetwork(window.ethereum, commonConfig.chain)
+    await switchOrAddNetwork(provider, commonConfig.chain)
 
     return provider
 }

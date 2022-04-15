@@ -13,7 +13,6 @@ interface Props extends ClientCryptogotchi {
 }
 
 const Koi: FunctionComponent<Props> = (props) => {
-    console.log(props, Transformer.uuidToUint256(props.id))
     return (
         <div>
             <div className="overflow-hidden pt-2 rounded-lg shadow-lg">
@@ -44,6 +43,10 @@ const Koi: FunctionComponent<Props> = (props) => {
                             <div className="flex flex-row justify-center my-2">
                                 <div className="bg-slate-600 text-slate-200 px-2 py-1 rounded-lg text-xs">
                                     <Clock
+                                        runTill={moment().add(
+                                            props.minutesTillDeath,
+                                            'minute'
+                                        )}
                                         date={moment(props.createdAt)}
                                         id={props.id + '-clock'}
                                     />

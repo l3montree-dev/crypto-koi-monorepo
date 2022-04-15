@@ -1,5 +1,6 @@
 import { useWalletConnectResult } from '@walletconnect/react-native-dapp/dist/hooks/useWalletConnect'
 import WalletConnectProvider from '@walletconnect/web3-provider'
+import { ethers } from 'ethers'
 import { commonConfig } from './commonConfig'
 import { Logger } from './logger'
 
@@ -28,8 +29,11 @@ export const chainId2Hex = (chainId: number): string => {
 
 export const switchOrAddNetworkFactory =
     (log: Logger, timeout = 5000) =>
-    (provider: WalletConnectProvider, network: typeof commonConfig.chain) => {
-        return new Promise<void>((resolve, reject) => {
+    (
+        provider: ethers.providers.Web3Provider,
+        network: typeof commonConfig.chain
+    ) => {
+        return new Promise<void>(async (resolve, reject) => {
             // resolve after 5 seconds automatically.
             const timeoutId = setTimeout(() => {
                 log.warn(
@@ -39,21 +43,30 @@ export const switchOrAddNetworkFactory =
                 reject()
             }, timeout)
 
+            const providerChainId = (await provider.getNetwork()).chainId
+
+            if (hexChainId2Number(network.chainId) === providerChainId) {
+                log.info('chain ID matches - early return')
+                resolve()
+                return
+            }
             log.info(
                 'chain ID mismatch - sending wallet_switchEthereumChain request with chain id: ' +
-                    network.chainId
+                    network.chainId +
+                    ', provider chainId: ' +
+                    providerChainId
             )
+
             provider
-                .request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: network.chainId }],
-                })
+                .send('wallet_switchEthereumChain', [
+                    { chainId: network.chainId },
+                ])
                 .then(() => {
                     log.info('wallet_switchEthereumChain request successful')
                     clearTimeout(timeoutId)
                     resolve()
                 })
-                .catch(async (switchErr) => {
+                .catch(async (switchErr: any) => {
                     // it did respond - therefore clear the timeout.
                     clearTimeout(timeoutId)
 
@@ -66,16 +79,14 @@ export const switchOrAddNetworkFactory =
                         log.info(
                             'switch failed with error code 4902 (chain does not exist) - sending wallet_addEthereumChain request'
                         )
-                        await provider.request({
-                            method: 'wallet_addEthereumChain',
-                            params: [network],
-                        })
+                        await provider.send('wallet_addEthereumChain', [
+                            network,
+                        ])
 
                         // wait for the chain to be added
-                        await provider.request({
-                            method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: network.chainId }],
-                        })
+                        await provider.send('wallet_switchEthereumChain', [
+                            { chainId: network.chainId },
+                        ])
                         resolve()
                     } else {
                         log.error(

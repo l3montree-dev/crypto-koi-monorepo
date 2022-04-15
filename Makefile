@@ -3,6 +3,9 @@
 web: install
 	yarn workspace @crypto-koi/web dev
 
+web-https: install
+	yarn workspace @crypto-koi/web dev-https
+
 native-android: install
 	yarn workspace @crypto-koi/native android
 
