@@ -58,11 +58,13 @@ const Kois: NextPage<Props> = (props) => {
                         <h2 className="font-poppins mb-2 font-bold text-2xl">
                             Leaderboard
                         </h2>
-                        <p className="bg-slate-100 rounded-lg p-4 mb-5">
-                            The leaderboard shows the top 48 users with the
-                            oldest kois
-                        </p>
-                        <div className="flex-row flex flex-wrap justify-between">
+                        <div className="flex flex-row justify-start">
+                            <p className="bg-slate-100 rounded-lg p-4 mb-5">
+                                The leaderboard shows the top 48 users with the
+                                oldest kois
+                            </p>
+                        </div>
+                        <div className="flex-row flex flex-wrap justify-start">
                             {props.leaderboard.map((leader) => (
                                 <Link
                                     key={leader.id}

@@ -64,11 +64,11 @@ const UserContent: FunctionComponent<GetUser_user> = observer((props) => {
                 </div>
             )}
             <h3 className="font-bold font-poppins text-2xl mb-2">CryptoKois</h3>
-            <div className="flex-row flex">
+            <div className="flex-row justify-start flex">
                 {props.cryptogotchies.map((c) => {
                     return (
                         <Link href={'/kois/' + c.id} key={c.id}>
-                            <a>
+                            <a className="mx-2">
                                 <Koi {...c} />{' '}
                             </a>
                         </Link>

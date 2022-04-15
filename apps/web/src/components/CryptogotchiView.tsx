@@ -12,14 +12,15 @@ import {
     GetNftSignature,
     GetNftSignatureVariables,
 } from '@crypto-koi/common/lib/graphql/queries/__generated__/GetNftSignature'
+import { GetUser_user } from '@crypto-koi/common/lib/graphql/queries/__generated__/GetUser'
 import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
 import Transformer from '@crypto-koi/common/lib/Transformer'
 import copyToClipboard from 'copy-to-clipboard'
-import { makeAutoObservable } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import moment from 'moment'
 import Image from 'next/image'
-import { FunctionComponent, useContext, useEffect, useState } from 'react'
+import Link from 'next/link'
+import { FunctionComponent, useContext, useState } from 'react'
 import {
     BsFillShieldSlashFill,
     BsFillTrophyFill,
@@ -43,6 +44,7 @@ import Lifetime from './Lifetime'
 import Toast from './Toast'
 
 export const CryptogotchiView: FunctionComponent<{
+    owner: GetUser_user
     cryptogotchi: Cryptogotchi
 }> = observer((props) => {
     const { store } = useContext(AppStateContext)
@@ -195,6 +197,13 @@ export const CryptogotchiView: FunctionComponent<{
                 <div className="mt-10 md:ml-5 flex-1 mx-auto">
                     <div>
                         <div className="mb-5 flex-1 w-full">
+                            <p className="mb-0 pb-0">
+                                <Link href={'/users/' + props.owner.id}>
+                                    <a className="text-cherry">
+                                        {props.owner.name}
+                                    </a>
+                                </Link>
+                            </p>
                             <div className="flex justify-between items-center flex-row">
                                 <h2 className="font-bold mb-0 flex-1 overflow-hidden text-2xl font-poppins">
                                     {cryptogotchi.name}

@@ -88,6 +88,7 @@ const RegistrationForm = () => {
                     disabled={
                         wallet === null || email.isInvalid || name.isInvalid
                     }
+                    type="submit"
                     onClick={handleRegister}
                     isFullWidth
                     colorScheme={'cherry'}

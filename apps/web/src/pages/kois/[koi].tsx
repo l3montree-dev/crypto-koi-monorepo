@@ -1,10 +1,16 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 import { FIND_CRYPTOGOTCHI } from '@crypto-koi/common/lib/graphql/queries/cryptogotchi'
+import { GET_USER } from '@crypto-koi/common/lib/graphql/queries/user'
 import {
     FindCryptogotchi,
     FindCryptogotchiVariables,
     FindCryptogotchi_cryptogotchi,
 } from '@crypto-koi/common/lib/graphql/queries/__generated__/FindCryptogotchi'
+import {
+    GetUser,
+    GetUserVariables,
+    GetUser_user,
+} from '@crypto-koi/common/lib/graphql/queries/__generated__/GetUser'
 import Cryptogotchi from '@crypto-koi/common/lib/mobx/Cryptogotchi'
 import { HydrationState } from '@crypto-koi/common/lib/mobx/RootStore'
 import { selectCurrentUser } from '@crypto-koi/common/lib/mobx/selectors'
@@ -24,27 +30,28 @@ import CookieStorage from '../../CookieStorage'
 import { AppStateProvider, useAppState } from '../../hooks/AppStateContext'
 import { buildServiceLayer, fetchHydrationState } from '../../service-layer'
 
-const KoiPageContent: FunctionComponent<FindCryptogotchi_cryptogotchi> =
-    observer((props) => {
-        const currentUser = useAppState(selectCurrentUser)
+const KoiPageContent: FunctionComponent<
+    FindCryptogotchi_cryptogotchi & { owner: GetUser_user }
+> = observer((props) => {
+    const currentUser = useAppState(selectCurrentUser)
 
-        const cryptogotchi = useMemo(() => {
-            if (props.ownerId === currentUser?.id) {
-                return (
-                    currentUser?.cryptogotchies.find(
-                        (gotchi) => gotchi.id === props.id
-                    ) ?? new Cryptogotchi(props)
-                )
-            } else {
-                return new Cryptogotchi(props)
-            }
-        }, [props, currentUser?.id, currentUser?.cryptogotchies])
-        return (
-            <div className="max-w-screen-xl mx-auto">
-                <CryptogotchiView cryptogotchi={cryptogotchi} />
-            </div>
-        )
-    })
+    const cryptogotchi = useMemo(() => {
+        if (props.ownerId === currentUser?.id) {
+            return (
+                currentUser?.cryptogotchies.find(
+                    (gotchi) => gotchi.id === props.id
+                ) ?? new Cryptogotchi(props)
+            )
+        } else {
+            return new Cryptogotchi(props)
+        }
+    }, [props, currentUser?.id, currentUser?.cryptogotchies])
+    return (
+        <div className="max-w-screen-xl mx-auto">
+            <CryptogotchiView owner={props.owner} cryptogotchi={cryptogotchi} />
+        </div>
+    )
+})
 
 interface Props {
     page: IPage
@@ -52,6 +59,7 @@ interface Props {
     menu: IMenu
     // will be defined - otherwise 404
     crypt: FindCryptogotchi_cryptogotchi
+    owner: GetUser_user
     hydrationState?: HydrationState | null
 }
 
@@ -96,7 +104,7 @@ const KoiPage: NextPage<Props> = observer((props) => {
                     </div>
                 </div>
                 <div className="md:py-20 pt-5 pb-10 bg-slate-200 px-4">
-                    <KoiPageContent {...props.crypt} />
+                    <KoiPageContent owner={props.owner} {...props.crypt} />
                 </div>
             </Page>
         </AppStateProvider>
@@ -146,12 +154,25 @@ export async function getServerSideProps(
         }
     }
 
+    // fetch the user information
+    const owner = await services.apolloClient.query<GetUser, GetUserVariables>({
+        query: GET_USER,
+        variables: { id: crypt.data.cryptogotchi.ownerId },
+    })
+
+    if (!owner || !owner.data.user) {
+        return {
+            notFound: true,
+        }
+    }
+
     return {
         props: {
             page: page.data[0],
             footer: footer.data.attributes,
             menu: menu.data.attributes,
             hydrationState,
+            owner: owner.data.user,
             crypt: crypt.data.cryptogotchi,
         },
     }
