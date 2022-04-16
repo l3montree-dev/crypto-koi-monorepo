@@ -122,7 +122,7 @@ export const CryptogotchiView: FunctionComponent<{
                 cryptogotchiId={cryptogotchi.id}
             />
             <div className="md:flex flex-row">
-                <div className="text-white flex-1 md:mr-5 relative flex py-8 shadow-lg flex-row justify-center koi-gradient rounded-lg">
+                <div className="text-white flex-1 md:mr-5 relative flex py-14 shadow-lg flex-row justify-center koi-gradient rounded-lg">
                     <div className="relative flex-row flex justify-center">
                         <div className="absolute">
                             <Lifetime
@@ -195,7 +195,7 @@ export const CryptogotchiView: FunctionComponent<{
                             </a>
                         )}
                     </div>
-                    <span className="absolute bottom-0 p-5 text-xs right-0 z-1">
+                    <span className="absolute top-0 p-5 text-xs right-0 z-1">
                         <span>Artwork by: </span>
                         <a
                             className="text-cherry"
@@ -304,7 +304,12 @@ export const CryptogotchiView: FunctionComponent<{
                         {store.authStore.currentUser?.id ===
                             cryptogotchi.ownerId && (
                             <div className="bg-black flex-row flex md:bg-transparent px-3 py-3 fixed md:static bottom-0 z-10 left-0 right-0 md:px-0 md:mt-5">
-                                <div className="flex-1 h-12 mr-1">
+                                <div
+                                    className={
+                                        'flex-1 h-12 ' +
+                                        (!cryptogotchi.isValidNft ? 'mr-1' : '')
+                                    }
+                                >
                                     <FeedButton
                                         disabled={!cryptogotchi.isAlive}
                                         cryptogotchi={cryptogotchi}
@@ -312,18 +317,20 @@ export const CryptogotchiView: FunctionComponent<{
                                         onClick={handleFeed}
                                     />
                                 </div>
-                                <div className="flex-1 h-12 ml-1">
-                                    <Button
-                                        onClick={handleMakeNft}
-                                        disabled={!cryptogotchi.isAlive}
-                                        isLoading={nftLoading}
-                                        colorScheme={'cherry'}
-                                        isFullWidth
-                                        height={'100%'}
-                                    >
-                                        Make NFT
-                                    </Button>
-                                </div>
+                                {!cryptogotchi.isValidNft && (
+                                    <div className="flex-1 h-12 ml-1">
+                                        <Button
+                                            onClick={handleMakeNft}
+                                            disabled={!cryptogotchi.isAlive}
+                                            isLoading={nftLoading}
+                                            colorScheme={'cherry'}
+                                            isFullWidth
+                                            height={'100%'}
+                                        >
+                                            Make NFT
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
