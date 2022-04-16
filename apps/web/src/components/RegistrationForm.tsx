@@ -9,7 +9,7 @@ import {
 import { notEmpty, validEmail } from '@crypto-koi/common/lib/validators'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppStateContext } from '../hooks/AppStateContext'
 import useInput from '../hooks/useInput'
 import { useWallet } from '../hooks/useWallet'
@@ -24,24 +24,29 @@ const RegistrationForm = () => {
 
     const { handleConnectWallet, wallet } = useWallet()
 
-    const handleRegister = async () => {
+    const handleRegister = async (ev: any) => {
+        ev.preventDefault()
+
         const user = await services.userService.registerUsingWalletAddress({
             email: email.value,
             name: name.value,
             walletAddress: wallet?.address,
         })
+
         if (user) {
             store.authStore.setCurrentUser(user)
+            await router.push('/users/[user]', `/users/${user.id}`)
             // redirect to app page.
-
-            router.push('/users/' + user.id)
         } else {
             // TODO: Show error to the user
         }
     }
 
     return (
-        <form className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border">
+        <form
+            onSubmit={handleRegister}
+            className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border"
+        >
             <h2 className="font-bold text-2xl font-poppins">Registration</h2>
 
             <FormControl isInvalid={name.isInvalid} className="pt-5">
@@ -89,7 +94,9 @@ const RegistrationForm = () => {
                         wallet === null || email.isInvalid || name.isInvalid
                     }
                     type="submit"
-                    onClick={handleRegister}
+                    onClick={() =>
+                        handleRegister({ preventDefault: () => false })
+                    }
                     isFullWidth
                     colorScheme={'cherry'}
                 >

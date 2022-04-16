@@ -47,7 +47,7 @@ export const CryptogotchiView: FunctionComponent<{
     owner: GetUser_user
     cryptogotchi: Cryptogotchi
 }> = observer((props) => {
-    const { store } = useContext(AppStateContext)
+    const { store, services } = useContext(AppStateContext)
     const toast = useToast()
     const { cryptogotchi } = props
 
@@ -81,6 +81,8 @@ export const CryptogotchiView: FunctionComponent<{
                 })
                 return res.data!.getNftSignature
             })
+            // resync the user.
+            store.authStore.setCurrentUser(await services.userService.sync())
         } catch (e) {
             console.error(e)
             toast({

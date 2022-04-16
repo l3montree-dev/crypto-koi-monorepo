@@ -1,15 +1,13 @@
-import WalletConnect from '@walletconnect/client'
-import QRCodeModal from '@walletconnect/qrcode-modal'
-import { ethers } from 'ethers'
 import { commonConfig } from '@crypto-koi/common/lib/commonConfig'
+import CryptoKoiSmartContract from '@crypto-koi/common/lib/contracts/CryptoKoiSmartContract'
 import {
-    hexChainId2Number,
     newProvider,
     switchOrAddNetworkFactory,
 } from '@crypto-koi/common/lib/web3'
 import { Web3Provider } from '@ethersproject/providers'
-import CryptoKoiSmartContract from '@crypto-koi/common/lib/contracts/CryptoKoiSmartContract'
-import { AppEventEmitter } from '@crypto-koi/common/lib/AppEventEmitter'
+import WalletConnect from '@walletconnect/client'
+import QRCodeModal from '@walletconnect/qrcode-modal'
+import { ethers } from 'ethers'
 
 export type WalletDescriptor = { iconUrl: string; name: string; color: string }
 declare const window: any
