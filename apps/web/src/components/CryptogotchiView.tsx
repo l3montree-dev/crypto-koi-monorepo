@@ -142,7 +142,7 @@ export const CryptogotchiView: FunctionComponent<{
                             src={
                                 config.api +
                                 '/images/' +
-                                Transformer.uuidToUint256(cryptogotchi.id) +
+                                cryptogotchi.getUint256 +
                                 '?size=1024'
                             }
                         />
@@ -153,7 +153,7 @@ export const CryptogotchiView: FunctionComponent<{
                             href={
                                 config.api +
                                 '/images/' +
-                                Transformer.uuidToUint256(cryptogotchi.id) +
+                                cryptogotchi.getUint256 +
                                 '?size=2048'
                             }
                             rel="noreferrer"
@@ -166,21 +166,33 @@ export const CryptogotchiView: FunctionComponent<{
                             />
                         </a>
                         {cryptogotchi.isValidNft && (
-                            <Button
-                                variant={'outline'}
-                                colorScheme="white"
-                                className="ml-2"
-                                leftIcon={
-                                    <Image
-                                        alt="Opensea logo"
-                                        src="/assets/opensea-black.svg"
-                                        width={24}
-                                        height={24}
-                                    />
+                            <a
+                                target={'_blank'}
+                                rel="noreferrer"
+                                href={
+                                    config.openseaUrl +
+                                    '/' +
+                                    config.contractAddress +
+                                    '/' +
+                                    cryptogotchi.getUint256
                                 }
                             >
-                                Visit on opensea.io
-                            </Button>
+                                <Button
+                                    variant={'outline'}
+                                    colorScheme="white"
+                                    className="ml-2"
+                                    leftIcon={
+                                        <Image
+                                            alt="Opensea logo"
+                                            src="/assets/opensea-black.svg"
+                                            width={24}
+                                            height={24}
+                                        />
+                                    }
+                                >
+                                    Visit on opensea.io
+                                </Button>
+                            </a>
                         )}
                     </div>
                     <span className="absolute bottom-0 p-5 text-xs right-0 z-1">

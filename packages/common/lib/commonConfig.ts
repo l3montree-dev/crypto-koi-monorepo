@@ -12,4 +12,5 @@ export const commonConfig = {
 
     privacyPolicyLink: 'https://crypto-koi.io/app-privacy-policy',
     termsOfServiceLink: 'https://crypto-koi.io/terms-of-use',
+    openseaUrl: 'https://testnets.opensea.io',
 }
