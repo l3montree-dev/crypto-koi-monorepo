@@ -171,6 +171,8 @@ export const CryptogotchiView: FunctionComponent<{
                                 rel="noreferrer"
                                 href={
                                     config.openseaUrl +
+                                    '/assets/' +
+                                    config.chain.chainName +
                                     '/' +
                                     config.contractAddress +
                                     '/' +
