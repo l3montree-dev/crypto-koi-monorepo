@@ -14,7 +14,7 @@ export const CustomColors = {
     onSecondary: "#FFFFFF",
     buttonBackgroundColor: "#212959",
     buttonTextColor: "#FFFFFF",
-    buttonProgressUnfilled: "#FFFFFF",
-    buttonProgressFilled: "#FFFFFF",
+    buttonProgressUnfilled: "#7b7e84",
+    buttonProgressFilled: "#212959",
     heartColor: "#D33148",
 };

@@ -1,17 +1,11 @@
-import {
-    createNativeStackNavigator,
-    NativeStackNavigationOptions,
-} from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent } from "react";
 import { Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useAppState from "./hooks/useAppState";
 import { RootStackParamList } from "./hooks/useNavigation";
-import {
-    selectCurrentUser,
-    selectThemeStore,
-} from "@crypto-koi/common/lib/mobx/selectors";
+import { selectCurrentUser } from "@crypto-koi/common/lib/mobx/selectors";
 import CMSScreen from "./screens/CMSScreen";
 import CryptogotchiScreen from "./screens/CryptogotchiScreen";
 import FriendEditScreen from "./screens/FriendEditScreen";
@@ -20,25 +14,13 @@ import OnboardingScreen from "./screens/onboarding/OnboardingScreen";
 import { commonStyles } from "./styles/commonStyles";
 import { TabNavigator } from "./TabNavigator";
 import { DimensionUtils } from "./utils/DimensionUtils";
+import { CustomColors } from "./styles/colors";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStackNavigator: FunctionComponent = observer(() => {
     const currentUser = useAppState(selectCurrentUser);
-    const themeStore = useAppState(selectThemeStore);
 
-    const commonNavigationOptions: NativeStackNavigationOptions = useMemo(
-        () => ({
-            animation: "slide_from_right",
-            headerShadowVisible: false,
-            headerTintColor: themeStore.currentHeaderTintColor,
-            headerStyle: {
-                backgroundColor: themeStore.secondaryColor,
-            },
-            // headerTitleAlign: "center",
-        }),
-        [themeStore.secondaryColor, themeStore.currentHeaderTintColor]
-    );
     return (
         <Stack.Navigator>
             {currentUser ? (
@@ -47,7 +29,12 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                         name="TabNavigator"
                         component={TabNavigator}
                         options={{
-                            ...commonNavigationOptions,
+                            animation: "slide_from_right",
+                            headerShadowVisible: false,
+                            headerTintColor: CustomColors.bgDark,
+                            headerStyle: {
+                                backgroundColor: CustomColors.secondaryColor,
+                            },
                             // there is no way to redirect back
                             headerShown: false,
                         }}
@@ -57,7 +44,13 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                         component={CMSScreen}
                         options={({ route }) => {
                             return {
-                                ...commonNavigationOptions,
+                                animation: "slide_from_right",
+                                headerShadowVisible: false,
+                                headerTintColor: CustomColors.onSecondary,
+                                headerStyle: {
+                                    backgroundColor:
+                                        CustomColors.secondaryColor,
+                                },
                                 headerShown: true,
                                 headerTransparent: false,
                                 headerTitle: route.params.title,
@@ -69,7 +62,13 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                         component={FriendEditScreen}
                         options={({ route }) => {
                             return {
-                                ...commonNavigationOptions,
+                                animation: "slide_from_right",
+                                headerShadowVisible: false,
+                                headerTintColor: CustomColors.onSecondary,
+                                headerStyle: {
+                                    backgroundColor:
+                                        CustomColors.secondaryColor,
+                                },
                                 headerShown: true,
                                 headerTransparent: true,
                                 headerTitle: () => (
@@ -84,7 +83,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                                                     (!route.params.isAlive
                                                         ? 150
                                                         : 100),
-                                                color: themeStore.onSecondary,
+                                                color: CustomColors.onSecondary,
                                             },
                                         ]}
                                     >
@@ -95,7 +94,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                                                     commonStyles.screenIcon,
                                                     {
                                                         color:
-                                                            themeStore.onSecondary,
+                                                            CustomColors.onSecondary,
                                                     },
                                                 ]}
                                                 name="grave-stone"
@@ -109,7 +108,9 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                     <Stack.Screen
                         name="CryptogotchiScreen"
                         options={{
-                            ...commonNavigationOptions,
+                            animation: "slide_from_right",
+                            headerShadowVisible: false,
+                            headerTintColor: CustomColors.bgDark,
                             headerTitle: "",
                             title: "",
                             headerTransparent: true,
@@ -122,7 +123,14 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                     <Stack.Screen
                         name="SnakeGameScreen"
                         component={SnakeGameScreen}
-                        options={commonNavigationOptions}
+                        options={{
+                            animation: "slide_from_right",
+                            headerShadowVisible: false,
+                            headerTintColor: CustomColors.bgDark,
+                            headerStyle: {
+                                backgroundColor: CustomColors.secondaryColor,
+                            },
+                        }}
                     />
                 </>
             ) : (
@@ -130,7 +138,12 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                     name="OnboardingScreen"
                     component={OnboardingScreen}
                     options={{
-                        ...commonNavigationOptions,
+                        animation: "slide_from_right",
+                        headerShadowVisible: false,
+                        headerTintColor: CustomColors.bgDark,
+                        headerStyle: {
+                            backgroundColor: CustomColors.secondaryColor,
+                        },
                         headerShown: false,
                     }}
                 />

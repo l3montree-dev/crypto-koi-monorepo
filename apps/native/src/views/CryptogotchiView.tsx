@@ -94,7 +94,7 @@ const CryptogotchiView = observer((props: Props) => {
     const currentUser = useAppState(selectCurrentUser);
     const cryptogotchies = useAppState(selectCryptogotchies);
 
-    const currentUserIsOwner = currentUser?.id === props.cryptogotchi.id;
+    const currentUserIsOwner = currentUser?.id === props.cryptogotchi.ownerId;
     // if the user is the owner of the cryptogotchi we need to set the rendered cryptogotchi to his own.
     // this makes sure to not render the cryptogotchi of the user and to update every values on the FriendScreen
     const cryptogotchi = useMemo(() => {
@@ -112,7 +112,6 @@ const CryptogotchiView = observer((props: Props) => {
         currentUser,
         cryptogotchi
     );
-    const themeStore = useAppState(selectThemeStore);
 
     const { navigate } = useNavigation();
 
@@ -138,13 +137,8 @@ const CryptogotchiView = observer((props: Props) => {
     };
 
     useFocusEffect(() => {
-        if (props.isVisible) {
-            themeStore.setColor(cryptogotchi.color);
-            if (Platform.OS === "android")
-                NavigationBar.setBackgroundColorAsync(
-                    themeStore.secondaryColor
-                );
-        }
+        if (Platform.OS === "android")
+            NavigationBar.setBackgroundColorAsync(CustomColors.secondaryColor);
     });
 
     return (
@@ -382,8 +376,8 @@ const CryptogotchiView = observer((props: Props) => {
             {currentUserIsOwner && (
                 <View
                     style={[
-                        tailwind("pt-4 px-4 pb-8"),
-                        { backgroundColor: CustomColors.onSecondary },
+                        tailwind("pt-4 px-4 pb-4"),
+                        { backgroundColor: CustomColors.bgDark },
                     ]}
                 >
                     <NextFeedButton

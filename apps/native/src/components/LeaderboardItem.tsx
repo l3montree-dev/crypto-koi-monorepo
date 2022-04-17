@@ -49,8 +49,6 @@ export const LeaderboardItem: FunctionComponent<Props> = observer((props) => {
     const { navigate } = useNavigation();
     const [value, setValue] = useState(moment());
 
-    const themeStore = useAppState((rootStore) => rootStore.themeStore);
-
     useEffect(() => {
         ticker.addTickHandler("item-lifetime-" + props.id, () =>
             setValue(moment())

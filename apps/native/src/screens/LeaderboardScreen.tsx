@@ -14,7 +14,6 @@ import { useTailwind } from "tailwind-rn/dist";
 import { LeaderboardItem } from "../components/LeaderboardItem";
 import { FETCH_LEADERBOARD } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
 import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
-import useAppState from "../hooks/useAppState";
 import { commonStyles } from "../styles/commonStyles";
 import { CustomColors } from "../styles/colors";
 import GradientBackground from "../components/GradientBackground";
@@ -34,8 +33,6 @@ const Leaderboard = observer(() => {
         }
     );
 
-    const themeStore = useAppState((rootStore) => rootStore.themeStore);
-
     return (
         <SafeAreaView style={tailwind("flex-1 flex-col")}>
             <StatusBar barStyle={"light-content"} />
@@ -54,7 +51,7 @@ const Leaderboard = observer(() => {
                         style={[
                             commonStyles.screenTitle,
                             tailwind("pt-1"),
-                            { color: themeStore.onSecondary },
+                            { color: CustomColors.onSecondary },
                         ]}
                     >
                         Leaderboard

@@ -168,7 +168,7 @@ function OnboardingScreen() {
     const handleNext = () => {
         if (activeSlide === 3) {
             if (agreedToTermsOfUse && agreedToPrivacyPolicy) {
-                return handlePlayWithoutWalletPress();
+                return handlePlayWithWalletPress();
             } else {
                 return ViewUtils.toast("Please agree to the terms of use and the privacy policy");
             }
@@ -407,13 +407,12 @@ function OnboardingScreen() {
                                     "text-white text-4xl font-bold text-center mb-5"
                                 )}
                             >
-                                Make it an NFT
+                                View your NFT
                             </Text>
                             <Text
                                 style={tailwind("text-white text-lg text-center")}
                             >
-                                To never loose your friend again you can make
-                                him unique by putting him in an NFT
+                                If you can converted your friend into a NFT, you can view and feed here
                             </Text>
                             <View style={tailwind("bg-white rounded-lg mt-4")}>
                                 <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
@@ -447,10 +446,10 @@ function OnboardingScreen() {
                                     textColor="white"
                                     disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
                                     onPress={handlePlayWithWalletPress}
-                                    title="I already have a Wallet"
+                                    title="Login with wallet"
                                 />
                             </View>
-                            <View style={tailwind("mt-4")}>
+                            {/*<View style={tailwind("mt-4")}>
                                 <AppButton
                                     backgroundColor={
                                         CustomColors.onBgDark
@@ -460,7 +459,7 @@ function OnboardingScreen() {
                                     onPress={handlePlayWithoutWalletPress}
                                     title="Play without connected Wallet"
                                 />
-                            </View>
+                                </View>*/}
                         </Animated.View>
                     )}
                 </View>

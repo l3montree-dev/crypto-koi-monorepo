@@ -34,6 +34,7 @@ import { nativeUserService } from "../services/NativeUserService";
 import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
 import { nativeRootStore } from "../mobx/NativeRootStore";
 import { CustomColors } from "../styles/colors";
+import { color } from "react-native-reanimated";
 
 const style = StyleSheet.create({
     header: {
@@ -46,12 +47,8 @@ const style = StyleSheet.create({
 });
 
 export const ProfileTab = observer(() => {
-    const themeStore = useAppState(selectThemeStore);
     const user = useAppState(selectCurrentUser);
     const tailwind = useTailwind();
-    const c = useMemo(() => ({ color: themeStore.onSecondary }), [
-        themeStore.onSecondary,
-    ]);
 
     const connector = useWalletConnect();
 
@@ -91,11 +88,6 @@ export const ProfileTab = observer(() => {
         }
     };
 
-    const onButtonColor = useMemo(
-        () => ({ color: themeStore.buttonTextColor }),
-        [themeStore.buttonTextColor]
-    );
-
     const { navigate } = useNavigation();
 
     const handleDeleteAccount = () => {
@@ -134,7 +126,13 @@ export const ProfileTab = observer(() => {
                     { backgroundColor: CustomColors.bgDark },
                 ]}
             >
-                <Text style={[commonStyles.screenTitle, tailwind("pt-1"), c]}>
+                <Text
+                    style={[
+                        commonStyles.screenTitle,
+                        tailwind("pt-1"),
+                        { color: CustomColors.buttonTextColor },
+                    ]}
+                >
                     Profile
                 </Text>
             </View>
@@ -142,7 +140,12 @@ export const ProfileTab = observer(() => {
                 <View style={tailwind("mb-5")}>
                     {user?.walletAddress ? (
                         <View style={tailwind("mb-5")}>
-                            <Text style={[tailwind("mb-2"), c]}>
+                            <Text
+                                style={[
+                                    tailwind("mb-2"),
+                                    { color: CustomColors.buttonTextColor },
+                                ]}
+                            >
                                 Connected Wallet
                             </Text>
                             <View
@@ -166,7 +169,10 @@ export const ProfileTab = observer(() => {
                                 <Text
                                     numberOfLines={1}
                                     ellipsizeMode="middle"
-                                    style={[onButtonColor, tailwind("flex-1")]}
+                                    style={[
+                                        { color: CustomColors.buttonTextColor },
+                                        tailwind("flex-1"),
+                                    ]}
                                 >
                                     {user?.walletAddress}
                                 </Text>
@@ -174,7 +180,12 @@ export const ProfileTab = observer(() => {
                         </View>
                     ) : (
                         <View>
-                            <Text style={[c, tailwind("mb-2")]}>
+                            <Text
+                                style={[
+                                    { color: CustomColors.buttonTextColor },
+                                    tailwind("mb-2"),
+                                ]}
+                            >
                                 Your CryptoKoi is currently not connected to any
                                 wallet. If you uninstall the App, it will be
                                 lost.

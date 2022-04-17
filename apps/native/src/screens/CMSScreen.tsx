@@ -1,12 +1,19 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import {Platform, ScrollView, View} from "react-native";
-import { useHeaderHeight } from '@react-navigation/elements';
+import { Platform, ScrollView, View, StyleSheet } from "react-native";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 import Markdown from "react-native-markdown-renderer";
 import { useTailwind } from "tailwind-rn";
 import { config } from "../config";
 import { RootStackParamList } from "../hooks/useNavigation";
+import { CustomColors } from "../styles/colors";
+
+const style = StyleSheet.create({
+    content: {
+        backgroundColor: CustomColors.bgDark,
+    },
+});
 
 const CMSScreen = () => {
     const tailwind = useTailwind();
@@ -17,9 +24,9 @@ const CMSScreen = () => {
         (async function () {
             const response = await fetch(
                 config.cmsBaseUrl +
-                    "/api/pages?filters[Link][$eq]=" +
-                    route.params.link +
-                    "&populate=deep"
+                "/api/pages?filters[Link][$eq]=" +
+                route.params.link +
+                "&populate=deep"
             );
             const data = await response.json();
             setMarkdown(data.data[0].attributes["Pagebuilder"][0].Text);
@@ -35,9 +42,12 @@ const CMSScreen = () => {
                     : [{ paddingTop: headerHeight }, tailwind("flex-1")]
             }
         >
-            <ScrollView contentContainerStyle={tailwind("p-4")}>
+            <ScrollView
+                contentContainerStyle={[tailwind("p-4"), style.content]}
+            >
                 <Markdown
                     style={{
+                        text: { color: CustomColors.buttonTextColor },
                         heading1: tailwind("font-bold text-3xl"),
                         heading2: tailwind("font-bold text-2xl"),
                         heading3: tailwind("font-bold text-xl mt-5"),
