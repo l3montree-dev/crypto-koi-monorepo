@@ -110,7 +110,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                         options={{
                             animation: "slide_from_right",
                             headerShadowVisible: false,
-                            headerTintColor: CustomColors.bgDark,
+                            headerTintColor: CustomColors.onSecondary,
                             headerTitle: "",
                             title: "",
                             headerTransparent: true,
@@ -126,7 +126,7 @@ const RootStackNavigator: FunctionComponent = observer(() => {
                         options={{
                             animation: "slide_from_right",
                             headerShadowVisible: false,
-                            headerTintColor: CustomColors.bgDark,
+                            headerTintColor: CustomColors.onSecondary,
                             headerStyle: {
                                 backgroundColor: CustomColors.secondaryColor,
                             },

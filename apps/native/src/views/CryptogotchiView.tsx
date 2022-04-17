@@ -2,7 +2,6 @@ import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
 import {
     selectCryptogotchies,
     selectCurrentUser,
-    selectThemeStore,
 } from "@crypto-koi/common/lib/mobx/selectors";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";

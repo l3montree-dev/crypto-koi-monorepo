@@ -319,7 +319,7 @@ const FriendEditModal = observer(() => {
             </View>
             <View style={tailwind("p-4 flex-row mb-4")}>
                 <AppButton
-                    backgroundColor={CustomColors.buttonBackgroundColor}
+                    backgroundColor={CustomColors.waves}
                     textColor={CustomColors.buttonTextColor}
                     loading={loading && !error}
                     onPress={handleNameSave}
