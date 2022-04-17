@@ -10,7 +10,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        // jcenter()
+        jcenter()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.0")
@@ -34,7 +34,7 @@ allprojects {
 
         google()
         mavenCentral()
-        // jcenter()
+        jcenter()
         maven { url 'https://www.jitpack.io' }
 
         // bintray is down: https://github.com/facebook/react-native/issues/32734#issuecomment-1013431238

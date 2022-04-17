@@ -23,6 +23,11 @@
         "plugins": [
             "sentry-expo"
         ],
+        "updates": {
+            "enabled": false,
+            "checkAutomatically": "ON_ERROR_RECOVERY",
+            "fallbackToCacheTimeout": 0
+        },
         "hooks": {
             "postPublish": [
                 {
