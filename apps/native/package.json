@@ -46,6 +46,7 @@
         "react-native-localhost": "1.0.0",
         "react-native-logs": "^4.0.1",
         "react-native-markdown-renderer": "^3.2.8",
+        "react-native-navigation-bar-color": "^2.0.1",
         "react-native-notifications": "^4.2.4",
         "react-native-pager-view": "5.4.9",
         "react-native-paper": "^4.11.2",

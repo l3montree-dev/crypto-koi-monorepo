@@ -33,7 +33,6 @@ import { nativeUserService } from "../../services/NativeUserService";
 import { Colors, CustomColors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
-import Svg, { Defs, Ellipse, LinearGradient, Path, Rect, Stop } from "react-native-svg";
 import GradientBackground from "../../components/GradientBackground";
 import { nativeRootStore } from "../../mobx/NativeRootStore";
 
@@ -189,7 +188,7 @@ function OnboardingScreen() {
     ]);
 
     return (
-        <View style={[{ backgroundColor: CustomColors.bgDark }, tailwind("flex-1"),]}>
+        <View style={[{ backgroundColor: CustomColors.bgDark, }, tailwind("flex-1"),]}>
             {/*<View style={tailwind("absolute -top-20")}>
                 <Wave
                     svgStyle={[
@@ -464,7 +463,10 @@ function OnboardingScreen() {
                     )}
                 </View>
             </ScrollView>
-            <View style={tailwind("flex-row items-center justify-between")}>
+            <View style={[tailwind("flex-row items-center justify-between"), {
+                marginBottom: DimensionUtils.screenHeight -
+                    DimensionUtils.deviceHeight,
+            }]}>
                 <TouchableNativeFeedback onPress={handleBack}>
                     <View style={tailwind("px-10 rounded-lg m-2 py-4")}>
                         <Text style={[tailwind("text-white"), opacity]}>

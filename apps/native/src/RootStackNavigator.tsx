@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
 import React, { FunctionComponent } from "react";
-import { Text } from "react-native";
+import { Platform, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useAppState from "./hooks/useAppState";
 import { RootStackParamList } from "./hooks/useNavigation";
@@ -15,11 +15,16 @@ import { commonStyles } from "./styles/commonStyles";
 import { TabNavigator } from "./TabNavigator";
 import { DimensionUtils } from "./utils/DimensionUtils";
 import { CustomColors } from "./styles/colors";
+import changeNavigationBarColor from "react-native-navigation-bar-color";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStackNavigator: FunctionComponent = observer(() => {
     const currentUser = useAppState(selectCurrentUser);
+
+    if (Platform.OS === "android") {
+        changeNavigationBarColor("translucent", false, false);
+    }
 
     return (
         <Stack.Navigator>

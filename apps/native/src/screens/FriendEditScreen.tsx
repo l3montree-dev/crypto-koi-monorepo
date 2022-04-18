@@ -25,7 +25,13 @@ import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+    FlatList,
+    StyleSheet,
+    Text,
+    View,
+    StatusBar as StatusBarReact,
+} from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
@@ -38,6 +44,7 @@ import { RootStackParamList } from "../hooks/useNavigation";
 import log from "../utils/logger";
 import { CustomColors } from "../styles/colors";
 import GradientBackground from "../components/GradientBackground";
+import { DimensionUtils } from "../utils/DimensionUtils";
 
 type Props = ClientEvent & { name: string; index: number };
 
@@ -317,7 +324,16 @@ const FriendEditModal = observer(() => {
                     )}
                 />
             </View>
-            <View style={tailwind("p-4 flex-row mb-4")}>
+            <View
+                style={[
+                    tailwind("p-4 flex-row mb-4"),
+                    {
+                        marginBottom:
+                            DimensionUtils.screenHeight -
+                            DimensionUtils.deviceHeight,
+                    },
+                ]}
+            >
                 <AppButton
                     backgroundColor={CustomColors.waves}
                     textColor={CustomColors.buttonTextColor}
