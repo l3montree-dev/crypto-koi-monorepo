@@ -40,8 +40,8 @@ export class UserService {
         return this.sync()
     }
 
-    async loginUsingDeviceId() {
-        const success = await this.authService.exchangeDeviceIdForToken()
+    async registerUsingDeviceId(values: RegisterRequest) {
+        const success = await this.authService.register(values)
         if (!success) {
             return
         }
@@ -55,7 +55,14 @@ export class UserService {
     async tryToLogin(): Promise<GetUser['user'] | null> {
         const success =
             await this.authService.tryToLoginUsingStoredCredentials()
-        if (!success) return null
+        if (!success) {
+            // try to login using the stored token
+            const storedDeviceIdSuccess =
+                await this.authService.exchangeDeviceIdForToken()
+            if (storedDeviceIdSuccess) {
+                return null
+            }
+        }
 
         return this.sync()
     }

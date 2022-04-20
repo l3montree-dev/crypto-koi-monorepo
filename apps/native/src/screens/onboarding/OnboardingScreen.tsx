@@ -26,15 +26,17 @@ import Animated, {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../../components/AppButton";
-import Wave from "../../components/Wave";
+import GradientBackground from "../../components/GradientBackground";
 import { config } from "../../config";
 import { useFloating } from "../../hooks/useFloating";
+import useInput from "../../hooks/useInput";
+import { nativeRootStore } from "../../mobx/NativeRootStore";
 import { nativeUserService } from "../../services/NativeUserService";
 import { Colors, CustomColors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
-import GradientBackground from "../../components/GradientBackground";
-import { nativeRootStore } from "../../mobx/NativeRootStore";
+import {validEmail} from "@crypto-koi/common/lib/validators"
+import Input from "../../components/Input";
 
 
 const style = StyleSheet.create({
@@ -49,7 +51,7 @@ const style = StyleSheet.create({
     svg: {
         height: DimensionUtils.deviceWidth,
         width: DimensionUtils.deviceWidth,
-        color: CustomColors.waves,
+        color: CustomColors.cherry,
     },
     rotatedSvg: {
         transform: [{ rotate: "180deg" }],
@@ -94,6 +96,9 @@ function OnboardingScreen() {
     const dotContainerWidth = useSharedValue(0);
     const connector = useWalletConnect();
 
+    const name = useInput();
+    const emailAddress = useInput();
+
     const [agreedToTermsOfUse, setAgreedToTermsOfUse] = useState(false);
     const [agreedToPrivacyPolicy, setAgreedToPrivacyPolicy] = useState(false);
 
@@ -134,8 +139,14 @@ function OnboardingScreen() {
     };
 
     const handlePlayWithoutWalletPress = async () => {
-        const user = await nativeUserService.loginUsingDeviceId();
-        nativeRootStore.authStore.setCurrentUser(user)
+        if (validEmail(emailAddress.value.trim()) && name.value.trim().length > 0) {
+            const user = await nativeUserService.loginUsingDeviceId({email: emailAddress.value.trim(), name: name.value.trim()});
+            nativeRootStore.authStore.setCurrentUser(user)
+        } else if(!validEmail(emailAddress.value.trim())) {
+            ViewUtils.toast("Please enter a valid email address")
+        } else if (name.value.trim().length === 0) {
+            ViewUtils.toast("Please enter a name")
+        }
     };
 
     const setActive = (next: number, x: number) => {
@@ -265,7 +276,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(500)}
                             >
                                 <Icon
-                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.cherry }]}
                                     name="food-apple"
                                 />
 
@@ -318,7 +329,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(1000)}
                             >
                                 <Icon
-                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.cherry }]}
                                     name="heart"
                                 />
                                 <View style={tailwind("ml-5")}>
@@ -342,7 +353,7 @@ function OnboardingScreen() {
                                 entering={FadeIn.delay(1500)}
                             >
                                 <Icon
-                                    style={[tailwind("text-4xl"), { color: CustomColors.waves }]}
+                                    style={[tailwind("text-4xl"), { color: CustomColors.cherry }]}
                                     name="arch"
                                 />
                                 <View style={tailwind("ml-5")}>
@@ -391,8 +402,8 @@ function OnboardingScreen() {
                         </Text>
                     </>)}
                 </View>
-                <View
-                    style={[
+                <ScrollView
+                    contentContainerStyle={[
                         style.slide,
                         tailwind(
                             "flex-col flex-1 justify-center px-4 items-center"
@@ -403,7 +414,7 @@ function OnboardingScreen() {
                         <Animated.View entering={FadeIn}>
                             <Text
                                 style={tailwind(
-                                    "text-white text-4xl font-bold text-center mb-5"
+                                    "text-white text-4xl pt-20 font-bold text-center mb-5"
                                 )}
                             >
                                 View your NFT
@@ -411,9 +422,18 @@ function OnboardingScreen() {
                             <Text
                                 style={tailwind("text-white text-lg text-center")}
                             >
-                                If you can converted your friend into a NFT, you can view and feed here
+                                If you have converted your friend into a NFT, you can view and feed here
                             </Text>
+                            <View>
+                                <View style={tailwind("mt-2")}>
+                                    <Input style={tailwind("bg-white")} placeholder="Name" textColor="black" labelColor="white" label="Name" {...name} />
+                                </View>
+                                <View style={tailwind("mt-2")}>
+                                    <Input style={tailwind("bg-white")} placeholder="E-Mail" textColor="black" labelColor="white" label="E-Mail" {...emailAddress} />
+                                </View>
+                            </View>
                             <View style={tailwind("bg-white rounded-lg mt-4")}>
+                               
                                 <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
                                     <Switch
                                         value={agreedToTermsOfUse}
@@ -439,16 +459,8 @@ function OnboardingScreen() {
                                     <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the privacy policy <Text onPress={() => Linking.openURL(config.privacyPolicyLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
                                 </View>
                             </View>
-                            <View style={tailwind("mt-5")}>
-                                <AppButton
-                                    backgroundColor={Colors.cherry}
-                                    textColor="white"
-                                    disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
-                                    onPress={handlePlayWithWalletPress}
-                                    title="Login with wallet"
-                                />
-                            </View>
-                            {/*<View style={tailwind("mt-4")}>
+                      
+                            <View style={tailwind("mt-4")}>
                                 <AppButton
                                     backgroundColor={
                                         CustomColors.onBgDark
@@ -458,10 +470,19 @@ function OnboardingScreen() {
                                     onPress={handlePlayWithoutWalletPress}
                                     title="Play without connected Wallet"
                                 />
-                                </View>*/}
+                            </View>
+                            <Text style={tailwind("text-white mt-5 text-center")}>Or</Text>
+                            <View style={tailwind("mt-5")}>
+                                <AppButton
+                                    backgroundColor={Colors.cherry}
+                                    textColor="white"
+                                    onPress={handlePlayWithWalletPress}
+                                    title="Login with wallet"
+                                />
+                            </View>
                         </Animated.View>
                     )}
-                </View>
+                </ScrollView>
             </ScrollView>
             <View style={[tailwind("flex-row items-center justify-between"), {
                 marginBottom: DimensionUtils.screenHeight -
@@ -490,7 +511,7 @@ function OnboardingScreen() {
                             style.dot,
                             tailwind("rounded absolute mx-2"),
                             animatedActiveDotStyle,
-                            { backgroundColor: CustomColors.waves },
+                            { backgroundColor: CustomColors.cherry },
                         ]}
                     />
                 </View>

@@ -7,7 +7,7 @@ export const Colors = {
 export const CustomColors = {
     bgDark: "#01030E",
     onBgDark: "#212959",
-    waves: "#D33148",
+    cherry: "#D33148",
     backgroundColor: "#01030E",
     secondaryColor: "#212959",
     onBackground: "#c1bbbd",

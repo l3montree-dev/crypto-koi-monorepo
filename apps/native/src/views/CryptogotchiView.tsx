@@ -120,7 +120,7 @@ const CryptogotchiView = observer((props: Props) => {
                 minHeight:
                     DimensionUtils.deviceHeight -
                     (currentUserIsOwner ? 36 : -39),
-                // paddingBottom: 20,
+                paddingBottom: 30,
             },
             wave: {
                 bottom: currentUserIsOwner ? 25 : 82,

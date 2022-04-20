@@ -1,8 +1,15 @@
 import { useMutation } from "@apollo/client";
+import { CONNECT_WALLET_MUTATION } from "@crypto-koi/common/lib/graphql/queries/user";
+import {
+    ConnectWallet,
+    ConnectWalletVariables,
+} from "@crypto-koi/common/lib/graphql/queries/__generated__/ConnectWallet";
+import { selectCurrentUser } from "@crypto-koi/common/lib/mobx/selectors";
+import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { observer } from "mobx-react-lite";
-import React, { useMemo } from "react";
+import React from "react";
 import {
     Alert,
     Linking,
@@ -13,28 +20,17 @@ import {
     TouchableNativeFeedback,
     View,
 } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
 import { AppButton } from "../components/AppButton";
 import { config } from "../config";
-import { CONNECT_WALLET_MUTATION } from "@crypto-koi/common/lib/graphql/queries/user";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {
-    ConnectWallet,
-    ConnectWalletVariables,
-} from "@crypto-koi/common/lib/graphql/queries/__generated__/ConnectWallet";
 import useAppState from "../hooks/useAppState";
-import {
-    selectCurrentUser,
-    selectThemeStore,
-} from "@crypto-koi/common/lib/mobx/selectors";
+import { useNavigation } from "../hooks/useNavigation";
+import { nativeRootStore } from "../mobx/NativeRootStore";
+import { nativeUserService } from "../services/NativeUserService";
+import { CustomColors } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
 import ViewUtils from "../utils/ViewUtils";
-import { useNavigation } from "../hooks/useNavigation";
-import { nativeUserService } from "../services/NativeUserService";
-import { hexChainId2Number } from "@crypto-koi/common/lib/web3";
-import { nativeRootStore } from "../mobx/NativeRootStore";
-import { CustomColors } from "../styles/colors";
-import { color } from "react-native-reanimated";
 
 const style = StyleSheet.create({
     header: {
@@ -82,8 +78,8 @@ export const ProfileTab = observer(() => {
             ViewUtils.toast("Wallet successfully connected");
         } catch (e) {
             ViewUtils.toast(
-                "Error connecting wallet - Is this wallet already used by another account?",
-                5
+                "Error connecting wallet - Is this wallet already used by another account? " +
+                    provider.accounts[0]
             );
         }
     };
@@ -140,12 +136,7 @@ export const ProfileTab = observer(() => {
                 <View style={tailwind("mb-5")}>
                     {user?.walletAddress ? (
                         <View style={tailwind("mb-5")}>
-                            <Text
-                                style={[
-                                    tailwind("mb-2"),
-                                    { color: CustomColors.buttonTextColor },
-                                ]}
-                            >
+                            <Text style={tailwind("mb-2 text-white")}>
                                 Connected Wallet
                             </Text>
                             <View
@@ -161,7 +152,9 @@ export const ProfileTab = observer(() => {
                             >
                                 <Icon
                                     size={24}
-                                    style={tailwind("opacity-75 mr-2")}
+                                    style={tailwind(
+                                        "opacity-75 text-white mr-2"
+                                    )}
                                     color={CustomColors.buttonTextColor}
                                     name="wallet"
                                 />
@@ -169,10 +162,7 @@ export const ProfileTab = observer(() => {
                                 <Text
                                     numberOfLines={1}
                                     ellipsizeMode="middle"
-                                    style={[
-                                        { color: CustomColors.buttonTextColor },
-                                        tailwind("flex-1"),
-                                    ]}
+                                    style={tailwind("flex-1 text-white")}
                                 >
                                     {user?.walletAddress}
                                 </Text>
@@ -180,12 +170,7 @@ export const ProfileTab = observer(() => {
                         </View>
                     ) : (
                         <View>
-                            <Text
-                                style={[
-                                    { color: CustomColors.buttonTextColor },
-                                    tailwind("mb-2"),
-                                ]}
-                            >
+                            <Text style={tailwind("mb-2 text-white")}>
                                 Your CryptoKoi is currently not connected to any
                                 wallet. If you uninstall the App, it will be
                                 lost.
@@ -204,7 +189,7 @@ export const ProfileTab = observer(() => {
                 </View>
                 <View
                     style={[
-                        tailwind("mb-4 rounded-lg"),
+                        tailwind("mb-4 rounded-lg bg-white"),
                         { backgroundColor: CustomColors.buttonBackgroundColor },
                     ]}
                 >
@@ -217,11 +202,7 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text
-                                style={{ color: CustomColors.buttonTextColor }}
-                            >
-                                Imprint
-                            </Text>
+                            <Text style={tailwind("text-white")}>Imprint</Text>
                         </View>
                     </TouchableNativeFeedback>
                     <TouchableNativeFeedback
@@ -230,9 +211,7 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text
-                                style={{ color: CustomColors.buttonTextColor }}
-                            >
+                            <Text style={tailwind("text-white")}>
                                 Privacy Policy
                             </Text>
                         </View>
@@ -243,9 +222,7 @@ export const ProfileTab = observer(() => {
                         }
                     >
                         <View style={[tailwind("p-4"), style.listItem]}>
-                            <Text
-                                style={{ color: CustomColors.buttonTextColor }}
-                            >
+                            <Text style={tailwind("text-white")}>
                                 Terms of Use
                             </Text>
                         </View>
@@ -270,11 +247,10 @@ export const ProfileTab = observer(() => {
                         <View style={tailwind("p-4 flex-row items-center")}>
                             <Icon
                                 size={24}
-                                style={tailwind("mr-2 opacity-75")}
+                                style={tailwind("mr-2 opacity-75 text-white")}
                                 name="delete-outline"
-                                color={CustomColors.waves}
                             />
-                            <Text style={{ color: CustomColors.waves }}>
+                            <Text style={tailwind("text-white")}>
                                 Delete account
                             </Text>
                         </View>

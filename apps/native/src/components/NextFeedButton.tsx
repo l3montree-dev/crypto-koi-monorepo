@@ -1,8 +1,10 @@
+import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
+import { ticker } from "@crypto-koi/common/lib/Ticker";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { config } from "../config";
-import Cryptogotchi from "@crypto-koi/common/lib/mobx/Cryptogotchi";
-import { ticker } from "@crypto-koi/common/lib/Ticker";
+import { CustomColors } from "../styles/colors";
+import { AppButton } from "./AppButton";
 import { ProgressButton } from "./ProgressButton";
 
 interface Props {
@@ -36,23 +38,31 @@ function NextFeedButton(props: Props) {
             ticker.removeTickHandler(props.clockId);
         };
     }, []);
+    if (seconds === -1) {
+        return (
+            <AppButton
+                title="Feed"
+                textColor="white"
+                loading={loading}
+                onPress={onPress}
+                backgroundColor={CustomColors.cherry}
+            />
+        );
+    }
     return (
         <ProgressButton
             title={
-                seconds === -1
-                    ? "Feed"
-                    : "Feed (" +
-                      moment
-                          .utc((config.secondsBetweenFeeding - seconds) * 1000)
-                          .format("HH:mm:ss") +
-                      ")"
+                "Feed (" +
+                moment
+                    .utc((config.secondsBetweenFeeding - seconds) * 1000)
+                    .format("HH:mm:ss") +
+                ")"
             }
             progress={
                 seconds === -1 ? 1 : seconds / config.secondsBetweenFeeding
             }
             {...props}
             disabled={disabled}
-            loading={loading}
             onPress={onPress}
         />
     );

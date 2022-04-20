@@ -3,7 +3,7 @@ import { Pressable, Text, TextInput, TextInputProps, View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 
 type Props = TextInputProps & {
-    label: string;
+    label?: string;
     textColor: string;
     labelColor: string;
 };
@@ -14,11 +14,14 @@ const Input = (props: Props) => {
     const { label, style, ...rest } = props;
     return (
         <Pressable onPress={() => textInputRef.current?.focus()}>
-            <View style={tailwind("rounded-lg py-3")}>
-                <Text style={[tailwind("mb-2"), { color: props.labelColor }]}>
-                    {label}
-                </Text>
-
+            <View style={tailwind("rounded-lg")}>
+                {props.label !== undefined && (
+                    <Text
+                        style={[tailwind("mb-2"), { color: props.labelColor }]}
+                    >
+                        {label}
+                    </Text>
+                )}
                 <View style={[tailwind("rounded-lg"), style]}>
                     <TextInput
                         ref={textInputRef}

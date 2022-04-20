@@ -13,7 +13,7 @@ const GradientBackground: FunctionComponent<Props> = (props) => {
         <View pointerEvents={"none"}>
             <Svg
                 width={DimensionUtils.deviceWidth}
-                height={DimensionUtils.deviceHeight}
+                height={DimensionUtils.screenHeight}
             >
                 <Defs>
                     <LinearGradient
@@ -40,7 +40,7 @@ const GradientBackground: FunctionComponent<Props> = (props) => {
                             stopColor={
                                 props.inSafeAreaView
                                     ? "#331019"
-                                    : CustomColors.waves
+                                    : CustomColors.cherry
                             }
                             stopOpacity={props.inSafeAreaView ? "1" : "0.35"}
                         />
@@ -50,7 +50,7 @@ const GradientBackground: FunctionComponent<Props> = (props) => {
                     x="0"
                     y="0"
                     width={DimensionUtils.deviceWidth}
-                    height={DimensionUtils.deviceHeight}
+                    height={DimensionUtils.screenHeight}
                     fill="url(#Gradient)"
                 />
             </Svg>

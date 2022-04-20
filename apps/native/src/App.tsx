@@ -13,10 +13,10 @@ import utilities from "../tailwind.json";
 import { AppStateContext } from "./mobx/AppStateContext";
 import { nativeRootStore } from "./mobx/NativeRootStore";
 import RootStackNavigator from "./RootStackNavigator";
-import { nativeEventEmitter } from "./services/NativeAppEventEmitter";
 import { nativeApolloClient } from "./services/NativeApolloClient";
+import { nativeEventEmitter } from "./services/NativeAppEventEmitter";
 import { nativeUserService } from "./services/NativeUserService";
-import { Colors } from "./styles/colors";
+import { CustomColors } from "./styles/colors";
 import log from "./utils/logger";
 import ViewUtils from "./utils/ViewUtils";
 
@@ -41,7 +41,7 @@ const Theme = {
     colors: {
         ...DefaultTheme.colors,
         primary: "rgb(255, 45, 85)",
-        background: Colors.soft,
+        background: CustomColors.bgDark,
     },
 };
 

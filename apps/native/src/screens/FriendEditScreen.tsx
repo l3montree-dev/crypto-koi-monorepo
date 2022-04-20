@@ -20,31 +20,24 @@ import {
 } from "@crypto-koi/common/lib/graphql/queries/__generated__/GetNftSignature";
 import { selectCryptogotchi } from "@crypto-koi/common/lib/mobx/selectors";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { StatusBar } from "expo-status-bar";
 import { observer } from "mobx-react-lite";
 import moment, { Moment } from "moment";
-import React, { FunctionComponent, useEffect, useState } from "react";
-import {
-    FlatList,
-    StyleSheet,
-    Text,
-    View,
-    StatusBar as StatusBarReact,
-} from "react-native";
+import React, { FunctionComponent, useEffect } from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { AppButton } from "../components/AppButton";
+import GradientBackground from "../components/GradientBackground";
 import Input from "../components/Input";
 import Screen from "../components/Screen";
 import useAppState from "../hooks/useAppState";
 import useInput from "../hooks/useInput";
 import { RootStackParamList } from "../hooks/useNavigation";
-import log from "../utils/logger";
 import { CustomColors } from "../styles/colors";
-import GradientBackground from "../components/GradientBackground";
 import { DimensionUtils } from "../utils/DimensionUtils";
+import log from "../utils/logger";
 
 type Props = ClientEvent & { name: string; index: number };
 
@@ -335,7 +328,7 @@ const FriendEditModal = observer(() => {
                 ]}
             >
                 <AppButton
-                    backgroundColor={CustomColors.waves}
+                    backgroundColor={CustomColors.cherry}
                     textColor={CustomColors.buttonTextColor}
                     loading={loading && !error}
                     onPress={handleNameSave}
