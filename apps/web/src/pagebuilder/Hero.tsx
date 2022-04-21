@@ -29,6 +29,34 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
                         </h2>
                         <div className="lg:block pt-5">
                             <CMSContent>{props.Text}</CMSContent>
+                            <div className="flex-row flex justify-center lg:justify-start">
+                                <div className="pr-3 flex-row flex items-center">
+                                    {/*<a
+                                        target={'_blank'}
+                                        href={props.Store_Links.Apple_App_Store_Link}
+                                        rel="noreferrer"
+                                    >*/}
+                                    <Image
+                                        alt="Appstore Badge"
+                                        src={'/assets/appstore-badge.svg'}
+                                        height={40}
+                                        width={130}
+                                    />
+                                    {/*</a>*/}
+                                </div>
+                                {/*<a
+                                    target={'_blank'}
+                                    href={props.Store_Links.Google_Play_Store_Link}
+                                    rel="noreferrer"
+                                >*/}
+                                <Image
+                                    alt="Google Play Badge"
+                                    src={'/assets/google-play-badge.svg'}
+                                    height={40}
+                                    width={130}
+                                />
+                                {/*</a>*/}
+                            </div>
                             <div className="lg:hidden -mx-4">
                                 <Image
                                     width={props.Image.data.attributes.width}
