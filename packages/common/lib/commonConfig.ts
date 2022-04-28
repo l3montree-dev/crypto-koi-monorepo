@@ -1,4 +1,4 @@
-import { mainnet, mumbai } from './chains'
+import { mainnet } from './chains'
 
 export const commonConfig = {
     cmsBaseUrl: 'https://cms.crypto-koi.io',

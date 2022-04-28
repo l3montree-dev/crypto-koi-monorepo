@@ -15,7 +15,7 @@ const Feature: FunctionComponent<IFeaturesPB> = (props) => {
                 <div className="md:flex flex-row md:-mx-2">
                     {props.Feature_Cards.map((card) => (
                         <div
-                            className="rounded-lg md:mx-2 text-center bg-white text-black mb-4 p-8 shadow-lg"
+                            className="rounded-lg md:mx-2 flex-1 text-center bg-white text-black mb-4 p-8 shadow-lg"
                             key={card.id}
                         >
                             <div className="flex-row items-center justify-center flex rounded-lg mx-auto mb-4 p-0">

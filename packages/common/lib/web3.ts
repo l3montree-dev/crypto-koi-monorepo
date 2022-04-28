@@ -8,13 +8,14 @@ export function newProvider(
     connector: useWalletConnectResult['connector'],
     network: typeof commonConfig.chain
 ): WalletConnectProvider {
-    return new WalletConnectProvider({
+    const params = {
         rpc: {
             [hexChainId2Number(network.chainId)]: network.rpcUrls[0],
         },
         chainId: hexChainId2Number(network.chainId),
-        connector: connector,
-    })
+        connector,
+    }
+    return new WalletConnectProvider(params)
 }
 
 export const hexChainId2Number = (chainId: string): number => {
@@ -50,6 +51,8 @@ export const switchOrAddNetworkFactory =
                 resolve()
                 return
             }
+
+            await provider.send('wallet_addEthereumChain', [network])
             log.info(
                 'chain ID mismatch - sending wallet_switchEthereumChain request with chain id: ' +
                     network.chainId +
@@ -79,6 +82,7 @@ export const switchOrAddNetworkFactory =
                         log.info(
                             'switch failed with error code 4902 (chain does not exist) - sending wallet_addEthereumChain request'
                         )
+                        // try again...
                         await provider.send('wallet_addEthereumChain', [
                             network,
                         ])

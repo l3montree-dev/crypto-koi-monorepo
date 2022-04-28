@@ -1,6 +1,7 @@
 import { commonConfig } from '@crypto-koi/common/lib/commonConfig'
 import CryptoKoiSmartContract from '@crypto-koi/common/lib/contracts/CryptoKoiSmartContract'
 import {
+    hexChainId2Number,
     newProvider,
     switchOrAddNetworkFactory,
 } from '@crypto-koi/common/lib/web3'
@@ -39,7 +40,15 @@ const getFittingWeb3Provider = async (): Promise<Web3Provider> => {
         await provider.send('eth_requestAccounts', [])
     } else {
         const p = newProvider(connector, commonConfig.chain)
+        p.on('error', (e: any) =>
+            console.log(
+                'Thats not my fault :) @timbastin Metamask does always try to connect to ethereum. If the user does not have the polygon network added, this error will occur',
+                e
+            )
+        )
+
         await p.enable()
+        p.updateRpcUrl(hexChainId2Number(commonConfig.chain.chainId))
         provider = new ethers.providers.Web3Provider(p)
     }
 
