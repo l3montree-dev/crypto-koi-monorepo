@@ -14,7 +14,8 @@ import {
     StyleSheet,
     Text,
     TouchableNativeFeedback,
-    View
+    View,
+    StatusBar as RNStatusBar,
 } from "react-native";
 import { Switch } from "react-native-paper";
 import Animated, {
@@ -35,8 +36,9 @@ import { nativeUserService } from "../../services/NativeUserService";
 import { Colors, CustomColors } from "../../styles/colors";
 import { DimensionUtils } from "../../utils/DimensionUtils";
 import ViewUtils from "../../utils/ViewUtils";
-import {validEmail} from "@crypto-koi/common/lib/validators"
+import { validEmail } from "@crypto-koi/common/lib/validators"
 import Input from "../../components/Input";
+import { StatusBar } from "expo-status-bar";
 
 
 const style = StyleSheet.create({
@@ -144,9 +146,13 @@ function OnboardingScreen() {
 
     const handlePlayWithoutWalletPress = async () => {
         if (validEmail(emailAddress.value.trim()) && name.value.trim().length > 0) {
-            const user = await nativeUserService.registerUsingDeviceId({email: emailAddress.value.trim(), name: name.value.trim()});
+            const user = await nativeUserService.registerUsingDeviceId({ email: emailAddress.value.trim(), name: name.value.trim() });
+            if (!user) {
+                ViewUtils.toast("Could not register - Please try again later");
+                return
+            }
             nativeRootStore.authStore.setCurrentUser(user)
-        } else if(!validEmail(emailAddress.value.trim())) {
+        } else if (!validEmail(emailAddress.value.trim())) {
             ViewUtils.toast("Please enter a valid email address")
         } else if (name.value.trim().length === 0) {
             ViewUtils.toast("Please enter a name")
@@ -215,6 +221,7 @@ function OnboardingScreen() {
             <View style={tailwind("absolute -bottom-20")}>
                 <Wave svgStyle={style.svg} />
                 </View>*/}
+            {Platform.OS === "ios" && <RNStatusBar barStyle={'light-content'} />}
             <View style={tailwind("absolute")}>
                 <GradientBackground inSafeAreaView={false} />
             </View>
@@ -430,14 +437,14 @@ function OnboardingScreen() {
                             </Text>
                             <View>
                                 <View style={tailwind("mt-2")}>
-                                    <Input style={tailwind("bg-white")} placeholder="Name" textColor="black" labelColor="white" label="Name" {...name} />
+                                    <Input style={[tailwind("bg-white"), { paddingBottom: 4 }]} placeholder="Name" textColor="black" labelColor="white" label="Name" {...name} />
                                 </View>
                                 <View style={tailwind("mt-2")}>
-                                    <Input style={tailwind("bg-white")} placeholder="E-Mail" textColor="black" labelColor="white" label="E-Mail" {...emailAddress} />
+                                    <Input style={[tailwind("bg-white"), { paddingBottom: 4, maxWidth: "100%" }]} placeholder="E-Mail" autoCapitalize={'none'} keyboardType={'email-address'} textColor="black" labelColor="white" label="E-Mail" {...emailAddress} />
                                 </View>
                             </View>
                             <View style={tailwind("bg-white rounded-lg mt-4")}>
-                               
+
                                 <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
                                     <Switch
                                         value={agreedToTermsOfUse}
@@ -463,7 +470,7 @@ function OnboardingScreen() {
                                     <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the privacy policy <Text onPress={() => Linking.openURL(config.privacyPolicyLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
                                 </View>
                             </View>
-                      
+
                             <View style={tailwind("mt-4")}>
                                 <AppButton
                                     backgroundColor={

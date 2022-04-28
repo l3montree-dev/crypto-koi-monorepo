@@ -1,4 +1,4 @@
-import { mumbai } from './chains'
+import { mainnet, mumbai } from './chains'
 
 export const commonConfig = {
     cmsBaseUrl: 'https://cms.crypto-koi.io',
@@ -6,11 +6,11 @@ export const commonConfig = {
 
     secondsBetweenFeeding: 60 * 60,
 
-    contractAddress: '0x2f158340c811c37284748fD2FFE298ebEB2F8c0e',
+    contractAddress: '0x6e2844069F11262EC646fDa6ff64eCC62308025A',
 
-    chain: mumbai,
+    chain: mainnet,
 
     privacyPolicyLink: 'https://crypto-koi.io/app-privacy-policy',
     termsOfServiceLink: 'https://crypto-koi.io/terms-of-use',
-    openseaUrl: 'https://testnets.opensea.io',
+    openseaUrl: 'https://opensea.io',
 }
