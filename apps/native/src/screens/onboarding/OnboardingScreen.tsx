@@ -417,7 +417,7 @@ function OnboardingScreen() {
                     contentContainerStyle={[
                         style.slide,
                         tailwind(
-                            "flex-col flex-1 justify-center px-4 items-center"
+                            "flex-1"
                         ),
                     ]}
                 >
@@ -425,8 +425,8 @@ function OnboardingScreen() {
                         <ScrollView
                             decelerationRate={"fast"}
                             scrollEnabled={true}
-                            style={tailwind("flex-1")}
                             scrollEventThrottle={16}
+                            contentContainerStyle={tailwind("px-4 flex-1 w-full")}
                             horizontal={false}
                             showsVerticalScrollIndicator={false}
                         >

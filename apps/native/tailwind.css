@@ -82,11 +82,6 @@
   margin-bottom: 0.5rem
 }
 
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem
-}
-
 .mr-1 {
   margin-right: 0.25rem
 }
@@ -159,12 +154,12 @@
   margin-left: 1.25rem
 }
 
-.mt-4 {
-  margin-top: 1rem
-}
-
 .mt-2 {
   margin-top: 0.5rem
+}
+
+.mt-4 {
+  margin-top: 1rem
 }
 
 .flex {
@@ -284,19 +279,14 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.bg-cherry {
+.bg-slate-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(217 77 97 / var(--tw-bg-opacity))
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity))
 }
 
-.bg-sea {
+.bg-slate-300 {
   --tw-bg-opacity: 1;
-  background-color: rgb(50 50 77 / var(--tw-bg-opacity))
-}
-
-.bg-sea-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(50 50 77 / var(--tw-bg-opacity))
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity))
 }
 
 .p-2 {
@@ -339,11 +329,6 @@
   padding-bottom: 1rem
 }
 
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem
-}
-
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem
@@ -364,9 +349,9 @@
   padding-right: 2.5rem
 }
 
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
 }
 
 .pb-3 {
@@ -409,16 +394,12 @@
   padding-top: 1rem
 }
 
-.pl-2 {
-  padding-left: 0.5rem
-}
-
-.pt-10 {
-  padding-top: 2.5rem
-}
-
 .pt-20 {
   padding-top: 5rem
+}
+
+.pl-2 {
+  padding-left: 0.5rem
 }
 
 .text-center {
