@@ -1,4 +1,6 @@
 import { useQuery } from "@apollo/client";
+import { FETCH_LEADERBOARD } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
+import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import {
@@ -12,11 +14,8 @@ import {
 } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import { LeaderboardItem } from "../components/LeaderboardItem";
-import { FETCH_LEADERBOARD } from "@crypto-koi/common/lib/graphql/queries/cryptogotchi";
-import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
-import { commonStyles } from "../styles/commonStyles";
 import { CustomColors } from "../styles/colors";
-import GradientBackground from "../components/GradientBackground";
+import { commonStyles } from "../styles/commonStyles";
 
 const style = StyleSheet.create({
     header: {
@@ -36,9 +35,7 @@ const Leaderboard = observer(() => {
     return (
         <SafeAreaView style={tailwind("flex-1 flex-col")}>
             <StatusBar barStyle={"light-content"} />
-            <View style={tailwind("absolute")}>
-                <GradientBackground inSafeAreaView={true} />
-            </View>
+
             <View
                 style={[
                     tailwind("px-4 pb-3"),

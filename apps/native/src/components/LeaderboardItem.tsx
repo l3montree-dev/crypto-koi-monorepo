@@ -1,3 +1,6 @@
+import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
+import { ticker } from "@crypto-koi/common/lib/Ticker";
+import Transformer from "@crypto-koi/common/lib/Transformer";
 import { observer } from "mobx-react-lite";
 import moment from "moment";
 import React, { FunctionComponent, useEffect, useState } from "react";
@@ -14,15 +17,11 @@ import Animated, { FadeIn } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { config } from "../config";
-import { FetchLeaderBoard } from "@crypto-koi/common/lib/graphql/queries/__generated__/FetchLeaderBoard";
-import useAppState from "../hooks/useAppState";
 import { useNavigation } from "../hooks/useNavigation";
-import { ticker } from "@crypto-koi/common/lib/Ticker";
+import { CustomColors } from "../styles/colors";
 import { android_ripple } from "../styles/commonStyles";
-import Transformer from "@crypto-koi/common/lib/Transformer";
 import CircularProgress from "./CircularProgress";
 import Clock from "./Clock";
-import { CustomColors } from "../styles/colors";
 
 const style = StyleSheet.create({
     img: {

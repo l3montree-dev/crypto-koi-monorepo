@@ -38,7 +38,7 @@ const style = StyleSheet.create({
     },
     listItem: {
         borderBottomWidth: 1,
-        borderBottomColor: "rgba(125, 125, 125, 1)",
+        borderBottomColor: "rgba(255, 255, 255, 0.2)",
     },
 });
 
@@ -181,9 +181,7 @@ export const ProfileTab = observer(() => {
                                 title="Connect Wallet"
                                 onPress={handleConnectWallet}
                                 textColor={CustomColors.buttonTextColor}
-                                backgroundColor={
-                                    CustomColors.buttonBackgroundColor
-                                }
+                                backgroundColor={CustomColors.cherry}
                             />
                         </View>
                     )}
@@ -262,7 +260,7 @@ export const ProfileTab = observer(() => {
                     title="Logout"
                     onPress={handleLogout}
                     textColor={CustomColors.buttonTextColor}
-                    backgroundColor={CustomColors.buttonBackgroundColor}
+                    backgroundColor={"rgba(255,255,255,0.1)"}
                 />
             </View>
         </SafeAreaView>

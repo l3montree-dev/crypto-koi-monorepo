@@ -138,7 +138,7 @@ function OnboardingScreen() {
 
         const user = await nativeUserService.loginUsingWalletAddress(provider.accounts[0]);
         if (!user) {
-            ViewUtils.toast("Could not login using wallet address");
+            ViewUtils.toast("Could not login using wallet address: "+provider.accounts[0]+" - do you already have an account?");
             return
         }
         nativeRootStore.authStore.setCurrentUser(user)
