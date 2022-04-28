@@ -18,7 +18,7 @@ export default class AuthStore {
             this.currentUser = new User(
                 user.id,
                 user.name,
-                user.walletAddress,
+                user.walletAddress?.toLowerCase() ?? null,
                 user.deviceId,
                 user.createdAt,
                 user.cryptogotchies.map((cryptogotchi) => {

@@ -136,7 +136,7 @@ function OnboardingScreen() {
 
         await provider.enable();
 
-        const user = await nativeUserService.loginUsingWalletAddress(provider.accounts[0]);
+        const user = await nativeUserService.loginUsingWalletAddress(provider.accounts[0].toLowerCase());
         if (!user) {
             ViewUtils.toast("Could not login using wallet address: "+provider.accounts[0]+" - do you already have an account?");
             return
