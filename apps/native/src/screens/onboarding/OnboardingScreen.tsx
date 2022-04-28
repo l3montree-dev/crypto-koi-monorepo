@@ -422,76 +422,85 @@ function OnboardingScreen() {
                     ]}
                 >
                     {activeSlide === 3 && (
-                        <Animated.View entering={FadeIn}>
-                            <Text
-                                style={tailwind(
-                                    "text-white text-4xl pt-20 font-bold text-center mb-5"
-                                )}
-                            >
-                                View your NFT
-                            </Text>
-                            <Text
-                                style={tailwind("text-white text-lg text-center")}
-                            >
-                                If you have converted your friend into a NFT, you can view and feed here
-                            </Text>
-                            <View>
-                                <View style={tailwind("mt-2")}>
-                                    <Input style={[tailwind("bg-white"), { paddingBottom: 4 }]} placeholder="Name" textColor="black" labelColor="white" label="Name" {...name} />
+                        <ScrollView
+                            decelerationRate={"fast"}
+                            scrollEnabled={true}
+                            style={tailwind("flex-1")}
+                            scrollEventThrottle={16}
+                            horizontal={false}
+                            showsVerticalScrollIndicator={false}
+                        >
+                            <Animated.View entering={FadeIn}>
+                                <Text
+                                    style={tailwind(
+                                        "text-white text-4xl pt-20 font-bold text-center mb-5"
+                                    )}
+                                >
+                                    View your NFT
+                                </Text>
+                                <Text
+                                    style={tailwind("text-white text-lg text-center")}
+                                >
+                                    If you have converted your friend into a NFT, you can view and feed here
+                                </Text>
+                                <View>
+                                    <View style={tailwind("mt-2")}>
+                                        <Input style={[tailwind("bg-white"), { paddingBottom: 4 }]} placeholder="Name" textColor="black" labelColor="white" label="Name" {...name} />
+                                    </View>
+                                    <View style={tailwind("mt-2")}>
+                                        <Input style={[tailwind("bg-white"), { paddingBottom: 4, maxWidth: "100%" }]} placeholder="E-Mail" autoCapitalize={'none'} keyboardType={'email-address'} textColor="black" labelColor="white" label="E-Mail" {...emailAddress} />
+                                    </View>
                                 </View>
-                                <View style={tailwind("mt-2")}>
-                                    <Input style={[tailwind("bg-white"), { paddingBottom: 4, maxWidth: "100%" }]} placeholder="E-Mail" autoCapitalize={'none'} keyboardType={'email-address'} textColor="black" labelColor="white" label="E-Mail" {...emailAddress} />
-                                </View>
-                            </View>
-                            <View style={tailwind("bg-white rounded-lg mt-4")}>
+                                <View style={tailwind("bg-white rounded-lg mt-4")}>
 
-                                <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
-                                    <Switch
-                                        value={agreedToTermsOfUse}
-                                        color={Colors.cherry}
-                                        onChange={() =>
-                                            setAgreedToTermsOfUse(
-                                                (prev) => !prev
-                                            )
-                                        }
-                                    />
-                                    <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the terms of use <Text onPress={() => Linking.openURL(config.termsOfServiceLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
+                                    <View style={tailwind("flex p-4 border-b-2 border-soft flex-row items-center")}>
+                                        <Switch
+                                            value={agreedToTermsOfUse}
+                                            color={Colors.cherry}
+                                            onChange={() =>
+                                                setAgreedToTermsOfUse(
+                                                    (prev) => !prev
+                                                )
+                                            }
+                                        />
+                                        <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the terms of use <Text onPress={() => Linking.openURL(config.termsOfServiceLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
+                                    </View>
+                                    <View style={tailwind("flex p-4 flex-row items-center mb-2")}>
+                                        <Switch
+                                            value={agreedToPrivacyPolicy}
+                                            color={Colors.cherry}
+                                            onChange={() =>
+                                                setAgreedToPrivacyPolicy(
+                                                    (prev) => !prev
+                                                )
+                                            }
+                                        />
+                                        <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the privacy policy <Text onPress={() => Linking.openURL(config.privacyPolicyLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
+                                    </View>
                                 </View>
-                                <View style={tailwind("flex p-4 flex-row items-center mb-2")}>
-                                    <Switch
-                                        value={agreedToPrivacyPolicy}
-                                        color={Colors.cherry}
-                                        onChange={() =>
-                                            setAgreedToPrivacyPolicy(
-                                                (prev) => !prev
-                                            )
-                                        }
-                                    />
-                                    <Text style={tailwind("pl-2 flex-1")}>I hereby agree to the privacy policy <Text onPress={() => Linking.openURL(config.privacyPolicyLink)} style={tailwind("text-cherry")}>( Read )</Text></Text>
-                                </View>
-                            </View>
 
-                            <View style={tailwind("mt-4")}>
-                                <AppButton
-                                    backgroundColor={
-                                        CustomColors.onBgDark
-                                    }
-                                    disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
-                                    textColor="white"
-                                    onPress={handlePlayWithoutWalletPress}
-                                    title="Register"
-                                />
-                            </View>
-                            <Text style={tailwind("text-white mt-5 text-center")}>Or</Text>
-                            <View style={tailwind("mt-5")}>
-                                <AppButton
-                                    backgroundColor={Colors.cherry}
-                                    textColor="white"
-                                    onPress={handleLoginWithWallet}
-                                    title="Login with wallet"
-                                />
-                            </View>
-                        </Animated.View>
+                                <View style={tailwind("mt-4")}>
+                                    <AppButton
+                                        backgroundColor={
+                                            CustomColors.onBgDark
+                                        }
+                                        disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
+                                        textColor="white"
+                                        onPress={handlePlayWithoutWalletPress}
+                                        title="Register"
+                                    />
+                                </View>
+                                <Text style={tailwind("text-white mt-4 text-center")}>Or</Text>
+                                <View style={tailwind("mt-5")}>
+                                    <AppButton
+                                        backgroundColor={Colors.cherry}
+                                        textColor="white"
+                                        onPress={handleLoginWithWallet}
+                                        title="Login with wallet"
+                                    />
+                                </View>
+                            </Animated.View>
+                        </ScrollView>
                     )}
                 </ScrollView>
             </ScrollView>
