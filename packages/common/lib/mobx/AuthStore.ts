@@ -29,4 +29,10 @@ export default class AuthStore {
             this.currentUser = null
         }
     }
+
+    setWalletAddress(walletAddress: string) {
+        if (this.currentUser) {
+            this.currentUser.walletAddress = walletAddress
+        }
+    }
 }

@@ -75,6 +75,7 @@ export const ProfileTab = observer(() => {
             await connectWallet({
                 variables: { walletAddress: provider.accounts[0] },
             });
+            nativeRootStore.authStore.setWalletAddress(provider.accounts[0]);
             ViewUtils.toast("Wallet successfully connected");
         } catch (e) {
             ViewUtils.toast(
