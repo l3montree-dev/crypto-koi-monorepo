@@ -43,72 +43,76 @@ const RegistrationForm = () => {
     }
 
     return (
-        <form
-            onSubmit={handleRegister}
-            className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border"
-        >
-            <h2 className="font-bold text-2xl font-poppins">Registration</h2>
+        <>
+            <form
+                onSubmit={handleRegister}
+                className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border"
+            >
+                <h2 className="font-bold text-2xl font-poppins">
+                    Registration
+                </h2>
 
-            <FormControl isInvalid={name.isInvalid} className="pt-5">
-                <FormLabel htmlFor="name">Username</FormLabel>
-                <Input
-                    autoFocus
-                    errorBorderColor="cherry.500"
-                    id="name"
-                    type="string"
-                    variant="filled"
-                    {...name}
-                />
-                <FormHelperText>
-                    This name will be visible to other users.
-                </FormHelperText>
-                <FormErrorMessage>Name is required.</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={email.isInvalid} className="pt-5">
-                <FormLabel htmlFor="email">Email address</FormLabel>
-                <Input
-                    errorBorderColor="cherry.500"
-                    placeholder="user@example.com"
-                    id="email"
-                    type="email"
-                    isRequired
-                    variant="filled"
-                    {...email}
-                />
-                <FormHelperText>
-                    We&apos;ll never share your email.
-                </FormHelperText>
-                <FormErrorMessage>Invalid Email.</FormErrorMessage>
-            </FormControl>
-            <div className="pt-5 flex-row flex">
-                <div className="flex-1">
-                    <WalletButton
-                        onClick={handleConnectWallet}
-                        wallet={wallet}
+                <FormControl isInvalid={name.isInvalid} className="pt-5">
+                    <FormLabel htmlFor="name">Username</FormLabel>
+                    <Input
+                        autoFocus
+                        errorBorderColor="cherry.500"
+                        id="name"
+                        type="string"
+                        variant="filled"
+                        {...name}
                     />
+                    <FormHelperText>
+                        This name will be visible to other users.
+                    </FormHelperText>
+                    <FormErrorMessage>Name is required.</FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={email.isInvalid} className="pt-5">
+                    <FormLabel htmlFor="email">Email address</FormLabel>
+                    <Input
+                        errorBorderColor="cherry.500"
+                        placeholder="user@example.com"
+                        id="email"
+                        type="email"
+                        isRequired
+                        variant="filled"
+                        {...email}
+                    />
+                    <FormHelperText>
+                        We&apos;ll never share your email.
+                    </FormHelperText>
+                    <FormErrorMessage>Invalid Email.</FormErrorMessage>
+                </FormControl>
+                <div className="pt-5 flex-row flex">
+                    <div className="flex-1">
+                        <WalletButton
+                            onClick={handleConnectWallet}
+                            wallet={wallet}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="pt-3 mb-3">
-                <Button
-                    disabled={
-                        wallet === null || email.isInvalid || name.isInvalid
-                    }
-                    type="submit"
-                    onClick={() =>
-                        handleRegister({ preventDefault: () => false })
-                    }
-                    isFullWidth
-                    colorScheme={'cherry'}
-                >
-                    Get your CryptoKoi
-                </Button>
-            </div>
+                <div className="pt-3 mb-3">
+                    <Button
+                        disabled={
+                            wallet === null || email.isInvalid || name.isInvalid
+                        }
+                        type="submit"
+                        onClick={() =>
+                            handleRegister({ preventDefault: () => false })
+                        }
+                        isFullWidth
+                        colorScheme={'cherry'}
+                    >
+                        Get your CryptoKoi
+                    </Button>
+                </div>
+            </form>
             <Link href="/login">
                 <a className="text-cherry text-center w-full flex justify-center">
                     Already have an account? Go to login
                 </a>
             </Link>
-        </form>
+        </>
     )
 }
 
