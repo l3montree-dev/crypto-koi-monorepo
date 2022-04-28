@@ -29,6 +29,8 @@ publish-image:
     - docker pull $IMAGE_TAG || true
     - docker build --network=host --build-arg SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN --build-arg API_HOST="https://dev.api.crypto-koi.io" --build-arg CMS_HOST="https://cms.crypto-koi.io" --cache-from $IMAGE_TAG -t $IMAGE_TAG -f apps/web/Dockerfile .
     - docker push $IMAGE_TAG
+  only:
+    - dev
 
 deployment-development:
   stage: deploy
@@ -45,7 +47,6 @@ deployment-development:
     - kubectl --server=$K8S_DEVELOPMENT_API_URL --token=$K8S_DEVELOPMENT_TOKEN --certificate-authority=ca.pem --namespace=crypto-koi rollout restart deployment/crypto-koi-website
   only:
     - dev
-  when: manual
 
 publish-image-production:
   image: docker:19.03.15
