@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Apr 20 17:25:11 2022
+# Make data base, printed on Thu Apr 28 14:53:05 2022
 
 # Variables
 
@@ -27,7 +27,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 UUID = db47ae1d-cad0-41cc-8b86-20922bc283be
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-6dbd2605-382a-45c1-906b-9a860ddd1f44.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2da88309-fe9e-41a3-8e99-dcb8861b91b7.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
@@ -42,8 +42,6 @@ MAKE_COMMAND := make
 THREE_SCALE_USER_TOKEN = 207c527cfc2a6b8dcf4fa43ad7a976da
 # environment
 QT_ACCESSIBILITY = 1
-# environment
-VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
 # environment
 GOPATH = /home/timbastin/go
 # automatic
@@ -61,7 +59,7 @@ LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu-xorg:/usr/share/gnome:/home/timbastin/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-OLDPWD = /home/timbastin/Schreibtisch/l3montree/stamplab/stamplab_client
+OLDPWD = /home/timbastin
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -81,7 +79,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.142
+GNOME_TERMINAL_SERVICE = :1.129
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -107,8 +105,6 @@ XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu-xorg:/etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-GIT_ASKPASS = /usr/share/code/resources/app/extensions/git/dist/askpass.sh
-# environment
 XDG_SESSION_DESKTOP = ubuntu-xorg
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST := Makefile
@@ -119,13 +115,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 8477
+VSCODE_PID = 8109
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/2582,unix/avocado:/tmp/.ICE-unix/2582
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/2447,unix/avocado:/tmp/.ICE-unix/2447
 # automatic
 *F = $(notdir $*)
 # environment
@@ -149,31 +145,23 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
-SHLVL = 2
+SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/530f3dbe_e47e_4f71_9d55_8dfd57461943
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/f92acdbf_491d_4382_9a86_22e4e23c9845
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.cargo/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/timbastin/.dotnet/tools:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin
+PATH = /home/timbastin/.nvm/versions/node/v14.17.0/bin:/home/timbastin/bin:/usr/local/bin:/home/timbastin/.cargo/bin:/home/timbastin/.local/bin:/home/timbastin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/timbastin/.dotnet/tools:/usr/local/go/bin:/home/timbastin/go/bin:/home/timbastin/Android/Sdk/tools:/home/timbastin/Android/Sdk/tools/bin:/home/timbastin/Android/Sdk/platform-tools:/home/timbastin/Android/Sdk/emulator:/usr/local/go/bin:/home/timbastin/go/bin
 # default
 MAKEFILES := 
-# environment
-VSCODE_GIT_IPC_HANDLE = /run/user/1000/vscode-git-b90d697690.sock
-# environment
-VSCODE_GIT_ASKPASS_NODE = /usr/share/code/code
 # automatic
 ^F = $(notdir $^)
-# environment
-VSCODE_GIT_ASKPASS_MAIN = /usr/share/code/resources/app/extensions/git/dist/askpass-main.js
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
 USERNAME = timbastin
-# environment
-TERM_PROGRAM = vscode
 # environment
 RECOMMENDER_API_URL = https://gw.api.openshift.io//api/v2
 # automatic
@@ -189,7 +177,7 @@ LESS = -R
 # environment
 DESKTOP_SESSION = ubuntu-xorg
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = Unity
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
@@ -197,9 +185,9 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 2841
+SYSTEMD_EXEC_PID = 2635
 # environment
-DISPLAY = :0
+DISPLAY = :1
 # environment
 USER = timbastin
 # environment
@@ -257,11 +245,9 @@ VTE_VERSION = 6800
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
-TERM_PROGRAM_VERSION = 1.66.2
-# environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=125/1024=12%, Rehash=0, Collisions=12/155=8%
+# Load=118/1024=12%, Rehash=0, Collisions=12/148=8%
 
 # Pattern-specific Variable Values
 
@@ -306,11 +292,11 @@ native-android: install
 	yarn workspace @crypto-koi/native android
 
 # Not a target:
+Makefile:
+#  Implicit rule search has been done.
  
 make: *** No rule to make target 'all'.  Stop.
 
-Makefile:
-#  Implicit rule search has been done.
 #  Last modified 2022-04-15 20:02:54.326726094
 #  File has been updated.
 #  Successfully updated.
@@ -389,6 +375,6 @@ apps/native/package.json:
 # strcache performance: lookups = 49 / hit rate = 36%
 # hash-table stats:
 # Load=31/8192=0%, Rehash=0, Collisions=1/49=2%
-# Finished Make data base on Wed Apr 20 17:25:11 2022
+# Finished Make data base on Thu Apr 28 14:53:07 2022
 
  

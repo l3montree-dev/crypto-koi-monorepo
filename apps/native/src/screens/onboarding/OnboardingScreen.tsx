@@ -118,7 +118,7 @@ function OnboardingScreen() {
             NavigationBar.setBackgroundColorAsync(Colors.cherry);
     }, []);
 
-    const handlePlayWithWalletPress = async () => {
+    const handleLoginWithWallet = async () => {
         if (!connector.connected) {
             await connector.connect();
         }
@@ -135,12 +135,16 @@ function OnboardingScreen() {
         await provider.enable();
 
         const user = await nativeUserService.loginUsingWalletAddress(provider.accounts[0]);
+        if (!user) {
+            ViewUtils.toast("Could not login using wallet address");
+            return
+        }
         nativeRootStore.authStore.setCurrentUser(user)
     };
 
     const handlePlayWithoutWalletPress = async () => {
         if (validEmail(emailAddress.value.trim()) && name.value.trim().length > 0) {
-            const user = await nativeUserService.loginUsingDeviceId({email: emailAddress.value.trim(), name: name.value.trim()});
+            const user = await nativeUserService.registerUsingDeviceId({email: emailAddress.value.trim(), name: name.value.trim()});
             nativeRootStore.authStore.setCurrentUser(user)
         } else if(!validEmail(emailAddress.value.trim())) {
             ViewUtils.toast("Please enter a valid email address")
@@ -178,7 +182,7 @@ function OnboardingScreen() {
     const handleNext = () => {
         if (activeSlide === 3) {
             if (agreedToTermsOfUse && agreedToPrivacyPolicy) {
-                return handlePlayWithWalletPress();
+                return handleLoginWithWallet();
             } else {
                 return ViewUtils.toast("Please agree to the terms of use and the privacy policy");
             }
@@ -468,7 +472,7 @@ function OnboardingScreen() {
                                     disabled={!agreedToTermsOfUse || !agreedToPrivacyPolicy}
                                     textColor="white"
                                     onPress={handlePlayWithoutWalletPress}
-                                    title="Play without connected Wallet"
+                                    title="Register"
                                 />
                             </View>
                             <Text style={tailwind("text-white mt-5 text-center")}>Or</Text>
@@ -476,7 +480,7 @@ function OnboardingScreen() {
                                 <AppButton
                                     backgroundColor={Colors.cherry}
                                     textColor="white"
-                                    onPress={handlePlayWithWalletPress}
+                                    onPress={handleLoginWithWallet}
                                     title="Login with wallet"
                                 />
                             </View>
