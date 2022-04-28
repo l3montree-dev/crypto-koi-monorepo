@@ -43,11 +43,8 @@ const RegistrationForm = () => {
     }
 
     return (
-        <>
-            <form
-                onSubmit={handleRegister}
-                className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border"
-            >
+        <div className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border">
+            <form onSubmit={handleRegister}>
                 <h2 className="font-bold text-2xl font-poppins">
                     Registration
                 </h2>
@@ -112,7 +109,7 @@ const RegistrationForm = () => {
                     Already have an account? Go to login
                 </a>
             </Link>
-        </>
+        </div>
     )
 }
 
