@@ -12,4 +12,12 @@
     .header-padding {
         padding-top: 73px;
     }
+
+    .sticky-footer-height {
+        min-height: calc(100vh - ((73px) + (380px
+                        /* footer height*/
+                        + 41px
+                        /* colophon height */
+                    )));
+    }
 }

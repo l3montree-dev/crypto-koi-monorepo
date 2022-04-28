@@ -38,7 +38,12 @@ const LoginForm = () => {
 
     return (
         <form className="md:max-w-lg mx-auto bg-white md:p-4 rounded-lg md:border">
-            <h2 className="font-bold text-2xl font-poppins">Login</h2>
+            <div className="flex flex-row justify-between items-center">
+                <h2 className="font-bold text-2xl font-poppins">Login</h2>
+                <Link href="/register">
+                    <a className="text-cherry text-right">Go to registration</a>
+                </Link>
+            </div>
             <div className="pt-5 flex-row flex">
                 <div className="flex-1">
                     <WalletButton
@@ -57,11 +62,6 @@ const LoginForm = () => {
                     Login
                 </Button>
             </div>
-            <Link href="/register">
-                <a className="text-cherry text-center w-full flex justify-center">
-                    Go to registration
-                </a>
-            </Link>
         </form>
     )
 }

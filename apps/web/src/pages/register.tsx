@@ -35,7 +35,7 @@ const Register: NextPage<Props> = (props) => {
                 footer={props.footer}
                 animateHeader={false}
             >
-                <div className="md:py-20 pt-5 pb-10 md:bg-slate-200 px-4">
+                <div className="md:py-20 pt-5 sticky-footer-height pb-10 md:bg-slate-200 px-4">
                     <RegistrationForm />
                 </div>
             </Page>
