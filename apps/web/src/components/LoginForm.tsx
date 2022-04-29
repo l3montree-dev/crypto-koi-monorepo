@@ -5,12 +5,14 @@ import {
     FormHelperText,
     FormLabel,
     Input,
+    useToast,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import { AppStateContext } from '../hooks/AppStateContext'
 import { useWallet } from '../hooks/useWallet'
+import Toast from './Toast'
 import WalletButton from './WalletButton'
 
 const LoginForm = () => {
@@ -18,7 +20,7 @@ const LoginForm = () => {
     const router = useRouter()
 
     const { handleConnectWallet, wallet } = useWallet()
-
+    const toast = useToast()
     const handleLogin = async () => {
         if (!wallet) {
             return
@@ -32,7 +34,23 @@ const LoginForm = () => {
 
             router.push('/users/' + user.id)
         } else {
-            // TODO: Show error to the user
+            toast({
+                title:
+                    'Could not login. Are you sure you used the wallet: ' +
+                    wallet.address +
+                    ' during registration?',
+                render: () => {
+                    return (
+                        <Toast
+                            msg={
+                                'Could not login. Are you sure you used the wallet: ' +
+                                wallet.address +
+                                ' during registration?'
+                            }
+                        />
+                    )
+                },
+            })
         }
     }
 

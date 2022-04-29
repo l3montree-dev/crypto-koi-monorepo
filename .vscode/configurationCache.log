@@ -1,1 +1,1 @@
-{"buildTargets":["install","native","native-android","native-ios","native-start","web","web-https"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":["install","make","native","native-android","native-ios","native-start","web","web-https"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

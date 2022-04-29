@@ -75,7 +75,7 @@ export const CryptogotchiView: FunctionComponent<{
             await makeNft(async (userAddress: string) => {
                 const res = await getNftSignature({
                     variables: {
-                        address: userAddress,
+                        address: userAddress.toLowerCase(),
                         id: cryptogotchi.id,
                     },
                 })
@@ -89,7 +89,7 @@ export const CryptogotchiView: FunctionComponent<{
                 title: 'An error occured!',
                 render: () => {
                     return (
-                        <Toast msg="An error occured. Please try again later." />
+                        <Toast msg="An error occured. Are you sure you have enough funds?" />
                     )
                 },
             })
@@ -171,9 +171,7 @@ export const CryptogotchiView: FunctionComponent<{
                                 rel="noreferrer"
                                 href={
                                     config.openseaUrl +
-                                    '/assets/' +
-                                    config.chain.chainName +
-                                    '/' +
+                                    '/assets/matic/' +
                                     config.contractAddress +
                                     '/' +
                                     cryptogotchi.getUint256
