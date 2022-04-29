@@ -23,7 +23,7 @@ const DynamicPage: FunctionComponent<Props> = (props) => {
                 animateHeader={false}
                 menu={props.menu}
                 footer={props.footer}
-                seo={props.page.attributes.SEO}
+                seo={props.page?.attributes.SEO}
             >
                 <div className="px-4 py-20">
                     {pageBuilder(props.page.attributes.Pagebuilder, props.menu)}
@@ -53,6 +53,12 @@ export async function getServerSideProps(
         cmsApi<{ data: { attributes: IMenu } }>(`menu?populate=deep`),
         fetchHydrationState(services),
     ])
+
+    if (pageData.data.length === 0) {
+        return {
+            notFound: true,
+        }
+    }
 
     return {
         props: {
