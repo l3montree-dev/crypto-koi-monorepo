@@ -30,20 +30,6 @@ const Hero: FunctionComponent<IHeroSectionPB & IMenu> = (props) => {
                         <div className="lg:block pt-5">
                             <CMSContent>{props.Text}</CMSContent>
                             <div className="flex-row flex justify-center lg:justify-start">
-                                <div className="pr-3 flex-row flex items-center">
-                                    {/*<a
-                                        target={'_blank'}
-                                        href={props.Store_Links.Apple_App_Store_Link}
-                                        rel="noreferrer"
-                                    >*/}
-                                    <Image
-                                        alt="Appstore Badge"
-                                        src={'/assets/appstore-badge.svg'}
-                                        height={40}
-                                        width={130}
-                                    />
-                                    {/*</a>*/}
-                                </div>
                                 {/*<a
                                     target={'_blank'}
                                     href={props.Store_Links.Google_Play_Store_Link}
