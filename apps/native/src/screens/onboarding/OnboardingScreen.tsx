@@ -167,7 +167,7 @@ function OnboardingScreen() {
     const scrollViewRef = useRef<ScrollView>(null);
     const scrollHandler = (ev: NativeSyntheticEvent<NativeScrollEvent>) => {
         setActive(
-            Math.floor(
+            Math.round(
                 ev.nativeEvent.contentOffset.x / DimensionUtils.deviceWidth
             ),
             ev.nativeEvent.contentOffset.x

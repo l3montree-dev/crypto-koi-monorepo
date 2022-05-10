@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,12 +8,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Apr 29 20:26:36 2022
+# Make data base, printed on Tue May 10 08:20:17 2022
 
 # Variables
 
-# environment
-PROVIDE_FULLSTACK_ACTION = true
 # environment
 JAVA_HOME = /usr/lib/jvm/java-11-openjdk-amd64
 # environment
@@ -19,15 +19,11 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
-NO_AT_BRIDGE = 1
-# environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-UUID = db47ae1d-cad0-41cc-8b86-20922bc283be
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-12073ac1-e0f6-4ad1-aaa8-9c1e1bd76467.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b061313b-8554-4d2e-bb10-b930c4b225bd.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu-xorg.mandatory.path
 # environment
@@ -38,8 +34,6 @@ WINDOWPATH = 2
 NVM_DIR = /home/timbastin/.nvm
 # default
 MAKE_COMMAND := make
-# environment
-THREE_SCALE_USER_TOKEN = 207c527cfc2a6b8dcf4fa43ad7a976da
 # environment
 QT_ACCESSIBILITY = 1
 # environment
@@ -59,7 +53,7 @@ LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu-xorg:/usr/share/gnome:/home/timbastin/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-OLDPWD = /home/timbastin/Schreibtisch/l3montree/crypto-koi/crypto-koi-api
+OLDPWD = /home/timbastin/Schreibtisch/l3montree/crypto-koi
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -79,15 +73,13 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.1589
+GNOME_TERMINAL_SERVICE = :1.110
 # makefile
 MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/timbastin/Schreibtisch/l3montree/crypto-koi-monorepo
 # environment
 VSCODE_PIPE_LOGGING = true
-# environment
-UTM_SOURCE = vscode
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
@@ -115,13 +107,13 @@ ZSH = /home/timbastin/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 38619
+VSCODE_PID = 69027
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/3525,unix/avocado:/tmp/.ICE-unix/3525
+SESSION_MANAGER = local/avocado:@/tmp/.ICE-unix/5465,unix/avocado:/tmp/.ICE-unix/5465
 # automatic
 *F = $(notdir $*)
 # environment
@@ -147,7 +139,7 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/d97c1555_bbb1_4443_9dfd_c529e06ca2ec
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/4f4d5ffb_6d8e_4277_bc48_d6a02fe79f58
 # environment
 MAKELEVEL := 0
 # default
@@ -162,8 +154,6 @@ MAKEFILES :=
 VSCODE_LOG_NATIVE = false
 # environment
 USERNAME = timbastin
-# environment
-RECOMMENDER_API_URL = https://gw.api.openshift.io//api/v2
 # automatic
 ?F = $(notdir $?)
 # environment
@@ -185,7 +175,7 @@ LOGNAME = timbastin
 # makefile
 .DEFAULT_GOAL := web
 # environment
-SYSTEMD_EXEC_PID = 3549
+SYSTEMD_EXEC_PID = 5631
 # environment
 DISPLAY = :1
 # environment
@@ -208,8 +198,6 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 COLORTERM = truecolor
 # environment
 NVM_CD_FLAGS = -q
-# environment
-GOLANG_EXECUTABLE = go
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -235,8 +223,6 @@ SUFFIXES :=
 # environment
 VSCODE_CLI = 1
 # environment
-TELEMETRY_ID = 2ba7c192-a2f5-46f6-8779-cde9eef73a86
-# environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VTE_VERSION = 6800
@@ -247,7 +233,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu-xorg
 # variable set hash-table stats:
-# Load=118/1024=12%, Rehash=0, Collisions=12/148=8%
+# Load=110/1024=11%, Rehash=0, Collisions=12/140=9%
 
 # Pattern-specific Variable Values
 
@@ -276,9 +262,6 @@ native-ios: install
 packages/common/package.json:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 #  File has not been updated.
 
 # Not a target:
@@ -297,6 +280,7 @@ native-android: install
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-04-15 20:02:54.326726094
 #  File has been updated.
 #  Successfully updated.
@@ -375,6 +359,6 @@ apps/native/package.json:
 # strcache performance: lookups = 49 / hit rate = 36%
 # hash-table stats:
 # Load=31/8192=0%, Rehash=0, Collisions=1/49=2%
-# Finished Make data base on Fri Apr 29 20:26:36 2022
+# Finished Make data base on Tue May 10 08:20:17 2022
 
  
