@@ -92,6 +92,7 @@ const style = StyleSheet.create({
 });
 
 function OnboardingScreen() {
+    const activeSlideRef = useRef(0);
     const [activeSlide, setActiveSlide] = useState(0);
 
     const scrollPosition = useSharedValue(0);
@@ -160,7 +161,10 @@ function OnboardingScreen() {
     };
 
     const setActive = (next: number, x: number) => {
-        setActiveSlide(next);
+        if (activeSlideRef.current !== next) {
+            setActiveSlide(next);
+            activeSlideRef.current=next;
+        }
         scrollPosition.value = x;
     };
 
